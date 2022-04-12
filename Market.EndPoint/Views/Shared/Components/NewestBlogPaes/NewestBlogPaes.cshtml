@@ -1,0 +1,9 @@
+﻿@using Application.Services.Common.BlogPage.Queries.GetAllBlogPages
+@model GetAllBlogPagesResult
+
+<ul>
+    @foreach(var item in Model.BlogPages)
+            {
+                <li><a href="/Blog?id=@item.Id">@item.Title</a></li>
+            }
+</ul>

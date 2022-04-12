@@ -1,0 +1,22 @@
+﻿@using Application.Services.Admin.Categories.Queries.GetCategoryById; 
+@model ResultOfGetCategoryByIdDto 
+@{
+    ViewData["Title"] = "Delete";
+    Layout = null;
+}
+
+<div class="row">
+    <form class="col s12" action="/Admin/ProductCategories/Deleting" method="post">
+        <div class="row">
+            <input type="hidden" name="id" value="@Model.Id" />
+
+            <div class="input-field col s6">
+                <h3>آیا از حذف گروه @Model.Name مطمئن هستید؟</h3>
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="حذف" class="waves-effect waves-light btn red" />
+        </div>
+    </form>
+</div>
+

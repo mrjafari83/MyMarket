@@ -1,0 +1,33 @@
+﻿@using Application.Services.Admin.Categories.Queries.GetCategoryById
+@model ResultOfGetCategoryByIdDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <form class="col s12" action="/Admin/BlogCategories/Edit" method="post">
+        <div class="row">
+            <input type="hidden" name="id" value="@Model.Id" />
+
+            <div class="input-field">
+                <input name="name" type="text" value="@Model.Name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select name="parentId" asp-items="@ViewBag.CategoriesList">
+                    <option value="@Model.ParentId" disabled selected>یک دسته بندی را انتخاب کنید.</option>
+                </select>
+                <label>دسته بندی ها</label>
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="ویرایش" class="waves-effect waves-light btn green" />
+        </div>
+    </form>
+</div>
+
+

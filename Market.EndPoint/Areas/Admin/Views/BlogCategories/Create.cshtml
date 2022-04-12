@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+    }
+
+<div class="row">
+    <form class="col s12" action="/Admin/BlogCategories/Create" method="post">
+        <div class="row">
+            <input type="hidden" name="parentId" value="@ViewBag.ParentId"/>
+
+            <div class="input-field col s6">
+                <input required name="name" type="text">
+                <label for="name" class="">نام دسته بندی : </label>
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="افزودن" class="waves-effect waves-light btn green" />
+        </div>
+    </form>
+</div>
+
+

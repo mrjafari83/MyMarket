@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin:5% auto; align-content:center;width:400px">
+    <div class="modal-header">
+        <h3 id="registerModalLabel"><span class="light">ثبت نام</span> در وبمارکت</h3>
+    </div>
+    <div class="modal-body">
+        <form method="post" asp-controller="Autantication" asp-action="Register" asp-route-returnUrl="@ViewBag.ReturnUrl">
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="inputUsernameRegister">نام کاربری</label>
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="UserName" id="inputUsernameRegister" placeholder="نام کاربری">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="inputEmailRegister">ایمیل</label>
+                <div class="controls">
+                    <input type="email" class="input-block-level" name="Email" id="inputEmailRegister" placeholder="ایمیل">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="inputPasswordRegister">رمز عبور</label>
+                <div class="controls">
+                    <input type="password" class="input-block-level" name="Password" id="inputPasswordRegister" placeholder="کلمه عبور">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-danger input-block-level bold higher">
+                ثبت نام
+            </button>
+        </form>
+        <p class="center-align push-down-0">
+            <a data-toggle="modal" role="button" href="/Login?returnUrl=@ViewBag.ReturnUrl" data-dismiss="modal">قبلا ثبت نام کرده اید؟</a>
+        </p>
+
+    </div>
+</div>
+

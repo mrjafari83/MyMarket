@@ -1,0 +1,67 @@
+﻿@using Application.Services.Client.Carts.Queries.GetUserCart
+@model GetUserCartDto
+@{
+    int TotalPrice = 0;
+    foreach (var item in Model.Products)
+    {
+        TotalPrice += item.Price * item.Count;
+    }
+
+    var routeUrl = Url.RouteUrl(ViewContext.RouteData.Values);
+    var qsPath = ViewContext.HttpContext.Request.QueryString.Value;
+    var returnUrl = $"{routeUrl}{qsPath}";
+}
+<div class="cart">
+    <p class="items">سبد خرید <span class="dark-clr">(@Model.Products.Count())</span></p>
+    <p class="dark-clr hidden-tablet">@TotalPrice تومان</p>
+    <a href="checkout-step-1.html" class="btn btn-danger">
+        <!-- <span class="icon icons-cart"></span> -->
+        <i class="icon-shopping-cart"></i>
+    </a>
+</div>
+
+<div class="open-panel">
+
+    @if (Model.Products.Count != 0)
+    {
+        ViewData["ProductCount"] = 5;
+        foreach (var item in Model.Products)
+        {
+            <div class="item-in-cart clearfix">
+                <div class="image">
+                    <img src="@item.Image" width="124" height="124" alt="cart item" />
+                </div>
+                <div class="desc">
+                    <strong><a href="product.html">@item.Name</a></strong>
+                    <span class="light-clr qty">
+                        تعداد : @item.Count
+                        &nbsp;
+                        <a class="icon-remove-sign btnDeleteProductFromCart" title="Remove Item" productInCartId="@item.ProductInCartId"></a>
+                    </span>
+                </div>
+                <div class="price">
+                    <strong>@item.Price تومان</strong>
+                </div>
+            </div>
+        }
+    }
+
+    <div class="summary">
+        <div class="line">
+            <div class="row-fluid">
+                <div class="span6">هزینه ارسال :</div>
+                <div class="span6 align-right">رایگان</div>
+            </div>
+        </div>
+        <div class="line">
+            <div class="row-fluid">
+                <div class="span6 btnDeleteProductFromCart">جمع کل :</div>
+                <div class="span6 align-right size-16">@TotalPrice تومان</div>
+            </div>
+        </div>
+    </div>
+    <div class="proceed">
+        <a href="/CartReview" class="btn btn-danger pull-right bold higher">تسویه حساب <i class="icon-shopping-cart"></i></a>
+        <small>هزینه ارسال بر اساس منطقه جغرافیایی محاسبه میشود. <a href="#">اطلاعات بیشتر</a></small>
+    </div>
+</div>

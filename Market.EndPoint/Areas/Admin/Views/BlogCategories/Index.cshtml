@@ -1,0 +1,121 @@
+﻿@using Common.Enums;
+@using Application.Services.Common.Category.Queries.GetAllCategories
+@model List<GetAllCategoriesDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    td, th {
+        text-align: right
+    }
+</style>
+<h3>دسته بندی وبلاگ</h3>
+<table dir="rtl" style="text-align:right">
+    <thead>
+        <tr>
+            <th>
+                <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" id="btnCreateNewCategory">افزودن</a>
+            </th>
+        </tr>
+        <tr>
+            <th>نام دسته بندی</th>
+            <th>زیر مجموعه ها</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.IsParent && item.ParentId == 0)
+            {
+                if(item.Name == "بدون دسته بندی")
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                    </tr>
+                }
+            else if (item.Children.Count != 0)
+            {
+                    <tr>
+                        <td style="width:33%">@item.Name</td>
+                        <td style="width:33%">
+                            <a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="GetChildren(@item.Id)">زیر مجموعه ها</a>
+                            <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
+                            <a class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/BlogCategories/Edit/@item.Id">ویرایش</a>
+                            <a class="waves-effect waves-light btn modal-trigger red" href="#modal1" onclick="Delete(@item.Id)">حذف</a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td style="width:33%">@item.Name</td>
+                        <td style="width:33%">
+                            <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
+                            <a class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/BlogCategories/Edit/@item.Id">ویرایش</a>
+                            <a class="waves-effect waves-light btn modal-trigger red" href="#modal1" onclick="Delete(@item.Id)">حذف</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 id="title">Modal Header</h4>
+        <p id="body">A bunch of text</p>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $("#btnCreateNewCategory").click(function () {
+
+            $.get("/Admin/BlogCategories/Create/0", function (result) {
+
+                $("#title").html("افزودن  گروه جدید");
+                $("#body").html(result);
+            });
+
+        });
+
+        function GetChildren(id) {
+
+            $.get("/Admin/BlogCategories/GetChildren/" + id, function (result) {
+
+                $("#title").html("زیر مجموعه ها");
+                $("#body").html(result);
+            });
+
+        };
+
+        function CreateChild(id) {
+
+            $.get("/Admin/BlogCategories/Create/" + id, function (result) {
+
+                $("#title").html("افزودن زیر مجموعه");
+                $("#body").html(result);
+            });
+
+        };
+
+        function Delete(id) {
+
+            $.get("/Admin/BlogCategories/Delete/" + id, function (result) {
+
+                $("#title").html("حذف");
+                $("#body").html(result);
+            });
+
+        };
+
+
+    </script>
+}
+

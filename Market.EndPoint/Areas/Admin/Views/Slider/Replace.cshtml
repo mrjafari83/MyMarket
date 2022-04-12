@@ -1,0 +1,77 @@
+﻿@using Application.Services.Admin.Products.Queries.GetAllProducts
+@model ResultGetAllProductsDto
+@{
+    ViewData["Title"] = "Replace";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int back = ViewBag.CurrentRow - 1;
+    int forward = ViewBag.CurrentRow + 1;
+}
+
+<style>
+    th, td {
+        width: 16%;
+        text-align: right;
+    }
+</style>
+
+<div class="row">
+    <table dir="rtl" style="text-align : right">
+        <tr>
+            <th>نام</th>
+            <th>نام دسته بندی</th>
+            <th>برند</th>
+            <th>موجودی</th>
+            <th>تعداد بازدید</th>
+        </tr>
+
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.CategoryName</td>
+                <td>@item.Brand</td>
+                <td>@item.Inventory</td>
+                <td>@item.VisitNumber</td>
+                <td>
+                    <a style="width:50%" class="waves-effect waves-light btn modal-trigger blue" href="/Admin/Slider/Replacing?productId=@item.Id&sliderId=@ViewBag.SliderId">انتخاب</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="pagination">
+        <ul>
+            @if (ViewBag.CurrentRow == 1)
+            {
+                <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
+            }
+            else
+            {
+                <li class="waves-effect"><a href="/Admin/Slider/Replace?currentPage=@back&sliderId=@ViewBag.SliderId"><i class="material-icons">chevron_right</i></a></li>
+            }
+
+            @for (int i = 1; i <= Model.TotalRows; i++)
+            {
+                if (i == ViewBag.CurrentRow)
+                {
+                    <li class="active"><a href="/Admin/Slider/Replace?currentPage=@i&sliderId=@ViewBag.SliderId">@i</a></li>
+                }
+                else
+                {
+                    <li class="waves-effect"><a href="/Admin/Slider/Replace?currentPage=@i&sliderId=@ViewBag.SliderId">@i</a></li>
+                }
+            }
+
+            @if (ViewBag.CurrentRow == Model.TotalRows)
+            {
+                <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+            }
+            else
+            {
+                <li class="waves-effect"><a href="/Admin/Slider/Replace?currentPage=@forward&sliderId=@ViewBag.SliderId"><i class="material-icons">chevron_left</i></a></li>
+            }
+
+        </ul>
+    </div> <!-- /pagination -->
+</div>
+

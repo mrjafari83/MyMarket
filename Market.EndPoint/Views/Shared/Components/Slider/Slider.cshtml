@@ -1,0 +1,26 @@
+﻿@using Application.Services.Common.Option.Queries.GetAllSliders
+@model List<GetAllSlidersDto>
+<!--  ==========  -->
+<!--  = Slider Revolution =  -->
+<!--  ==========  -->
+<div class="fullwidthbanner-container">
+    <div class="fullwidthbanner">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li data-transition="premium-random" data-slotamount="3">
+                    <a href="/Product?id=@item.ProductId">
+                        <img src="@item.ProductImage" alt="slider img" width="1400" height="377" />
+                    </a>
+                </li><!-- /slide -->
+            }
+
+        </ul>
+        <div class="tp-bannertimer"></div>
+    </div>
+    <!--  ==========  -->
+    <!--  = Nav Arrows =  -->
+    <!--  ==========  -->
+    <div id="sliderRevLeft"><i class="icon-chevron-left"></i></div>
+    <div id="sliderRevRight"><i class="icon-chevron-right"></i></div>
+</div> <!-- /slider revolution -->

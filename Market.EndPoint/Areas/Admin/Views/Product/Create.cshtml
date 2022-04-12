@@ -1,0 +1,388 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Collections.Generic;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card">
+    <div class="card-content">
+        <div class="class=" input-field">
+            <select id="categoryId" asp-items="@ViewBag.Categories">
+                <option disabled selected>یک دسته بندی را انتخاب کنید</option>
+            </select>
+            <label>دسته بندی ها</label>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <input type="text" class="validate" id="name">
+                <label class="active">نام کالا : </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="brand" type="text" class="validate">
+                <label class="active">برند : </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="shortDescription" type="text" class="validate">
+                <label class="active"> توضیحات مختصر : </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="description" type="text" class="validate">
+                <label class="active">توضیحات : </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="number" id="price" class="materialize-textarea">
+                <label for="textarea1">قیمت  : </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="number" id="inventory" class="materialize-textarea">
+                <label for="textarea1">تعداد موجود : </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="file-field input-field">
+                    <div class="btn cyan">
+                        <span>تصاویر</span>
+                        <input type="file" id="images" multiple accept="image/*">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin:10px 0px">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <div class="input-field">
+                    <input type="text" id="keywordValue" class="validate" />
+                    <label class="active">کلمه کلیدی : </label>
+                    <button class="btn green waves-effect waves-light right" id="btnCreateKeyword">
+                        افزودن
+                    </button>
+                </div>
+
+                <br />
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>کلمه کلیدی</th>
+                        </tr>
+                    </thead>
+                    <tbody id="keywordTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <div class="input-field">
+                    <input type="text" id="colorValue" class="validate" />
+                    <label class="active">رنگ :</label>
+                    <button class="btn green waves-effect waves-light right" id="btnCreateColor">
+                        افزودن
+                    </button>
+                </div>
+
+                <div class="input-field">
+                    @await Component.InvokeAsync("ColorsInSelectList")
+                    <button class="btn green waves-effect waves-light right" id="btnCreateColorByList">
+                        افزودن
+                    </button>
+                </div>
+
+                <br />
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>رنگ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="colorTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <div class="input-field">
+                    <input type="text" id="sizeValue" class="validate" />
+                    <label class="active">سایز : </label>
+                    <button class="btn green waves-effect waves-light right" id="btnCreateSize">
+                        افزودن
+                    </button>
+                </div>
+
+                <div class="input-field">
+                    @await Component.InvokeAsync("SizesInSelectList")
+                    <button class="btn green waves-effect waves-light right" id="btnCreateSizeByList">
+                        افزودن
+                    </button>
+                </div>
+
+                <br />
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>سایز</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sizeTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <div class="input-field">
+                    <input type="text" id="featureDisplay" class="validate" />
+                    <label class="active">نام ویژگی :</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="featureValue" class="validate" />
+                    <label class="active">مقدار ویژگی :</label>
+                    <button class="btn green waves-effect waves-light right" id="btnCreateFeature">
+                        افزودن
+                    </button>
+                </div>
+
+                <br />
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>نام ویژگی</th>
+                            <th>مقدار ویژگی</th>
+                        </tr>
+                    </thead>
+                    <tbody id="featureTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s12">
+        <input type="submit" value="افزودن" class="btn green waves-effect waves-light right" id="btnSend">
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $("#btnSend").click(function (e) {
+
+                var formdata = new FormData();
+                formdata.append("Name", $("#name").val());
+                formdata.append("Brand", $("#brand").val());
+                formdata.append("Description", $("#description").val());
+                formdata.append("ShortDescription", $("#shortDescription").val());
+                formdata.append("Inventory", $("#inventory").val());
+                formdata.append("Price", $("#price").val());
+                formdata.append("CategoryId", $("#categoryId").find("option:selected").val());
+
+                var productImages = document.getElementById("images");
+                if (productImages.files.length > 0) {
+                    for (var i = 0; i < productImages.files.length; i++) {
+                        formdata.append('Images', productImages.files[i]);
+                    }
+                }
+
+                var Keywords = $('#keywordTable tr').map(function () {
+                    return {
+                        KeywordValue: $(this.cells[0]).text(),
+                    };
+                }).get();
+                $.each(Keywords, function (i, val) {
+                    formdata.append('[' + i + '].KeywordValue', val.KeywordValue);
+                });
+
+                var colors = $('#colorTable tr').map(function () {
+                    return {
+                        Name: $(this.cells[0]).text(),
+                    };
+                }).get();
+                $.each(colors, function (i, val) {
+                    formdata.append('[' + i + '].Name', val.Name);
+                });
+
+                var sizes = $('#sizeTable tr').map(function () {
+                    return {
+                        SizeValue: $(this.cells[0]).text(),
+                    };
+                }).get();
+                $.each(sizes, function (i, val) {
+                    formdata.append('[' + i + '].SizeValue', val.SizeValue);
+                });
+
+                var features = $('#featureTable tr').map(function () {
+                    return {
+                        Display: $(this.cells[0]).text(),
+                        FeatureValue: $(this.cells[1]).text(),
+                    };
+                }).get();
+                $.each(features, function (i, val) {
+                    formdata.append('[' + i + '].Display', val.Display);
+                    formdata.append('[' + i + '].FeatureValue', val.FeatureValue);
+                });
+
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    url: "/Admin/Product/Create",
+                    data: formdata,
+                    success: function (response) {
+                        window.location.href = "/Admin/Product";
+                    }
+                });
+            });
+
+            //کنترل جدول کلمات کلیدی برای اضافه و حذف نمودن خط به جدول
+            $("#btnCreateKeyword").click(function (e) {
+                var table = document.getElementById("keywordTable");
+                var keyValue = document.getElementById("keywordValue").value;
+
+                if (keyValue !== "") {
+                    CreateRow(table, [keyValue], true);
+                }
+
+                $("#keywordValue").val("");
+            });
+
+            $("#keywordTable").on('click', '.idFeatures', function () {
+                $(this).closest('tr').remove();
+            });
+
+            //کنترل جدول رنگ ها برای افزودن و حذف نمودن خط به جدول
+            $("#btnCreateColor").click(function (e) {
+                var table = document.getElementById("colorTable");
+                var keyValue = document.getElementById("colorValue").value;
+
+                if (keyValue !== "") {
+                    CreateRow(table, [keyValue], true);
+                }
+
+                $("#colorValue").val("");
+            });
+
+            $("#colorTable").on('click', '.idFeatures', function () {
+                $(this).closest('tr').remove();
+            });
+
+            //کنترل جدول سایز ها برای افزودن و حذف نمودن خط به جدول
+            $("#btnCreateSize").click(function (e) {
+                var table = document.getElementById("sizeTable");
+                var keyValue = document.getElementById("sizeValue").value;
+
+                if (keyValue !== "") {
+                    CreateRow(table, [keyValue], true);
+                }
+
+                $("#sizeValue").val("");
+            });
+
+            $("#sizeTable").on('click', '.idFeatures', function () {
+                $(this).closest('tr').remove();
+            });
+
+            //کنترل جدول ویژگی ها برای افزودن و حذف نمودن خط به جدول
+            $("#btnCreateFeature").click(function (e) {
+                debugger;
+                var table = document.getElementById("featureTable");
+                var display = document.getElementById("featureDisplay").value;
+                var value = document.getElementById("featureValue").value;
+
+                if (value !== "" && display !== "") {
+                    CreateRow(table, [display, value], true);
+                }
+
+                $("#featureDisplay").val("");
+                $("#featureValue").val("");
+            });
+
+            $("#featureTable").on('click', '.idFeatures', function () {
+                $(this).closest('tr').remove();
+            });
+
+            //افزودن رنگ با لیست
+            $("#btnCreateColorByList").click(function (e) {
+                var colors = document.getElementById("ColorsList").options;
+                var table = document.getElementById("colorTable");
+                debugger;
+                for (var i = 0; i < colors.length; i++) {
+                    if (colors[i].selected && !colors[i].disabled) {
+                        CreateRow(table, [colors[i].value], true);
+                    }
+                };
+            });
+
+            //افزودن سایر با لیست
+            $("#btnCreateSizeByList").click(function (e) {
+                var sizes = document.getElementById("SizesList").options;
+                var table = document.getElementById("sizeTable");
+                debugger;
+                for (var i = 0; i < sizes.length; i++) {
+                    if (sizes[i].selected && !sizes[i].disabled) {
+                        CreateRow(table, [sizes[i].value], true);
+                    }
+                };
+            });
+
+            //متد افزودن خط
+            function CreateRow(table, values, withDeleteKey) {
+                var newRow = "<tr>";
+                for (var i = 0; i < values.length; i++) {
+                    newRow += "<td>" + values[i] + "</td>";
+                }
+
+                if (withDeleteKey === true) {
+                    newRow += '<td><button class="idFeatures btn red waves-effect waves-light right" >حذف</button></td>';
+                }
+
+                newRow += "</tr>";
+                table.innerHTML += newRow;
+            }
+        });
+    </script>
+}
+

@@ -1,0 +1,19 @@
+﻿@using Common.ViewModels
+@model UserViewModel
+
+<div class="row">
+    <table>
+        <tr>
+            <td>@Model.UserName</td>
+        </tr>
+        <tr>
+            <td>@Model.Email</td>
+        </tr>
+    </table>
+</div>
+<div class="row">
+    <form method="post" action="/Admin/Users/Deleting"> 
+        <input type="hidden" name="userName" value="@Model.UserName" />
+        <input type="submit" value="حذف" class="waves-effect waves-light btn red"/>
+    </form>
+</div>

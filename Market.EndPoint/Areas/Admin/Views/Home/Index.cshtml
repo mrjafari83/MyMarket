@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col s12 m12 l6">
+        <div class="card">
+            <div class="card-content">
+                <h5 class="card-title">محصولات</h5>
+                <button class="waves-effect waves-light btn modal-trigger blue" id="btnMostViewedProduct">پربازدیدترین ها</button>
+                <button class="waves-effect waves-light btn modal-trigger blue" id="btnNewestProduct">جدیدترین ها</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نام</th>
+                            <th>دسته بندی</th>
+                            <th>برند</th>
+                            <th>موجودی</th>
+                            <th>قیمت</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTable">
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m12 l6">
+        <div class="card">
+            <div class="card-content">
+                <h5 class="card-title">وبلاگ</h5>
+                <button class="waves-effect waves-light btn modal-trigger blue" id="btnMostViewedBlogPage">پربازدیدترین ها</button>
+                <button class="waves-effect waves-light btn modal-trigger blue"id="btnNewestBlogPage">جدیدترین ها</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>عنوان</th>
+                            <th>دسته بندی</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blogPagesTable">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        //تنظیم اولیه جدول ها
+        $.get("/Admin/Home/NewestProduct",
+            function (data) {
+                SetProductTable(data);
+            }
+        );
+
+        $.get("/Admin/Home/NewestBlogPage",
+            function (data) {
+                SetBlogPageTable(data);
+            }
+        );
+
+        //تنظیم کردن مقادیر داخل جدول ها با فشردن دکمه ها
+        $("#btnMostViewedProduct").click(function () {
+            $.get("/Admin/Home/MostViewedProduct",
+                function (data) {
+                    SetProductTable(data);
+                }
+            );
+        });
+        $("#btnNewestProduct").click(function () {
+            $.get("/Admin/Home/NewestProduct",
+                function (data) {
+                    SetProductTable(data);
+                }
+            );
+        });
+        $("#btnMostViewedBlogPage").click(function () {
+            $.get("/Admin/Home/MostViewedBlogPage",
+                function (data) {
+                    SetBlogPageTable(data);
+                }
+            );
+        });
+        $("#btnNewestBlogPage").click(function () {
+            $.get("/Admin/Home/NewestBlogPage",
+                function (data) {
+                    SetBlogPageTable(data);
+                }
+            );
+        });
+
+        function SetBlogPageTable(data) {
+            var table = "";
+            for (var i = 0; i < data.length; i++) {
+                table += "<tr>";
+                table += "<td>" + data[i].title + "</td>";
+                table += "<td>" + data[i].categoryName + "</td>";
+                table += "</tr>";
+            }
+
+            document.getElementById('blogPagesTable').innerHTML = table;
+        }
+
+        function SetProductTable(data) {
+            var table = "";
+            for (var i = 0; i < data.length; i++) {
+                table += "<tr>";
+                table += "<td>" + data[i].name + "</td>";
+                table += "<td>" + data[i].categoryName + "</td>";
+                table += "<td>" + data[i].brand + "</td>";
+                table += "<td>" + data[i].inventory + "</td>";
+                table += "<td>" + data[i].price + "</td>";
+                table += "</tr>";
+            }
+
+            document.getElementById('productsTable').innerHTML = table;
+        }
+    </script>
+}
+

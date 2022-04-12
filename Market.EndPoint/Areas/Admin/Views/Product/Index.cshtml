@@ -1,0 +1,83 @@
+﻿@using Application.Services.Admin.Products.Queries.GetAllProducts
+@model ResultGetAllProductsDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int back = ViewBag.CurrentRow - 1;
+    int forward = ViewBag.CurrentRow + 1;
+}
+
+<style>
+    th, td {
+        width: 16%;
+        text-align: right;
+    }
+</style>
+
+<div class="row">
+    <table dir="rtl" style="text-align : right">
+        <tr>
+            <th>
+                <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/Product/Create">افزودن</a>
+            </th>
+        </tr>
+        <tr>
+            <th>نام</th>
+            <th>نام دسته بندی</th>
+            <th>برند</th>
+            <th>موجودی</th>
+            <th>تعداد بازدید</th>
+        </tr>
+
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.CategoryName</td>
+                <td>@item.Brand</td>
+                <td>@item.Inventory</td>
+                <td>@item.VisitNumber</td>
+                <td>
+                    <a style="width:50%" class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/Product/Edit/@item.Id">ویرایش</a>
+                    <a style="width:50%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/Product/Delete/@item.Id">حذف</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="pagination">
+        <ul>
+            @if (ViewBag.CurrentRow == 1)
+            {
+                <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
+            }
+            else
+            {
+                <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
+            }
+
+            @for (int i = 1; i <= Model.TotalRows; i++)
+            {
+                if (i == ViewBag.CurrentRow)
+                {
+                    <li class="active"><a href="/Admin/Product/Index?currentPage=@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@i">@i</a></li>
+                }
+            }
+
+            @if (ViewBag.CurrentRow == Model.TotalRows)
+            {
+                <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+            }
+            else
+            {
+        <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@forward"><i class="material-icons">chevron_left</i></a></li>
+            }
+
+        </ul>
+    </div> <!-- /pagination -->
+</div>
+

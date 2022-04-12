@@ -1,0 +1,4 @@
+﻿table, tr, th, td {
+    direction: rtl;
+    text-align: right;
+}

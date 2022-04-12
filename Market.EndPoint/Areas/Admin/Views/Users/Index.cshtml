@@ -1,0 +1,73 @@
+﻿@using Common.ViewModels
+@model List<UserViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table>
+    <thead>
+        <tr>
+            <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" id="btnCreateUser">افزودن</a>
+        </tr>
+        <tr>
+            <th>نام کاربری</th>
+            <th>ایمیل</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td>
+                    <a class="waves-effect waves-light btn modal-trigger red btnDelete" href="#modal1" userName="@item.UserName">حذف</a>
+                    <a class="waves-effect waves-light btn modal-trigger blue btnAddRole" href="#modal1" userName="@item.UserName">ویرایش مقام</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 id="title">Modal Header</h4>
+        <p id="body">A bunch of text</p>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $("#btnCreateUser").click(function () {
+
+            $.get("/Admin/Users/Create", function (result) {
+
+                $("#title").html("افزودن  کاربر جدید");
+                $("#body").html(result);
+            });
+
+        });
+
+        $(".btnDelete").click(function (e) {
+            var userName = this.getAttribute("userName");
+            $.get("/Admin/Users/Delete?userName=" + userName, function (result) {
+
+                $("#title").html("حذف  کاربر ");
+                $("#body").html(result);
+            });
+        });
+
+        $(".btnAddRole").click(function (e) {
+            var userName = this.getAttribute("userName");
+            $.get("/Admin/Users/EditUserRoles?userName="+userName, function (result) {
+
+                $("#title").html("افزودن مقام به کاربر");
+                $("#body").html(result);
+            });
+        });
+    </script>
+}

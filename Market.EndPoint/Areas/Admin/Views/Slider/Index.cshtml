@@ -1,0 +1,39 @@
+﻿@using Application.Services.Common.Option.Queries.GetAllSliders
+@model List<GetAllSlidersDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table dir="rtl" style="text-align : right">
+    <tr>
+        @if (Model.Count() < 4)
+        {
+            <th>
+                <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/Slider/Create">افزودن</a>
+            </th>
+        }
+    </tr>
+    <tr>
+        <th>تصویر</th>
+        <th>نام محصول</th>
+        <th>قیمت محصول</th>
+        <th>موجودی مححصول</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><img src="@item.ProductImage" class="thumbnail" style="max-height:15%;max-width:15%"/></td>
+            <td>@item.ProductName</td>
+            <td>@item.ProductPrice</td>
+            <td>@item.ProductInventory</td>
+            <td>
+                <a style="width:50%" class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/Slider/Replace?sliderId=@item.SliderId">جایگزین</a>
+                <a style="width:50%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/Slider/Delete?id=@item.SliderId">حذف</a>
+            </td>
+        </tr>
+    }
+</table>
+

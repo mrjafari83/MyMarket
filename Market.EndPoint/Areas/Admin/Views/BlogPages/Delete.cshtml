@@ -1,0 +1,19 @@
+﻿@using Application.Services.Admin.BlogPages.Queries.GetBlogPageById
+@model GetBlogPageByIdDto
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<dl class="dl-horizontal">
+    <dt>
+        <img class="thumbnail" src="@Model.Image"/>
+    </dt>
+    <dt>عنوان : @Model.Title</dt>
+    <dt>دسته بندی : @Model.CategoryName</dt>
+    <dt>تاریخ انتشار : @Model.CreateDate</dt>
+    <dt>تعداد بازدید : @Model.VisitNumber</dt>
+</dl>
+<a class="btn red waves-effect waves-light right" href="/Admin/BlogPages/Deleting/@Model.Id">حذف</a>
+
+

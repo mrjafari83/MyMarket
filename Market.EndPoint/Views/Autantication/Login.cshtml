@@ -1,0 +1,42 @@
+﻿@using Common.ViewModels
+@model LoginViwModel 
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="align-content: center; margin: 5% auto; width: 400px">
+    <div class="modal-header">
+        <h3 id="loginModalLabel"><span class="light">ورود</span> در وبمارکت</h3>
+    </div>
+    <div class="modal-body">
+        <form method="post" action="Login?returnUrl=@ViewBag.ReturnUrl">
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="username">نام کاربری</label>
+                <div class="controls">
+                    <input type="text" class="input-block-level" asp-for="UserName" placeholder="نام کاربری">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="password">رمز عبور</label>
+                <div class="controls">
+                    <input type="password" class="input-block-level" asp-for="Password" placeholder="کلمه عبور">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox" asp-for="RememberMe">
+                        مرا به خاطر بسپار
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary input-block-level bold higher">
+                ورود
+            </button>
+        </form>
+        <p class="center-align push-down-0">
+            <a href="#" data-dismiss="modal">رمز عبورتان را فراموش کرده اید؟</a>
+        </p>
+    </div>
+</div>

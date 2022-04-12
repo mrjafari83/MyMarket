@@ -1,0 +1,35 @@
+﻿@using Common.ViewModels
+@model EditUserRolesViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<form method="post" action="/Admin/Users/EditUserRoles">
+    <div class="row">
+        <p>
+            <label>
+                <input type="checkbox" name="Customer" asp-for="Customer" />
+                <span>مشتری</span>
+            </label>
+        </p>
+    </div>
+    <div class="row">
+        <p>
+            <label>
+                <input type="checkbox" name="Admin" asp-for="Admin" />
+                <span>ادمین</span>
+            </label>
+        </p>
+    </div>
+    <div class="row">
+        <p>
+            <label>
+                <input type="checkbox" name="Owner" asp-for="Owner" />
+                <span>مدیریت</span>
+            </label>
+        </p>
+    </div>
+    <input type="hidden" value="@Model.UserName" asp-for="UserName" />
+    <div class="row">
+        <div class="row">
+            <input type="submit" value="افزودن" class="waves-effect waves-light btn green" />
+        </div>
+    </div>
+</form>

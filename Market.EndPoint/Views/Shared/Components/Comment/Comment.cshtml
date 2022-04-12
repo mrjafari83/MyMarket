@@ -1,0 +1,83 @@
+﻿@using Application.Services.Common.Comment.Queries.GetAllCommentsByPageId
+@model List<GetAllCommentsByPageIdDto> 
+
+<section id="comments" class="comments-container">
+    <h3 class="push-down-25"><span class="light">@Model.Count()</span> نظر</h3>
+
+    @if (Model.Count != 0)
+    {
+        foreach (var item in Model)
+        {
+            if (item.VisitingParent == 0)
+            {
+                <div class="single-comment clearfix">
+                    <div class="avatar-container">
+                        <img src="@item.ImageSrc" alt="avatar" class="avatar" width="184" height="184">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-inner">
+                            <cite class="author-name">
+                                @item.Name
+                            </cite>
+                            <div class="metadata">
+                                @item.CreateDate  /
+                                <a href="#commentHeader" class="btnAnswer" commentId="@item.Id" commenterName="@item.Name" visitingParent="@item.Id">پاسخ</a>
+                            </div>
+                            <div class="comment-text">
+                                <p>@item.Text</p>
+                            </div>
+                        </div>
+
+                        @foreach (var child in Model)
+                        {
+                            if (child.VisitingParent == item.Id)
+                            {
+                                <div class="single-comment nested clearfix">
+                                    <div class="avatar-container">
+                                        <img src="@child.ImageSrc" alt="avatar" class="avatar" width="184" height="184">
+                                    </div>
+                                    <div class="comment-content">
+                                        <div class="comment-inner">
+                                            <cite class="author-name">
+                                                @child.Name
+                                            </cite>
+                                            <div class="metadata">
+                                                @child.CreateDate  /
+                                                <a href="#commentHeader" class="btnAnswer" commentId="@item.Id" commenterName="@item.Name" visitingParent="@item.Id">پاسخ</a>
+                                            </div>
+                                            <div class="comment-text">
+                                                <p>@child.Text</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        }
+    }
+
+    <hr>
+
+    <h3 class="push-down-25" id="commentHeader"><span class="light">نظر</span> بدهید</h3>
+    <h6 id="answerTo"></h6>
+    <div id="comment" class="form form-inline form-comments">
+        <p class="push-down-20">
+            <input type="text" aria-required="true" tabindex="1" size="30" value="" id="name" required="">
+            <label for="author">نام<span class="red-clr bold">*</span></label>
+        </p>
+        <p class="push-down-20">
+            <input type="email" aria-required="true" tabindex="2" size="30" value="" id="email" required="">
+            <label for="email">ایمیل<span class="red-clr bold">*</span></label>
+        </p>
+        <p class="push-down-20">
+            <textarea class="input-block-level" tabindex="4" rows="7" cols="70" id="text" placeholder="نظرتان را در اینجا بنویسید ..." required=""></textarea>
+        </p>
+        <p>
+            <button class="btn btn-primary bold" tabindex="5" id="btnSendComment">ارسال نظر</button>
+        </p>
+    </div>
+
+</section>

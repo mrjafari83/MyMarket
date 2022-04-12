@@ -1,0 +1,87 @@
+﻿@using Application.Services.Common.BlogPage.Queries.GetAllBlogPages
+@model GetAllBlogPagesResult
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int back = ViewBag.CurrentRow - 1;
+    int forward = ViewBag.CurrentRow + 1;
+}
+
+<style>
+    th, td {
+        width: 16%;
+        text-align: right;
+    }
+</style>
+
+<div class="row">
+    <table dir="rtl" style="text-align : right">
+        <thead>
+            <tr>
+                <th>
+                    <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/BlogPages/Create">افزودن</a>
+                </th>
+            </tr>
+            <tr>
+                <th>تصویر</th>
+                <th>عنوان</th>
+                <th>عنوان دسته بندی</th>
+                <th>تاریخ انتشار</th>
+                <th>تعداد بازدید</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.BlogPages)
+        {
+            <tr>
+                <td><img style="max-width:100px" src="@item.Image" /></td>
+                <td>@item.Title</td>
+                <td>@item.CategoryName</td>
+                <td>@item.CreateDate</td>
+                <td>@item.VisitNumber</td>
+                <td>
+                    <a style="width:50%" class="waves-effect waves-light btn modal-trigger blue" href="/Admin/BlogPages/DetailInBaseLayout/@item.Id">مشاهده در قالب اصلی</a>
+                    <a style="width:25%" class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/BlogPages/Edit/@item.Id">ویرایش</a>
+                    <a style="width:25%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/BlogPages/Delete/@item.Id">حذف</a>
+                </td>
+            </tr>
+        }
+        <tbody>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <ul>
+            @if (ViewBag.CurrentRow == 1)
+            {
+                <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
+            }
+            else
+            {
+                <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
+            }
+
+            @for (int i = 1; i <= Model.TotalRows; i++)
+            {
+                if (i == ViewBag.CurrentRow)
+                {
+                    <li class="active"><a href="/Admin/BlogPages/Index?currentPage=@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@i">@i</a></li>
+                }
+            }
+
+            @if (ViewBag.CurrentRow == Model.TotalRows)
+            {
+                <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+            }
+            else
+            {
+                <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@forward"><i class="material-icons">chevron_left</i></a></li>
+            }
+
+        </ul>
+    </div> <!-- /pagination -->
+</div>

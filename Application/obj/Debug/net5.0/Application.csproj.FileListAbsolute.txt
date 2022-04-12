@@ -1,0 +1,17 @@
+E:\asp.net projects\Market\Application\bin\Debug\net5.0\Application.deps.json
+E:\asp.net projects\Market\Application\bin\Debug\net5.0\Application.dll
+E:\asp.net projects\Market\Application\bin\Debug\net5.0\ref\Application.dll
+E:\asp.net projects\Market\Application\bin\Debug\net5.0\Application.pdb
+E:\asp.net projects\Market\Application\bin\Debug\net5.0\Common.dll
+E:\asp.net projects\Market\Application\bin\Debug\net5.0\Domain.dll
+E:\asp.net projects\Market\Application\bin\Debug\net5.0\Common.pdb
+E:\asp.net projects\Market\Application\bin\Debug\net5.0\Domain.pdb
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\Application.csproj.AssemblyReference.cache
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\Application.AssemblyInfoInputs.cache
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\Application.AssemblyInfo.cs
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\Application.csproj.CoreCompileInputs.cache
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\Application.csproj.CopyComplete
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\Application.dll
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\ref\Application.dll
+E:\asp.net projects\Market\Application\obj\Debug\net5.0\Application.pdb

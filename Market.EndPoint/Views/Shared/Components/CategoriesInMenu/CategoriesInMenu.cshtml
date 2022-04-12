@@ -1,0 +1,75 @@
+﻿@using Common.Enums;
+@using Application.Services.Common.Category.Queries.GetAllCategories
+@model List<GetAllCategoriesDto>
+
+@{
+    ViewData["Title"] = "View";
+    Layout = null;
+}
+
+<li class="dropdown">
+
+    @if (ViewBag.CategoryType == Enums.CategoryType.Product)
+    {
+        <a href="/Products" class="dropdown-toggle">
+            <span>محصولات</span>
+            <b class="caret"></b>
+        </a>
+
+        <ul class="dropdown-menu">
+            @foreach (var item in Model)
+            {
+                if (item.IsParent)
+                {
+                    <li class="dropdown">
+                        <a href="/Products?categoryId=@item.Id">
+                            @if (item.Children.Count() != 0)
+                            {
+                                <i class="icon-caret-left pull-right visible-desktop"></i>
+                            }
+                            @item.Name
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var child in item.Children)
+                            {
+                                <li><a href="/Products?categoryId=@child.Id">@child.Name</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+            }
+        </ul>
+    }
+    else
+    {
+        <a href="/Blogs" class="dropdown-toggle">
+            <span>وبلاگ</span>
+            <b class="caret"></b>
+        </a>
+
+        <ul class="dropdown-menu">
+            @foreach (var item in Model)
+            {
+                if (item.IsParent)
+                {
+                    <li class="dropdown-menu">
+                        <a href="/Blogs?categoryId=@item.Id">
+                            @if (item.Children.Count() != 0)
+                            {
+                                <i class="icon-caret-left pull-right visible-desktop"></i>
+                            }
+                            @item.Name
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var child in item.Children)
+                            {
+                                <li><a href="/Blogs?categoryId=@child.Id">@child.Name</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+            }
+        </ul>
+    }
+</li>
+

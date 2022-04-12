@@ -1,0 +1,10 @@
+﻿@using Common.ViewModels
+@model List<ColorViewModel>
+
+    <select multiple tabindex="-1" id="ColorsList">
+        <option disabled selected>انتخاب رنگ ها</option>
+        @foreach(var item in Model)
+            {
+                <option>@item.Name</option>
+            }
+    </select> 

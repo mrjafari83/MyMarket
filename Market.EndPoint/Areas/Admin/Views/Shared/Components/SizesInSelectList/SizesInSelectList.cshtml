@@ -1,0 +1,10 @@
+﻿@using Common.ViewModels
+@model List<SizeViewModel>
+
+<select multiple tabindex="-1" id="SizesList">
+    <option disabled selected>انتخاب سایز ها</option>
+    @foreach (var item in Model)
+    {
+        <option>@item.SizeValue</option>
+    }
+</select>

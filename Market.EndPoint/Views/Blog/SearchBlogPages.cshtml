@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "SearchBlogPages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int back = ViewBag.CurrentPage - 1;
+    int forward = ViewBag.CurrentPage + 1;
+}
+@using Application.Services.Common.BlogPage.Queries.GetAllBlogPages
+@model GetAllBlogPagesResult
+
+<div class="darker-stripe">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="">وبلاگ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="push-up top-equal blocks-spacer">
+        <div class="row">
+
+            <!--  ==========  -->
+            <!--  = Main content =  -->
+            <!--  ==========  -->
+            <section class="span8 blog">
+                @if (Model.BlogPages.Count == 0)
+                {
+                    <h4 style="margin-right:1%;text-align:right" dir="rtl">صفحه ای یافت نشد.</h4>
+                }
+                else
+                {
+                    <h4 style="margin-right:1%;text-align:right" dir="rtl">@ViewBag.PageTitle</h4>
+                }
+                @foreach (var item in Model.BlogPages)
+                {
+                    <article class="post format-image">
+                        <div class="post-inner">
+                            <a href="blog-single.html"><img src="@item.Image" alt="featured image" width="1540" height="746"></a>
+                            <div class="post-title">
+                                <h2><a href="">@item.Title</a></h2>
+                            </div>
+
+                            <p class="push-down-25">
+                                @item.ShortDescription
+                            </p>
+
+                            <a href="/Blog?id=@item.Id" class="btn btn-primary bold higher">ادامه مطلب</a>
+                        </div>
+                    </article>
+                }
+
+                <hr>
+
+                @if (Model.BlogPages.Count() != 0)
+                {
+                    <!--  ==========  -->
+                    <!--  = Pagination =  -->
+                    <!--  ==========  -->
+                    <div class="pagination">
+                        <ul>
+                            @if (ViewBag.CurrentRow == 1)
+                            {
+                                <li><a class="btn btn-primary"><span class="icon-chevron-left"></span></a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/SearchBlogs?currentPage=@back&searchKey=@ViewBag.SearchKey" class="btn btn-primary"><span class="icon-chevron-left"></span></a></li>
+                            }
+
+                            @for (int i = 1; i <= Model.TotalRows; i++)
+                            {
+                                if (i == ViewBag.CurrentRow)
+                                {
+                                    <li class="active"><a href="/SearchBlogs?currentPage=@i&searchKey=@ViewBag.SearchKey">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/SearchBlogs?currentPage=@i&searchKey=@ViewBag.SearchKey">@i</a></li>
+                                }
+                            }
+
+                            @if (ViewBag.CurrentRow == Model.TotalRows)
+                            {
+                                <li><a class="btn btn-primary"><span class="icon-chevron-right"></span></a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/SearchBlogs?currentPage=@forward&searchKey=@ViewBag.SearchKey" class="btn btn-primary"><span class="icon-chevron-right"></span></a></li>
+                            }
+
+                        </ul>
+                    </div> <!-- /pagination -->
+                }
+
+            </section> <!-- /main content -->
+            <!--  ==========  -->
+            <!--  = Sidebar =  -->
+            <!--  ==========  -->
+            <aside class="span4 right-sidebar">
+
+                <!--  ==========  -->
+                <!--  = Search Widget =  -->
+                <!--  ==========  -->
+                <div class="sidebar-item widget_search">
+                    <!-- <div class="underlined">
+                        <h3><span class="light">Search</span></h3>
+                    </div> -->
+
+                    <form class="form" action="/SearchBlogs" id="searchform" method="post" role="search">
+                        <input type="text" id="appendedInputButton" class="input-block-level" name="searchKey" placeholder="جستجو ...">
+                        <button type="submit">
+                            <i class="icon-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!--  ==========  -->
+                <!--  = Archive =  -->
+                <!--  ==========  -->
+                <div class="sidebar-item widget_archive">
+                    <div class="underlined">
+                        <h3><span class="light">آرشیو</span>نوشته های بلاگ</h3>
+                    </div>
+                    @await Component.InvokeAsync("NewestBlogPaes")
+                </div>
+
+            </aside> <!-- /sidebar -->
+
+        </div>
+    </div>
+</div>
+

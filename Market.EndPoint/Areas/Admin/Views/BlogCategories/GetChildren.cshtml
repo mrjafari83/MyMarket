@@ -1,0 +1,79 @@
+﻿@using Application.Services.Common.Category.Queries.GetChildrenOfCategory;
+@model List<GetChildrenOfCategoryDto>
+
+<table>
+    <thead>
+        <tr>
+            <th>نام دسته بندی</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    @if (item
+                        .ChildrenCount != 0)
+                    {
+                        <a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="GetChildren(@item.Id)">زیر مجموعه ها</a>
+                        <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
+                        <a class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/BlogCategories/Edit/@item.Id">ویرایش</a>
+                        <a class="waves-effect waves-light btn modal-trigger red" href="#modal1" onclick="Delete(@item.Id)">حذف</a>
+                    }
+                    else
+                    {
+                        <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
+                        <a class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/BlogCategories/Edit/@item.Id">ویرایش</a>
+                        <a class="waves-effect waves-light btn modal-trigger red" href="#modal1" onclick="Delete(@item.Id)">حذف</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 id="title">Modal Header</h4>
+        <p id="body">A bunch of text</p>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        function GetChildren(id) {
+
+            $.get("/Admin/BlogCategories/GetChildren/" + id, function (result) {
+
+                $("#title").html("زیر مجموعه ها");
+                $("#body").html(result);
+            });
+
+        };
+
+        function CreateChild(id) {
+
+            $.get("/Admin/BlogCategories/Create/" + id, function (result) {
+
+                $("#title").html("افزودن زیر مجموعه");
+                $("#body").html(result);
+            });
+
+        };
+
+        function Delete(id) {
+
+            $.get("/Admin/BlogCategories/Delete/" + id, function (result) {
+
+                $("#title").html("حذف");
+                $("#body").html(result);
+            });
+
+        };
+    </script>
+}
