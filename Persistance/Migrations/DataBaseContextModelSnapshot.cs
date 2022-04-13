@@ -135,6 +135,9 @@ namespace Persistance.Migrations
                     b.Property<int?>("CartId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CartPayingInfoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -156,6 +159,8 @@ namespace Persistance.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
+
+                    b.HasIndex("CartPayingInfoId");
 
                     b.HasIndex("ProductId");
 
@@ -822,11 +827,17 @@ namespace Persistance.Migrations
                         .WithMany("Products")
                         .HasForeignKey("CartId");
 
+                    b.HasOne("Domain.Entities.Cart.CartPayingInfo", "CartPayingInfo")
+                        .WithMany("Products")
+                        .HasForeignKey("CartPayingInfoId");
+
                     b.HasOne("Domain.Entities.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
 
                     b.Navigation("Cart");
+
+                    b.Navigation("CartPayingInfo");
 
                     b.Navigation("Product");
                 });
@@ -1027,6 +1038,11 @@ namespace Persistance.Migrations
                 {
                     b.Navigation("CartPayings");
 
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Cart.CartPayingInfo", b =>
+                {
                     b.Navigation("Products");
                 });
 

@@ -12,6 +12,7 @@ using Application.Services.Client.Carts.Commands.DeleteProductFromCart;
 using Application.Services.Client.Carts.Commands.EditProductCount;
 using Application.Services.Client.Carts.Queries.GetUserCart;
 using Application.Services.Client.Carts.Commands.AddCartPaying;
+using Application.Services.Client.Carts.Commands.VerifyPaying;
 
 namespace Application.FacadPatterns.Client
 {
@@ -83,6 +84,15 @@ namespace Application.FacadPatterns.Client
             get
             {
                 return _addCartPayingService ?? new AddCartPayingService(db);
+            }
+        }
+
+        private VerifyPayingService _verifyPayingService;
+        public IVerifyPayingService VerifyPaying
+        {
+            get
+            {
+                return _verifyPayingService ?? new VerifyPayingService(db);
             }
         }
     }

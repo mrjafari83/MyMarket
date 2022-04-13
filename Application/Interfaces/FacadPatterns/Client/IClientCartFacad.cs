@@ -9,6 +9,7 @@ using Application.Services.Client.Carts.Commands.DeleteCart;
 using Application.Services.Client.Carts.Commands.DeleteProductFromCart;
 using Application.Services.Client.Carts.Commands.EditProductCount;
 using Application.Services.Client.Carts.Commands.AddCartPaying;
+using Application.Services.Client.Carts.Commands.VerifyPaying;
 using Application.Services.Client.Carts.Queries.GetUserCart;
 
 namespace Application.Interfaces.FacadPatterns.Client
@@ -22,5 +23,6 @@ namespace Application.Interfaces.FacadPatterns.Client
         IDeleteCartService DeleteCart { get; }
         IDeleteProductFromCartService DeleteProductFromCart { get; }
         IAddCartPayingService AddCartPaying { get; }
+        IVerifyPayingService VerifyPaying { get; }
     }
 }

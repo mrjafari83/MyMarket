@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\asp.net projects\\Market\\Domain\\Domain.csproj": {}
+    "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "E:\\asp.net projects\\Market\\Domain\\Domain.csproj": {
+    "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\asp.net projects\\Market\\Domain\\Domain.csproj",
+        "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "E:\\asp.net projects\\Market\\Domain\\Domain.csproj",
+        "projectPath": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-        "outputPath": "E:\\asp.net projects\\Market\\Domain\\obj\\",
+        "outputPath": "E:\\asp.net projects\\MyMarket\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

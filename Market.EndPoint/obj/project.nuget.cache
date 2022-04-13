@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PHo2AkAGautyH20S+S1ps/OdqLUg2MqQGeHdjr+ph9Pj1qt9NJP9n6Hevojwxc4TlP+dfuw+ozXFrGgwV0z/Yg==",
+  "dgSpecHash": "uF+uroeIVZthGP8pLUx9bfozkSvPup4q3dxCjy+z/xEfgbrJMumSMwo8ln2ZqOWszw7fQsxwlg9DNWglQDSlSA==",
   "success": true,
-  "projectFilePath": "E:\\asp.net projects\\Market\\Market.EndPoint\\Market.EndPoint.csproj",
+  "projectFilePath": "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

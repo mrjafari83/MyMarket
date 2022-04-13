@@ -10,3 +10,15 @@ E:\asp.net projects\Market\Domain\obj\Debug\net5.0\Domain.dll
 E:\asp.net projects\Market\Domain\obj\Debug\net5.0\ref\Domain.dll
 E:\asp.net projects\Market\Domain\obj\Debug\net5.0\Domain.pdb
 E:\asp.net projects\Market\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+E:\asp.net projects\MyMarket\Domain\bin\Debug\net5.0\Domain.deps.json
+E:\asp.net projects\MyMarket\Domain\bin\Debug\net5.0\Domain.dll
+E:\asp.net projects\MyMarket\Domain\bin\Debug\net5.0\ref\Domain.dll
+E:\asp.net projects\MyMarket\Domain\bin\Debug\net5.0\Domain.pdb
+E:\asp.net projects\MyMarket\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+E:\asp.net projects\MyMarket\Domain\obj\Debug\net5.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\asp.net projects\MyMarket\Domain\obj\Debug\net5.0\Domain.AssemblyInfoInputs.cache
+E:\asp.net projects\MyMarket\Domain\obj\Debug\net5.0\Domain.AssemblyInfo.cs
+E:\asp.net projects\MyMarket\Domain\obj\Debug\net5.0\Domain.csproj.CoreCompileInputs.cache
+E:\asp.net projects\MyMarket\Domain\obj\Debug\net5.0\Domain.dll
+E:\asp.net projects\MyMarket\Domain\obj\Debug\net5.0\ref\Domain.dll
+E:\asp.net projects\MyMarket\Domain\obj\Debug\net5.0\Domain.pdb

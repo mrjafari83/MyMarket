@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZJzAYJdE9GLAczDBECOzaD5ad98Ajri/Ieo0wQxnMTvuu6tNcu9rQJDqTyPhl2L71OdUsmeSc01z4HinMmhepw==",
+  "dgSpecHash": "DpFGpAZ2uAfyARAhesd84XHhqpwK/28oCHtnkWfVmF6X4cLagkY1oRugHOS8A/YGdhKW32WM+rw7eZhOicNJag==",
   "success": true,
-  "projectFilePath": "E:\\asp.net projects\\Market\\Domain\\Domain.csproj",
+  "projectFilePath": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

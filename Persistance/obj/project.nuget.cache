@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c61kAv8rAkL4S42DO0VgNA9uTC6FI/q1ByIJiJ0GJjUdEZNOvwrSfy0ot9cdr09CQ1tzn9LzpcXGYggonn+XoA==",
+  "dgSpecHash": "PKfpSRQbxr/TTfLh2Q+QYNy1yyl4+zos8gERfTqzG+aC5Tvhm/dDpQml1ydPWDPEvMHcUPIN7DGUm/gmd+9b6Q==",
   "success": true,
-  "projectFilePath": "E:\\asp.net projects\\Market\\Persistance\\Persistance.csproj",
+  "projectFilePath": "E:\\asp.net projects\\MyMarket\\Persistance\\Persistance.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

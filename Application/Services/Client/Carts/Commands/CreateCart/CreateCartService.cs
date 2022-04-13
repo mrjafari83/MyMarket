@@ -15,8 +15,8 @@ namespace Application.Services.Client.Carts.Commands.CreateCart
         public ResultDto Execute(string userName , out int cartId)
         {
             var entity = db.Carts.Add(new Cart { UserName = userName });
-            cartId = entity.Entity.Id;
             db.SaveChanges();
+            cartId = entity.Entity.Id;
 
             return new ResultDto
             {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "b8CtXnosmsUgNOovARYn4HvYIg+NUY3RRrtVloo8wgLgfQtgfTs2pxC9zw6dzC/2HbXE03MsL/xPiuEJkI+6zQ==",
+  "dgSpecHash": "GQym/RyI5+/jonBHfS5ZAiYLYwXWSiH0vnjTkP1kCBxRFrfDRlqvYTt30nmWUHIpO8DJOm0peUj6QRhe1Wm+9A==",
   "success": true,
-  "projectFilePath": "E:\\asp.net projects\\Market\\Common\\Common.csproj",
+  "projectFilePath": "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\microsoft.aspnetcore.hosting.server.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",

@@ -85,6 +85,9 @@ namespace Market.EndPoint.Controllers
                 return Redirect("/");
 
             ViewBag.ReturnUrl = returnUrl;
+            int cartId;
+            _clientCartFacad.CreateCart.Execute(user.UserName, out cartId);
+            CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
             var result = await signInManager.PasswordSignInAsync(user.UserName, user.Password, user.RememberMe, true);
             if (result.IsNotAllowed)
             {

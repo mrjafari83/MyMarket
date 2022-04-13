@@ -15,18 +15,18 @@ namespace Application.Services.Client.Carts.Queries.GetUserCart
 
         public ResultDto<GetUserCartDto> Execute(string userName)
         {
-            var userCart = db.Carts.Where(c => c.UserName == userName).Include(c=> c.Products).ThenInclude(c=> c.Product).ThenInclude(p=> p.Images).Select(c => new GetUserCartDto
+            var userCart = db.Carts.Where(c => c.UserName == userName).Include(c => c.Products).ThenInclude(c => c.Product).ThenInclude(p => p.Images).Select(c => new GetUserCartDto
             {
                 CartId = c.Id,
                 UserName = c.UserName,
-                Products = c.Products.Select(p => new CartProductDto
+                Products = c.Products.Select(p=> new CartProductDto
                 {
                     Id = p.Product.Id,
                     Name = p.Product.Name,
                     Price = p.Product.Price,
                     Count = p.Count,
                     Image = p.Product.Images.FirstOrDefault().Src,
-                    ProductInCartId = p.Id
+                    ProductInCartId = p.Id,
                 }).ToList()
             }).FirstOrDefault();
 

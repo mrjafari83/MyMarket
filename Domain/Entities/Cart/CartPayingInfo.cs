@@ -18,5 +18,6 @@ namespace Domain.Entities.Cart
         public bool IsPayed { get; set; }
 
         public virtual Cart Cart { get; set; }
+        public virtual ICollection<ProductInCart> Products { get; set; }
     }
 }

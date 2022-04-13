@@ -1817,11 +1817,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\asp.net projects\\Market\\Application\\Application.csproj",
+      "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "E:\\asp.net projects\\Market\\Application\\Application.csproj",
+      "projectPath": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-      "outputPath": "E:\\asp.net projects\\Market\\Application\\obj\\",
+      "outputPath": "E:\\asp.net projects\\MyMarket\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -1842,11 +1842,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\asp.net projects\\Market\\Common\\Common.csproj": {
-              "projectPath": "E:\\asp.net projects\\Market\\Common\\Common.csproj"
+            "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj": {
+              "projectPath": "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj"
             },
-            "E:\\asp.net projects\\Market\\Domain\\Domain.csproj": {
-              "projectPath": "E:\\asp.net projects\\Market\\Domain\\Domain.csproj"
+            "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj": {
+              "projectPath": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj"
             }
           }
         }

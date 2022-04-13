@@ -57,5 +57,51 @@ namespace Market.EndPoint.Controllers
         {
             return View();
         }
+
+        [Route("SetAddress")]
+        [HttpPost]
+        public IActionResult SetAddress(CartPayingViewModel model)
+        {
+            model.CartId = Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId"));
+            var cartPayingId = _clientCartFacad.AddCartPaying.Execute(model).Data;
+            CookiesManager.AddCookie(HttpContext, "cartPayingId", cartPayingId.ToString());
+            return Redirect("/Paying");
+        }
+
+        [Route("Paying")]
+        [HttpGet]
+        public IActionResult Pay()
+        {
+            return View();
+        }
+
+        [Route("Paying")]
+        [HttpPost]
+        public IActionResult Paying()
+        {
+            _clientCartFacad.VerifyPaying.Execute(Int32.Parse(CookiesManager.GetCookieValue(HttpContext , "cartPayingId")) , Int32.Parse(CookiesManager.GetCookieValue(HttpContext , "CartId")));
+
+            return Redirect("/VerifyCart");
+        }
+
+        [Route("VerifyCart")]
+        [HttpGet]
+        public IActionResult VerifyCart()
+        {
+            return View(_clientCartFacad.GetUserCart.Execute(User.Identity.Name).Data);
+        }
+
+        [Route("DeleteCartData")]
+        [HttpGet]
+        public IActionResult DeleteCartData()
+        {
+            var products = _clientCartFacad.GetUserCart.Execute(User.Identity.Name).Data.Products;
+            foreach(var item in products)
+            {
+                _clientCartFacad.DeleteProductFromCart.Execute(item.ProductInCartId);
+            }
+
+            return Redirect("/");
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace Domain.Entities.Cart
     public class ProductInCart : BaseEntity
     {
         public virtual Product Product { get; set; }
+        public virtual CartPayingInfo CartPayingInfo { get; set; }
         public Cart Cart { get; set; }
         public int Count { get; set; }
         public string Color { get; set; }

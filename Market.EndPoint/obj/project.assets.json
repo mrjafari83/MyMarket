@@ -8063,11 +8063,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\asp.net projects\\Market\\Market.EndPoint\\Market.EndPoint.csproj",
+      "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj",
       "projectName": "Market.EndPoint",
-      "projectPath": "E:\\asp.net projects\\Market\\Market.EndPoint\\Market.EndPoint.csproj",
+      "projectPath": "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj",
       "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-      "outputPath": "E:\\asp.net projects\\Market\\Market.EndPoint\\obj\\",
+      "outputPath": "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -8088,11 +8088,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\asp.net projects\\Market\\Application\\Application.csproj": {
-              "projectPath": "E:\\asp.net projects\\Market\\Application\\Application.csproj"
+            "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj": {
+              "projectPath": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj"
             },
-            "E:\\asp.net projects\\Market\\Persistance\\Persistance.csproj": {
-              "projectPath": "E:\\asp.net projects\\Market\\Persistance\\Persistance.csproj"
+            "E:\\asp.net projects\\MyMarket\\Persistance\\Persistance.csproj": {
+              "projectPath": "E:\\asp.net projects\\MyMarket\\Persistance\\Persistance.csproj"
             }
           }
         }
