@@ -430,3 +430,10 @@ E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Market.EndPoint.pd
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Market.EndPoint.genruntimeconfig.cache
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Cart\Pay.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Cart\VerifyCart.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Web.Mvc.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Web.Razor.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Web.WebPages.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Web.Helpers.dll

@@ -9,6 +9,7 @@ using Domain.Entities.Categories;
 using Domain.Entities.Products.Relations;
 using Domain.Entities.Comments;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Domain.Entities.Products
 {
@@ -19,6 +20,7 @@ namespace Domain.Entities.Products
         public string Brand { get; set; }
         public int Inventory { get; set; }
         public string ShortDescription { get; set; }
+        [AllowHtml]
         public string Description { get; set; }
         public int VisitNumber { get; set; }
         public int Price { get; set; }

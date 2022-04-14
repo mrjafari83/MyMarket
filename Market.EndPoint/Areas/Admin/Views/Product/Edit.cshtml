@@ -34,9 +34,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s6">
-                <input id="description" type="text" class="validate" value="@Model.Description">
-                <label class="active">توضیحات : </label>
+            <div class="input-field col s12">
+                <textarea id="description" class="validate"></textarea>
             </div>
         </div>
         <div class="row">
@@ -241,9 +240,10 @@
 
 @section scripts
 {
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/ckeditor/adapters/jquery.js"></script>
     <script>
         $(document).ready(function () {
-
             $("#btnSend").click(function (e) {
 
                 var formdata = new FormData();
@@ -421,6 +421,10 @@
                 newRow += "</tr>";
                 table.innerHTML += newRow;
             }
+
+            $(function () {
+                $('#description').ckeditor();
+            });
         });
     </script>
 }

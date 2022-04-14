@@ -176,7 +176,7 @@
             <div class="tab-content">
                 <div class="fade in tab-pane active" id="tab-1">
                     <h3>توضیحات محصول</h3>
-                    @Model.Description
+                    @Html.Raw(Model.Description)
                     <h3>ویژگی های محصول</h3>
                     <ul dir="rtl">
                         @foreach (var item in Model.Features)

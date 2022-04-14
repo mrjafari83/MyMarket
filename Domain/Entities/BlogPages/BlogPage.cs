@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Domain.Entities.Common;
 using Domain.Entities.Categories;
 using Domain.Entities.Comments;
+using System.Web.Mvc;
 
 namespace Domain.Entities.BlogPages
 {
@@ -14,6 +15,7 @@ namespace Domain.Entities.BlogPages
     {
         public string Title { get; set; }
         public string ShortDescription { get; set; }
+        [AllowHtml]
         public string Text { get; set; }
         public string Image { get; set; }
         public DateTime CreateDate { get; set; }

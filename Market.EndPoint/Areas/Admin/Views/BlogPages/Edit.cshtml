@@ -28,8 +28,7 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input value="@Model.Text" id="text" type="text" class="materialize-textarea" />
-                <label for="textarea1">متن اصلی</label>
+                <textarea id="text" class="validate"></textarea>
             </div>
         </div>
         <div class="row">
@@ -97,6 +96,8 @@
 <br />
 
 @section scripts{
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/ckeditor/adapters/jquery.js"></script>
     <script>
         $(document).ready(function () {
             $("#btnSend").click(function (e) {
@@ -163,6 +164,10 @@
                 newRow += "</tr>";
                 table.innerHTML += newRow;
             }
+
+            $(function () {
+                $('#text').ckeditor();
+            });
         });
     </script>
 }

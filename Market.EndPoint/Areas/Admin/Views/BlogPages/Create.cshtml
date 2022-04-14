@@ -14,21 +14,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12">
                 <input id="title" type="text" class="validate">
                 <label class="active">عنوان</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12">
                 <input id="shortDescription" type="text" class="validate">
                 <label class="active">توضیحات مختصر</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="text" class="materialize-textarea"></textarea>
-                <label for="textarea1">متن اصلی</label>
+                <textarea id="text" class="validate"></textarea>
             </div>
         </div>
         <div class="row">
@@ -82,6 +81,8 @@
 </div>
 
 @section scripts{
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/ckeditor/adapters/jquery.js"></script>
     <script>
         $(document).ready(function () {
             $("#btnSend").click(function (e) {
@@ -132,7 +133,7 @@
                 $(this).closest('tr').remove();
             });
 
-                    function CreateRow(table, values, withDeleteKey) {
+            function CreateRow(table, values, withDeleteKey) {
                 debugger;
                 var newRow = "<tr>";
                 for (var i = 0; i < values.length; i++) {
@@ -147,6 +148,9 @@
                 table.innerHTML += newRow;
             }
         });
+
+        $(function () {
+            $('#text').ckeditor();
+        });
     </script>
 }
-
