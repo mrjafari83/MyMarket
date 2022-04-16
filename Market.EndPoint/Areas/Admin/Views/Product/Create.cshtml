@@ -4,196 +4,149 @@
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="card">
-    <div class="card-content">
-        <div class="class=" input-field">
-            <select id="categoryId" asp-items="@ViewBag.Categories">
-                <option disabled selected>یک دسته بندی را انتخاب کنید</option>
-            </select>
-            <label>دسته بندی ها</label>
-        </div>
 
-        <div class="row">
-            <div class="input-field col s6">
-                <input type="text" class="validate" id="name">
-                <label class="active">نام کالا : </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="brand" type="text" class="validate">
-                <label class="active">برند : </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="shortDescription" type="text" class="validate">
-                <label class="active"> توضیحات مختصر : </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="description" class="validate"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input type="number" id="price" class="materialize-textarea">
-                <label for="textarea1">قیمت  : </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input type="number" id="inventory" class="materialize-textarea">
-                <label for="textarea1">تعداد موجود : </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <div class="file-field input-field">
-                    <div class="btn cyan">
-                        <span>تصاویر</span>
-                        <input type="file" id="images" multiple accept="image/*">
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <form class="formValidate" id="formValidate" novalidate="novalidate">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <select id="categoryId" asp-items="@ViewBag.Categories"></select>
+                            <label>دسته بندی ها</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="name" class="">نام کالا*</label>
+                            <input id="name" name="name" type="text" data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="brand">برند</label>
+                            <input id="brand" type="text" name="brand">
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="price">قیمت*</label>
+                            <input id="price" type="number" name="price" data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="inventory">موجودی*</label>
+                            <input id="inventory" type="number" name="inventory" data-error=".errorTxt3">
+                            <div class="errorTxt3"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="shortDescription">توضیحات مختصر*</label>
+                            <input id="shortDescription" type="text" name="shortDescription" data-error=".errorTxt4">
+                            <div class="errorTxt4"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="description" name="description" data-error=".errorTxt5"></textarea>
+                            <div class="errorTxt5"></div>
+                        </div>
+                        <div class="input-field col s12 file-field">
+                            <div class="btn cyan">
+                                <span>تصاویر</span>
+                                <input multiple type="file" id="images" name="images" data-error=".errorTxt6">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                            <div class="errorTxt6"></div>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <label for="keywordValue">کلمه کلیدی : </label>
+                            <input type="text" id="keywordValue" class="validate" />
+                            <a class="btn green waves-effect waves-light right" id="btnCreateKeyword">
+                                افزودن
+                            </a>
+                        </div>
+                        <table class="highlight">
+                            <thead>
+                                <tr>
+                                    <th>کلمه کلیدی</th>
+                                </tr>
+                            </thead>
+                            <tbody id="keywordTable">
+                            </tbody>
+                        </table>
+                        <hr />
+
+                        <div class="input-field col s12">
+                            <label for="featureDisplay"> نام ویژگی : </label>
+                            <input type="text" id="featureDisplay" class="validate" />
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="featureValue"> مقدار ویژگی : </label>
+                            <input type="text" id="featureValue" class="validate" />
+                            <a class="btn green waves-effect waves-light right" id="btnCreateFeature">
+                                افزودن
+                            </a>
+                        </div>
+                        <table class="highlight">
+                            <thead>
+                                <tr>
+                                    <th>نام ویژگی</th>
+                                    <th>مقدار ویژگی</th>
+                                </tr>
+                            </thead>
+                            <tbody id="featureTable">
+                            </tbody>
+                        </table>
+                        <hr />
+                        <div class="input-field col s12">
+                            <label for="colorValue"> رنگ : </label>
+                            <input type="text" id="colorValue" class="validate" />
+                            <a class="btn green waves-effect waves-light right" id="btnCreateColor">
+                                افزودن
+                            </a>
+                        </div>
+                        <div class="input-field col s12">
+                            @await Component.InvokeAsync("ColorsInSelectList")
+                            <a class="btn green waves-effect waves-light right" id="btnCreateColorByList">
+                                افزودن
+                            </a>
+                        </div>
+                        <table class="highlight">
+                            <thead>
+                                <tr>
+                                    <th>رنگ ها</th>
+                                </tr>
+                            </thead>
+                            <tbody id="colorTable">
+                            </tbody>
+                        </table>
+                        <hr />
+                        <div class="input-field col s12">
+                            <label for="sizeValue"> سایز : </label>
+                            <input type="text" id="sizeValue" class="validate" />
+                            <a class="btn green waves-effect waves-light right" id="btnCreateSize">
+                                افزودن
+                            </a>
+                        </div>
+                        <div class="input-field col s12">
+                            @await Component.InvokeAsync("SizesInSelectList")
+                            <a class="btn green waves-effect waves-light right" id="btnCreateSizeByList">
+                                افزودن
+                            </a>
+                        </div>
+                        <table class="highlight">
+                            <thead>
+                                <tr>
+                                    <th>سایز ها</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sizeTable">
+                            </tbody>
+                        </table>
+                        <hr />
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light right submit green" type="submit" name="action">افزودن</button>
+                        </div>
                     </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="row" style="margin:10px 0px">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="input-field">
-                    <input type="text" id="keywordValue" class="validate" />
-                    <label class="active">کلمه کلیدی : </label>
-                    <button class="btn green waves-effect waves-light right" id="btnCreateKeyword">
-                        افزودن
-                    </button>
-                </div>
-
-                <br />
-                <table class="highlight">
-                    <thead>
-                        <tr>
-                            <th>کلمه کلیدی</th>
-                        </tr>
-                    </thead>
-                    <tbody id="keywordTable">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="input-field">
-                    <input type="text" id="colorValue" class="validate" />
-                    <label class="active">رنگ :</label>
-                    <button class="btn green waves-effect waves-light right" id="btnCreateColor">
-                        افزودن
-                    </button>
-                </div>
-
-                <div class="input-field">
-                    @await Component.InvokeAsync("ColorsInSelectList")
-                    <button class="btn green waves-effect waves-light right" id="btnCreateColorByList">
-                        افزودن
-                    </button>
-                </div>
-
-                <br />
-                <table class="highlight">
-                    <thead>
-                        <tr>
-                            <th>رنگ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="colorTable">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="input-field">
-                    <input type="text" id="sizeValue" class="validate" />
-                    <label class="active">سایز : </label>
-                    <button class="btn green waves-effect waves-light right" id="btnCreateSize">
-                        افزودن
-                    </button>
-                </div>
-
-                <div class="input-field">
-                    @await Component.InvokeAsync("SizesInSelectList")
-                    <button class="btn green waves-effect waves-light right" id="btnCreateSizeByList">
-                        افزودن
-                    </button>
-                </div>
-
-                <br />
-                <table class="highlight">
-                    <thead>
-                        <tr>
-                            <th>سایز</th>
-                        </tr>
-                    </thead>
-                    <tbody id="sizeTable">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="input-field">
-                    <input type="text" id="featureDisplay" class="validate" />
-                    <label class="active">نام ویژگی :</label>
-                </div>
-                <div class="input-field">
-                    <input type="text" id="featureValue" class="validate" />
-                    <label class="active">مقدار ویژگی :</label>
-                    <button class="btn green waves-effect waves-light right" id="btnCreateFeature">
-                        افزودن
-                    </button>
-                </div>
-
-                <br />
-                <table class="highlight">
-                    <thead>
-                        <tr>
-                            <th>نام ویژگی</th>
-                            <th>مقدار ویژگی</th>
-                        </tr>
-                    </thead>
-                    <tbody id="featureTable">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="input-field col s12">
-        <input type="submit" value="افزودن" class="btn green waves-effect waves-light right" id="btnSend">
     </div>
 </div>
 <br />
@@ -205,8 +158,134 @@
 {
     <script src="/ckeditor/ckeditor.js"></script>
     <script src="/ckeditor/adapters/jquery.js"></script>
+
+    <script src="/Admin/assets/extra-libs/prism/prism.js"></script>
+    <script src="/Admin/dist/js/pages/forms/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
+            $("#formValidate").validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    price: {
+                        required: true,
+                    },
+                    inventory: {
+                        required: true,
+                    },
+                    shortDescription: {
+                        required: true,
+                    },
+                    description: {
+                        required: true,
+                    },
+                    images: {
+                        required: true,
+                    },
+                },
+                //For custom messages 
+                messages: {
+                    name: {
+                        required: "یک نام انتخاب کنید",
+                    },
+                    price: {
+                        required: "قیمت کالا را وارد کنید",
+                    },
+                    inventory: {
+                        required: "موجودی کالا(در انبار) را وارد کنید",
+                    },
+                    shortDescription: {
+                        required: "توضیحات مختصر را وارد کنید",
+                    },
+                    description: {
+                        required: "توضیحات محصول را وارد کنید",
+                    },
+                    images: {
+                        required: "یک تصویر انتخاب کنید",
+                    },
+                },
+                errorElement: 'div',
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function () {
+                    debugger;
+
+                    var formdata = new FormData();
+                    formdata.append("Name", $("#name").val());
+                    formdata.append("Brand", $("#brand").val());
+                    formdata.append("Description", $("#description").val());
+                    formdata.append("ShortDescription", $("#shortDescription").val());
+                    formdata.append("Inventory", $("#inventory").val());
+                    formdata.append("Price", $("#price").val());
+                    formdata.append("CategoryId", $("#categoryId").find("option:selected").val());
+
+                    var productImages = document.getElementById("images");
+                    if (productImages.files.length > 0) {
+                        for (var i = 0; i < productImages.files.length; i++) {
+                            formdata.append('Images', productImages.files[i]);
+                        }
+                    }
+
+                    var Keywords = $('#keywordTable tr').map(function () {
+                        return {
+                            KeywordValue: $(this.cells[0]).text(),
+                        };
+                    }).get();
+                    $.each(Keywords, function (i, val) {
+                        formdata.append('[' + i + '].KeywordValue', val.KeywordValue);
+                    });
+
+                    var colors = $('#colorTable tr').map(function () {
+                        return {
+                            Name: $(this.cells[0]).text(),
+                        };
+                    }).get();
+                    $.each(colors, function (i, val) {
+                        formdata.append('[' + i + '].Name', val.Name);
+                    });
+
+                    var sizes = $('#sizeTable tr').map(function () {
+                        return {
+                            SizeValue: $(this.cells[0]).text(),
+                        };
+                    }).get();
+                    $.each(sizes, function (i, val) {
+                        formdata.append('[' + i + '].SizeValue', val.SizeValue);
+                    });
+
+                    var features = $('#featureTable tr').map(function () {
+                        return {
+                            Display: $(this.cells[0]).text(),
+                            FeatureValue: $(this.cells[1]).text(),
+                        };
+                    }).get();
+                    $.each(features, function (i, val) {
+                        formdata.append('[' + i + '].Display', val.Display);
+                        formdata.append('[' + i + '].FeatureValue', val.FeatureValue);
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        enctype: "multipart/form-data",
+                        url: "/Admin/Product/Create",
+                        data: formdata,
+                        success: function (response) {
+                            window.location.href = "/Admin/Product";
+                        }
+                    });
+                }
+            });
+
 
             $("#btnSend").click(function (e) {
 
@@ -377,7 +456,7 @@
                 }
 
                 if (withDeleteKey === true) {
-                    newRow += '<td><button class="idFeatures btn red waves-effect waves-light right" >حذف</button></td>';
+                    newRow += '<td><a class="idFeatures btn red waves-effect waves-light right" >حذف</a></td>';
                 }
 
                 newRow += "</tr>";

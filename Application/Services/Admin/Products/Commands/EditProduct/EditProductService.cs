@@ -127,8 +127,12 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             foreach (var item in colors)
             {
                 if (productColors.Where(c => c.Name == item.Name).ToList().Count() != 0)
+                {
+                    var dbColor = db.ProductColors.Where(c => c.Name == item.Name).FirstOrDefault();
+                    db.ColorsInProducts.Add(new ColorInProduct { Color = dbColor, Product = product });
                     continue;
-
+                }
+                    
                 var color = db.ProductColors.Add(new ProductColor { Name = item.Name});
                 db.ColorsInProducts.Add(new ColorInProduct { Product = product, Color = color.Entity });
             }
@@ -158,8 +162,16 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             foreach (var item in sizes)
             {
                 if (productSizes.Where(s=> s.Value == item.SizeValue).ToList().Count() != 0)
+                {
+                    var dbSize = db.ProductSizes.Where(s => s.Value == item.SizeValue).FirstOrDefault();
+                    db.SizesInProducts.Add(new SizeInProduct
+                    {
+                        Product = product,
+                        Size = dbSize
+                    });
                     continue;
-
+                }
+                    
                 var size = db.ProductSizes.Add(new ProductSize {Value = item.SizeValue });
                 db.SizesInProducts.Add(new SizeInProduct { Product = product, Size = size.Entity });
             }
@@ -186,14 +198,15 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
 
         private void AddImages(Product product, List<IFormFile> images)
         {
-            foreach (var item in images)
-            {
-                db.ProductImages.Add(new ProductImage
+            if(images != null)
+                foreach (var item in images)
                 {
-                    Product = product,
-                    Src = FileUploader.Upload(item, _environment, "products/" + product.Name)
-                });
-            }
+                    db.ProductImages.Add(new ProductImage
+                    {
+                        Product = product,
+                        Src = FileUploader.Upload(item, _environment, "products/" + product.Name)
+                    });
+                }
         }
 
         private void DeleteImages(List<ProductImage> productImages)

@@ -119,6 +119,11 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                             Color = color.Entity
                         });
                     }
+                    else
+                    {
+                        var dbColor = db.ProductColors.Where(c => c.Name == item.Name).FirstOrDefault();
+                        db.ColorsInProducts.Add(new ColorInProduct { Color = dbColor, Product = product });
+                    }
                 }
             }
         }
@@ -136,6 +141,15 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                         {
                             Size = size.Entity,
                             Product = product
+                        });
+                    }
+                    else
+                    {
+                        var size = db.ProductSizes.Where(s => s.Value == item.SizeValue).FirstOrDefault();
+                        db.SizesInProducts.Add(new SizeInProduct
+                        {
+                            Product = product,
+                            Size = size
                         });
                     }
                 }
