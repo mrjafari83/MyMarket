@@ -6,91 +6,168 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="card">
-    <div class="card-content">
-        <div class="row">
-            <div class="input-field col s12">
-                <select name="categoryId" asp-items="@ViewBag.Categories"></select>
-                <label>دسته بندی ها</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <input value="@Model.Title" id="title" type="text" class="validate">
-                <label class="active">عنوان</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <input value="@Model.ShortDescription" id="shortDescription" type="text" class="validate">
-                <label class="active">توضیحات مختصر</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="text" class="validate"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <div class="file-field input-field">
-                    <div class="btn cyan">
-                        <span>تصویر</span>
-                        <input type="file" id="image">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row" style="margin:10px 0px">
+<div class="row">
     <div class="col s12">
         <div class="card">
             <div class="card-content">
-                <div class="input-field">
-                    <input type="text" id="keywordValue" class="validate" />
-                    <label class="active">کلمه کلیدی : </label>
-                    <button class="btn green waves-effect waves-light right" id="btnCreateKeyword">
-                        افزودن
-                    </button>
-                </div>
+                <form class="formValidate" id="formValidate" novalidate="novalidate">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <select id="categoryId" asp-items="@ViewBag.Categories" data-error=".errorTxt5"></select>
+                            <label>دسته بندی ها</label>
+                            <div class="errorTxt5"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="title" class="">عنوان*</label>
+                            <input id="title" name="title" type="text" data-error=".errorTxt1" value="@Model.Title">
+                            <div class="errorTxt1"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="shortDescription">توضیحات مختصر *</label>
+                            <input id="shortDescription" type="text" name="shortDescription" data-error=".errorTxt2" value="@Model.ShortDescription">
+                            <div class="errorTxt2"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="text" name="text" data-error=".errorTxt3">@Model.Text</textarea>
+                            <div class="errorTxt3"></div>
+                        </div>
+                        <div class="input-field col s12 file-field">
+                            <div class="btn cyan">
+                                <span>تصویر</span>
+                                <input type="file" id="image" name="image" data-error=".errorTxt4" value="@Model.Image">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                            <div class="errorTxt4"></div>
+                        </div>
 
-                <br />
-                <table class="highlight">
-                    <thead>
-                        <tr>
-                            <th>کلمه کلیدی</th>
-                        </tr>
-                    </thead>
-                    <tbody id="keywordTable">
-                        @if (Model.Keywords != null)
-                        {
-                            foreach (var item in Model.Keywords)
-                            {
+                        <div class="input-field col s12">
+                            <label for="keywordValue">کلمه کلیدی : </label>
+                            <input type="text" id="keywordValue" class="validate" />
+                            <a class="btn green waves-effect waves-light right" id="btnCreateKeyword">
+                                افزودن
+                            </a>
+                        </div>
+
+                        <br />
+                        <table class="highlight">
+                            <thead>
                                 <tr>
-                                    <td>@item.KeywordValue</td>
-                                    <td>
-                                        <button class="idFeatures btn red waves-effect waves-light right">حذف</button>
-                                    </td>
+                                    <th>کلمه کلیدی</th>
                                 </tr>
-                            }
-                        }
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody id="keywordTable">
+                                @if (Model.Keywords != null)
+                                {
+                                    foreach (var item in Model.Keywords)
+                                    {
+                                        <tr>
+                                            <td>@item.KeywordValue</td>
+                                            <td>
+                                                <button class="idFeatures btn red waves-effect waves-light right">حذف</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light right submit green" type="submit" name="action">ویرایش</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="input-field col s12">
-        <button class="btn green waves-effect waves-light right" id="btnSend">
-            ویرایش
-        </button>
+
+@*<div class="card">
+        <div class="card-content">
+            <div class="row">
+                <div class="input-field col s12">
+                    <select name="categoryId" asp-items="@ViewBag.Categories"></select>
+                    <label>دسته بندی ها</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input value="@Model.Title" id="title" type="text" class="validate">
+                    <label class="active">عنوان</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input value="@Model.ShortDescription" id="shortDescription" type="text" class="validate">
+                    <label class="active">توضیحات مختصر</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="text" class="validate"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="file-field input-field">
+                        <div class="btn cyan">
+                            <span>تصویر</span>
+                            <input type="file" id="image">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row" style="margin:10px 0px">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="input-field">
+                        <input type="text" id="keywordValue" class="validate" />
+                        <label class="active">کلمه کلیدی : </label>
+                        <button class="btn green waves-effect waves-light right" id="btnCreateKeyword">
+                            افزودن
+                        </button>
+                    </div>
+
+                    <br />
+                    <table class="highlight">
+                        <thead>
+                            <tr>
+                                <th>کلمه کلیدی</th>
+                            </tr>
+                        </thead>
+                        <tbody id="keywordTable">
+                            @if (Model.Keywords != null)
+                            {
+                                foreach (var item in Model.Keywords)
+                                {
+                                    <tr>
+                                        <td>@item.KeywordValue</td>
+                                        <td>
+                                            <button class="idFeatures btn red waves-effect waves-light right">حذف</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <button class="btn green waves-effect waves-light right" id="btnSend">
+                ویرایش
+            </button>
+        </div>
+    </div>*@
 <br />
 <br />
 <br />
@@ -98,9 +175,12 @@
 @section scripts{
     <script src="/ckeditor/ckeditor.js"></script>
     <script src="/ckeditor/adapters/jquery.js"></script>
+
+    <script src="/Admin/assets/extra-libs/prism/prism.js"></script>
+    <script src="/Admin/dist/js/pages/forms/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#btnSend").click(function (e) {
+            @*$("#btnSend").click(function (e) {
 
                 var formdata = new FormData();
                 formdata.append("title", $("#title").val());
@@ -132,7 +212,7 @@
                         window.location.href = "/Admin/BlogPages";
                     }
                 });
-            });
+            });*@
 
             //کنترل جدول کلمات کلیدی برای اضافه و حذف نمودن خط به جدول
             $("#btnCreateKeyword").click(function (e) {
@@ -168,6 +248,81 @@
             $(function () {
                 $('#text').ckeditor();
             });
+
+            $("#formValidate").validate({
+                rules: {
+                    categoryId: {
+                        required: true,
+                    },
+                    title: {
+                        required: true,
+                    },
+                    shortDescription: {
+                        required: true,
+                    },
+                    text: {
+                        required: true,
+                    },
+                },
+                //For custom messages
+                messages: {
+                    categoryId: {
+                        required: "یک دسته بندی انتخاب کنید",
+                    },
+                    title: {
+                        required: "عنوان را وارد کنید",
+                    },
+                    shortDescription: {
+                        required: "توضیحات مختصر را وارد کنید",
+                    },
+                    text: {
+                        required: "متن اصلی  را وارد کنید",
+                    },
+                },
+                errorElement: 'div',
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function () {
+                    debugger;
+                    var formdata = new FormData();
+                    formdata.append("title", $("#title").val());
+                    formdata.append("shortDescription", $("#shortDescription").val());
+                    formdata.append("text", $("#text").val());
+                    formdata.append("categoryId", $("#categoryId").find("option:selected").val());
+                    formdata.append("image", document.getElementById("image").files[0]);
+                    formdata.append("id", @Model.Id);
+                    formdata.append("imageName", "@Model.Image");
+
+                    var Keywords = $('#keywordTable tr').map(function () {
+                        return {
+                            KeywordValue: $(this.cells[0]).text(),
+                        };
+                    }).get();
+                    $.each(Keywords, function (i, val) {
+                        formdata.append('[' + i + '].KeywordValue', val.KeywordValue);
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        enctype: "multipart/form-data",
+                        url: "/Admin/BlogPages/Edit",
+                        data: formdata,
+                        success: function (response) {
+                            window.location.href = "/Admin/BlogPages";
+                        }
+                    });
+                }
+            });
+
         });
     </script>
 }
