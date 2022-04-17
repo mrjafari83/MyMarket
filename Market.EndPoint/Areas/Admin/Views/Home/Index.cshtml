@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="row">
+@*<div class="row">
     <div class="col s12 m12 l6">
         <div class="card">
             <div class="card-content">
@@ -45,6 +45,69 @@
 
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="row">
+    <div class="col l9">
+        <div class="card">
+            <div class="card-content">
+                <div class="d-flex flex-wrap">
+                    <div>
+                        <h4 class="card-title">Analytics Overview</h4>
+                        <h6 class="card-subtitle">Overview of Monthly analytics</h6>
+                    </div>
+                    <div class="ml-auto align-self-center">
+                        <ul class="list-inline font-12 dl m-r-10">
+                            <li class="green-text"><i class="fa fa-circle"></i> Site A</li>
+                            <li class="blue-text text-accent-4"><i class="fa fa-circle"></i> Site B</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="overview ct-charts" style="height:290px!important;"><div class="chartist-tooltip" style="top: 24px; left: 208px;"><span class="chartist-tooltip-value">8000</span></div><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-line" style="width: 100%; height: 100%;"><g class="ct-grids"><line x1="30" x2="30" y1="15" y2="255" class="ct-grid ct-horizontal"></line><line x1="135.32142857142856" x2="135.32142857142856" y1="15" y2="255" class="ct-grid ct-horizontal"></line><line x1="240.64285714285714" x2="240.64285714285714" y1="15" y2="255" class="ct-grid ct-horizontal"></line><line x1="345.9642857142857" x2="345.9642857142857" y1="15" y2="255" class="ct-grid ct-horizontal"></line><line x1="451.2857142857143" x2="451.2857142857143" y1="15" y2="255" class="ct-grid ct-horizontal"></line><line x1="556.6071428571429" x2="556.6071428571429" y1="15" y2="255" class="ct-grid ct-horizontal"></line><line x1="661.9285714285714" x2="661.9285714285714" y1="15" y2="255" class="ct-grid ct-horizontal"></line><line x1="767.25" x2="767.25" y1="15" y2="255" class="ct-grid ct-horizontal"></line><line y1="255" y2="255" x1="30" x2="767.25" class="ct-grid ct-vertical"></line><line y1="215" y2="215" x1="30" x2="767.25" class="ct-grid ct-vertical"></line><line y1="175" y2="175" x1="30" x2="767.25" class="ct-grid ct-vertical"></line><line y1="135" y2="135" x1="30" x2="767.25" class="ct-grid ct-vertical"></line><line y1="95" y2="95" x1="30" x2="767.25" class="ct-grid ct-vertical"></line><line y1="55" y2="55" x1="30" x2="767.25" class="ct-grid ct-vertical"></line><line y1="15" y2="15" x1="30" x2="767.25" class="ct-grid ct-vertical"></line></g><g><g class="ct-series ct-series-a"><path d="M30,255L30,255C65.107,241.667,100.214,232.778,135.321,215C170.429,197.222,205.536,135,240.643,135C275.75,135,310.857,191,345.964,191C381.071,191,416.179,135,451.286,135C486.393,135,521.5,183,556.607,183C591.714,183,626.821,15,661.929,15C697.036,15,732.143,175,767.25,255L767.25,255Z" class="ct-area" x1="NaN"></path><path d="M30,255C65.107,241.667,100.214,232.778,135.321,215C170.429,197.222,205.536,135,240.643,135C275.75,135,310.857,191,345.964,191C381.071,191,416.179,135,451.286,135C486.393,135,521.5,183,556.607,183C591.714,183,626.821,15,661.929,15C697.036,15,732.143,175,767.25,255" class="ct-line"></path><line x1="30" y1="255" x2="30.01" y2="255" class="ct-point" ct:value="0"></line><line x1="135.32142857142856" y1="215" x2="135.33142857142855" y2="215" class="ct-point" ct:value="5000"></line><line x1="240.64285714285714" y1="135" x2="240.65285714285713" y2="135" class="ct-point" ct:value="15000"></line><line x1="345.9642857142857" y1="191" x2="345.9742857142857" y2="191" class="ct-point" ct:value="8000"></line><line x1="451.2857142857143" y1="135" x2="451.29571428571427" y2="135" class="ct-point" ct:value="15000"></line><line x1="556.6071428571429" y1="183" x2="556.6171428571429" y2="183" class="ct-point" ct:value="9000"></line><line x1="661.9285714285714" y1="15" x2="661.9385714285714" y2="15" class="ct-point" ct:value="30000"></line><line x1="767.25" y1="255" x2="767.26" y2="255" class="ct-point" ct:value="0"></line></g><g class="ct-series ct-series-b"><path d="M30,255L30,255C65.107,247,100.214,237.4,135.321,231C170.429,224.6,205.536,215,240.643,215C275.75,215,310.857,239,345.964,239C381.071,239,416.179,191,451.286,191C486.393,191,521.5,247,556.607,247C591.714,247,626.821,215,661.929,215C697.036,215,732.143,241.667,767.25,255L767.25,255Z" class="ct-area" x1="NaN"></path><path d="M30,255C65.107,247,100.214,237.4,135.321,231C170.429,224.6,205.536,215,240.643,215C275.75,215,310.857,239,345.964,239C381.071,239,416.179,191,451.286,191C486.393,191,521.5,247,556.607,247C591.714,247,626.821,215,661.929,215C697.036,215,732.143,241.667,767.25,255" class="ct-line"></path><line x1="30" y1="255" x2="30.01" y2="255" class="ct-point" ct:value="0"></line><line x1="135.32142857142856" y1="231" x2="135.33142857142855" y2="231" class="ct-point" ct:value="3000"></line><line x1="240.64285714285714" y1="215" x2="240.65285714285713" y2="215" class="ct-point" ct:value="5000"></line><line x1="345.9642857142857" y1="239" x2="345.9742857142857" y2="239" class="ct-point" ct:value="2000"></line><line x1="451.2857142857143" y1="191" x2="451.29571428571427" y2="191" class="ct-point" ct:value="8000"></line><line x1="556.6071428571429" y1="247" x2="556.6171428571429" y2="247" class="ct-point" ct:value="1000"></line><line x1="661.9285714285714" y1="215" x2="661.9385714285714" y2="215" class="ct-point" ct:value="5000"></line><line x1="767.25" y1="255" x2="767.26" y2="255" class="ct-point" ct:value="0"></line></g></g><g class="ct-labels"><foreignObject style="overflow: visible;" x="30" y="260" width="105.32142857142857" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 105px; height: 20px;">1</span></foreignObject><foreignObject style="overflow: visible;" x="135.32142857142856" y="260" width="105.32142857142857" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 105px; height: 20px;">2</span></foreignObject><foreignObject style="overflow: visible;" x="240.64285714285714" y="260" width="105.32142857142858" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 105px; height: 20px;">3</span></foreignObject><foreignObject style="overflow: visible;" x="345.9642857142857" y="260" width="105.32142857142856" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 105px; height: 20px;">4</span></foreignObject><foreignObject style="overflow: visible;" x="451.2857142857143" y="260" width="105.32142857142861" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 105px; height: 20px;">5</span></foreignObject><foreignObject style="overflow: visible;" x="556.6071428571429" y="260" width="105.32142857142856" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 105px; height: 20px;">6</span></foreignObject><foreignObject style="overflow: visible;" x="661.9285714285714" y="260" width="105.32142857142856" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 105px; height: 20px;">7</span></foreignObject><foreignObject style="overflow: visible;" x="767.25" y="260" width="30" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 30px; height: 20px;">8</span></foreignObject><foreignObject style="overflow: visible;" y="215" x="10" height="40" width="10"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 40px; width: 10px;">0k</span></foreignObject><foreignObject style="overflow: visible;" y="175" x="10" height="40" width="10"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 40px; width: 10px;">5k</span></foreignObject><foreignObject style="overflow: visible;" y="135" x="10" height="40" width="10"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 40px; width: 10px;">10k</span></foreignObject><foreignObject style="overflow: visible;" y="95" x="10" height="40" width="10"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 40px; width: 10px;">15k</span></foreignObject><foreignObject style="overflow: visible;" y="55" x="10" height="40" width="10"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 40px; width: 10px;">20k</span></foreignObject><foreignObject style="overflow: visible;" y="15" x="10" height="40" width="10"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 40px; width: 10px;">25k</span></foreignObject><foreignObject style="overflow: visible;" y="-15" x="10" height="30" width="10"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 30px; width: 10px;">30k</span></foreignObject></g><defs><linearGradient id="gradient" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="rgba(255, 255, 255, 1)"></stop><stop offset="1" stop-color="#288fee"></stop></linearGradient></defs></svg></div>
+            </div>
+        </div>
+    </div>
+    <div class="col l3">
+        <div class="card primary-gradient">
+            <div class="card-content">
+                <h4 class="card-title white-text">Total Visit</h4>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h6 class="font-light m-b-0 white-text"><i class="ti-angle-up white-text"></i>  12456</h6>
+                    </div>
+                    <div class="ml-auto">
+                        <div id="spark8"><canvas width="67" height="40" style="display: inline-block; width: 67px; height: 40px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card success-gradient">
+            <div class="card-content">
+                <h4 class="card-title">Bounce rate</h4>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h6 class="font-light m-b-0"><i class="ti-angle-down "></i>  456</h6>
+                    </div>
+                    <div class="ml-auto">
+                        <div id="spark9"><canvas width="67" height="40" style="display: inline-block; width: 67px; height: 40px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card warning-gradient">
+            <div class="card-content">
+                <h4 class="card-title white-text">Page Views</h4>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h6 class="font-light m-b-0 white-text"><i class="ti-angle-up white-text"></i> 2456</h6>
+                    </div>
+                    <div class="ml-auto">
+                        <div id="spark10"><canvas width="67" height="40" style="display: inline-block; width: 67px; height: 40px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

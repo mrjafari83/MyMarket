@@ -15,7 +15,9 @@ namespace Domain.Entities.Cart
         public string Email { get; set; }
         public string Address { get; set; }
         public string PostalCode { get; set; }
+        public DateTime PayDate { get; set; }
         public bool IsPayed { get; set; }
+        public bool Sended { get; set; }
 
         public virtual Cart Cart { get; set; }
         public virtual ICollection<ProductInCart> Products { get; set; }

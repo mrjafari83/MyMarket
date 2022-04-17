@@ -17,7 +17,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
     {
         private readonly IDataBaseContext db;
         private readonly IHostingEnvironment _environment;
-        public EditProductService(IDataBaseContext context , IHostingEnvironment environment)
+        public EditProductService(IDataBaseContext context, IHostingEnvironment environment)
         {
             db = context;
             _environment = environment;
@@ -26,7 +26,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         public ResultDto Execute(EditProductDto entry)
         {
             var product = db.Products.Include(p => p.Keywords).Include(p => p.Images).Include(p => p.Colors).ThenInclude(c => c.Color)
-                .Include(p => p.Sizes).ThenInclude(s=> s.Size).Include(p => p.Features).Where(p => p.Id == entry.Id).FirstOrDefault();
+                .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Where(p => p.Id == entry.Id).FirstOrDefault();
 
             product.Name = entry.Name;
             product.Brand = entry.Brand;
@@ -40,7 +40,12 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
                 product.CategoryId = entry.CategoryId;
                 product.Category = db.ProductCategories.Find(entry.CategoryId);
             }
-            DeleteImages(product.Images.ToList());
+
+            if (entry.Images != null)
+            {
+                DeleteImages(product.Images.ToList());
+                AddImages(product, entry.Images);
+            }
 
             List<ProductColor> colors = product.Colors.Select(c => new ProductColor { Id = c.Color.Id, Name = c.Color.Name }).ToList();
             AddColors(product, entry.Colors, colors);
@@ -52,7 +57,6 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
 
             AddKeywords(product, entry.Keywords, product.Keywords.ToList());
             AddFeaturs(product, entry.Features, product.Features.ToList());
-            AddImages(product, entry.Images);
 
             DeleteKeywords(entry.Keywords, product.Keywords.ToList());
             DeleteFeatures(entry.Features, product.Features.ToList());
@@ -126,15 +130,16 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         {
             foreach (var item in colors)
             {
-                if (productColors.Where(c => c.Name == item.Name).ToList().Count() != 0)
-                {
-                    var dbColor = db.ProductColors.Where(c => c.Name == item.Name).FirstOrDefault();
-                    db.ColorsInProducts.Add(new ColorInProduct { Color = dbColor, Product = product });
+                if (productColors.Where(c => c.Name == item.Name).Any())
                     continue;
-                }
-                    
-                var color = db.ProductColors.Add(new ProductColor { Name = item.Name});
-                db.ColorsInProducts.Add(new ColorInProduct { Product = product, Color = color.Entity });
+
+                ProductColor color = new ProductColor();
+                if (db.ProductColors.Where(c => c.Name == item.Name).Any())
+                    color = db.ProductColors.Where(c => c.Name == item.Name).First();
+                else
+                    color = db.ProductColors.Add(new ProductColor { Name = item.Name }).Entity;
+
+                db.ColorsInProducts.Add(new ColorInProduct { Product = product, Color = color });
             }
         }
 
@@ -145,10 +150,6 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
                 if (colors.Where(c => c.Name == item.Name).Count() == 0)
                 {
                     var color = db.ProductColors.Find(item.Id);
-                    color.IsRemoved = true;
-                    color.RemoveTime = System.DateTime.Now;
-                    db.ProductColors.Update(color);
-
                     var relation = db.ColorsInProducts.Where(c => c.Color == color && c.Product == product).FirstOrDefault();
                     relation.IsRemoved = true;
                     relation.RemoveTime = System.DateTime.Now;
@@ -161,34 +162,26 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         {
             foreach (var item in sizes)
             {
-                if (productSizes.Where(s=> s.Value == item.SizeValue).ToList().Count() != 0)
-                {
-                    var dbSize = db.ProductSizes.Where(s => s.Value == item.SizeValue).FirstOrDefault();
-                    db.SizesInProducts.Add(new SizeInProduct
-                    {
-                        Product = product,
-                        Size = dbSize
-                    });
+                if (productSizes.Where(s => s.Value == item.SizeValue).ToList().Count() != 0)
                     continue;
-                }
-                    
-                var size = db.ProductSizes.Add(new ProductSize {Value = item.SizeValue });
-                db.SizesInProducts.Add(new SizeInProduct { Product = product, Size = size.Entity });
+
+                ProductSize size = new ProductSize();
+                if (db.ProductSizes.Where(s => s.Value == item.SizeValue).Any())
+                    size = db.ProductSizes.Where(s => s.Value == item.SizeValue).First();
+                else
+                    size = db.ProductSizes.Add(new ProductSize { Value = item.SizeValue }).Entity;
+                db.SizesInProducts.Add(new SizeInProduct { Product = product, Size = size });
             }
         }
 
-        private void DeleteSizes(Product product , List<SizeViewModel> sizes, List<ProductSize> productSizes)
+        private void DeleteSizes(Product product, List<SizeViewModel> sizes, List<ProductSize> productSizes)
         {
             foreach (var item in productSizes)
             {
-                if (sizes.Where(s=> s.SizeValue == item.Value).Count() == 0)
+                if (sizes.Where(s => s.SizeValue == item.Value).Count() == 0)
                 {
                     var size = db.ProductSizes.Find(item.Id);
-                    size.IsRemoved = true;
-                    size.RemoveTime = System.DateTime.Now;
-                    db.ProductSizes.Update(size);
-
-                    var relation = db.SizesInProducts.Where(s=> s.Size == size && s.Product == product).FirstOrDefault();
+                    var relation = db.SizesInProducts.Where(s => s.Size == size && s.Product == product).FirstOrDefault();
                     relation.IsRemoved = true;
                     relation.RemoveTime = System.DateTime.Now;
                     db.SizesInProducts.Update(relation);
@@ -198,15 +191,14 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
 
         private void AddImages(Product product, List<IFormFile> images)
         {
-            if(images != null)
-                foreach (var item in images)
+            foreach (var item in images)
+            {
+                db.ProductImages.Add(new ProductImage
                 {
-                    db.ProductImages.Add(new ProductImage
-                    {
-                        Product = product,
-                        Src = FileUploader.Upload(item, _environment, "products/" + product.Name)
-                    });
-                }
+                    Product = product,
+                    Src = FileUploader.Upload(item, _environment, "products/" + product.Name)
+                });
+            }
         }
 
         private void DeleteImages(List<ProductImage> productImages)

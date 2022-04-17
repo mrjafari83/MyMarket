@@ -47,12 +47,11 @@
                         <div class="input-field col s12 file-field">
                             <div class="btn cyan">
                                 <span>تصاویر</span>
-                                <input multiple type="file" id="images" name="images" data-error=".errorTxt6">
+                                <input multiple type="file" id="images" name="images">
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text">
                             </div>
-                            <div class="errorTxt6"></div>
                         </div>
 
                         <div class="input-field col s12">
@@ -214,9 +213,6 @@
                     description: {
                         required: true,
                     },
-                    images: {
-                        required: true,
-                    },
                 },
                 //For custom messages
                 messages: {
@@ -234,9 +230,6 @@
                     },
                     description: {
                         required: "توضیحات محصول را وارد کنید",
-                    },
-                    images: {
-                        required: "یک تصویر انتخاب کنید",
                     },
                 },
                 errorElement: 'div',
