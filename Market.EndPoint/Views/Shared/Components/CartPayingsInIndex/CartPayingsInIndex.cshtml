@@ -1,0 +1,63 @@
+﻿@using Application.Services.Admin.CartPaying.Queries.GetAllCartPayings
+@model ResultGetAllCartPayingsDto
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="card-title">آخرین فروش ها</h5>
+                        </div>
+                    </div>
+                    <div class="table-responsive m-b-20">
+                        <table class="">
+                            <thead>
+                                <tr>
+                                    <th>اطلاعات فرد</th>
+                                    <th>شماره تماس</th>
+                                    <th>مجموع قیمت</th>
+                                    <th>وضعیت</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                    foreach (var item in Model.CartPayings)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div class="m-r-10"><img src="../../assets/images/users/d1.jpg" alt="user" class="circle" width="45"></div>
+                                                    <div class="">
+                                                        <h5 class="m-b-0 font-16 font-medium">@item.Name @item.Family</h5><span>@item.Email</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="">@item.PhoneNumber</p>
+                                            </td>
+                                            <td class="blue-grey-text text-darken-4 font-medium">$96K</td>
+                                            @if (item.Sended)
+                                            {
+                                                <td><span class="label label-info">ارسال شده</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="label label-warning">ارسال نشده</span></td>
+                                            }
+                                        <td>
+                                            @if (!item.Sended)
+                                            {
+                                                <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/Cart/OKSend?cartPayingId=@item.CartPayingId">ارسال کالا</a>
+                                            }
+                                        </td>
+                                        </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 

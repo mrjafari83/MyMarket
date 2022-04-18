@@ -110,6 +110,7 @@ namespace Market.EndPoint
             services.AddScoped<IProductCategoryFacad, ProductCategoryFacad>();
             services.AddScoped<IBlogPageCategoryFacad, BlogPageCategoryFacad>();
             services.AddScoped<ISliderFacad, SliderFacad>();
+            services.AddScoped<ICartPayingFacad, CartPayingsFacad>();
         }
 
         private void ClientInjections(IServiceCollection services)

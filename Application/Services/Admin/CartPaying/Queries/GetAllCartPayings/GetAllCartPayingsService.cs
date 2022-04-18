@@ -18,6 +18,8 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllCartPayings
             int totalRows = 0;
             var cartPayings = db.CartPayings.Select(c => new GetAllCartPayingsDto
             {
+                CartId = c.Cart.Id,
+                CartPayingId = c.Id,
                 Name = c.Name,
                 Family = c.Family,
                 Email = c.Email,

@@ -19,16 +19,17 @@ namespace Application.Services.Client.Carts.Queries.GetUserCart
             {
                 CartId = c.Id,
                 UserName = c.UserName,
-                Products = c.Products.Select(p=> new CartProductDto
-                {
-                    Id = p.Product.Id,
-                    Name = p.Product.Name,
-                    Price = p.Product.Price,
-                    Count = p.Count,
-                    Image = p.Product.Images.FirstOrDefault().Src,
-                    ProductInCartId = p.Id,
-                }).ToList()
             }).FirstOrDefault();
+
+            userCart.Products = db.ProductsInCart.Where(c => c.Cart.Id == userCart.CartId).Select(p=> new CartProductDto 
+            {
+                Id = p.Product.Id,
+                Name = p.Product.Name,
+                Price = p.Product.Price,
+                Count = p.Count,
+                Image = p.Product.Images.FirstOrDefault().Src,
+                ProductInCartId = p.Id,
+            }).ToList();
 
             return new ResultDto<GetUserCartDto>
             {
