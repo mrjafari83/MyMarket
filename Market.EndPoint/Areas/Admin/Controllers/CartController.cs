@@ -22,5 +22,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
             return Redirect("/Admin");
         }
+
+        public IActionResult GetAllPaysPrice()
+        {
+            var data = _cartPayingFacad.GetAllPaysPrice.Execute().Data;
+            return Json(data);
+        }
     }
 }

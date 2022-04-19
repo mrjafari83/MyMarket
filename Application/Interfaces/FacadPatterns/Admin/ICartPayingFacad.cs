@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Admin.CartPaying.Queries.GetAllCartPayings;
+using Application.Services.Admin.CartPaying.Queries.GetAllPaysPrice;
 using Application.Services.Admin.CartPaying.Commands.SendedCart;
 
 namespace Application.Interfaces.FacadPatterns.Admin
@@ -12,5 +13,6 @@ namespace Application.Interfaces.FacadPatterns.Admin
     {
         IGetAllCartPayingsService GetAllCartPayings { get; }
         ISendedCartService SendedCart { get; }
+        IGetAllPaysPriceService GetAllPaysPrice { get; }
     }
 }

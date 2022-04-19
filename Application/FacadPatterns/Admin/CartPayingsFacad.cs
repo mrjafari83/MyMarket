@@ -7,6 +7,7 @@ using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Services.Admin.CartPaying.Commands.SendedCart;
 using Application.Services.Admin.CartPaying.Queries.GetAllCartPayings;
+using Application.Services.Admin.CartPaying.Queries.GetAllPaysPrice;
 
 namespace Application.FacadPatterns.Admin
 {
@@ -33,6 +34,15 @@ namespace Application.FacadPatterns.Admin
             get
             {
                 return sendedCartService ?? new SendedCartService(db);
+            }
+        }
+
+        private GetAllPaysPriceService getAllPaysPriceService;
+        public IGetAllPaysPriceService GetAllPaysPrice
+        {
+            get
+            {
+                return getAllPaysPriceService ?? new GetAllPaysPriceService(db);
             }
         }
     }

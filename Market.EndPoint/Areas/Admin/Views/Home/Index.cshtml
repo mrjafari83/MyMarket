@@ -93,10 +93,10 @@
     <div class="col l3">
         <div class="card primary-gradient">
             <div class="card-content">
-                <h4 class="card-title white-text">Total Visit</h4>
+                <h4 class="card-title white-text">کل فروش ها</h4>
                 <div class="d-flex align-items-center">
                     <div>
-                        <h6 class="font-light m-b-0 white-text"><i class="ti-angle-up white-text"></i>  12456</h6>
+                        <h6 id="AllPaysPrice" class="font-light m-b-0 white-text"><i class="ti-angle-up white-text"></i></h6>
                     </div>
                     <div class="ml-auto">
                         <div id="spark8"><canvas width="67" height="40" style="display: inline-block; width: 67px; height: 40px; vertical-align: top;"></canvas></div>
@@ -230,3 +230,16 @@
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $.get("/Admin/Cart/GetAllPaysPrice", 
+                function (data, textStatus, jqXHR) {
+                    $("#AllPaysPrice").text(data + " تومان");
+                },
+            );
+        });
+    </script>
+}

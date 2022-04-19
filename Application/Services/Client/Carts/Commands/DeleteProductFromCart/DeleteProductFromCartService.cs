@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Dto;
+using Common.Utilities;
 using Application.Interfaces.Context;
 
 namespace Application.Services.Client.Carts.Commands.DeleteProductFromCart
@@ -12,12 +13,14 @@ namespace Application.Services.Client.Carts.Commands.DeleteProductFromCart
             db = context;
         }
 
-        public ResultDto Execute(int productInCartId)
+        public ResultDto Execute(int productInCartId , int cartId)
         {
             var produtInCart = db.ProductsInCart.Find(productInCartId);
-            produtInCart.IsRemoved = true;
-            produtInCart.RemoveTime = DateTime.Now;
+            var cart = db.Carts.Find(cartId);
+            cart.Products.Remove(produtInCart);
+            produtInCart.Cart = null;
             db.ProductsInCart.Update(produtInCart);
+            db.Carts.Update(cart);
             db.SaveChanges();
 
             return new ResultDto

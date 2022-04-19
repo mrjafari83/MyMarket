@@ -31,7 +31,7 @@ namespace Market.EndPoint.Controllers
         [HttpPost]
         public IActionResult DeleteProductFromCart(int productInCartId)
         {
-            _clientCartFacad.DeleteProductFromCart.Execute(productInCartId);
+            _clientCartFacad.DeleteProductFromCart.Execute(productInCartId , Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
             return Redirect("/");
         }
 
@@ -98,7 +98,7 @@ namespace Market.EndPoint.Controllers
             var products = _clientCartFacad.GetUserCart.Execute(User.Identity.Name).Data.Products;
             foreach(var item in products)
             {
-                _clientCartFacad.DeleteProductFromCart.Execute(item.ProductInCartId);
+                _clientCartFacad.DeleteProductFromCart.Execute(item.ProductInCartId , Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
             }
 
             return Redirect("/");
