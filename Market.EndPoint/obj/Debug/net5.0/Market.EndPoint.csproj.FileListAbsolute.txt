@@ -438,3 +438,4 @@ E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.Web.Infr
 E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
 E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Web.Helpers.dll
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Shared\Components\CartPayingsInIndex\CartPayingsInIndex.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Shared\Components\CommentsInIndex\CommentsInIndex.cshtml.g.cs

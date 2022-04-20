@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\Admin\Comment\Commands\" />
     <Folder Include="Services\Admin\Keyword\Queries\" />
     <Folder Include="Services\Admin\Slider\Queries\" />
     <Folder Include="Services\Client\Products\Queries\" />
