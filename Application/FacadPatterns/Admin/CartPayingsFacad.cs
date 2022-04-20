@@ -9,6 +9,7 @@ using Application.Services.Admin.CartPaying.Commands.SendedCart;
 using Application.Services.Admin.CartPaying.Queries.GetAllCartPayings;
 using Application.Services.Admin.CartPaying.Queries.GetAllPaysPrice;
 using Application.Services.Admin.CartPaying.Queries.GetAllNotSendedPrice;
+using Application.Services.Admin.CartPaying.Queries.GetNotSendedCount;
 
 namespace Application.FacadPatterns.Admin
 {
@@ -53,6 +54,15 @@ namespace Application.FacadPatterns.Admin
             get
             {
                 return getAllNotSendedPrice ?? new GetAllNotSendedPriceService(db);
+            }
+        }
+
+        private GetNotSendedCountSevice getNotSendedCountSevice;
+        public IGetNotSendedCountSevice GetNotSendedCount
+        {
+            get
+            {
+                return getNotSendedCountSevice ?? new GetNotSendedCountSevice(db);
             }
         }
     }

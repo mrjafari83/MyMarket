@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application.Services.Admin.CartPaying.Queries.GetAllCartPayings;
 using Application.Services.Admin.CartPaying.Queries.GetAllPaysPrice;
 using Application.Services.Admin.CartPaying.Queries.GetAllNotSendedPrice;
+using Application.Services.Admin.CartPaying.Queries.GetNotSendedCount;
 using Application.Services.Admin.CartPaying.Commands.SendedCart;
 
 namespace Application.Interfaces.FacadPatterns.Admin
@@ -16,5 +17,6 @@ namespace Application.Interfaces.FacadPatterns.Admin
         ISendedCartService SendedCart { get; }
         IGetAllPaysPriceService GetAllPaysPrice { get; }
         IGetAllNotSendedPriceService GetAllNotSendedPrice { get; }
+        IGetNotSendedCountSevice GetNotSendedCount { get; }
     }
 }

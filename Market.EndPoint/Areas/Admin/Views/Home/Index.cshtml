@@ -119,10 +119,10 @@
         </div>
         <div class="card warning-gradient">
             <div class="card-content">
-                <h4 class="card-title white-text">Page Views</h4>
+                <h4 class="card-title white-text">تعداد سبد های ارسال نشده</h4>
                 <div class="d-flex align-items-center">
                     <div>
-                        <h6 class="font-light m-b-0 white-text"><i class="ti-angle-up white-text"></i> 2456</h6>
+                        <h6 id="notSendedCartPayings" class="font-light m-b-0 white-text"><i class="ti-angle-up white-text"></i></h6>
                     </div>
                     <div class="ml-auto">
                         <div id="spark10"><canvas width="67" height="40" style="display: inline-block; width: 67px; height: 40px; vertical-align: top;"></canvas></div>
@@ -244,6 +244,12 @@
             $.get("/Admin/Cart/GetNotSendedPrice",
                 function (data, textStatus, jqXHR) {
                     $("#notSendedPrice").text(data + " تومان");
+                },
+            );
+
+            $.get("/Admin/Cart/GetNotSendedCount",
+                function (data, textStatus, jqXHR) {
+                    $("#notSendedCartPayings").text(data + " عدد");
                 },
             );
         });

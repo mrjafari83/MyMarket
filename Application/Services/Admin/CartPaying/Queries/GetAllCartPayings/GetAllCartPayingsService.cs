@@ -28,7 +28,7 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllCartPayings
                 Email = c.Email,
                 PhoneNumber = c.PhoneNumber,
                 Sended = c.Sended
-            }).AsQueryable();
+            }).OrderByDescending(c=> c.CartPayingId).AsQueryable();
 
             if (sended)
                 cartPayings = cartPayings.Where(c => c.Sended);

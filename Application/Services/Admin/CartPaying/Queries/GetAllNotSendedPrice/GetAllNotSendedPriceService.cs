@@ -16,7 +16,7 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllNotSendedPrice
         public ResultDto<int> Execute()
         {
             int price = 0;
-            var products = db.ProductsInCart.Include(p => p.CartPayingInfo).Include(p=> p.Product).Where(p => !p.CartPayingInfo.Sended).ToList();
+            var products = db.ProductsInCart.Include(p => p.CartPayingInfo).Include(p=> p.Product).Where(p => !p.CartPayingInfo.Sended && p.CartPayingInfo.IsPayed).ToList();
 
             foreach(var item in products)
             {

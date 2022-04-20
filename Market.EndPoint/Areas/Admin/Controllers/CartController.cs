@@ -34,5 +34,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             var data = _cartPayingFacad.GetAllNotSendedPrice.Execute().Data;
             return Json(data);
         }
+
+        public IActionResult GetNotSendedCount()
+        {
+            return Json(_cartPayingFacad.GetNotSendedCount.Execute().Data);
+        }
     }
 }
