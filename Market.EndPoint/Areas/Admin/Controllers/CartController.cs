@@ -28,5 +28,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             var data = _cartPayingFacad.GetAllPaysPrice.Execute().Data;
             return Json(data);
         }
+
+        public IActionResult GetNotSendedPrice()
+        {
+            var data = _cartPayingFacad.GetAllNotSendedPrice.Execute().Data;
+            return Json(data);
+        }
     }
 }

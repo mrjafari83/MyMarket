@@ -19,7 +19,7 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllCartPayings
         public ResultDto<ResultGetAllCartPayingsDto> Execute(int pageNumber = 1, int pageSize = 10, bool sended = false)
         {
             int totalRows = 0;
-            var cartPayings = db.CartPayings.Include(c => c.Products).ThenInclude(c => c.Product).Select(c => new GetAllCartPayingsDto
+            var cartPayings = db.CartPayings.Include(c => c.Products).ThenInclude(c => c.Product).Where(c=> c.IsPayed).Select(c => new GetAllCartPayingsDto
             {
                 CartId = c.Cart.Id,
                 CartPayingId = c.Id,
