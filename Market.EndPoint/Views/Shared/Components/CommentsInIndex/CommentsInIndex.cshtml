@@ -1,11 +1,10 @@
 ﻿@using Common.Dto
 @model ResultGetAllCommentsDto
 
-    <div class="row">
         <div class="col s12 m12 l6">
             <div class="card">
                 <div class="card-content">
-                    <h5 class="card-title">Recent Comments</h5>
+                    <h5 class="card-title">آخرین کامنت های @ViewBag.CategiryType</h5>
                     <div class="comment-widgets scrollable ps ps--theme_default ps--active-y ps--active-x" style="height:560px;" data-ps-id="e030b43c-3c38-97be-b507-e3897af0ebf5">
                         @foreach (var item in Model.Comments)
                         {
@@ -31,4 +30,3 @@
                 </div>
             </div>
         </div>
-    </div> 

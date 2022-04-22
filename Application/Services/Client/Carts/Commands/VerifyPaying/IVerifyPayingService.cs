@@ -27,16 +27,11 @@ namespace Application.Services.Client.Carts.Commands.VerifyPaying
             var cartPaying = db.CartPayings.Find(cartPayingId);
             cartPaying.IsPayed = true;
 
-            //var products = db.ProductsInCart.Where(p => p.Cart.Id == cartId).Include(p=> p.Product).Include(p=> p.Cart).ToList();
-            //foreach(var item in products)
-            //{
-            //    cartPaying.Products.Add(item);
-            //}
-
-            var products = db.ProductsInCart.Where(p => p.Cart.Id == cartId).ToList();
+            var products = db.ProductsInCart.Include(p=> p.Product).Where(p => p.Cart.Id == cartId).ToList();
             foreach (var item in products)
             {
                 item.CartPayingInfo = cartPaying;
+                item.Product.Inventory = item.Product.Inventory - item.Count;
             }
 
             db.CartPayings.Update(cartPaying);

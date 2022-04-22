@@ -10,6 +10,7 @@ using Domain.Entities.Products.Relations;
 using Domain.Entities.Comments;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Domain.Entities.Cart;
 
 namespace Domain.Entities.Products
 {
@@ -34,6 +35,6 @@ namespace Domain.Entities.Products
         public virtual ICollection<Keyword<Product>> Keywords { get; set; }
         public virtual ICollection<ProductImage> Images { get; set; }
         public virtual ICollection<Comment<Product>> Comments { get; set; }
-
+        public virtual ICollection<ProductInCart> ProductInCarts { get; set; }
     }
 }

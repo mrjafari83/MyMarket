@@ -8,6 +8,7 @@ using Application.Services.Admin.Products.Commands.EditProduct;
 using Application.Services.Admin.Products.Commands.DeleteProduct;
 using Application.Services.Admin.Products.Queries.GetAllProducts;
 using Application.Services.Admin.Products.Queries.GetProductById;
+using Application.Services.Admin.Products.Queries.GetBestSellingProducts;
 
 namespace Application.Interfaces.FacadPatterns.Admin
 {
@@ -18,5 +19,6 @@ namespace Application.Interfaces.FacadPatterns.Admin
         ICreateProductService CreateProductService { get; }
         IEditProductService EditProductService { get; }
         IDeleteProductService DeleteProductService { get; }
+        IGetBestSellingProductsService GetBestSellingProducts { get; }
     }
 }

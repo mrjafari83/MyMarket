@@ -6050,6 +6050,7 @@
     <Content Include="wwwroot\Css\bootstrap-rtl.css" />
     <Content Include="wwwroot\Css\bootstrap.css" />
     <Content Include="wwwroot\Css\bootstrap.min.css" />
+    <Content Include="wwwroot\Css\Chart.min.css" />
     <Content Include="wwwroot\Css\CustomStyle.css" />
     <Content Include="wwwroot\favicon.ico" />
     <Content Include="wwwroot\Images\BlogImages\03b70821-93fe-4952-a0f9-cefc4641bf74JavaScript.png" />
@@ -6111,6 +6112,8 @@
     <Content Include="wwwroot\Images\Products\یخچال\bd8190d7-efc9-429a-8c0d-1eb047bc4bd3fall-photo-cellphone-2.jpg" />
     <Content Include="wwwroot\Images\Products\یخچال\c31d4d3c-8de1-4a7a-9c9a-8a6e06d0a972fall-photo-cellphone-2.jpg" />
     <Content Include="wwwroot\Images\Products\یخچال\c6b51947-81c3-44ad-9826-d9b75dd7c59dCToGD7f.jpg" />
+    <Content Include="wwwroot\js\Chart.js" />
+    <Content Include="wwwroot\js\Chart.min.js" />
     <Content Include="wwwroot\js\jQuery.Validation.1.11.1\Content\Scripts\jquery.validate-vsdoc.js" />
     <Content Include="wwwroot\js\jQuery.Validation.1.11.1\Content\Scripts\jquery.validate.js" />
     <Content Include="wwwroot\js\jQuery.Validation.1.11.1\Content\Scripts\jquery.validate.min.js" />
@@ -6893,6 +6896,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Chart.js" Version="2.9.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />

@@ -39,5 +39,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             return Json(_cartPayingFacad.GetNotSendedCount.Execute().Data);
         }
+
+        public IActionResult GetPriceByDate(int dayAgo)
+        {
+            return Json(_cartPayingFacad.GetAllPriceByDate.Execute(dayAgo).Data);
+        }
     }
 }

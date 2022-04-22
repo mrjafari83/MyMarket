@@ -9,6 +9,7 @@ namespace Application.Interfaces.FacadPatterns.Admin
 {
     public interface ICommentFacad
     {
-        IGetAllProductCommentsService GetAllProductComments { get; }
+        IGetAllCommentsService GetAllProductComments { get; }
+        IGetAllCommentsService GetAllBlogComments { get; }
     }
 }

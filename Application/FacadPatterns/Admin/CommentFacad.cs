@@ -18,13 +18,22 @@ namespace Application.FacadPatterns.Admin
         }
 
         private GetAllProductCommentsService getAllProductCommentsService;
-        public IGetAllProductCommentsService GetAllProductComments 
+        public IGetAllCommentsService GetAllProductComments 
         {
             get
             {
                 return getAllProductCommentsService ?? new GetAllProductCommentsService(db);
             }
         }
-        
+
+        private GetAllBlogCommentsService getAllBlogCommentsService;
+        public IGetAllCommentsService GetAllBlogComments
+        {
+            get
+            {
+                return getAllBlogCommentsService ?? new GetAllBlogCommentsService(db);
+            }
+        }
+
     }
 }

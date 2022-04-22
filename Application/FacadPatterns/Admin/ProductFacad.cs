@@ -8,6 +8,7 @@ using Application.Services.Admin.Products.Commands.EditProduct;
 using Application.Services.Admin.Products.Commands.DeleteProduct;
 using Application.Services.Admin.Products.Queries.GetAllProducts;
 using Application.Services.Admin.Products.Queries.GetProductById;
+using Application.Services.Admin.Products.Queries.GetBestSellingProducts;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.Context;
 using Microsoft.AspNetCore.Hosting;
@@ -67,6 +68,15 @@ namespace Application.FacadPatterns.Admin
             get
             {
                 return _deleteProductService == null ? new DeleteProductService(db) : _deleteProductService;
+            }
+        }
+
+        private GetBestSellingProductsService _getBestSellingProductsService;
+        public IGetBestSellingProductsService GetBestSellingProducts
+        {
+            get
+            {
+                return _getBestSellingProductsService ?? new GetBestSellingProductsService(db);
             }
         }
     }

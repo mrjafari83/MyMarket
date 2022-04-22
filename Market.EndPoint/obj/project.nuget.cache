@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "yJfZ0OV/5iZqcay/sdRpPT3LwJ8aYqGH52BlAO6NbgQfWdaOMlUUxDUSn0lF3uzY+dvQZZszkL0z9K4IrfkvYw==",
+  "dgSpecHash": "MiiP8goP+T4lTwxdz4Xfjx0hbZXhwIk4aAGMDDW+taXSspphK7FaetYRZX4/iDBaqMzwpb03ur0MlWNwGgTIsg==",
   "success": true,
   "projectFilePath": "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\chart.js\\2.9.3\\chart.js.2.9.3.nupkg.sha512",
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.8\\microsoft.aspnet.mvc.5.2.8.nupkg.sha512",
     "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.8\\microsoft.aspnet.razor.3.2.8.nupkg.sha512",
