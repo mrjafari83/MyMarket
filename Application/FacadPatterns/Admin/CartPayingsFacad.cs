@@ -11,6 +11,7 @@ using Application.Services.Admin.CartPaying.Queries.GetAllPaysPrice;
 using Application.Services.Admin.CartPaying.Queries.GetAllNotSendedPrice;
 using Application.Services.Admin.CartPaying.Queries.GetNotSendedCount;
 using Application.Services.Admin.CartPaying.Queries.GetAllPriceByDate;
+using Application.Services.Admin.CartPaying.Queries.GetCartPayingById;
 
 namespace Application.FacadPatterns.Admin
 {
@@ -72,7 +73,16 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return GetAllPriceByDate ?? new GetAllPriceByDateService(db);
+                return getAllPriceByDateService ?? new GetAllPriceByDateService(db);
+            }
+        }
+
+        private GetCartPayingByIdService getCartPayingByIdService;
+        public IGetCartPayingByIdService GetCartPayingById
+        {
+            get
+            {
+                return getCartPayingByIdService ?? new GetCartPayingByIdService(db);
             }
         }
     }

@@ -16,6 +16,16 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _cartPayingFacad = cartPayingFacad;
         }
 
+        public IActionResult Index()
+        {
+            return View(_cartPayingFacad.GetAllCartPayings.Execute().Data);
+        }
+
+        public IActionResult CartPayingInfo(int id)
+        {
+            return View();
+        }
+
         public IActionResult OKSend(int cartPayingId)
         {
             _cartPayingFacad.SendedCart.Execute(cartPayingId);
@@ -38,11 +48,6 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult GetNotSendedCount()
         {
             return Json(_cartPayingFacad.GetNotSendedCount.Execute().Data);
-        }
-
-        public IActionResult GetPriceByDate(int dayAgo)
-        {
-            return Json(_cartPayingFacad.GetAllPriceByDate.Execute(dayAgo).Data);
         }
     }
 }
