@@ -49,10 +49,7 @@
                                             <td><span class="label label-warning">ارسال نشده</span></td>
                                         }
                                         <td>
-                                            @if (!item.Sended)
-                                            {
-                                                <a class="waves-effect waves-light btn modal-trigger blue" href="">مشاهده</a>
-                                            }
+                                            <a class="waves-effect waves-light btn modal-trigger purple" href="/Admin/Cart/CartPayingInfo?id=@item.CartPayingId">مشاهده</a>
                                         </td>
                                     </tr>
                                 }

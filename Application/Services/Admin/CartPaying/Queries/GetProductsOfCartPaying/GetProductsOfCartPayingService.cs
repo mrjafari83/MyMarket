@@ -16,7 +16,7 @@ namespace Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying
 
         public ResultDto<List<ProductInCartPayingDto>> Execute(int cartPayingId)
         {
-            var products = db.ProductsInCart.Include(p=> p.Product).Where(p => p.CartPayingInfo.Id == cartPayingId).Select(p => new ProductInCartPayingDto
+            var products = db.ProductsInCart.Include(p => p.Product).ThenInclude(p => p.Images).Where(p => p.CartPayingInfo.Id == cartPayingId).Select(p => new ProductInCartPayingDto
             {
                 Id = p.Product.Id,
                 Brand = p.Product.Brand,
@@ -24,7 +24,8 @@ namespace Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying
                 Price = p.Product.Price,
                 Color = p.Color,
                 Count = p.Count,
-                Size = p.Size
+                Size = p.Size,
+                ImageSrc = p.Product.Images.FirstOrDefault().Src
             }).ToList();
 
             if (products == null)

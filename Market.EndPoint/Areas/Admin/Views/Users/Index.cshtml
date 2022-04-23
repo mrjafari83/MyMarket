@@ -13,20 +13,39 @@
         <tr>
             <th>نام کاربری</th>
             <th>ایمیل</th>
+            <th>مقام</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.UserName</td>
-                <td>@item.Email</td>
-                <td>
-                    <a class="waves-effect waves-light btn modal-trigger red btnDelete" href="#modal1" userName="@item.UserName">حذف</a>
-                    <a class="waves-effect waves-light btn modal-trigger blue btnAddRole" href="#modal1" userName="@item.UserName">ویرایش مقام</a>
-                </td>
-            </tr>
+        <tr>
+            <td>@item.UserName</td>
+            <td>@item.Email</td>
+            @switch (item.RoleName)
+            {
+                case "Owner":
+                    {
+                        <td>مدیریت</td>
+                        break;
+                    }
+                case "Admin":
+                    {
+                        <td>ادمین</td>
+                        break;
+                    }
+                default:
+                    {
+                        <td>مشتری</td>
+                        break;
+                    }
+            }
+            <td>
+                <a class="waves-effect waves-light btn modal-trigger red btnDelete" href="#modal1" userName="@item.UserName">حذف</a>
+                <a class="waves-effect waves-light btn modal-trigger blue btnAddRole" href="#modal1" userName="@item.UserName">ویرایش مقام</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
@@ -40,7 +59,7 @@
 </div>
 
 @section scripts
-{
+            {
     <script>
         $("#btnCreateUser").click(function () {
 
@@ -48,26 +67,26 @@
 
                 $("#title").html("افزودن  کاربر جدید");
                 $("#body").html(result);
-            });
+                    });
 
-        });
+                });
 
         $(".btnDelete").click(function (e) {
-            var userName = this.getAttribute("userName");
+                    var userName = this.getAttribute("userName");
             $.get("/Admin/Users/Delete?userName=" + userName, function (result) {
 
                 $("#title").html("حذف  کاربر ");
                 $("#body").html(result);
-            });
-        });
+                    });
+                });
 
         $(".btnAddRole").click(function (e) {
-            var userName = this.getAttribute("userName");
+                    var userName = this.getAttribute("userName");
             $.get("/Admin/Users/EditUserRoles?userName="+userName, function (result) {
 
                 $("#title").html("افزودن مقام به کاربر");
                 $("#body").html(result);
-            });
-        });
+                    });
+                });
     </script>
 }

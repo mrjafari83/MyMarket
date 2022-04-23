@@ -19,14 +19,21 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var users = _userManager.Users.Select(u => new UserViewModel
             {
                 Id = u.Id,
                 UserName = u.UserName,
-                Email = u.Email
+                Email = u.Email,
             }).ToList();
+
+            foreach (var item in users)
+            {
+                var user = _userManager.FindByNameAsync(item.UserName).Result;
+                var roleName = await _userManager.GetRolesAsync(user);
+                item.RoleName = roleName.FirstOrDefault();
+            }
 
             return View(users);
         }
@@ -84,27 +91,36 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUserRoles(EditUserRolesViewModel model)
         {
+            if ((model.Admin && model.Owner) || (model.Admin && model.Customer) 
+                || (model.Customer && model.Owner) || (model.Admin && model.Owner && model.Customer))
+                return Redirect("/Admin/Users");
+
             var user = _userManager.FindByNameAsync(model.UserName).Result;
+            var roles = new List<string>() { "Owner", "Admin", "Customer" };
             if (model.Owner)
             {
                 if (!_roleManager.Roles.Any(r => r.Name == "Owner"))
                     await _roleManager.CreateAsync(new IdentityRole { Name = "Owner" });
+                await _userManager.RemoveFromRolesAsync(user, roles);
                 await _userManager.AddToRoleAsync(user, "Owner");
             }
 
-            if (model.Admin)
+            else if (model.Admin)
             {
                 if (!_roleManager.Roles.Any(r => r.Name == "Admin"))
                     await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
+                await _userManager.RemoveFromRolesAsync(user, roles);
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
 
-            if (model.Customer)
+            else if (model.Customer)
             {
                 if (!_roleManager.Roles.Any(r => r.Name == "Customer"))
                     await _roleManager.CreateAsync(new IdentityRole { Name = "Customer" });
+                await _userManager.RemoveFromRolesAsync(user, roles);
                 await _userManager.AddToRoleAsync(user, "Customer");
             }
+
             return Redirect("/Admin/Users");
         }
     }

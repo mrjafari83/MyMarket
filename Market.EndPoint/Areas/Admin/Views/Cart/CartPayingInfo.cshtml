@@ -1,0 +1,66 @@
+﻿@using Application.Services.Admin.CartPaying.Queries.GetCartPayingById
+@model GetCartPayingByIdDto
+@{
+    ViewData["Title"] = "CartPayingInfo";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    th, td {
+        width: 15%;
+        text-align: right;
+    }
+</style>
+
+<h3>جزییات سبد خرید</h3>
+<hr />
+<h4>اطلاعات فردی</h4>
+<ul>
+    <li>نام : @Model.Name</li>
+    <li>نام خانوادگی : @Model.Family</li>
+    <li>ایمیل : @Model.Email</li>
+    <li>شماره تماس : @Model.PhoneNymber</li>
+    <li>کد پستی : @Model.PostalCode</li>
+    <li>آدرس : @Model.Address</li>
+    @if (Model.Sended)
+    {
+        <li>وضعیت : ارسال شده</li>
+    }
+    else
+    {
+        <li>وضعیت : ارسال نشده</li>
+    }
+
+</ul>
+<hr />
+<h4>محصولات</h4>
+<table>
+    <thead>
+        <tr>
+            <td>تصویر</td>
+            <td>نام</td>
+            <td>برند</td>
+            <td>رنگ</td>
+            <td>سایز</td>
+            <td>تعداد</td>
+            <td>قیمت</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+            foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td><img style="max-width:100%" src="@item.ImageSrc" /></td>
+                    <td>@item.Name</td>
+                    <td>@item.Brand</td>
+                    <td>@item.Color</td>
+                    <td>@item.Size</td>
+                    <td>@item.Count</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+

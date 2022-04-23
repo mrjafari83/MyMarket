@@ -23,7 +23,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         public IActionResult CartPayingInfo(int id)
         {
-            return View();
+            return View(_cartPayingFacad.GetCartPayingById.Execute(id).Data);
         }
 
         public IActionResult OKSend(int cartPayingId)
