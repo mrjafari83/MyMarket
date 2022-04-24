@@ -20,32 +20,33 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@item.UserName</td>
-            <td>@item.Email</td>
-            @switch (item.RoleName)
-            {
-                case "Owner":
-                    {
-                        <td>مدیریت</td>
-                        break;
-                    }
-                case "Admin":
-                    {
-                        <td>ادمین</td>
-                        break;
-                    }
-                default:
-                    {
-                        <td>مشتری</td>
-                        break;
-                    }
-            }
-            <td>
-                <a class="waves-effect waves-light btn modal-trigger red btnDelete" href="#modal1" userName="@item.UserName">حذف</a>
-                <a class="waves-effect waves-light btn modal-trigger blue btnAddRole" href="#modal1" userName="@item.UserName">ویرایش مقام</a>
-            </td>
-        </tr>
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                @switch (item.RoleName)
+                {
+                    case "Owner":
+                        {
+                            <td>مدیریت</td>
+                            break;
+                        }
+                    case "Admin":
+                        {
+                            <td>ادمین</td>
+                            break;
+                        }
+                    default:
+                        {
+                            <td>مشتری</td>
+                            break;
+                        }
+                }
+                <td>
+                    <a class="waves-effect waves-light btn modal-trigger blue btnAddRole" href="#modal1" userName="@item.UserName">ویرایش مقام</a>
+                    <a class="waves-effect waves-light btn modal-trigger blue btnGetUserCartPayings" href="#modal1" userName="@item.UserName">سبد های خرید</a>
+                    <a class="waves-effect waves-light btn modal-trigger red btnDelete" href="#modal1" userName="@item.UserName">حذف</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -67,26 +68,35 @@
 
                 $("#title").html("افزودن  کاربر جدید");
                 $("#body").html(result);
-                    });
+            });
 
-                });
+        });
 
         $(".btnDelete").click(function (e) {
-                    var userName = this.getAttribute("userName");
+            var userName = this.getAttribute("userName");
             $.get("/Admin/Users/Delete?userName=" + userName, function (result) {
 
                 $("#title").html("حذف  کاربر ");
                 $("#body").html(result);
-                    });
-                });
+            });
+        });
 
         $(".btnAddRole").click(function (e) {
-                    var userName = this.getAttribute("userName");
-            $.get("/Admin/Users/EditUserRoles?userName="+userName, function (result) {
+            var userName = this.getAttribute("userName");
+            $.get("/Admin/Users/EditUserRoles?userName=" + userName, function (result) {
 
-                $("#title").html("افزودن مقام به کاربر");
+                $("#title").html("تغییر مقام کاربر");
                 $("#body").html(result);
-                    });
-                });
+            });
+        });
+
+        $(".btnGetUserCartPayings").click(function (e) {
+            var userName = this.getAttribute("userName");
+            $.get("/Admin/Users/GetUserCartPayings?userName=" + userName, function (result) {
+
+                $("#title").html("سبد خرید های کاربر");
+                $("#body").html(result);
+            });
+        });
     </script>
 }

@@ -1,0 +1,46 @@
+﻿@using Application.Services.Admin.CartPaying.Queries.GetUserCartPayings
+@model List<GetUserCartPayingsDto>
+@{
+    ViewData["Title"] = "GetUserCartPayings";
+    Layout = null;
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>نام و نام خانوادگی</th>
+            <th>تعداد محصولات</th>
+            <th>قیمت کل</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.ProductsCount</td>
+                    <td>@item.ProductsPrice</td>
+                    <td>
+                        <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/Cart/CartPayingInfo?id=@item.Id">مشاهده سبد</a>
+                    </td>
+                </tr>
+            }
+        else
+        {
+            <tr>
+                <td>
+                    این کاربر خریدی نداشته است.
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>جمع خرید ها : @Model.Sum(p=> p.ProductsPrice)</td>
+        </tr>
+    </tbody>
+</table>
+

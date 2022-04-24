@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.ViewModels;
+using Application.Interfaces.FacadPatterns.Admin;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -13,10 +14,13 @@ namespace Market.EndPoint.Areas.Admin.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public UsersController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly ICartPayingFacad _cartPayingFacad;
+        public UsersController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager
+            ,ICartPayingFacad cartPayingFacad)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _cartPayingFacad = cartPayingFacad;
         }
 
         public async Task<IActionResult> Index()
@@ -122,6 +126,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             }
 
             return Redirect("/Admin/Users");
+        }
+
+        public IActionResult GetUserCartPayings(string userName)
+        {
+            return View(_cartPayingFacad.GetUserCartPayings.Execute(userName).Data);
         }
     }
 }
