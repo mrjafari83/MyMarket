@@ -443,3 +443,6 @@ E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Cart\Index.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Cart\CartPayingInfo.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\GetUserCartPayings.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Autantication\Dashboard.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Autantication\EditUserInfo.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Autantication\ResetPassword.cshtml.g.cs

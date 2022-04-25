@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--  ==========  -->
+<!--  = Breadcrumbs =  -->
+<!--  ==========  -->
+<div class="darker-stripe">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="index.html">وبمارکت</a>
+                    </li>
+                    <li><span class="icon-chevron-right"></span></li>
+                    <li>
+                        <a href="features.html">امکانات</a>
+                    </li>
+                    <li><span class="icon-chevron-right"></span></li>
+                    <li>
+                        <a href="icons.html">آیکن ها</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="push-up blocks-spacer">
+        <div class="row">
+
+            <!--  ==========  -->
+            <!--  = Main content =  -->
+            <!--  ==========  -->
+            <section class="span12">
+
+                <!--  ==========  -->
+                <!--  = Title =  -->
+                <!--  ==========  -->
+                <div class="underlined push-down-20">
+                    <h3><span class="light">همه</span> آیکن ها</h3>
+                </div>
+
+                <div>
+                    <div style="float: right; width: 50%;">
+                        <ul style="font-size: 125%; width: 100%;">
+                            <li>نام : </li>
+                            <li>نام خانوادگی : </li>
+                            <li>نام کاربری : @User.Identity.Name</li>
+                            <li>ایمیل : </li>
+                            <li>شماره تلفن : </li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li>
+                                <a href="/EditUser">ویرایش اطلاعات</a>
+                            </li>
+                            <li>
+                                <a href="/RestPassword">تغییر رمز عبور</a>
+                            </li>
+                            <li>
+                                <a>خرید های من</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="float: left; width: 50%;">
+                        <img src="/Images/DefaultUser.jpg" style="text-align:center">
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+<!-- /container -->

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "EditUserInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin:5% auto; align-content:center;width:400px">
+    <div class="modal-header">
+        <h3 id="registerModalLabel"><span class="light">ویرایش اطلاعات</span></h3>
+    </div>
+    <div class="modal-body">
+        <form method="post">
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="nameInput">نام</label>
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="name" id="nameInput" placeholder="نام">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="familyInput">نام خانوادگی</label>
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="family" id="familyInput" placeholder="نام خانوادگی">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="phoneNumberInput">شماره تلفن</label>
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="phoneNumber" id="phoneNumberInput" placeholder="شماره تلفن">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="userNameInput">نام کاربری</label>
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="UserName" id="userNameInput" placeholder="نام کاربری">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label hidden shown-ie8" for="emailInput">ایمیل</label>
+                <div class="controls">
+                    <input type="email" class="input-block-level" name="Email" id="emailInput" placeholder="ایمیل">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-danger input-block-level bold higher">
+                ویرایش
+            </button>
+        </form>
+    </div>
+</div>
+
