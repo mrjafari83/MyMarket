@@ -15,6 +15,7 @@ using Domain.Entities.Products.Relations;
 using Domain.Entities.BlogPages;
 using Domain.Entities.Option;
 using Domain.Entities.Cart;
+using Domain.Entities.User;
 
 namespace Application.Interfaces.Context
 {
@@ -36,6 +37,7 @@ namespace Application.Interfaces.Context
         DbSet<Cart> Carts { get; set; }
         DbSet<ProductInCart> ProductsInCart { get; set; }
         DbSet<CartPayingInfo> CartPayings { get; set; }
+        DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         //relation tables
         DbSet<ColorInProduct> ColorsInProducts { get; set; }

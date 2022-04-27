@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
+@using Domain.Entities.User
+@inject SignInManager<ApplicationUser> SignInManager
 
 <!DOCTYPE html>
 <!--[if lt IE 8]>      <html class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
@@ -113,6 +114,7 @@
                                 }
                                 @if (SignInManager.IsSignedIn(User))
                                 {
+                                    <a href="/Dashboard" role="button" data-toggle="modal">داشبورد</a><span>یا</span>
                                     <a href="/Logout?returnUrl=@returnUrl">خروج</a>
                                 }
                                 else

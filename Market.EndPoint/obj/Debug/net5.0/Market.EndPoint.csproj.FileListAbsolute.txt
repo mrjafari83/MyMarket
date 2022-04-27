@@ -446,3 +446,13 @@ E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Autantication\Dashboard.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Autantication\EditUserInfo.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Autantication\ResetPassword.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\EntityFramework.SqlServer.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\EntityFramework.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.AspNet.Identity.Core.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.Extensions.Caching.Abstractions.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.Extensions.Logging.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Autantication\MyPays.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Shared\Components\ProductsInCartPaying\GetCartPayingProducts.cshtml.g.cs

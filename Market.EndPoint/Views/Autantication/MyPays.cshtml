@@ -1,0 +1,115 @@
+﻿@using Application.Services.Common.Cart.Queries.GetUserCartPayings
+@model List<GetUserCartPayingsDto>
+@{
+    ViewData["Title"] = "MyPays";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--  ==========  -->
+<!--  = Breadcrumbs =  -->
+<!--  ==========  -->
+<div class="darker-stripe">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/">وبمارکت</a>
+                    </li>
+                    <li><span class="icon-chevron-right"></span></li>
+                    <li>
+                        <a href="/Dashboard">داشبورد</a>
+                    </li>
+                    <li><span class="icon-chevron-right"></span></li>
+                    <li>
+                        <a href="/MyPays">خرید های من</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="push-up blocks-spacer">
+        <div class="row">
+
+            <!--  ==========  -->
+            <!--  = Main content =  -->
+            <!--  ==========  -->
+            <section class="span12">
+
+                <!--  ==========  -->
+                <!--  = Title =  -->
+                <!--  ==========  -->
+                <div class="underlined push-down-20">
+                    <h3><span class="light">مشاهده سبد خرید</span></h3>
+                </div>
+            </section>
+
+            <section id="tabs">
+                <!--  ==========  -->
+                <!--  = Tab style 2 =  -->
+                <!--  ==========  -->
+                <ul id="myTab2" class="nav nav-tabs nav-tabs-style-2">
+                    @foreach (var item in Model)
+                    {
+                        <li class="">
+                            <a href="#tab-@item.Id" data-toggle="tab">سبد خرید</a>
+                        </li>
+                    }
+                </ul>
+                <div class="tab-content">
+                    @foreach (var item in Model)
+                    {
+                        <div class="fade tab-pane" id="tab-@item.Id">
+                            <h3> محصولات</h3>
+                            <div>
+                                @await Component.InvokeAsync("ProductsInCartPaying" , new { id = item.Id })
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- /container -->
+
+<div class="modal-dialog modal-lg">
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">محصولات</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/js/bootstrap-modal.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            function GetProductsInCart(cartId) {
+                debugger;
+                $.get("/GetCartPayingProducts", { id: cartId },
+                    function (data, textStatus, jqXHR) {
+                        $(".modal-body").html(data);
+                    }
+                );
+            }
+        });
+    </script>
+}

@@ -1,7 +1,11 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using Domain.Entities.User
+@inject UserManager<ApplicationUser> userManager
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var user = userManager.FindByNameAsync(User.Identity.Name).Result;
 }
 
 <!--  ==========  -->
@@ -13,15 +17,11 @@
             <div class="span12">
                 <ul class="breadcrumb">
                     <li>
-                        <a href="index.html">وبمارکت</a>
+                        <a href="/">وبمارکت</a>
                     </li>
                     <li><span class="icon-chevron-right"></span></li>
                     <li>
-                        <a href="features.html">امکانات</a>
-                    </li>
-                    <li><span class="icon-chevron-right"></span></li>
-                    <li>
-                        <a href="icons.html">آیکن ها</a>
+                        <a href="/Dashboard">داشبورد</a>
                     </li>
                 </ul>
             </div>
@@ -42,17 +42,17 @@
                 <!--  = Title =  -->
                 <!--  ==========  -->
                 <div class="underlined push-down-20">
-                    <h3><span class="light">همه</span> آیکن ها</h3>
+                    <h3><span class="light">داشبورد</span></h3>
                 </div>
 
                 <div>
                     <div style="float: right; width: 50%;">
                         <ul style="font-size: 125%; width: 100%;">
-                            <li>نام : </li>
-                            <li>نام خانوادگی : </li>
+                            <li>نام : @user.Name</li>
+                            <li>نام خانوادگی : @user.Family</li>
                             <li>نام کاربری : @User.Identity.Name</li>
-                            <li>ایمیل : </li>
-                            <li>شماره تلفن : </li>
+                            <li>ایمیل : @user.Email</li>
+                            <li>شماره تلفن : @user.PhoneNumber</li>
                         </ul>
                         <hr>
                         <ul>
@@ -63,12 +63,12 @@
                                 <a href="/RestPassword">تغییر رمز عبور</a>
                             </li>
                             <li>
-                                <a>خرید های من</a>
+                                <a href="/MyPays">خرید های من</a>
                             </li>
                         </ul>
                     </div>
                     <div style="float: left; width: 50%;">
-                        <img src="/Images/DefaultUser.jpg" style="text-align:center">
+                        <img src="@user.ProfileImageSrc" style="margin : 5% auto;max-width:80%">
                     </div>
                 </div>
 

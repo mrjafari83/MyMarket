@@ -1,0 +1,40 @@
+﻿@using Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying
+@model List<ProductInCartPayingDto>
+@{
+    Layout = null;
+}
+<style>
+    td{
+        width:16%;
+        border:solid 1px black;
+        padding:1%;
+        font-size:115%;
+    }
+</style>
+
+<table style="width:100%">
+    <thead>
+        <tr>
+            <td>نام</td>
+            <td>برند</td>
+            <td>قیمت</td>
+            <td>تعداد</td>
+            <td>رنگ</td>
+            <td>سایز</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Brand</td>
+                <td>@item.Price</td>
+                <td>@item.Count</td>
+                <td>@item.Color</td>
+                <td>@item.Size</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

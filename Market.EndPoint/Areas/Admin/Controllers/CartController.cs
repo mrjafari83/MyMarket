@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
+using Application.Interfaces.FacadPatterns.Common;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -11,9 +12,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
     public class CartController : Controller
     {
         private readonly ICartPayingFacad _cartPayingFacad;
-        public CartController(ICartPayingFacad cartPayingFacad)
+        private readonly ICommonCartFacad _commonCartFacad;
+        public CartController(ICartPayingFacad cartPayingFacad , ICommonCartFacad commonCartFacad)
         {
             _cartPayingFacad = cartPayingFacad;
+            _commonCartFacad = commonCartFacad;
         }
 
         public IActionResult Index()
@@ -23,7 +26,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         public IActionResult CartPayingInfo(int id)
         {
-            return View(_cartPayingFacad.GetCartPayingById.Execute(id).Data);
+            return View(_commonCartFacad.GetCartPayingById.Execute(id).Data);
         }
 
         public IActionResult OKSend(int cartPayingId)

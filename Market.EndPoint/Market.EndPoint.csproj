@@ -6112,6 +6112,7 @@
     <Content Include="wwwroot\Images\Products\یخچال\bd8190d7-efc9-429a-8c0d-1eb047bc4bd3fall-photo-cellphone-2.jpg" />
     <Content Include="wwwroot\Images\Products\یخچال\c31d4d3c-8de1-4a7a-9c9a-8a6e06d0a972fall-photo-cellphone-2.jpg" />
     <Content Include="wwwroot\Images\Products\یخچال\c6b51947-81c3-44ad-9826-d9b75dd7c59dCToGD7f.jpg" />
+    <Content Include="wwwroot\js\bootstrap-modal.js" />
     <Content Include="wwwroot\js\Chart.js" />
     <Content Include="wwwroot\js\Chart.min.js" />
     <Content Include="wwwroot\js\jQuery.Validation.1.11.1\Content\Scripts\jquery.validate-vsdoc.js" />

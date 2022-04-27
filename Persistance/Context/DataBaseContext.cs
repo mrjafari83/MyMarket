@@ -16,10 +16,11 @@ using Domain.Entities.Common;
 using Domain.Entities.Comments;
 using Domain.Entities.Option;
 using Domain.Entities.Cart;
+using Domain.Entities.User;
 
 namespace Persistance.Context
 {
-    public class DataBaseContext : IdentityDbContext, IDataBaseContext
+    public class DataBaseContext : IdentityDbContext<ApplicationUser>, IDataBaseContext
     {
         public DataBaseContext(DbContextOptions options)
             :base(options)
@@ -42,6 +43,7 @@ namespace Persistance.Context
         public DbSet<Cart> Carts { get; set; }
         public DbSet<ProductInCart> ProductsInCart { get; set; }
         public DbSet<CartPayingInfo> CartPayings { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         //relation tables
         public DbSet<ColorInProduct> ColorsInProducts { get; set; }

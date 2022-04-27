@@ -6,21 +6,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Common.ViewModels;
 using Application.Interfaces.FacadPatterns.Admin;
+using Application.Interfaces.FacadPatterns.Common;
+using Domain.Entities.User;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class UsersController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ICartPayingFacad _cartPayingFacad;
-        public UsersController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager
-            ,ICartPayingFacad cartPayingFacad)
+        private readonly ICommonCartFacad _commonCartFacad;
+        public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager
+            ,ICartPayingFacad cartPayingFacad , ICommonCartFacad commonCartFacad)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _cartPayingFacad = cartPayingFacad;
+            _commonCartFacad = commonCartFacad;
         }
 
         public async Task<IActionResult> Index()
@@ -51,7 +55,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(string email, string userName, string password)
         {
-            await _userManager.CreateAsync(new IdentityUser
+            await _userManager.CreateAsync(new ApplicationUser
             {
                 Email = email,
                 UserName = userName
@@ -130,7 +134,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         public IActionResult GetUserCartPayings(string userName)
         {
-            return View(_cartPayingFacad.GetUserCartPayings.Execute(userName).Data);
+            return View(_commonCartFacad.GetUserCartPayings.Execute(userName).Data);
         }
     }
 }

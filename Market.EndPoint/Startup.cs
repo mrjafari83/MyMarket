@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Common.Utilities.MessageSender;
+using Domain.Entities.User;
 
 namespace Market.EndPoint
 {
@@ -51,7 +52,7 @@ namespace Market.EndPoint
             services.AddHttpContextAccessor();
             services.AddMvc();
 
-            services.AddIdentity<IdentityUser, IdentityRole>(option =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(option =>
             {
                 option.Password.RequireLowercase = false;
                 option.Password.RequireUppercase = false;
@@ -127,6 +128,7 @@ namespace Market.EndPoint
             services.AddScoped<ICommonCategorisFacad, CommonCategorisFacad>();
             services.AddScoped<ICommonCommentFacad, CommonCommentFacad>();
             services.AddScoped<ICommonOptionFacad, CommonOprionFacad>();
+            services.AddScoped<ICommonCartFacad, CommonCartFacad>();
         }
 
         private void InjectionUtilities(IServiceCollection services)
