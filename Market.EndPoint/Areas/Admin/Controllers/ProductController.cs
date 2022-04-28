@@ -12,10 +12,12 @@ using Application.Services.Admin.Products.Commands.CreateProduct;
 using Application.Services.Admin.Products.Commands.EditProduct;
 using Application.Services.Admin.Products.Commands.DeleteProduct;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IProductFacad _productFacad;

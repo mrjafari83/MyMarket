@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SliderController : Controller
     {
         private ICommonOptionFacad _optionFacad;

@@ -9,10 +9,12 @@ using Domain.Entities.User;
 using Application.Interfaces.FacadPatterns.Client;
 using Application.Interfaces.FacadPatterns.Common;
 using Common.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AutanticationController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

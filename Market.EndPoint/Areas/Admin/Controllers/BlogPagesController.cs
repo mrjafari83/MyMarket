@@ -12,10 +12,12 @@ using Application.Services.Admin.BlogPages.Commands.CreateBlogPage;
 using Application.Services.Admin.BlogPages.Commands.EditBlogPage;
 using Microsoft.AspNetCore.Hosting;
 using Common.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class BlogPagesController : Controller
     {
         private readonly IBlogPageFacad _blogPageFacad;

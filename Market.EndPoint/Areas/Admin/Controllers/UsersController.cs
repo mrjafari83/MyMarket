@@ -8,10 +8,12 @@ using Common.ViewModels;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Domain.Entities.User;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Owner")]
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

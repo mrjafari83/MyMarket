@@ -10,10 +10,12 @@ using Application.Services.Admin.Categories.Commands.CreateCategory;
 using Application.Services.Admin.Categories.Commands.EditCategory;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Common.Dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductCategoriesController : Controller
     {
         private IProductCategoryFacad _productCategoryFacad;
