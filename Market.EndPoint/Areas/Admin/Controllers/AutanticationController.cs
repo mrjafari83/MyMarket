@@ -88,5 +88,24 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
             return Redirect("Admin/EditUserInfo");
         }
+
+        [Route("Admin/ResetPassword")]
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [Route("Admin/ResetPassword")]
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(string currentPassword, string newPassword)
+        {
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var result = _userManager.ChangePasswordAsync(user, currentPassword, newPassword).Result;
+
+            if (result.Succeeded)
+                return Redirect("/Admin");
+            return Redirect("/Admin/ResetPassword");
+        }
     }
 }
