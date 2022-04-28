@@ -17,7 +17,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IClientCartFacad _clientCartFacad;
-        public AutanticationController(UserManager<ApplicationUser> userManager , SignInManager<ApplicationUser> signInManager
+        public AutanticationController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager
              , IClientCartFacad clientCartFacad)
         {
             _userManager = userManager;
@@ -60,6 +60,33 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
 
             return Redirect("/");
+        }
+
+        [Route("Admin/EditUserInfo")]
+        [HttpGet]
+        public IActionResult EditUserInfo()
+        {
+            return View();
+        }
+
+        [Route("Admin/EditUserInfo")]
+        [HttpPost]
+        public IActionResult EditUserInfo(string userName, string name, string family, string phoneNumber, string email)
+        {
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            user.Name = name;
+            user.Family = family;
+            user.Email = email;
+            user.UserName = userName;
+            user.PhoneNumber = phoneNumber;
+            var result = _userManager.UpdateAsync(user).Result;
+
+            if (result.Succeeded)
+            {
+                return Redirect("/Admmin");
+            }
+
+            return Redirect("Admin/EditUserInfo");
         }
     }
 }
