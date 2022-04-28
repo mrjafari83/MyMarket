@@ -7,6 +7,7 @@ using Common.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Domain.Entities.User;
 using Application.Interfaces.FacadPatterns.Client;
+using Application.Interfaces.FacadPatterns.Common;
 using Common.Utilities;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
@@ -17,12 +18,14 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IClientCartFacad _clientCartFacad;
+        private readonly ICommonCartFacad _commonCartFacad;
         public AutanticationController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager
-             , IClientCartFacad clientCartFacad)
+             , IClientCartFacad clientCartFacad , ICommonCartFacad commonCartFacad)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _clientCartFacad = clientCartFacad;
+            _commonCartFacad = commonCartFacad;
         }
 
         [HttpGet]
@@ -106,6 +109,13 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             if (result.Succeeded)
                 return Redirect("/Admin");
             return Redirect("/Admin/ResetPassword");
+        }
+
+        [Route("/Admin/MyPays")]
+        [HttpGet]
+        public IActionResult MyPays()
+        {
+            return View(_commonCartFacad.GetUserCartPayings.Execute(User.Identity.Name).Data);
         }
     }
 }

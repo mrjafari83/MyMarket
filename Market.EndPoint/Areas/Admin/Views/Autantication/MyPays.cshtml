@@ -1,0 +1,17 @@
+﻿@using Application.Services.Common.Cart.Queries.GetUserCartPayings
+@model List<GetUserCartPayingsDto>
+@{
+    ViewData["Title"] = "MyPays";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    @foreach (var item in Model)
+    {
+        <h4>سبد خرید</h4>
+        @await Component.InvokeAsync("ProductsInCartPaying", new { id = item.Id })
+        <hr />
+        <br />
+    }
+</div>
+
