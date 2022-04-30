@@ -3,7 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<link href="~/Css/Chart.min.css" rel="stylesheet" />
+<link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
 <div class="row">
     @await Component.InvokeAsync("BestSellingProductsInIndex")
     <div class="col l3">
@@ -58,6 +58,9 @@
 
 @section scripts
 {
+    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="/Admin/assets/libs/sweetalert2/sweet-alert.init.js"></script>
+
     <script src="~/js/Chart.js"></script>
     <script>
         $(document).ready(function () {

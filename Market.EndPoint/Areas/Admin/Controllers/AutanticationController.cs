@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class AutanticationController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -32,12 +31,14 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         [HttpGet]
         [Route("Admin/Login")]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("Admin/Login")]
         public async Task<IActionResult> Login(LoginViwModel model)
         {
@@ -88,10 +89,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
             if (result.Succeeded)
             {
-                return Redirect("/Admmin");
+                return Json(true);
             }
 
-            return Redirect("Admin/EditUserInfo");
+            return Json(false);
         }
 
         [Route("Admin/ResetPassword")]
@@ -103,14 +104,14 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         [Route("Admin/ResetPassword")]
         [HttpPost]
-        public async Task<IActionResult> ResetPassword(string currentPassword, string newPassword)
+        public IActionResult ResetPassword(string currentPassword, string newPassword)
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var result = _userManager.ChangePasswordAsync(user, currentPassword, newPassword).Result;
 
             if (result.Succeeded)
-                return Redirect("/Admin");
-            return Redirect("/Admin/ResetPassword");
+                return Json(true);
+            return Json(false);
         }
 
         [Route("/Admin/MyPays")]

@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IProductFacad _productFacad;

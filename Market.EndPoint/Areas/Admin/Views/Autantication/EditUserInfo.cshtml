@@ -19,6 +19,7 @@
     <link href="/Admin/dist/css/style.css" rel="stylesheet">
     <!-- This page CSS -->
     <link href="/Admin/dist/css/pages/authentication.css" rel="stylesheet">
+    <link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <!-- This page CSS -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,7 +55,7 @@
                     </div>
                     <!-- Form -->
                     <div class="row">
-                        <form class="col s12" action="/Admin/EditUserInfo" method="post">
+                        <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input value="@user.Name" name="name" id="name" type="text" class="validate" required>
@@ -82,34 +83,19 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input value="@user.Email" id="email" name="email" type="email" class="validate" required>
-                                    <label for="email">کلمه عبور</label>
+                                    <label for="email"> ایمیل</label>
                                 </div>
                             </div>
                             <div class="row m-t-40">
                                 <div class="col s12">
-                                    <button class="btn-large w100 blue accent-4" type="submit">ویرایش</button>
+                                    <button class="btn-large w100 blue accent-4" id="btnSend">ویرایش</button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- Login box.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper scss in scafholding.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper scss in scafholding.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Right Sidebar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Right Sidebar -->
-        <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- All Required js -->
@@ -119,6 +105,7 @@
     <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->
+    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
     <script>
         $('.tooltipped').tooltip();
         // ==============================================================
@@ -130,6 +117,44 @@
         });
         $(function () {
             $(".preloader").fadeOut();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            //Success Message
+            $('#btnSend').click(function () {
+                var data = new FormData();
+                data.append("name", $("#name").val());
+                data.append("family", $("#family").val());
+                data.append("phoneNumber", $("#phoneNumber").val());
+                data.append("userName", $("#userName").val());
+                data.append("email", $("#email").val());
+
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    url: "/Admin/EditUserInfo",
+                    data: data,
+                    success: function (response) {
+                        if (response == true) {
+                            swal("موفق", "اطلاعات با موفقیت ویرایش شد.", "success")
+                                .then((value) => {
+                                    window.location.href = "/Admin";
+                                });
+                        }
+                        else {
+                            swal("خطا", "خطایی رخ داده است. لطفا مجددا امتحان کنید.", "warning")
+                                .then((value) => {
+                                    location.reload();
+                                }
+                                );
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>

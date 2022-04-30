@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class CartController : Controller
     {
         private readonly ICartPayingFacad _cartPayingFacad;
