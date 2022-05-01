@@ -3,39 +3,90 @@
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
 <div style="margin:5% auto; align-content:center;width:400px">
     <div class="modal-header">
         <h3 id="registerModalLabel"><span class="light">ثبت نام</span> در وبمارکت</h3>
     </div>
     <div class="modal-body">
-        <form method="post" asp-controller="Autantication" asp-action="Register" asp-route-returnUrl="@ViewBag.ReturnUrl">
+        <div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="inputUsernameRegister">نام کاربری</label>
+                <label class="control-label hidden shown-ie8" for="userName">نام کاربری</label>
                 <div class="controls">
-                    <input type="text" class="input-block-level" name="UserName" id="inputUsernameRegister" placeholder="نام کاربری">
+                    <input type="text" class="input-block-level" id="userName" placeholder="نام کاربری">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="inputEmailRegister">ایمیل</label>
+                <label class="control-label hidden shown-ie8" for="email">ایمیل</label>
                 <div class="controls">
-                    <input type="email" class="input-block-level" name="Email" id="inputEmailRegister" placeholder="ایمیل">
+                    <input type="email" class="input-block-level"  id="email" placeholder="ایمیل">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="inputPasswordRegister">رمز عبور</label>
+                <label class="control-label hidden shown-ie8" for="password">رمز عبور</label>
                 <div class="controls">
-                    <input type="password" class="input-block-level" name="Password" id="inputPasswordRegister" placeholder="کلمه عبور">
+                    <input type="password" class="input-block-level" id="password" placeholder="کلمه عبور">
                 </div>
             </div>
-            <button type="submit" class="btn btn-danger input-block-level bold higher">
+            <button id="btnSend" class="btn btn-danger input-block-level bold higher">
                 ثبت نام
             </button>
-        </form>
+        </div>
         <p class="center-align push-down-0">
             <a data-toggle="modal" role="button" href="/Login?returnUrl=@ViewBag.ReturnUrl" data-dismiss="modal">قبلا ثبت نام کرده اید؟</a>
         </p>
 
     </div>
 </div>
+
+@section scripts
+{
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="/Admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/Admin/dist/js/materialize.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //Success Message
+            $('#btnSend').click(function () {
+                var data = new FormData();
+                data.append("UserName", $("#userName").val());
+                data.append("Password", $("#password").val());
+                data.append("Email", $("#email").val());
+
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    url: "/Register",
+                    data: data,
+                    success: function (response) {
+                        if (response == true) {
+                            swal("موفق", "خوش آمدید.", "success")
+                                .then((value) => {
+                                    window.location.href = '@ViewBag.ReturnUrl';
+                                });
+                        }
+                        else {
+                            swal("خطا", "خطایی رخ داده است. لطفا مجددا امتحان کنید.", "warning")
+                                .then((value) => {
+                                    location.reload();
+                                }
+                                )
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
 

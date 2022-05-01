@@ -37,7 +37,7 @@ namespace Market.EndPoint.Controllers
 
         [Route("Register")]
         [HttpGet]
-        public IActionResult Register(string returnUrl = "")
+        public IActionResult Register(string returnUrl = "/")
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -45,7 +45,7 @@ namespace Market.EndPoint.Controllers
 
         [Route("Register")]
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel user, string returnUrl = "")
+        public async Task<IActionResult> Register(RegisterViewModel user)
         {
             var newUser = new ApplicationUser()
             {
@@ -69,14 +69,14 @@ namespace Market.EndPoint.Controllers
             CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
 
 
-            if (returnUrl != "" && Url.IsLocalUrl(returnUrl))
-                return Redirect(returnUrl);
-            return Redirect(returnUrl);
+            if (result.Succeeded)
+                return Json(true);
+            return Json(false);
         }
 
         [Route("Login")]
         [HttpGet]
-        public IActionResult Login(string returnUrl = "")
+        public IActionResult Login(string returnUrl = "/")
         {
             if (signInManager.IsSignedIn(User))
                 return Redirect("/");
@@ -87,12 +87,11 @@ namespace Market.EndPoint.Controllers
 
         [Route("Login")]
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViwModel user, string returnUrl = "")
+        public async Task<IActionResult> Login(LoginViwModel user)
         {
             if (signInManager.IsSignedIn(User))
                 return Redirect("/");
 
-            ViewBag.ReturnUrl = returnUrl;
             var dbUser = userManager.FindByNameAsync(user.UserName).Result;
             var userRole = userManager.GetRolesAsync(dbUser).Result.FirstOrDefault();
             if(userRole == "Customer")
@@ -109,14 +108,12 @@ namespace Market.EndPoint.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (returnUrl != "")
-                        return Redirect(returnUrl);
-                    return Redirect("/");
+                    return Json(true);
                 }
             }
-           
 
-            return Redirect("/");
+
+            return Json(false);
         }
 
         [Route("Logout")]

@@ -1,42 +1,97 @@
-﻿@using Common.ViewModels
-@model LoginViwModel 
-@{
+﻿@{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
 <div style="align-content: center; margin: 5% auto; width: 400px">
     <div class="modal-header">
         <h3 id="loginModalLabel"><span class="light">ورود</span> در وبمارکت</h3>
     </div>
     <div class="modal-body">
-        <form method="post" action="Login?returnUrl=@ViewBag.ReturnUrl">
+        <div>
             <div class="control-group">
                 <label class="control-label hidden shown-ie8" for="username">نام کاربری</label>
                 <div class="controls">
-                    <input type="text" class="input-block-level" asp-for="UserName" placeholder="نام کاربری">
+                    <input type="text" class="input-block-level" placeholder="نام کاربری" id="userName">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label hidden shown-ie8" for="password">رمز عبور</label>
                 <div class="controls">
-                    <input type="password" class="input-block-level" asp-for="Password" placeholder="کلمه عبور">
+                    <input type="password" class="input-block-level" placeholder="کلمه عبور" id="Password">
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
                     <label class="checkbox">
-                        <input type="checkbox" asp-for="RememberMe">
+                        <input type="checkbox" id="RememberMe" name="RememberMe">
                         مرا به خاطر بسپار
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary input-block-level bold higher">
+            <button id="btnSend" class="btn btn-primary input-block-level bold higher">
                 ورود
             </button>
-        </form>
+        </div>
         <p class="center-align push-down-0">
             <a href="#" data-dismiss="modal">رمز عبورتان را فراموش کرده اید؟</a>
         </p>
     </div>
 </div>
+
+@section scripts
+{
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="/Admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/Admin/dist/js/materialize.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //Success Message
+            $('#btnSend').click(function () {
+                debugger;
+                var data = new FormData();
+                var rememberMe = false;
+                if ($("#RememberMe").is(":checked")){
+                    rememberMe = true;
+                }
+
+                data.append("UserName", $("#userName").val());
+                data.append("Password", $("#Password").val());
+                data.append("RememberMe", rememberMe);
+
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    url: "/Login",
+                    data: data,
+                    success: function (response) {
+                        if (response == true) {
+                            swal("موفق", "خوش آمدید.", "success")
+                                .then((value) => {
+                                    window.location.href = '@ViewBag.ReturnUrl';
+                                });
+                        }
+                        else {
+                            swal("خطا", "خطایی رخ داده است. لطفا مجددا امتحان کنید.", "warning")
+                                .then((value) => {
+                                    location.reload();
+                                }
+                                )
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
