@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Domain.Entities.User 
+@using Domain.Entities.User
 @inject UserManager<ApplicationUser> userManager
 @{
     ViewData["Title"] = "EditUserInfo";
@@ -7,53 +7,107 @@
 
     var user = userManager.FindByNameAsync(User.Identity.Name).Result;
 }
+<link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
 <div style="margin:5% auto; align-content:center;width:400px">
     <div class="modal-header">
         <h3 id="registerModalLabel"><span class="light">ویرایش اطلاعات</span></h3>
     </div>
     <div class="modal-body">
-        <form method="post" action="/EditUser" enctype="multipart/form-data">
+        <div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="nameInput">نام</label>
+                <label class="control-label hidden shown-ie8" for="name">نام</label>
                 <div class="controls">
-                    <input type="text" value="@user.Name" class="input-block-level" name="name" id="nameInput" placeholder="نام">
+                    <input type="text" value="@user.Name" class="input-block-level" name="name" id="name" placeholder="نام">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="familyInput">نام خانوادگی</label>
+                <label class="control-label hidden shown-ie8" for="family">نام خانوادگی</label>
                 <div class="controls">
-                    <input type="text" value="@user.Family" class="input-block-level" name="family" id="familyInput" placeholder="نام خانوادگی">
+                    <input type="text" value="@user.Family" class="input-block-level" name="family" id="family" placeholder="نام خانوادگی">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="phoneNumberInput">شماره تلفن</label>
+                <label class="control-label hidden shown-ie8" for="phoneNumber">شماره تلفن</label>
                 <div class="controls">
-                    <input type="text" value="@user.PhoneNumber" class="input-block-level" name="phoneNumber" id="phoneNumberInput" placeholder="شماره تلفن">
+                    <input type="text" value="@user.PhoneNumber" class="input-block-level" name="phoneNumber" id="phoneNumber" placeholder="شماره تلفن">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="userNameInput">نام کاربری</label>
+                <label class="control-label hidden shown-ie8" for="UserName">نام کاربری</label>
                 <div class="controls">
-                    <input type="text" value="@user.UserName" class="input-block-level" name="UserName" id="userNameInput" placeholder="نام کاربری">
+                    <input type="text" value="@user.UserName" class="input-block-level" name="UserName" id="UserName" placeholder="نام کاربری">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="emailInput">ایمیل</label>
+                <label class="control-label hidden shown-ie8" for="Email">ایمیل</label>
                 <div class="controls">
-                    <input type="email" value="@user.Email" class="input-block-level" name="Email" id="emailInput" placeholder="ایمیل">
+                    <input type="email" value="@user.Email" class="input-block-level" name="Email" id="Email" placeholder="ایمیل">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label hidden shown-ie8" for="imageInput">تصویر پروفایل</label>
+                <label class="control-label hidden shown-ie8" for="image">تصویر پروفایل</label>
                 <div class="controls">
-                    <input type="file" value="@user.Email" class="input-block-level" name="image" id="imageInput" placeholder="تصویر پروفایل">
+                    <input type="file" class="input-block-level" name="image" id="image" placeholder="تصویر پروفایل">
                 </div>
             </div>
-            <button type="submit" class="btn btn-danger input-block-level bold higher">
+            <button id="btnSend" class="btn btn-danger input-block-level bold higher">
                 ویرایش
             </button>
-        </form>
+        </div>
     </div>
 </div>
 
+@section scripts
+{
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="/Admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/Admin/dist/js/materialize.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //Success Message
+            $('#btnSend').click(function () {
+                var data = new FormData();
+
+                data.append("name", $("#name").val());
+                data.append("family", $("#family").val());
+                data.append("phoneNumber", $("#phoneNumber").val());
+                data.append("UserName", $("#UserName").val());
+                data.append("Email", $("#Email").val());
+                data.append("image", document.getElementById("image").files[0]);
+
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    url: "/EditUser",
+                    data: data,
+                    success: function (response) {
+                        if (response == true) {
+                            swal("موفق", "اطلاعات کاربر با موفقیت ویرایش شد.", "success")
+                                .then((value) => {
+                                    window.location.href = "/Dashboard";
+                                });
+                        }
+                        else {
+                            swal("خطا", "خطایی رخ داده است. لطفا مجددا امتحان کنید.", "warning")
+                                .then((value) => {
+                                    location.reload();
+                                }
+                                )
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

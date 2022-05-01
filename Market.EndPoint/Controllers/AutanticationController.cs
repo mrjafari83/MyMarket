@@ -173,18 +173,18 @@ namespace Market.EndPoint.Controllers
             var result = await userManager.UpdateAsync(user);
 
             if (result.Succeeded)
-                return Redirect("/Dashboard");
+                return Json(true);
 
-            return Redirect("/EditUser");
+            return Json(false);
         }
 
-        [Route("RestPassword")]
+        [Route("ResetPassword")]
         public IActionResult ResetPassword()
         {
             return View();
         }
 
-        [Route("RestPassword")]
+        [Route("ResetPassword")]
         [HttpPost]
         public async Task<IActionResult> ResetPassword(string currentPassword = "", string newPassword = "")
         {
@@ -192,9 +192,9 @@ namespace Market.EndPoint.Controllers
             var result = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
 
             if (result.Succeeded)
-                return Redirect("/Dashboard");
+                return Json(true);
 
-            return Redirect("/RestPassword");
+            return Json(false);
         }
 
         [Route("MyPays")]
