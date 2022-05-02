@@ -6,6 +6,7 @@
     ViewData["Title"] = "ShowProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
 <div class="darker-stripe">
     <div class="container">
@@ -96,23 +97,16 @@
                     <!--  ==========  -->
                     <!--  = Add to cart form =  -->
                     <!--  ==========  -->
-                    <form action="/AddToCart" class="form form-inline clearfix" method="post">
+                    <div>
                         <div class="numbered">
-                            @{ 
-                                var routeUrl = Url.RouteUrl(ViewContext.RouteData.Values);
-                                var qsPath = ViewContext.HttpContext.Request.QueryString.Value;
-                                var returnUrl = $"{routeUrl}{qsPath}";
-                            }
-                            <input type="hidden" name="productId" value="@Model.Id" />
-                            <input type="hidden" name="returnUrl" value="@returnUrl" />
-                            <input type="text" name="count" value="1" class="tiny-size">
+                            <input type="text" id="count" value="1" class="tiny-size">
                             <span class="clickable add-one icon-plus-sign-alt"></span>
                             <span class="clickable remove-one icon-minus-sign-alt"></span>
                         </div>
                         &nbsp;
                         @if (Model.Colors.Count() != 0)
                         {
-                            <select name="color" class="span2" id="colorSelector">
+                            <select class="span2" id="colorSelector">
                                 @foreach (var color in Model.Colors)
                                 {
                                     <option value="@color.Name">@color.Name</option>
@@ -122,15 +116,18 @@
                         &nbsp;
                         @if (Model.Sizes.Count() != 0)
                         {
-                            <select name="size" class="span2" id="sizeSelector">
+                            <select class="span2" id="sizeSelector">
                                 @foreach (var size in Model.Sizes)
                                 {
                                     <option value="@size.SizeValue">@size.SizeValue</option>
                                 }
                             </select>
                         }
-                        <button class="btn btn-danger pull-right"><i class="icon-shopping-cart"></i> اضافه به سبد خرید</button>
-                    </form>
+                        @if (Model.Inventory != 0)
+                        {
+                            <button id="btnAddToCart" class="btn btn-danger pull-right"><i class="icon-shopping-cart"></i> اضافه به سبد خرید</button>
+                        }
+                    </div>
 
                     <hr>
 
@@ -188,7 +185,7 @@
                     </ul>
                 </div>
                 <div class="fade tab-pane" id="tab-3">
-                    @await Component.InvokeAsync("Comment" , new {pageId = Model.Id , categoryType = Common.Enums.Enums.CategoryType.Product })
+                    @await Component.InvokeAsync("Comment", new { pageId = Model.Id, categoryType = Common.Enums.Enums.CategoryType.Product })
                 </div>
                 <div class="fade tab-pane" id="tab-4">
                     <p>
@@ -202,18 +199,18 @@
 
 @section scripts
 {
+    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
     <script>
         var commentId = 0;
         var commenterName = "";
         var visitingParent = 0;
-        
+
         $(document).ready(function () {
             $(".btnAnswer").click(function (e) {
                 commentId = this.getAttribute("commentId");
                 commenterName = this.getAttribute("commenterName");
                 visitingParent = this.getAttribute("visitingParent");
                 document.getElementById("answerTo").innerHTML = "پاسخ به " + commenterName;
-                debugger;
             });
 
             $("#btnSendComment").click(function () {
@@ -237,6 +234,28 @@
                         location.reload();
                     }
                 });
+            });
+
+            $("#btnAddToCart").click(function (e) {
+                    var data = new FormData();
+
+                    data.append("count", $("#count").val());
+                    data.append("color", $("#colorSelector").find(":selected").text());
+                    data.append("size", $("#sizeSelector").find(":selected").text());
+                    data.append("productId", @Model.Id);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/AddToCart",
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        data: data,
+                        success: function (response) {
+                            location.reload();
+                        }
+                    });
+
             });
         });
     </script>

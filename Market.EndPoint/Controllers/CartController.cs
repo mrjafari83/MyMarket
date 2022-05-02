@@ -19,12 +19,12 @@ namespace Market.EndPoint.Controllers
 
         [Route("AddToCart")]
         [HttpPost]
-        public IActionResult AddToCart(int productId, int count, string returnUrl = "", string color = "", string size = "")
+        public IActionResult AddToCart(int productId, int count, string color = "", string size = "")
         {
             int cartId = Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId"));
             _clientCartFacad.AddProductToCart.Execute(cartId, productId, count, color, size);
 
-            return Redirect(returnUrl == "" ? "/" : returnUrl);
+            return Json(true);
         }
 
         [Route("DeleteProductFromCart")]
