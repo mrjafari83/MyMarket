@@ -134,7 +134,7 @@
                                             </tr>
                                         }
                                         else
-                                            for(int i =0;i<Model.Products.Count();i++)
+                                            for (int i = 0; i < Model.Products.Count(); i++)
                                             {
                                                 var item = Model.Products[i];
                                                 <tr>
@@ -268,10 +268,23 @@
             });
 
             $("#btnNext").click(function (e) {
+                debugger;
+                var productNames = [];
                 for (var i = 0; i < @Model.Products.Count() ; i++) {
-                    var count = $("#count-" + i).val();
                     var productName = document.getElementById("count-" + i).getAttribute("productName");
                     var productInventory = document.getElementById("count-" + i).getAttribute("inventory");
+                    var count = 0;
+                    if (productNames.includes(productName)) {
+                        var items = document.querySelectorAll("[productName='" + productName + "']");
+                        for (var j = 0; j < items.length; j++) {
+                            count += parseInt(items[j].value);
+                        }
+                    }
+                    else {
+                        count = $("#count-" + i).val();
+                    }
+                    productNames.push(productName);
+
                     if (parseInt(count) > parseInt(productInventory)) {
                         swal("هشدار", "موجودی " + productName + "در انبار کمتر از تعداد درخواستی شماست. تعداد موجود در انبار : " + productInventory, "warning");
                         return;
