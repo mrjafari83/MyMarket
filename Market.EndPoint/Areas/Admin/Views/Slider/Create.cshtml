@@ -7,7 +7,7 @@
     <div class="col s12">
         <div class="card">
             <div class="card-content">
-                <form class="formValidate" id="formValidate" novalidate="novalidate" method="post" action="/Admin/Slider/Create" enctype="multipart/form-data">
+                <form class="formValidate" id="formValidate" novalidate="novalidate">
                     <div class="row">
                         <div class="input-field col s12">
                             <label for="url" class="">مسیر(url)*</label>
@@ -34,3 +34,61 @@
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script src="/Admin/assets/extra-libs/prism/prism.js"></script>
+    <script src="/Admin/dist/js/pages/forms/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#formValidate").validate({
+                rules: {
+                    url: {
+                        required: true,
+                    },
+                    image: {
+                        required: true,
+                    },
+                },
+                //For custom messages
+                messages: {
+                    url: {
+                        required: "یک مسیر وارد کنید.",
+                    },
+                    image: {
+                        required: "یک تصویر انتخاب کنید",
+                    },
+                },
+                errorElement: 'div',
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function () {
+                    debugger;
+
+                    var formdata = new FormData();
+                    formdata.append("url", $("#url").val());
+                    formdata.append("image", document.getElementById("image").files[0]);
+
+                    $.ajax({
+                        type: "POST",
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        enctype: "multipart/form-data",
+                        url: "/Admin/Slider/Create",
+                        data: formdata,
+                        success: function (response) {
+                            window.location.href = "/Admin/Slider";
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
