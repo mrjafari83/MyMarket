@@ -16,10 +16,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ICartPayingFacad _cartPayingFacad;
         private readonly ICommonCartFacad _commonCartFacad;
-        public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager
+        public UsersController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager
             ,ICartPayingFacad cartPayingFacad , ICommonCartFacad commonCartFacad)
         {
             _userManager = userManager;
@@ -108,24 +108,18 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             var roles = new List<string>() { "Owner", "Admin", "Customer" };
             if (model.Owner)
             {
-                if (!_roleManager.Roles.Any(r => r.Name == "Owner"))
-                    await _roleManager.CreateAsync(new IdentityRole { Name = "Owner" });
                 await _userManager.RemoveFromRolesAsync(user, roles);
                 await _userManager.AddToRoleAsync(user, "Owner");
             }
 
             else if (model.Admin)
             {
-                if (!_roleManager.Roles.Any(r => r.Name == "Admin"))
-                    await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
                 await _userManager.RemoveFromRolesAsync(user, roles);
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
 
             else if (model.Customer)
             {
-                if (!_roleManager.Roles.Any(r => r.Name == "Customer"))
-                    await _roleManager.CreateAsync(new IdentityRole { Name = "Customer" });
                 await _userManager.RemoveFromRolesAsync(user, roles);
                 await _userManager.AddToRoleAsync(user, "Customer");
             }
