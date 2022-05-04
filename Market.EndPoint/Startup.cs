@@ -52,7 +52,7 @@ namespace Market.EndPoint
             services.AddHttpContextAccessor();
             services.AddMvc();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(option =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
             {
                 option.Password.RequireLowercase = false;
                 option.Password.RequireUppercase = false;

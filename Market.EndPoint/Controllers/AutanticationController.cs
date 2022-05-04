@@ -12,6 +12,7 @@ using Application.Interfaces.FacadPatterns.Common;
 using Domain.Entities.User;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Common.Classes;
 
 namespace Market.EndPoint.Controllers
 {
@@ -53,24 +54,19 @@ namespace Market.EndPoint.Controllers
                 UserName = user.UserName,
             };
             var result = await userManager.CreateAsync(newUser, user.Password);
-            await userManager.AddToRoleAsync(newUser, "Customer");
             if (result.Succeeded)
             {
                 //var confirmationEmailToken = userManager.GenerateEmailConfirmationTokenAsync(newUser);
                 //var emailMessage = Url.Action("ConfirmEmail", "Autantication" ,
                 //new { username = newUser.UserName, token = confirmationEmailToken } , Request.Scheme);
                 //await messageSender.SendAsync(user.Email, "تایید ایمیل", emailMessage, false);
-
+                await userManager.AddToRoleAsync(newUser, RoleNames.Customer);
+                int cartId;
+                _clientCartFacad.CreateCart.Execute(user.UserName, out cartId);
+                CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
                 await signInManager.PasswordSignInAsync(user.UserName, user.Password, false, true);
-            }
-
-            int cartId;
-            _clientCartFacad.CreateCart.Execute(user.UserName, out cartId);
-            CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
-
-
-            if (result.Succeeded)
                 return Json(true);
+            }
             return Json(false);
         }
 
@@ -94,7 +90,7 @@ namespace Market.EndPoint.Controllers
 
             var dbUser = userManager.FindByNameAsync(user.UserName).Result;
             var userRole = userManager.GetRolesAsync(dbUser).Result.FirstOrDefault();
-            if(userRole == "Customer")
+            if(userRole == RoleNames.Customer)
             {
                 int cartId;
                 cartId = _clientCartFacad.GetUserCart.Execute(user.UserName).Data.CartId;

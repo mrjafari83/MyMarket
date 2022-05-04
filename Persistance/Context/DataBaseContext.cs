@@ -17,10 +17,11 @@ using Domain.Entities.Comments;
 using Domain.Entities.Option;
 using Domain.Entities.Cart;
 using Domain.Entities.User;
+using Common.Classes;
 
 namespace Persistance.Context
 {
-    public class DataBaseContext : IdentityDbContext<ApplicationUser>, IDataBaseContext
+    public class DataBaseContext : IdentityDbContext<ApplicationUser , ApplicationRole , string>, IDataBaseContext
     {
         public DataBaseContext(DbContextOptions options)
             :base(options)
@@ -44,6 +45,7 @@ namespace Persistance.Context
         public DbSet<ProductInCart> ProductsInCart { get; set; }
         public DbSet<CartPayingInfo> CartPayings { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
 
         //relation tables
         public DbSet<ColorInProduct> ColorsInProducts { get; set; }
@@ -91,6 +93,27 @@ namespace Persistance.Context
                 Id = 1383,
                 Name = "بدون دسته بندی",
                 IsParent = true,
+            });
+
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = RoleNames.Customer,
+                Name = RoleNames.Customer,
+                NormalizedName = "CUSTOMER"
+            });
+
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = RoleNames.Admin,
+                Name = RoleNames.Admin,
+                NormalizedName = "ADMIN"
+            });
+
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = RoleNames.Owner,
+                Name = RoleNames.Owner,
+                NormalizedName = "OWNER"
             });
         }
     }
