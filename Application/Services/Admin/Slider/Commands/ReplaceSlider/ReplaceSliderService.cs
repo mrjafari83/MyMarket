@@ -13,14 +13,18 @@ namespace Application.Services.Admin.Slider.Commands.ReplaceSlider
             db = context;
         }
 
-        public ResultDto Execute(int lastSliderId, int newProdcutId)
+        public ResultDto Execute(int lastSliderId, string url, string imageSrc)
         {
             var lastSlider = db.Sliders.Find(lastSliderId);
             lastSlider.IsRemoved = true;
             lastSlider.RemoveTime = DateTime.Now;
             db.Sliders.Update(lastSlider);
 
-            db.Sliders.Add(new Domain.Entities.Option.Slider { Product = db.Products.Find(newProdcutId) });
+            db.Sliders.Add(new Domain.Entities.Option.Slider 
+            {
+                Url = url,
+                ImageSrc = imageSrc
+            });
             db.SaveChanges();
 
             return new ResultDto

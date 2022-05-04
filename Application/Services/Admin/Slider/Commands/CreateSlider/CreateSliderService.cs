@@ -12,9 +12,13 @@ namespace Application.Services.Admin.Slider.Commands.CreateSlider
             db = context;
         }
 
-        public ResultDto Execute(int productId)
+        public ResultDto Execute(string url , string imageSrc)
         {
-            db.Sliders.Add(new Domain.Entities.Option.Slider { Product = db.Products.Find(productId) });
+            db.Sliders.Add(new Domain.Entities.Option.Slider
+            {
+                Url = url,
+                ImageSrc = imageSrc
+            });
             db.SaveChanges();
 
             return new ResultDto

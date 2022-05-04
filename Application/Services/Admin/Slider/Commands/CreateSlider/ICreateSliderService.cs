@@ -9,6 +9,6 @@ namespace Application.Services.Admin.Slider.Commands.CreateSlider
 {
     public interface ICreateSliderService
     {
-        ResultDto Execute(int productId);
+        ResultDto Execute(string url , string imageSrc);
     }
 }

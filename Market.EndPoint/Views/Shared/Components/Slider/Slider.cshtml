@@ -9,8 +9,8 @@
             @foreach (var item in Model)
             {
                 <li data-transition="premium-random" data-slotamount="3">
-                    <a href="/Product?id=@item.ProductId">
-                        <img src="@item.ProductImage" alt="slider img" width="1400" height="377" />
+                    <a href="@item.Url">
+                        <img src="@item.ImageSrc" alt="slider img" width="1400" height="377" />
                     </a>
                 </li><!-- /slide -->
             }

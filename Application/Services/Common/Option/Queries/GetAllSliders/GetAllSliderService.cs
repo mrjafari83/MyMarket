@@ -16,14 +16,11 @@ namespace Application.Services.Common.Option.Queries.GetAllSliders
 
         public ResultDto<List<GetAllSlidersDto>> Execute()
         {
-            var sliders = db.Sliders.Include(s => s.Product.Images).Select(s => new GetAllSlidersDto
+            var sliders = db.Sliders.Select(s => new GetAllSlidersDto
             {
                 SliderId = s.Id,
-                ProductId = s.Product.Id == null ? 0 : s.Product.Id,
-                ProductName = s.Product.Name ?? "",
-                 ProductPrice = s.Product.Price == null ? 0 : s.Product.Price,
-                ProductInventory = s.Product.Inventory == null ? 0 : s.Product.Inventory,
-                ProductImage = s.Product.Images.FirstOrDefault().Src ?? ""
+                Url = s.Url,
+                ImageSrc = s.ImageSrc
             }).ToList();
 
             return new ResultDto<List<GetAllSlidersDto>>

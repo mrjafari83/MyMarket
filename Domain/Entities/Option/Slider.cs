@@ -10,6 +10,7 @@ namespace Domain.Entities.Option
 {
     public class Slider : BaseEntity
     {
-        public virtual Product Product { get; set; }
+        public string Url { get; set; }
+        public string ImageSrc { get; set; }
     }
 }

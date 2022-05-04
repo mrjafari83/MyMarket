@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Common.Utilities;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -15,12 +18,14 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private ICommonOptionFacad _optionFacad;
         private ISliderFacad _sliderFacad;
         private IProductFacad _productFacad;
+        private readonly IHostingEnvironment _environment;
         public SliderController(ICommonOptionFacad commonOptionFacad, ISliderFacad sliderFacad
-            ,IProductFacad productFacad)
+            ,IProductFacad productFacad , IHostingEnvironment environment)
         {
             _optionFacad = commonOptionFacad;
             _sliderFacad = sliderFacad;
             _productFacad = productFacad;
+            _environment = environment;
         }
 
         public IActionResult Index()
@@ -28,28 +33,34 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             return View(_optionFacad.GetAllSlider.Execute().Data);
         }
 
-        public IActionResult Create(int currentPage = 1)
+        [HttpGet]
+        public IActionResult Create()
         {
-            ViewBag.CurrentRow = currentPage;
-            return View(_productFacad.GetAllProductsService.Execute(currentPage , 10).Data);
+            return View();
         }
 
-        public IActionResult Creating(int productId)
+        [HttpPost]
+        public IActionResult Create(string url , IFormFile image)
         {
-            _sliderFacad.CreateSlider.Execute(productId);
+            string imageSrc = FileUploader.Upload(image, _environment, "Slider/");
+
+            _sliderFacad.CreateSlider.Execute(url , imageSrc);
             return Redirect("/Admin/Slider");
         }
 
-        public IActionResult Replace(int sliderId, int currentPage = 1)
+        [HttpGet]
+        public IActionResult Replace(int sliderId)
         {
             ViewBag.SliderId = sliderId;
-            ViewBag.CurrentRow = currentPage;
-            return View(_productFacad.GetAllProductsService.Execute(currentPage, 10).Data);
+            return View();
         }
 
-        public IActionResult Replacing(int sliderId , int productId)
+        [HttpPost]
+        public IActionResult Replace(int sliderId , string url , IFormFile image)
         {
-            _sliderFacad.ReplaceSlider.Execute(sliderId, productId);
+            string imageSrc = FileUploader.Upload(image, _environment, "Slider/");
+
+            _sliderFacad.ReplaceSlider.Execute(sliderId, url , imageSrc);
             return Redirect("/Admin/Slider");
         }
 

@@ -5,6 +5,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+<style>
+    td{
+        width:33%;
+    }
+</style>
+
 <table dir="rtl" style="text-align : right">
     <tr>
         @if (Model.Count() < 4)
@@ -16,19 +22,15 @@
     </tr>
     <tr>
         <th>تصویر</th>
-        <th>نام محصول</th>
-        <th>قیمت محصول</th>
-        <th>موجودی مححصول</th>
+        <th>آدرس محصول</th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td><img src="@item.ProductImage" class="thumbnail" style="max-height:15%;max-width:15%"/></td>
-            <td>@item.ProductName</td>
-            <td>@item.ProductPrice</td>
-            <td>@item.ProductInventory</td>
+            <td><img src="@item.ImageSrc" class="thumbnail" style="max-height:15%;max-width:15%"/></td>
+            <td>@item.Url</td>
             <td>
                 <a style="width:50%" class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/Slider/Replace?sliderId=@item.SliderId">جایگزین</a>
                 <a style="width:50%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/Slider/Delete?id=@item.SliderId">حذف</a>

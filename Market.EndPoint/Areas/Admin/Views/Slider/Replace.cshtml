@@ -1,77 +1,37 @@
-﻿@using Application.Services.Admin.Products.Queries.GetAllProducts
-@model ResultGetAllProductsDto
-@{
+﻿@{
     ViewData["Title"] = "Replace";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-    int back = ViewBag.CurrentRow - 1;
-    int forward = ViewBag.CurrentRow + 1;
 }
 
-<style>
-    th, td {
-        width: 16%;
-        text-align: right;
-    }
-</style>
-
 <div class="row">
-    <table dir="rtl" style="text-align : right">
-        <tr>
-            <th>نام</th>
-            <th>نام دسته بندی</th>
-            <th>برند</th>
-            <th>موجودی</th>
-            <th>تعداد بازدید</th>
-        </tr>
-
-        @foreach (var item in Model.Products)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.CategoryName</td>
-                <td>@item.Brand</td>
-                <td>@item.Inventory</td>
-                <td>@item.VisitNumber</td>
-                <td>
-                    <a style="width:50%" class="waves-effect waves-light btn modal-trigger blue" href="/Admin/Slider/Replacing?productId=@item.Id&sliderId=@ViewBag.SliderId">انتخاب</a>
-                </td>
-            </tr>
-        }
-    </table>
-
-    <div class="pagination">
-        <ul>
-            @if (ViewBag.CurrentRow == 1)
-            {
-                <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
-            }
-            else
-            {
-                <li class="waves-effect"><a href="/Admin/Slider/Replace?currentPage=@back&sliderId=@ViewBag.SliderId"><i class="material-icons">chevron_right</i></a></li>
-            }
-
-            @for (int i = 1; i <= Model.TotalRows; i++)
-            {
-                if (i == ViewBag.CurrentRow)
-                {
-                    <li class="active"><a href="/Admin/Slider/Replace?currentPage=@i&sliderId=@ViewBag.SliderId">@i</a></li>
-                }
-                else
-                {
-                    <li class="waves-effect"><a href="/Admin/Slider/Replace?currentPage=@i&sliderId=@ViewBag.SliderId">@i</a></li>
-                }
-            }
-
-            @if (ViewBag.CurrentRow == Model.TotalRows)
-            {
-                <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
-            }
-            else
-            {
-                <li class="waves-effect"><a href="/Admin/Slider/Replace?currentPage=@forward&sliderId=@ViewBag.SliderId"><i class="material-icons">chevron_left</i></a></li>
-            }
-
-        </ul>
-    </div> <!-- /pagination -->
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <form class="formValidate" id="formValidate" novalidate="novalidate" method="post" action="/Admin/Slider/Replace" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="url" class="">مسیر(url)*</label>
+                            <input id="url" name="url" type="url" data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                        </div>
+                        <div class="input-field col s12 file-field">
+                            <div class="btn cyan">
+                                <span>تصویر</span>
+                                <input type="file" id="image" name="image" data-error=".errorTxt2">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                            <div class="errorTxt2"></div>
+                        </div>
+                        <input type="hidden" name="sliderId" value="@ViewBag.SliderId" />
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light right submit green" type="submit" name="action">افزودن</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
