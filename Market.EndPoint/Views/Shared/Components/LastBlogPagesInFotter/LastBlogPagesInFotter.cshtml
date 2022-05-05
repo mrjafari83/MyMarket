@@ -1,0 +1,25 @@
+﻿@using Application.Services.Common.BlogPage.Queries.GetAllBlogPages
+@model GetAllBlogPagesResult
+    <!--  ==========  -->
+<!--  = News content =  -->
+<!--  ==========  -->
+<div class="row">
+    <div class="span12">
+        <div class="carouFredSel" data-nav="tweets" data-autoplay="false">
+            <div class="slide">
+                <div class="row">
+                    @foreach (var item in Model.BlogPages)
+                    {
+                        <div class="span6">
+                            <div class="news-item">
+                                <div class="published">@item.CreateDate</div>
+                                <h6><a href="/Blog?id=@item.Id">@item.Title</a></h6>
+                                <p>@item.ShortDescription</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- /news content -->

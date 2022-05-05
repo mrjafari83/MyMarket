@@ -460,3 +460,4 @@ E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Autantication\EditUserInfo.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Autantication\ResetPassword.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Autantication\MyPays.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Shared\Components\LastBlogPagesInFotter\LastBlogPagesInFotter.cshtml.g.cs

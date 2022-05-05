@@ -65,67 +65,7 @@
                             <span class="tagline">قالب فروشگاهی HTML قدرتمند</span>
                         </a>
                     </div>
-
-                    <!--  ==========  -->
-                    <!--  = Social Icons =  -->
-                    <!--  ==========  -->
-                    <div class="span5">
-                        <div class="topmost-line">
-                            <div class="lang-currency">
-                                <div class="dropdown js-selectable-dropdown">
-                                    <a data-toggle="dropdown" class="selected" href="#"><span class="js-change-text"><i class="famfamfam-flag-gb"></i> انگلیسی (EN)</span> <b class="caret"></b></a>
-                                    <!-- for all available country flags look the styles in lib/components/_flags.scss -->
-                                    <ul class="dropdown-menu js-possibilities" role="menu" aria-labelledby="dLabel">
-                                        <li><a href="#"><i class="famfamfam-flag-gb"></i> انگلیسی (EN)</a></li>
-                                        <li><a href="#"><i class="famfamfam-flag-si"></i> اسلوانیایی (SI)</a></li>
-                                        <li><a href="#"><i class="famfamfam-flag-de"></i> آلمانی (DE)</a></li>
-                                        <li><a href="#"><i class="famfamfam-flag-fr"></i> فرانسوی (FR)</a></li>
-                                        <li><a href="#"><i class="famfamfam-flag-es"></i> اسپانیولی (ES)</a></li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown js-selectable-dropdown">
-                                    <a data-toggle="dropdown" class="selected" href="#"><span class="js-change-text">USD ($)</span> <b class="caret"></b></a>
-                                    <ul class="dropdown-menu js-possibilities" role="menu" aria-labelledby="dLabel">
-                                        <li><a href="#">USD ($)</a></li>
-                                        <li><a href="#">EUR (€)</a></li>
-                                        <li><a href="#">YEN (¥)</a></li>
-                                        <li><a href="#">GBP (£)</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="top-right">
-                            <div class="icons">
-                                <a href="http://www.facebook.com/ProteusNet"><span class="zocial-facebook"></span></a>
-                                <a href="skype:primozcigler?call"><span class="zocial-skype"></span></a>
-                                <a href="https://twitter.com/proteusnetcom"><span class="zocial-twitter"></span></a>
-                                <a href="http://eepurl.com/xFPYD"><span class="zocial-rss"></span></a>
-                                <a href="#"><span class="zocial-wordpress"></span></a>
-                                <a href="#"><span class="zocial-android"></span></a>
-                                <a href="#"><span class="zocial-html5"></span></a>
-                                <a href="#"><span class="zocial-windows"></span></a>
-                                <a href="#"><span class="zocial-apple"></span></a>
-                            </div>
-                            <div class="register">
-                                @{
-                                    var routeUrl = Url.RouteUrl(ViewContext.RouteData.Values);
-                                    var qsPath = ViewContext.HttpContext.Request.QueryString.Value;
-                                    string returnUrl = $"{routeUrl}{qsPath}";
-                                }
-                                @if (SignInManager.IsSignedIn(User))
-                                {
-                                    <a href="/Dashboard" role="button" data-toggle="modal">داشبورد</a><span>یا</span>
-                                    <a href="/Logout?returnUrl=@returnUrl">خروج</a>
-                                }
-                                else
-                                {
-                                    <a href="/Login?returnUrl=@returnUrl" role="button" data-toggle="modal">ورود</a><span>یا</span>
-                                    <a href="/Register?returnUrl=@returnUrl" role="button" data-toggle="modal">ثبت نام</a>
-                                }
-                            </div>
-                        </div>
-                    </div> <!-- /social icons -->
-                </div>
+                </div> <!-- /social icons -->
             </div>
         </header>
 
@@ -152,8 +92,32 @@
                                     @await Component.InvokeAsync("CategoriesInMenu", new { categoryType = Common.Enums.Enums.CategoryType.Product })
                                     @await Component.InvokeAsync("CategoriesInMenu", new { categoryType = Common.Enums.Enums.CategoryType.BlogPage })
 
-                                    <li><a href="about-us.html">درباره ما</a></li>
                                     <li><a href="contact.html">تماس با ما</a></li>
+
+                                    @{
+                                        var routeUrl = Url.RouteUrl(ViewContext.RouteData.Values);
+                                        var qsPath = ViewContext.HttpContext.Request.QueryString.Value;
+                                        string returnUrl = $"{routeUrl}{qsPath}";
+                                    }
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        <li>
+                                            <a href="/Dashboard" role="button" data-toggle="modal">داشبورد</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Logout?returnUrl=@returnUrl">خروج</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="/Login?returnUrl=@returnUrl" role="button" data-toggle="modal">ورود</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Register?returnUrl=@returnUrl" role="button" data-toggle="modal">ثبت نام</a>
+                                        </li>
+
+                                    }
                                 </ul>
 
                                 <!--  ==========  -->
@@ -185,38 +149,27 @@
         @RenderBody()
         <!--  = Brands Carousel =  -->
         <!--  ==========  -->
-        <div class="container blocks-spacer-last">
+        <!--  ==========  -->
+        <!--  = Lastest News =  -->
+        <!--  ==========  -->
+        <div class="darker-stripe blocks-spacer more-space latest-news with-shadows">
+            <div class="container">
 
-            <!--  ==========  -->
-            <!--  = Title =  -->
-            <!--  ==========  -->
-            <div class="row">
-                <div class="span12">
-                    <div class="main-titles lined">
-                        <h2 class="title"><span class="light">برند های</span> ما</h2>
-                        <div class="arrows">
-                            <a href="#" class="icon-chevron-right" id="brandsRight"></a>
-                            <a href="#" class="icon-chevron-left" id="brandsLeft"></a>
+                <!--  ==========  -->
+                <!--  = Title =  -->
+                <!--  ==========  -->
+                <div class="row">
+                    <div class="span12">
+                        <div class="main-titles center-align">
+                            <h2 class="title">
+                                <span class="light">آخرین</span> خبر ها &nbsp;&nbsp;&nbsp;
+                            </h2>
                         </div>
                     </div>
-                </div>
-            </div> <!-- /title -->
-            <!--  ==========  -->
-            <!--  = Logos =  -->
-            <!--  ==========  -->
-            <div class="row">
-                <div class="span12">
-                    <div class="brands carouFredSel" data-nav="brands" data-autoplay="true">
-                        <img src="/Market/images/dummy/brands/brands_01.jpg" alt="" width="203" height="104" />
-                        <img src="/Market/images/dummy/brands/brands_02.jpg" alt="" width="203" height="104" />
-                        <img src="/Market/images/dummy/brands/brands_03.jpg" alt="" width="203" height="104" />
-                        <img src="/Market/images/dummy/brands/brands_04.jpg" alt="" width="203" height="104" />
-                        <img src="/Market/images/dummy/brands/brands_05.jpg" alt="" width="203" height="104" />
-                        <img src="/Market/images/dummy/brands/brands_06.jpg" alt="" width="203" height="104" />
-                    </div>
-                </div>
-            </div> <!-- /logos -->
-        </div> <!-- /brands carousel -->
+                </div> <!-- /title -->
+                @await Component.InvokeAsync("LastBlogPagesInFotter")
+            </div>
+        </div> <!-- /latest news -->
         <!--  ==========  -->
         <!--  = Footer =  -->
         <!--  ==========  -->
@@ -436,7 +389,7 @@
             $(".btnDeleteProductFromCart").click(function (e) {
                 var productInCartId = this.getAttribute("productInCartId");
 
-                $.post("/DeleteProductFromCart", { productInCartId: productInCartId},
+                $.post("/DeleteProductFromCart", { productInCartId: productInCartId },
                     function (data, textStatus, jqXHR) {
                         location.reload();
                     },
