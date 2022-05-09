@@ -1,0 +1,16 @@
+﻿@using Application.Services.Common.Category.Queries.GetAllCategories
+@using Common.Enums
+@model List<GetAllCategoriesDto>
+
+@if (ViewBag.CategoryType == Enums.CategoryType.Product)
+    foreach (var item in Model)
+    {
+        <li><a href="/Products?categoryId=@item.Id">@item.Name</a></li>
+    }
+else
+{
+    foreach (var item in Model)
+    {
+        <li><a href="/Blogs?categoryId=@item.Id">@item.Name</a></li>
+    }
+}

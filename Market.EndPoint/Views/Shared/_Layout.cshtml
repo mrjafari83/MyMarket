@@ -11,7 +11,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>Webmarket HTML Template - Home Page</title>
+    <title>فروشگاه من</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ProteusThemes">
@@ -61,8 +61,7 @@
                     <div class="span7">
                         <a class="brand" href="index.html">
                             <img src="/Market/images/logo.png" alt="Webmarket Logo" width="48" height="48" />
-                            <span class="pacifico">Webmarket</span>
-                            <span class="tagline">قالب فروشگاهی HTML قدرتمند</span>
+                            <span class="pacifico">فروشگاه من</span>
                         </a>
                     </div>
                 </div> <!-- /social icons -->
@@ -181,25 +180,15 @@
             <div class="foot-light">
                 <div class="container">
                     <div class="row">
-                        <div class="span4">
-                            <h2 class="pacifico">Webmarket &nbsp; <img src="/Market/images/webmarket.png" alt="Webmarket Cart" class="align-baseline" /></h2>
-                            <p>این یک نوشته آزمایشی است. شما میتوانید این قسمت را با نوشته های دلخواه خود که مناسب این ناحیه باشند پر نمایید. ما این بخش را با نوشته هایی بی معنی پر کرده ایم.</p>
+                        <div class="span6">
+                            <h2 class="pacifico">فروشگاه من &nbsp; <img src="/Market/images/webmarket.png" alt="Webmarket Cart" class="align-baseline" /></h2>
+                            <p>این وبسیات صرفا یک وبسایت آزمایشی بوده و یک پروژه تجاری نیست.</p>
                         </div>
-                        <div class="span4">
-                            <div class="main-titles lined">
-                                <h3 class="title">فیسبوک</h3>
-                            </div>
-                            <div class="bordered">
-                                <div class="fill-iframe">
-                                    <div class="fb-like-box" data-href="https://www.facebook.com/ProteusNet" data-width="292" data-height="200" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span4">
+                        <div class="span6">
                             <div class="main-titles lined">
                                 <h3 class="title"><span class="light">عضویت</span> در خبرنامه</h3>
                             </div>
-                            <p>این بخشی از یک نوشتار آزمایشی صرفا برای پر کردن این ناحیه است.</p>
+                            <p>برای اطلاع از آخرین اخبار ایمیل خود را وارد کنید.</p>
                             <!-- Begin MailChimp Signup Form -->
                             <div id="mc_embed_signup">
                                 <form action="http://proteusthemes.us4.list-manage1.com/subscribe/post?u=ea0786485977f5ec8c9283d5c&amp;id=5dad3f35e9" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form form-inline" target="_blank" novalidate>
@@ -229,16 +218,14 @@
                         <!--  ==========  -->
                         <!--  = Menu 1 =  -->
                         <!--  ==========  -->
-                        <div class="span3">
+                        <div class="span4">
                             <div class="main-titles lined">
-                                <h3 class="title"><span class="light">ناوبری</span> اصلی</h3>
+                                <h3 class="title">اصلی</h3>
                             </div>
                             <ul class="nav bold">
-                                <li><a href="#">خانه</a></li>
-                                <li><a href="#">صفحات</a></li>
-                                <li><a href="#">درباره ما</a></li>
-                                <li><a href="#">کد های میانبر</a></li>
-                                <li><a href="#">گالری</a></li>
+                                <li><a href="/">خانه</a></li>
+                                <li><a href="/Products">محصولات</a></li>
+                                <li><a href="Blogs">وبلاگ</a></li>
                                 <li><a href="#">تماس با ما</a></li>
                             </ul>
                         </div>
@@ -246,56 +233,26 @@
                         <!--  ==========  -->
                         <!--  = Menu 2 =  -->
                         <!--  ==========  -->
-                        <div class="span3">
+                        <div class="span4">
                             <div class="main-titles lined">
-                                <h3 class="title"><span class="light">دومین</span> ناوبری</h3>
+                                <h3 class="title">محصولات</h3>
                             </div>
                             <ul class="nav">
-                                <li><a href="#">پیوند نوشتار آزمایشی</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                                <li><a href="#">برند ها</a></li>
-                                <li><a href="#">مشاهده آخرین توییت ها</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
+                                @await Component.InvokeAsync("CategoriesInFootter" , new { categoryType = Common.Enums.Enums.CategoryType.Product })
                             </ul>
                         </div>
 
                         <!--  ==========  -->
                         <!--  = Menu 3 =  -->
                         <!--  ==========  -->
-                        <div class="span3">
+                        <div class="span4">
                             <div class="main-titles lined">
-                                <h3 class="title"><span class="light">سومین</span> ناوبری</h3>
+                                <h3 class="title">وبلاگ</h3>
                             </div>
                             <ul class="nav">
-                                <li><a href="#">پیوند نوشتار آزمایشی</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                                <li><a href="#">برند ها</a></li>
-                                <li><a href="#">مشاهده آخرین توییت ها</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
+                                @await Component.InvokeAsync("CategoriesInFootter", new { categoryType = Common.Enums.Enums.CategoryType.BlogPage })
                             </ul>
                         </div>
-
-                        <!--  ==========  -->
-                        <!--  = Menu 4 =  -->
-                        <!--  ==========  -->
-                        <div class="span3">
-                            <div class="main-titles lined">
-                                <h3 class="title"><span class="light">چهارمین</span> ناوبری</h3>
-                            </div>
-                            <ul class="nav">
-                                <li><a href="#">پیوند نوشتار آزمایشی</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                                <li><a href="#">برند ها</a></li>
-                                <li><a href="#">مشاهده آخرین توییت ها</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cpContainter">
-                    <div class="mcopyright">
-                        <div class="inside">فارسی سازی و ویرایش توسط <a href="http://20script.ir" target="_blank" title="بیست اسکریپت">20script.ir</a></div>
                     </div>
                 </div>
 
@@ -310,10 +267,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="span6">
-                            &copy; Copyright 2013. Images of products by <a target="_blank" href="http://www.20script.ir/">محصول ویژه</a>.
-                        </div>
-                        <div class="span6">
-                            <div class="pull-right">قالب HTML وبمارکت توسط<a href="http://www.20script.ir/">بیست اسکریپت</a></div>
+                            تمامی حقوق محفوظ است.
                         </div>
                     </div>
                 </div>
@@ -380,6 +334,7 @@
 
     <!--  = Custom JS =  -->
     <script src="/Market/js/custom.js" type="text/javascript"></script>
+
     <script src="~/js/jQuery.Validation.1.11.1/Content/Scripts/jquery.validate.js"></script>
     <script src="~/js/Microsoft.jQuery.Unobtrusive.Validation.3.2.3/Content/Scripts/jquery.validate.unobtrusive.js"></script>
     @RenderSection("scripts", false)
