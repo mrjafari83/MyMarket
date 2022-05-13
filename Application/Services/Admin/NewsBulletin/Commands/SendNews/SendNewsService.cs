@@ -11,25 +11,19 @@ namespace Application.Services.Admin.NewsBulletin.Commands.SendNews
             db = context;
         }
 
-        public ResultDto Execute(string subject, string text, string imageSrc)
+        public ResultDto Execute(string subject, string text)
         {
-            var result = db.News.Add(new Domain.Entities.NewsBulletin.News
+            db.News.Add(new Domain.Entities.NewsBulletin.News
             {
                 Subject = subject,
                 Text = text,
-                ImageSrc = imageSrc
-            }).State;
+            });
+            db.SaveChanges();
 
-            if (result == Microsoft.EntityFrameworkCore.EntityState.Unchanged)
-                return new ResultDto
-                {
-                    IsSuccess = true,
-                    Message = "این خبر به ایمیل ها ارسال شد."
-                };
             return new ResultDto
             {
-                IsSuccess = false,
-                Message = "خطایی رخ داده است."
+                IsSuccess = true,
+                Message = "این خبر به ایمیل ها ارسال شد."
             };
         }
     }

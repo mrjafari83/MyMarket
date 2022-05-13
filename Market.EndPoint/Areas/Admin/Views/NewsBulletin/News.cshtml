@@ -1,0 +1,38 @@
+﻿@using Application.Services.Admin.NewsBulletin.Queries.GetAllNews
+@model GetNewsDto
+@{
+    ViewData["Title"] = "News";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>خبر ها</h3>
+<table dir="rtl" style="text-align:right">
+    <thead>
+        <tr>
+            <th>
+                <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/NewsBulletin/SendNews">ارسال ایمیل جدید</a>
+            </th>
+        </tr>
+        <tr>
+            <th>تصویر</th>
+            <th>عنوان</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+            foreach (var item in Model.News)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.ImageSrc" alt="تصویر" class="thumbnail" style="width:100%" />
+                    </td>
+                    <td>@item.Subject</td>
+                    <td>
+                        <a class="waves-effect waves-light btn modal-trigger blue" href="">مشاهده</a>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+

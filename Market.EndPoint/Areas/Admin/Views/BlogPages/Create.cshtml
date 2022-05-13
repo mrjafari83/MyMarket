@@ -114,15 +114,6 @@
             $('#text').ckeditor();
         });
 
-        function textFieldValidator(inputId , errLocation , message , errStatus , jumpTo)
-        {
-            if ($("#" + inputId).val() == "") {
-                $("#" + errLocation).text(message);
-                errStatus = true;
-                jumpTo = "#" + inputId;
-            }
-        }
-
         $("#formValidate").validate({
             rules: {
                 categoryId: {

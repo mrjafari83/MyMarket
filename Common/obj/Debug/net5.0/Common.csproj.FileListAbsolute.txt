@@ -39,7 +39,6 @@ E:\asp.net projects\MyMarket\Common\bin\Debug\net5.0\System.Web.WebPages.Razor.x
 E:\asp.net projects\MyMarket\Common\bin\Debug\net5.0\System.Web.WebPages.xml
 E:\asp.net projects\MyMarket\Common\bin\Debug\net5.0\Microsoft.Web.Infrastructure.xml
 E:\asp.net projects\MyMarket\Common\bin\Debug\net5.0\System.Web.WebPages.Deployment.xml
-E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.csproj.AssemblyReference.cache
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.GeneratedMSBuildEditorConfig.editorconfig
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.AssemblyInfoInputs.cache
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.AssemblyInfo.cs
@@ -48,3 +47,4 @@ E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.csproj.CopyComplete
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.dll
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\ref\Common.dll
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.pdb
+E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.csproj.AssemblyReference.cache

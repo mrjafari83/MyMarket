@@ -9,6 +9,6 @@ namespace Application.Services.Admin.NewsBulletin.Commands.SendNews
 {
     public interface ISendNewsService
     {
-        ResultDto Execute(string subject, string text, string imageSrc);
+        ResultDto Execute(string subject, string text);
     }
 }
