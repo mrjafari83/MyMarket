@@ -19,6 +19,7 @@ using Domain.Entities.Cart;
 using Domain.Entities.User;
 using Common.Classes;
 using Domain.Entities.NewsBulletin;
+using Domain.Entities.Message;
 
 namespace Persistance.Context
 {
@@ -49,6 +50,7 @@ namespace Persistance.Context
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public DbSet<Email> Emails { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<CriticismMessage> CriticismMessages { get; set; }
 
         //relation tables
         public DbSet<ColorInProduct> ColorsInProducts { get; set; }

@@ -114,12 +114,14 @@ namespace Market.EndPoint
             services.AddScoped<ICartPayingFacad, CartPayingsFacad>();
             services.AddScoped<ICommentFacad, CommentFacad>();
             services.AddScoped<INewsBulletinFacad, NewsBulletinFacad>();
+            services.AddScoped<IMessageFacad, MessageFacad>();
         }
 
         private void ClientInjections(IServiceCollection services)
         {
             services.AddScoped<IClientBlogPageFacad, ClientBlogPagesFacad>();
             services.AddScoped<IClientCartFacad, ClientCartFacad>();
+            services.AddScoped<IClientMessageFacad, ClientMessageFacad>();
         }
 
         private void CommonInjection(IServiceCollection services)

@@ -17,6 +17,7 @@ using Domain.Entities.Option;
 using Domain.Entities.Cart;
 using Domain.Entities.User;
 using Domain.Entities.NewsBulletin;
+using Domain.Entities.Message;
 
 namespace Application.Interfaces.Context
 {
@@ -41,6 +42,7 @@ namespace Application.Interfaces.Context
         DbSet<ApplicationUser> ApplicationUsers { get; set; }
         DbSet<Email> Emails { get; set; }
         DbSet<News> News { get; set; }
+        DbSet<CriticismMessage> CriticismMessages { get; set; }
 
         //relation tables
         DbSet<ColorInProduct> ColorsInProducts { get; set; }

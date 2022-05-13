@@ -395,6 +395,30 @@ namespace Persistance.Migrations
                     b.ToTable("ProductKeywords");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Message.CriticismMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CriticismMessages");
+                });
+
             modelBuilder.Entity("Domain.Entities.NewsBulletin.Email", b =>
                 {
                     b.Property<int>("Id")
@@ -416,9 +440,6 @@ namespace Persistance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ImageSrc")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
@@ -680,21 +701,21 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = "Customer",
-                            ConcurrencyStamp = "2c19a2f5-bced-4995-a0b6-292cebba3d15",
+                            ConcurrencyStamp = "7c0e6be0-ce39-40b2-b334-0848d7a0c717",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "Admin",
-                            ConcurrencyStamp = "59245068-2e62-4124-bb74-3a8c2685ace1",
+                            ConcurrencyStamp = "f9789ca0-07bf-492b-a4ca-6a0c83a992d4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "Owner",
-                            ConcurrencyStamp = "4155a45d-1cc9-4c49-a8e4-99c07fcd9925",
+                            ConcurrencyStamp = "cf5a2101-1516-46dc-955a-a0f2bd2dd6be",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
