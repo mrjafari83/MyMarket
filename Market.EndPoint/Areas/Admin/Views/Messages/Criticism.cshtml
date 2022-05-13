@@ -1,0 +1,74 @@
+﻿@using Application.Services.Admin.Message.Queries.GetAllCriticismMessages
+@model GetAllCriticsmMessagesDto
+@{
+    ViewData["Title"] = "Criticism";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int back = ViewBag.CurrentRow - 1;
+    int forward = ViewBag.CurrentRow + 1;
+}
+
+<style>
+    td, td {
+        width: auto;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>نام</th>
+            <th>ایمیل</th>
+            <th>وبسایت</th>
+            <th>پیام</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+            foreach (var item in Model.Messages)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Website</td>
+                    <td>@item.Message</td>
+                </tr>
+            }
+    </tbody>
+
+</table>
+
+<div class="pagination">
+    <ul>
+        @if (ViewBag.CurrentRow == 1)
+        {
+            <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
+        }
+        else
+        {
+            <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
+        }
+
+        @for (int i = 1; i <= Model.TotalRows; i++)
+        {
+            if (i == ViewBag.CurrentRow)
+            {
+                <li class="active"><a href="/Admin/Messages/Criticism?currentPage=@i">@i</a></li>
+            }
+            else
+            {
+                <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@i">@i</a></li>
+            }
+        }
+
+        @if (ViewBag.CurrentRow == Model.TotalRows)
+        {
+            <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+        }
+        else
+        {
+            <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@forward"><i class="material-icons">chevron_left</i></a></li>
+        }
+
+    </ul>
+</div>
+

@@ -65,22 +65,22 @@
 
                     <h3 class="push-down-25"><span class="light">ارسال</span> پیام</h3>
 
-                    <form id="commentform" method="post" action="#" class="form form-inline form-contact">
+                    <form id="commentform" method="post" action="/SendCriticism" class="form form-inline form-contact">
                         <p class="push-down-20">
-                            <input type="text" aria-required="true" tabindex="1" size="30" value="" id="author" name="author" required="">
+                            <input type="text" aria-required="true" tabindex="1" size="30" id="author" name="Name" required="">
                             <label for="author">نام<span class="red-clr bold">*</span></label>
                         </p>
                         <p class="push-down-20">
-                            <input type="email" aria-required="true" tabindex="2" size="30" value="" id="email" name="email" required="">
+                            <input type="email" aria-required="true" tabindex="2" size="30" id="email" name="Email">
                             <label for="email">ایمیل<span class="red-clr bold">*</span></label>
                         </p>
                         <p class="push-down-20">
-                            <input type="text" tabindex="3" size="30" value="" id="url" name="url">
+                            <input type="text" tabindex="3" size="30" id="url" name="Website">
                             <label for="url">وبسایت</label>
                         </p>
 
                         <p class="push-down-20">
-                            <textarea class="input-block-level" tabindex="4" rows="7" cols="70" id="comment" name="comment" placeholder="پیامتان را در اینجا بنویسید ..." required=""></textarea>
+                            <textarea class="input-block-level" tabindex="4" rows="7" cols="70" id="comment" name="Message" placeholder="پیامتان را در اینجا بنویسید ..." required=""></textarea>
                         </p>
                         <p>
                             <button class="btn btn-primary bold" type="submit" tabindex="5" id="submit">ارسال پیام</button>
