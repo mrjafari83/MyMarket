@@ -18,16 +18,6 @@
                             <textarea id="text" name="text" data-error=".errorTxt3"></textarea>
                             <div class="errorTxt3"></div>
                         </div>
-                        <div class="input-field col s12 file-field">
-                            <div class="btn cyan">
-                                <span>تصویر</span>
-                                <input type="file" id="image" name="image" data-error=".errorTxt4">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                            <div class="errorTxt4"></div>
-                        </div>
 
                         <div class="input-field col s12">
                             <button class="btn waves-effect waves-light right submit green" type="submit" name="action">ارسال</button>
@@ -84,7 +74,6 @@
                 var formdata = new FormData();
                 formdata.append("subject", $("#subject").val());
                 formdata.append("text", $("#text").val());
-                formdata.append("image", document.getElementById("image").files[0]);
 
                 $.ajax({
                     type: "POST",

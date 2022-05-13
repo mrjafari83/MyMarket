@@ -21,7 +21,6 @@ namespace Application.Services.Admin.NewsBulletin.Queries.GetAllNews
             {
                 Subject = n.Subject,
                 Text = n.Text,
-                ImageSrc = n.ImageSrc
             }).ToPaged(out totalRow, pageNumber, pageSize).ToList();
 
             if (news.Count() != 0)

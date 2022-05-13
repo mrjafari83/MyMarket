@@ -49,5 +49,18 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
             return Json(true);
         }
+
+        [HttpGet]
+        public IActionResult AddEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddEmail(string email)
+        {
+            _newsBulletinFacad.AddEmail.Execute(email);
+            return Redirect("/Admin/NewsBulletin/News");
+        }
     }
 }

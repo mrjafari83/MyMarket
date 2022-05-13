@@ -11,6 +11,7 @@
         <tr>
             <th>
                 <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/NewsBulletin/SendNews">ارسال ایمیل جدید</a>
+                <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" id="btnCreateNewCategory">افزودن ایمیل جدید</a>
             </th>
         </tr>
         <tr>
@@ -24,9 +25,6 @@
             foreach (var item in Model.News)
             {
                 <tr>
-                    <td>
-                        <img src="@item.ImageSrc" alt="تصویر" class="thumbnail" style="width:100%" />
-                    </td>
                     <td>@item.Subject</td>
                     <td>
                         <a class="waves-effect waves-light btn modal-trigger blue" href="">مشاهده</a>
@@ -36,3 +34,25 @@
     </tbody>
 </table>
 
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 id="title">Modal Header</h4>
+        <p id="body">A bunch of text</p>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $("#btnCreateNewCategory").click(function () {
+
+            $.get("/Admin/NewsBulletin/AddEmail", function (result) {
+
+                $("#title").html("افزودن  ایمیل جدید");
+                $("#body").html(result)
+            });
+
+        });
+    </script>
+}

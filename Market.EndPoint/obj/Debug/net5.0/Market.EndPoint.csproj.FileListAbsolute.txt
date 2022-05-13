@@ -464,3 +464,4 @@ E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Shared
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Home\ContactUs.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\NewsBulletin\SendNews.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\NewsBulletin\News.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\NewsBulletin\AddEmail.cshtml.g.cs
