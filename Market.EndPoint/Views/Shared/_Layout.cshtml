@@ -43,7 +43,6 @@
     <link rel="shortcut icon" href="/Market/images/apple-touch/57.png">
 </head>
 
-
 <body class="">
 
     <div class="master-wrapper">
@@ -91,7 +90,7 @@
                                     @await Component.InvokeAsync("CategoriesInMenu", new { categoryType = Common.Enums.Enums.CategoryType.Product })
                                     @await Component.InvokeAsync("CategoriesInMenu", new { categoryType = Common.Enums.Enums.CategoryType.BlogPage })
 
-                                    <li><a href="contact.html">تماس با ما</a></li>
+                                    <li><a href="/ContactUs">تماس با ما</a></li>
 
                                     @{
                                         var routeUrl = Url.RouteUrl(ViewContext.RouteData.Values);
@@ -226,7 +225,7 @@
                                 <li><a href="/">خانه</a></li>
                                 <li><a href="/Products">محصولات</a></li>
                                 <li><a href="Blogs">وبلاگ</a></li>
-                                <li><a href="#">تماس با ما</a></li>
+                                <li><a href="/ContactUs">تماس با ما</a></li>
                             </ul>
                         </div>
 

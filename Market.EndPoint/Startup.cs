@@ -113,6 +113,7 @@ namespace Market.EndPoint
             services.AddScoped<ISliderFacad, SliderFacad>();
             services.AddScoped<ICartPayingFacad, CartPayingsFacad>();
             services.AddScoped<ICommentFacad, CommentFacad>();
+            services.AddScoped<INewsBulletinFacad, NewsBulletinFacad>();
         }
 
         private void ClientInjections(IServiceCollection services)

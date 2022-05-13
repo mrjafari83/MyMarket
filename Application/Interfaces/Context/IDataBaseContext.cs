@@ -16,6 +16,7 @@ using Domain.Entities.BlogPages;
 using Domain.Entities.Option;
 using Domain.Entities.Cart;
 using Domain.Entities.User;
+using Domain.Entities.NewsBulletin;
 
 namespace Application.Interfaces.Context
 {
@@ -38,6 +39,8 @@ namespace Application.Interfaces.Context
         DbSet<ProductInCart> ProductsInCart { get; set; }
         DbSet<CartPayingInfo> CartPayings { get; set; }
         DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        DbSet<Email> Emails { get; set; }
+        DbSet<News> News { get; set; }
 
         //relation tables
         DbSet<ColorInProduct> ColorsInProducts { get; set; }

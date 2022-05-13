@@ -22,5 +22,11 @@ namespace Market.EndPoint.Controllers
         {
             return View();
         }
+
+        [Route("ContactUs")]
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
     }
 }

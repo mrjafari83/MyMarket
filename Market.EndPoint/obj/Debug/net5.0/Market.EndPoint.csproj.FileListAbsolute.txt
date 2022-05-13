@@ -405,7 +405,6 @@ E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Blog\S
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Cart\CartReview.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Cart\SetAddress.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Product\Index.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Product\ShowProduct.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Shared\Components\Cart\Cart.cshtml.g.cs
@@ -462,3 +461,4 @@ E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Autantication\MyPays.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Shared\Components\LastBlogPagesInFotter\LastBlogPagesInFotter.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Shared\Components\CategoriesInFootter\CategoriesInFootter.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Views\Home\ContactUs.cshtml.g.cs

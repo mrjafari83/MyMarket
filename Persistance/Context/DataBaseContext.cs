@@ -18,6 +18,7 @@ using Domain.Entities.Option;
 using Domain.Entities.Cart;
 using Domain.Entities.User;
 using Common.Classes;
+using Domain.Entities.NewsBulletin;
 
 namespace Persistance.Context
 {
@@ -46,6 +47,8 @@ namespace Persistance.Context
         public DbSet<CartPayingInfo> CartPayings { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public DbSet<Email> Emails { get; set; }
+        public DbSet<News> News { get; set; }
 
         //relation tables
         public DbSet<ColorInProduct> ColorsInProducts { get; set; }

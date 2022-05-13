@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewData["Title"] = "ContactUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="darker-stripe">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="index.html">فروشگاه من</a>
+                    </li>
+                    <li><span class="icon-chevron-right"></span></li>
+                    <li>
+                        <a href="contact.html">ارتباط با ما</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="push-up top-equal blocks-spacer-last">
+        <div class="row">
+
+            <!--  ==========  -->
+            <!--  = Main Title =  -->
+            <!--  ==========  -->
+
+            <div class="span12">
+                <div class="title-area">
+                    <h1 class="inline"><span class="light">با من</span> ارتباط برقرار کنید.</h1>
+                </div>
+            </div>
+
+            <!--  ==========  -->
+            <!--  = Main content =  -->
+            <!--  ==========  -->
+            <section class="span8 single single-page">
+
+                <!--  ==========  -->
+                <!--  = Post =  -->
+                <!--  ==========  -->
+                <article class="post">
+                    <div class="post-inner">
+                        <p>
+                            <ul>
+                                <li style="margin:1%">محمد جعفری</li>
+                                <li style="margin:1%">09374239707</li>
+                                <li style="margin:1%">mr.m.jafari.83@gmail.com</li>
+                            </ul>
+                        </p>
+                    </div>
+                </article>
+
+                <hr>
+
+                <!--  ==========  -->
+                <!--  = Contact Form =  -->
+                <!--  ==========  -->
+                <section class="contact-form-container">
+
+                    <h3 class="push-down-25"><span class="light">ارسال</span> پیام</h3>
+
+                    <form id="commentform" method="post" action="#" class="form form-inline form-contact">
+                        <p class="push-down-20">
+                            <input type="text" aria-required="true" tabindex="1" size="30" value="" id="author" name="author" required="">
+                            <label for="author">نام<span class="red-clr bold">*</span></label>
+                        </p>
+                        <p class="push-down-20">
+                            <input type="email" aria-required="true" tabindex="2" size="30" value="" id="email" name="email" required="">
+                            <label for="email">ایمیل<span class="red-clr bold">*</span></label>
+                        </p>
+                        <p class="push-down-20">
+                            <input type="text" tabindex="3" size="30" value="" id="url" name="url">
+                            <label for="url">وبسایت</label>
+                        </p>
+
+                        <p class="push-down-20">
+                            <textarea class="input-block-level" tabindex="4" rows="7" cols="70" id="comment" name="comment" placeholder="پیامتان را در اینجا بنویسید ..." required=""></textarea>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary bold" type="submit" tabindex="5" id="submit">ارسال پیام</button>
+                        </p>
+                    </form>
+                </section>
+
+                <hr>
+
+            </section> <!-- /main content -->
+            <!--  ==========  -->
+            <!--  = Sidebar =  -->
+            <!--  ==========  -->
+            <aside class="span4">
+
+                <!--  ==========  -->
+                <!--  = Opening Times Widget =  -->
+                <!--  ==========  -->
+                <div class="sidebar-item opening-time" id="opening_time-4">
+                    <div class="underlined">
+                        <h3><span class="light">ساعات</span> کاری</h3>
+                    </div>
+                    <div class="time-table">
+                        <dl class="week-day">
+                            <dt>
+                                شنبه
+                            </dt>
+                            <dd>
+                                9:00 - 20:00
+                            </dd>
+                        </dl>
+                        <dl class="week-day light-bg">
+                            <dt>
+                                یکشنبه
+                            </dt>
+                            <dd>
+                                9:00 - 20:00
+                            </dd>
+                        </dl>
+                        <dl class="week-day">
+                            <dt>
+                                دوشنبه
+                            </dt>
+                            <dd>
+                                9:00 - 20:00
+                            </dd>
+                        </dl>
+                        <dl class="week-day light-bg today">
+                            <dt>
+                                سه شنبه
+                            </dt>
+                            <dd>
+                                9:00 - 20:00
+                            </dd>
+                        </dl>
+                        <dl class="week-day">
+                            <dt>
+                                چهارشنبه
+                            </dt>
+                            <dd>
+                                9:00 - 20:00
+                            </dd>
+                        </dl>
+                        <dl class="week-day light-bg">
+                            <dt>
+                                پنج شنبه
+                            </dt>
+                            <dd>
+                                9:00 - 20:00
+                            </dd>
+                        </dl>
+                        <dl class="week-day closed">
+                            <dt>
+                                جمعه
+                            </dt>
+                            <dd>
+                                تعطیل
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <!--  ==========  -->
+                <!--  = Twitter Widget =  -->
+                <!--  ==========  -->
+                <div class="sidebar-item widget_twitter">
+                    <div class="underlined">
+                        <h3>فضای مجازی</h3>
+                    </div>
+                    <a href="">اینستاگرام</a><br />
+                    <a href="">لینکدین</a><br />
+                    <a href="">گیت هاب</a><br />
+
+                </div>
+
+
+            </aside> <!-- /sidebar -->
+
+        </div>
+    </div>
+</div>
