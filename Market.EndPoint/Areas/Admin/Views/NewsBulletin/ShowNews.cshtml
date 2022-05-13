@@ -1,0 +1,15 @@
+﻿@using Common.ViewModels;
+@model NewsViewModel 
+@{
+    ViewData["Title"] = "ShowNews";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="margin:2%">
+    <h3>@Model.Subject</h3>
+    <hr />
+    <div>
+        @Html.Raw(Model.Text)
+    </div>
+</div>
+

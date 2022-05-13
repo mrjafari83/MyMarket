@@ -9,6 +9,7 @@ using Application.Services.Admin.NewsBulletin.Commands.AddEmail;
 using Application.Services.Admin.NewsBulletin.Commands.SendNews;
 using Application.Services.Admin.NewsBulletin.Queries.GetAllEmails;
 using Application.Services.Admin.NewsBulletin.Queries.GetAllNews;
+using Application.Services.Admin.NewsBulletin.Queries.GetNewsById;
 
 namespace Application.FacadPatterns.Admin
 {
@@ -53,6 +54,15 @@ namespace Application.FacadPatterns.Admin
             get
             {
                 return _getNewsService ?? new GetNewsService(db);
+            }
+        }
+
+        private GetNewsByIdService _getNewsByIdService;
+        public IGetNewsByIdService GetNewsById
+        {
+            get
+            {
+                return _getNewsByIdService ?? new GetNewsByIdService(db);
             }
         }
     }

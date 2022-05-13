@@ -1,0 +1,87 @@
+﻿@using Application.Services.Admin.NewsBulletin.Queries.GetAllEmails
+@model GetEmailsDto 
+@{
+    ViewData["Title"] = "Emails";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int back = ViewBag.CurrentRow - 1;
+    int forward = ViewBag.CurrentRow + 1;
+}
+
+<h3>ایمیل ها</h3>
+<table dir="rtl" style="text-align:right">
+    <thead>
+        <tr>
+            <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" id="btnCreateNewCategory">افزودن ایمیل جدید</a>
+        </tr>
+        <tr>
+            <th>آدرس ایمیل</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+            foreach (var item in Model.Emails)
+            {
+                <tr>
+                    <td>@item</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+<div class="pagination">
+    <ul>
+        @if (ViewBag.CurrentRow == 1)
+        {
+            <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
+        }
+        else
+        {
+            <li class="waves-effect"><a href="/Admin/NewsBulletin/Emails?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
+        }
+
+        @for (int i = 1; i <= Model.TotalRow; i++)
+        {
+            if (i == ViewBag.CurrentRow)
+            {
+                <li class="active"><a href="/Admin/NewsBulletin/Emails?currentPage=@i">@i</a></li>
+            }
+            else
+            {
+                <li class="waves-effect"><a href="/Admin/NewsBulletin/Emails?currentPage=@i">@i</a></li>
+            }
+        }
+
+        @if (ViewBag.CurrentRow == Model.TotalRow)
+        {
+            <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+        }
+        else
+        {
+            <li class="waves-effect"><a href="/Admin/NewsBulletin/Emails?currentPage=@forward"><i class="material-icons">chevron_left</i></a></li>
+        }
+
+    </ul>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 id="title">Modal Header</h4>
+        <p id="body">A bunch of text</p>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $("#btnCreateNewCategory").click(function () {
+
+            $.get("/Admin/NewsBulletin/AddEmail", function (result) {
+
+                $("#title").html("افزودن  ایمیل جدید");
+                $("#body").html(result)
+            });
+
+        });
+    </script>
+}

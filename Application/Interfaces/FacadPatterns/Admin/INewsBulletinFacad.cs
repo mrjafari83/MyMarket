@@ -7,6 +7,7 @@ using Application.Services.Admin.NewsBulletin.Commands.AddEmail;
 using Application.Services.Admin.NewsBulletin.Commands.SendNews;
 using Application.Services.Admin.NewsBulletin.Queries.GetAllEmails;
 using Application.Services.Admin.NewsBulletin.Queries.GetAllNews;
+using Application.Services.Admin.NewsBulletin.Queries.GetNewsById;
 
 namespace Application.Interfaces.FacadPatterns.Admin
 {
@@ -16,5 +17,6 @@ namespace Application.Interfaces.FacadPatterns.Admin
         ISendNewsService SendNews { get; }
         IGetAllEmailsService GetAllEmails { get; }
         IGetNewsService GetNews { get; }
+        IGetNewsByIdService GetNewsById { get; }
     }
 }

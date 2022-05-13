@@ -26,9 +26,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult News()
+        public IActionResult News(int currentPage = 1)
         {
-            return View(_newsBulletinFacad.GetNews.Execute().Data);
+            ViewBag.CurrentRow = currentPage;
+
+            return View(_newsBulletinFacad.GetNews.Execute(currentPage).Data);
         }
 
         [HttpGet]
@@ -61,6 +63,20 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             _newsBulletinFacad.AddEmail.Execute(email);
             return Redirect("/Admin/NewsBulletin/News");
+        }
+
+        [HttpGet]
+        public IActionResult ShowNews(int id)
+        {
+            return View(_newsBulletinFacad.GetNewsById.Execute(id).Data);
+        }
+
+        [HttpGet]
+        public IActionResult Emails(int currentPage = 1)
+        {
+            ViewBag.CurrentRow = currentPage;
+
+            return View(_newsBulletinFacad.GetAllEmails.Execute(currentPage , 30).Data);
         }
     }
 }

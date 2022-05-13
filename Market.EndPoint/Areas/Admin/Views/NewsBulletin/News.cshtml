@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "News";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int back = ViewBag.CurrentRow - 1;
+    int forward = ViewBag.CurrentRow + 1;
 }
 
 <h3>خبر ها</h3>
@@ -10,12 +12,10 @@
     <thead>
         <tr>
             <th>
-                <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/NewsBulletin/SendNews">ارسال ایمیل جدید</a>
-                <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" id="btnCreateNewCategory">افزودن ایمیل جدید</a>
+                <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/NewsBulletin/SendNews">ارسال خبر جدید</a>
             </th>
         </tr>
         <tr>
-            <th>تصویر</th>
             <th>عنوان</th>
             <th></th>
         </tr>
@@ -27,32 +27,44 @@
                 <tr>
                     <td>@item.Subject</td>
                     <td>
-                        <a class="waves-effect waves-light btn modal-trigger blue" href="">مشاهده</a>
+                        <a class="waves-effect waves-light btn modal-trigger blue" href="/Admin/NewsBulletin/ShowNews?id=@item.Id">مشاهده</a>
                     </td>
                 </tr>
             }
     </tbody>
 </table>
 
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4 id="title">Modal Header</h4>
-        <p id="body">A bunch of text</p>
-    </div>
+<div class="pagination">
+    <ul>
+        @if (ViewBag.CurrentRow == 1)
+        {
+            <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
+        }
+        else
+        {
+            <li class="waves-effect"><a href="/Admin/NewsBulletin/News?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
+        }
+
+        @for (int i = 1; i <= Model.TotalRow; i++)
+        {
+            if (i == ViewBag.CurrentRow)
+            {
+                <li class="active"><a href="/Admin/NewsBulletin/News?currentPage=@i">@i</a></li>
+            }
+            else
+            {
+                <li class="waves-effect"><a href="/Admin/NewsBulletin/News?currentPage=@i">@i</a></li>
+            }
+        }
+
+        @if (ViewBag.CurrentRow == Model.TotalRow)
+        {
+            <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+        }
+        else
+        {
+            <li class="waves-effect"><a href="/Admin/NewsBulletin/News?currentPage=@forward"><i class="material-icons">chevron_left</i></a></li>
+        }
+
+    </ul>
 </div>
-
-@section scripts
-{
-    <script>
-        $("#btnCreateNewCategory").click(function () {
-
-            $.get("/Admin/NewsBulletin/AddEmail", function (result) {
-
-                $("#title").html("افزودن  ایمیل جدید");
-                $("#body").html(result)
-            });
-
-        });
-    </script>
-}

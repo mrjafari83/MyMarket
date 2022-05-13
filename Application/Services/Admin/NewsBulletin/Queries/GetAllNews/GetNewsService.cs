@@ -19,6 +19,7 @@ namespace Application.Services.Admin.NewsBulletin.Queries.GetAllNews
             int totalRow = 0;
             var news = db.News.Select(n => new NewsViewModel
             {
+                Id = n.Id,
                 Subject = n.Subject,
                 Text = n.Text,
             }).ToPaged(out totalRow, pageNumber, pageSize).ToList();
