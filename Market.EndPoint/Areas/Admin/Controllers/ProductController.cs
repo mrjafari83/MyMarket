@@ -7,6 +7,7 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Common.Enums;
+using Common.Classes;
 using Common.ViewModels;
 using Application.Services.Admin.Products.Commands.CreateProduct;
 using Application.Services.Admin.Products.Commands.EditProduct;
@@ -17,6 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Owner")]
     public class ProductController : Controller
     {
         private readonly IProductFacad _productFacad;

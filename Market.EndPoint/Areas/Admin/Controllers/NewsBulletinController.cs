@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Http;
 using Common.Utilities;
 using Common.Utilities.MessageSender;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Owner")]
     public class NewsBulletinController : Controller
     {
         private readonly INewsBulletinFacad _newsBulletinFacad;

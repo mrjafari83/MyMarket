@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Hosting;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Owner")]
     public class AutanticationController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -35,8 +36,9 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpGet]
         [Route("Admin/Login")]
         [AllowAnonymous]
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl = "")
         {
+            ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
 
@@ -45,11 +47,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [Route("Admin/Login")]
         public async Task<IActionResult> Login(LoginViwModel model)
         {
-            if (_signInManager.IsSignedIn(User))
-                return Redirect("/");
+            //if (_signInManager.IsSignedIn(User))
+            //    return Redirect("/");
             var dbUser = _userManager.FindByNameAsync(model.UserName).Result;
             var userRole = _userManager.GetRolesAsync(dbUser).Result.FirstOrDefault();
-            if (userRole == "Admin")
+            if (userRole == "Admin" || userRole == "Owner")
             {
                 int cartId;
                 cartId = _clientCartFacad.GetUserCart.Execute(model.UserName).Data.CartId;
@@ -63,7 +65,9 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Redirect("/Admin");
+                    if (model.ReturnUrl == "" || model.ReturnUrl == null)
+                        return Redirect("/Admin");
+                    return Redirect(model.ReturnUrl);
                 }
             }
 

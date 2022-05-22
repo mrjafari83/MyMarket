@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Owner")]
     public class SliderController : Controller
     {
         private ICommonOptionFacad _optionFacad;

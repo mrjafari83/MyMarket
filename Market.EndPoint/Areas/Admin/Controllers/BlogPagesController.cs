@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Owner")]
     public class BlogPagesController : Controller
     {
         private readonly IBlogPageFacad _blogPageFacad;

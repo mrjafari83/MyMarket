@@ -13,6 +13,7 @@ using Domain.Entities.User;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Common.Classes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Controllers
 {
@@ -113,6 +114,7 @@ namespace Market.EndPoint.Controllers
         }
 
         [Route("Logout")]
+        [Authorize]
         public async Task<IActionResult> Logout(string returnUrl = "")
         {
             await signInManager.SignOutAsync();
@@ -121,6 +123,7 @@ namespace Market.EndPoint.Controllers
             return Redirect("/");
         }
 
+        [Authorize]
         public async Task<IActionResult> ConfirmEmail(string userName, string token)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(token))
@@ -135,6 +138,7 @@ namespace Market.EndPoint.Controllers
         }
 
         [Route("Dashboard")]
+        [Authorize]
         public IActionResult Dashboard()
         {
             if (signInManager.IsSignedIn(User))
@@ -143,6 +147,7 @@ namespace Market.EndPoint.Controllers
         }
 
         [Route("EditUser")]
+        [Authorize]
         [HttpGet]
         public IActionResult EditUserInfo()
         {
@@ -151,6 +156,7 @@ namespace Market.EndPoint.Controllers
 
         [Route("EditUser")]
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditUserInfo(EditUserViewModel model)
         {
             var user = userManager.FindByNameAsync(User.Identity.Name).Result;
@@ -175,6 +181,7 @@ namespace Market.EndPoint.Controllers
         }
 
         [Route("ResetPassword")]
+        [Authorize]
         public IActionResult ResetPassword()
         {
             return View();
@@ -182,6 +189,7 @@ namespace Market.EndPoint.Controllers
 
         [Route("ResetPassword")]
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> ResetPassword(string currentPassword = "", string newPassword = "")
         {
             var user = userManager.FindByNameAsync(User.Identity.Name).Result;
@@ -194,6 +202,7 @@ namespace Market.EndPoint.Controllers
         }
 
         [Route("MyPays")]
+        [Authorize]
         public IActionResult MyPays()
         {
             return View(_commonCartFacad.GetUserCartPayings.Execute(User.Identity.Name).Data);

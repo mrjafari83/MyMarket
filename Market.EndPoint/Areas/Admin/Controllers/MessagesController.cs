@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Owner")]
     public class MessagesController : Controller
     {
         private readonly IMessageFacad _messageFacad;

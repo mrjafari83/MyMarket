@@ -29,7 +29,7 @@ namespace Application.Services.Common.BlogPage.Queries.GetAllBlogPages
                     }
                 case Enums.PagesFilter.MostViewed:
                     {
-                        blogPages.OrderByDescending(b => b.VisitNumber);
+                        blogPages.OrderByDescending(b => b.Visits.Count());
                         break;
                     }
             }
@@ -48,7 +48,7 @@ namespace Application.Services.Common.BlogPage.Queries.GetAllBlogPages
                 Image = b.Image,
                 CategoryName = b.Category.Name,
                 CreateDate = b.CreateDate.ToShamsi(),
-                VisitNumber = b.VisitNumber
+                VisitNumber = b.Visits.Count(),
             }).ToPaged(out totalRows, pageNumber, pageSize).ToList();
 
             if (blogPages != null)

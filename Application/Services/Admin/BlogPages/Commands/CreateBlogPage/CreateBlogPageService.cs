@@ -27,7 +27,6 @@ namespace Application.Services.Admin.BlogPages.Commands.CreateBlogPage
                 Image = entry.Image,
                 Category = db.BlogPageCategories.Find(entry.CategoryId),
                 CreateDate = DateTime.Now,
-                VisitNumber = 0
             };
 
             db.BlogKeywords.AddRange(AddKeywords(blogPage , entry.Keywords));

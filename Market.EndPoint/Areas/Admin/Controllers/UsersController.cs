@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Owner")]
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

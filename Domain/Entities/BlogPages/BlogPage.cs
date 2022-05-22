@@ -19,7 +19,6 @@ namespace Domain.Entities.BlogPages
         public string Text { get; set; }
         public string Image { get; set; }
         public DateTime CreateDate { get; set; }
-        public int VisitNumber { get; set; }
 
         public virtual Category<BlogPage> Category { get; set; }
         public virtual ICollection<Keyword<BlogPage>> Keywords { get; set; }

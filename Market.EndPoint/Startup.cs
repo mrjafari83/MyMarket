@@ -61,6 +61,12 @@ namespace Market.EndPoint
                 option.Lockout.MaxFailedAccessAttempts = 10;
             }).AddEntityFrameworkStores<DataBaseContext>()
                 .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(option =>
+            {
+                option.AccessDeniedPath = "/Admin/Login";
+                option.LoginPath = "/Login";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,8 +87,8 @@ namespace Market.EndPoint
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

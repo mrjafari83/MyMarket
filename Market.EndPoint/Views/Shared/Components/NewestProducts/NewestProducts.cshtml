@@ -30,7 +30,6 @@
                                 <img src="@Model.Products[i].Image" alt="" width="540" height="374" />
                                 <div class="img-overlay">
                                     <a href="/Product?id=@Model.Products[i].Id" class="btn more btn-primary">توضیحات بیشتر</a>
-                                    <a href="#" class="btn buy btn-danger">اضافه به سبد خرید</a>
                                 </div>
                             </div>
                         </div>
@@ -39,14 +38,6 @@
                             <h5 class="no-margin">@Model.Products[i].Name</h5>
                         </div>
                         <p class="desc">@Model.Products[i].ShortDescription</p>
-                        <p class="center-align stars">
-                            <span class="icon-star stars-clr"></span>
-                            <span class="icon-star stars-clr"></span>
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-
-                        </p>
                     </div>
                 </div><!-- /product -->
                 @if (i == 3)

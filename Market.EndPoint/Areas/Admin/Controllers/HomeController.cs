@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
 using Common.Enums;
+using Common.Classes;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Owner")]
     public class HomeController : Controller
     {
         private readonly ICommonProductFacad _commonProductFacad;

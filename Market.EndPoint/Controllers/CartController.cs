@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Client;
 using Common.Utilities;
 using Common.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IClientCartFacad _clientCartFacad;
