@@ -1,9 +1,26 @@
 ﻿@using Application.Services.Client.BlogPages.Queries.GetBlogPageById
 @model GetBlogPageByIdDto
+@using Common.Utilities
+@using Application.Interfaces.FacadPatterns.Client
+@using Application.Interfaces.FacadPatterns.Common
+@inject ICommonOptionFacad _commonOptionFacad
+@inject IClientBlogPageFacad _clientBlogPageFacad
 
 @{
     ViewData["Title"] = "ShowBlogPages";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if(CookiesManager.ContainCookie(Context , "BrowserCode"))
+    {
+        string code = CookiesManager.GetCookieValue(Context, "BrowserCode");
+        _clientBlogPageFacad.AddNewVisit.Execute(Model.Id,code );
+    }
+    else
+    {
+        string code = _commonOptionFacad.CreateBrowser.Execute().Data;
+        CookiesManager.AddCookie(Context, "BrowserCode", code);
+        _clientBlogPageFacad.AddNewVisit.Execute(Model.Id, code);
+    }
 }
 
 <div class="darker-stripe">

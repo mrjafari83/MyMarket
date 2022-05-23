@@ -1,10 +1,27 @@
 ﻿@using System.Linq
 @using Application.Services.Common.Product.Queries.GetProductById
 @model GetProductByIdDto
+@using Application.Interfaces.FacadPatterns.Client
+@using Application.Interfaces.FacadPatterns.Common
+@using Common.Utilities
+@inject ICommonOptionFacad _commonOptionFacad
+@inject IClientProductFacad _clientProductFacad
 
 @{
     ViewData["Title"] = "ShowProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (CookiesManager.ContainCookie(Context, "BrowserCode"))
+    {
+        var code = CookiesManager.GetCookieValue(Context, "BrowserCode");
+        _clientProductFacad.AddNewVisit.Execute(Model.Id, code);
+    }
+    else
+    {
+        string code = _commonOptionFacad.CreateBrowser.Execute().Data;
+        CookiesManager.AddCookie(Context, "BrowserCode", code);
+        _clientProductFacad.AddNewVisit.Execute(Model.Id, code);
+    }
 }
 <link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
 

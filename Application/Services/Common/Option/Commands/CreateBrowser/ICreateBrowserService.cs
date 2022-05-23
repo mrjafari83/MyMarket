@@ -8,6 +8,6 @@ namespace Application.Services.Common.Option.Commands.CreateBrowser
 {
     public interface ICreateBrowserService
     {
-        ResultDto Execute();
+        ResultDto<string> Execute();
     }
 }

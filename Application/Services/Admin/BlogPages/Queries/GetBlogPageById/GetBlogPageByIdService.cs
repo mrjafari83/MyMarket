@@ -24,7 +24,7 @@ namespace Application.Services.Admin.BlogPages.Queries.GetBlogPageById
                 ShortDescription = p.ShortDescription,
                 Text = p.Text,
                 Image = p.Image,
-                VisitNumber = p.VisitNumber,
+                VisitNumber = p.Visits.Count(),
                 CategoryId = p.Category.Id,
                 CategoryName = p.Category.Name,
                 CreateDate = p.CreateDate.ToShamsi(),

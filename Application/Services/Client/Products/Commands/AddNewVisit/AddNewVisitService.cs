@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Application.Interfaces.Context;
 using Common.Dto;
 
-namespace Application.Services.Client.BlogPages.Commands.AddNewVisit
+namespace Application.Services.Client.Products.Commands.AddNewVisit
 {
-    public interface IAddNewVisitService
-    {
-        ResultDto Execute(int id, string browserCode);
-    }
-
     public class AddNewVisitService : IAddNewVisitService
     {
         private readonly IDataBaseContext db;
@@ -23,14 +14,14 @@ namespace Application.Services.Client.BlogPages.Commands.AddNewVisit
 
         public ResultDto Execute(int id, string browserCode)
         {
-            var blogPage = db.BlogPages.Find(id);
+            var product = db.Products.Find(id);
             var browser = db.Browsers.Where(b => b.BrowserCode == browserCode).FirstOrDefault();
 
-            if(!db.BlogPagesVisits.Where(b=> b.BlogPage == blogPage && b.Browser == browser).Any())
+            if(!db.ProductsVisits.Where(p=> p.Product == product && p.Browser == browser).Any())
             {
-                db.BlogPagesVisits.Add(new Domain.Entities.BlogPages.BlogPagesVisit
+                db.ProductsVisits.Add(new Domain.Entities.Products.Relations.ProductsVisit
                 {
-                    BlogPage = blogPage,
+                    Product = product,
                     Browser = browser
                 });
 
@@ -39,7 +30,7 @@ namespace Application.Services.Client.BlogPages.Commands.AddNewVisit
 
             return new ResultDto
             {
-                IsSuccess = true,
+                IsSuccess = true
             };
         }
     }

@@ -12,16 +12,17 @@ namespace Application.Services.Common.Option.Commands.CreateBrowser
             db = context;
         }
 
-        public ResultDto Execute()
+        public ResultDto<string> Execute()
         {
-            db.Browsers.Add(new Domain.Entities.User.Browser
+            var code = db.Browsers.Add(new Domain.Entities.User.Browser
             {
                 BrowserCode = Guid.NewGuid().ToString()
-            });
+            }).Entity.BrowserCode;
             db.SaveChanges();
 
-            return new ResultDto
+            return new ResultDto<string>
             {
+                Data = code,
                 IsSuccess = true
             };
         }

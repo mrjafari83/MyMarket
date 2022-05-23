@@ -122,6 +122,7 @@ namespace Market.EndPoint
             services.AddScoped<IClientBlogPageFacad, ClientBlogPagesFacad>();
             services.AddScoped<IClientCartFacad, ClientCartFacad>();
             services.AddScoped<IClientMessageFacad, ClientMessageFacad>();
+            services.AddScoped<IClientProductFacad, ClientProductFacad>();
         }
 
         private void CommonInjection(IServiceCollection services)
