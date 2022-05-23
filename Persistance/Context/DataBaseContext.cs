@@ -20,6 +20,7 @@ using Domain.Entities.User;
 using Common.Classes;
 using Domain.Entities.NewsBulletin;
 using Domain.Entities.Message;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistance.Context
 {
@@ -63,66 +64,59 @@ namespace Persistance.Context
         {
             base.OnModelCreating(builder);
 
-            QueriesFilter(builder);
-            SeedData(builder);
-        }
+            QueriesFilter();
+            SeedData();
 
-        private void QueriesFilter(ModelBuilder builder)
-        {
-            builder.Entity<Product>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<BlogPage>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<Category<BlogPage>>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<Category<Product>>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<ProductFeature>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<ProductColor>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<Keyword<BlogPage>>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<Keyword<Product>>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<ProductSize>().HasQueryFilter(q => !q.IsRemoved);
-            builder.Entity<ColorInProduct>().HasQueryFilter(cp => !cp.IsRemoved);
-            builder.Entity<SizeInProduct>().HasQueryFilter(sp => !sp.IsRemoved);
-            builder.Entity<Comment<Product>>().HasQueryFilter(c => !c.IsRemoved);
-            builder.Entity<Comment<BlogPage>>().HasQueryFilter(c => !c.IsRemoved);
-            builder.Entity<Slider>().HasQueryFilter(s => !s.IsRemoved);
-            builder.Entity<Cart>().HasQueryFilter(c => !c.IsRemoved);
-            builder.Entity<ProductInCart>().HasQueryFilter(pc => !pc.IsRemoved);
-        }
-
-        private void SeedData(ModelBuilder builder)
-        {
-            builder.Entity<Category<Product>>().HasData(new Category<Product>
+            void QueriesFilter()
             {
-                Id = 1383,
-                Name = "بدون دسته بندی",
-                IsParent = true,
-            });
+                builder.Entity<Product>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<BlogPage>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<Category<BlogPage>>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<Category<Product>>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<ProductFeature>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<ProductColor>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<Keyword<BlogPage>>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<Keyword<Product>>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<ProductSize>().HasQueryFilter(q => !q.IsRemoved);
+                builder.Entity<ColorInProduct>().HasQueryFilter(cp => !cp.IsRemoved);
+                builder.Entity<SizeInProduct>().HasQueryFilter(sp => !sp.IsRemoved);
+                builder.Entity<Comment<Product>>().HasQueryFilter(c => !c.IsRemoved);
+                builder.Entity<Comment<BlogPage>>().HasQueryFilter(c => !c.IsRemoved);
+                builder.Entity<Slider>().HasQueryFilter(s => !s.IsRemoved);
+                builder.Entity<Cart>().HasQueryFilter(c => !c.IsRemoved);
+                builder.Entity<ProductInCart>().HasQueryFilter(pc => !pc.IsRemoved);
+            }
 
-            builder.Entity<Category<BlogPage>>().HasData(new Category<Product>
+            void SeedData()
             {
-                Id = 1383,
-                Name = "بدون دسته بندی",
-                IsParent = true,
-            });
+                builder.Entity<Category<Product>>().HasData(new Category<Product>
+                {
+                    Id = 1383,
+                    Name = "بدون دسته بندی",
+                    IsParent = true,
+                });
 
-            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
-            {
-                Id = RoleNames.Customer,
-                Name = RoleNames.Customer,
-                NormalizedName = "CUSTOMER"
-            });
+                builder.Entity<Category<BlogPage>>().HasData(new Category<Product>
+                {
+                    Id = 1383,
+                    Name = "بدون دسته بندی",
+                    IsParent = true,
+                });
 
-            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
-            {
-                Id = RoleNames.Admin,
-                Name = RoleNames.Admin,
-                NormalizedName = "ADMIN"
-            });
+                builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+                {
+                    Id = RoleNames.Customer,
+                    Name = RoleNames.Customer,
+                    NormalizedName = "CUSTOMER"
+                });
 
-            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
-            {
-                Id = RoleNames.Owner,
-                Name = RoleNames.Owner,
-                NormalizedName = "OWNER"
-            });
+                builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+                {
+                    Id = RoleNames.Admin,
+                    Name = RoleNames.Admin,
+                    NormalizedName = "ADMIN"
+                });
+            }
         }
     }
 }

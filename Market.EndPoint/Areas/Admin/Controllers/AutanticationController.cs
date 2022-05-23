@@ -11,6 +11,7 @@ using Application.Interfaces.FacadPatterns.Common;
 using Common.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Common.Classes;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -31,6 +32,42 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _clientCartFacad = clientCartFacad;
             _commonCartFacad = commonCartFacad;
             _hostingEnvironment = hostingEnvironment;
+        }
+
+        [HttpGet]
+        [Route("Admin/Register")]
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Admin/Register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(string userName , string email , string password)
+        {
+            var newUser = new ApplicationUser()
+            {
+                Email = email,
+                UserName = userName,
+            };
+            var result = await _userManager.CreateAsync(newUser, password);
+            if (result.Succeeded)
+            {
+                //var confirmationEmailToken = userManager.GenerateEmailConfirmationTokenAsync(newUser);
+                //var emailMessage = Url.Action("ConfirmEmail", "Autantication" ,
+                //new { username = newUser.UserName, token = confirmationEmailToken } , Request.Scheme);
+                //await messageSender.SendAsync(user.Email, "تایید ایمیل", emailMessage, false);
+                await _userManager.AddToRoleAsync(newUser, RoleNames.Owner);
+                int cartId;
+                _clientCartFacad.CreateCart.Execute(userName, out cartId);
+                CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
+                await _signInManager.PasswordSignInAsync(userName, password, false, true);
+                return Redirect("/Admin");
+            }
+
+            return Redirect("/Admin/Register");
         }
 
         [HttpGet]

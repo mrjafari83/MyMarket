@@ -468,3 +468,4 @@ E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\NewsBulletin\ShowNews.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\NewsBulletin\Emails.cshtml.g.cs
 E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Messages\Criticism.cshtml.g.cs
+E:\asp.net projects\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Autantication\Register.cshtml.g.cs
