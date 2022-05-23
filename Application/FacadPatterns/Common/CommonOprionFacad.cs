@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Common;
 using Application.Services.Common.Option.Queries.GetAllSliders;
+using Application.Services.Common.Option.Commands.CreateBrowser;
 
 namespace Application.FacadPatterns.Common
 {
@@ -23,6 +24,15 @@ namespace Application.FacadPatterns.Common
             get
             {
                 return _getAllSliderService ?? new GetAllSliderService(db);
+            }
+        }
+
+        private CreateBrowserService _createBrowserService;
+        public ICreateBrowserService CreateBrowser
+        {
+            get
+            {
+                return _createBrowserService ?? new CreateBrowserService(db);
             }
         }
     }

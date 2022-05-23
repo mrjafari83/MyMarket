@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Client.BlogPages.Queries.GetBlogPageById;
+using Application.Services.Client.BlogPages.Commands.AddNewVisit;
 using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Client;
 
@@ -22,7 +23,16 @@ namespace Application.FacadPatterns.Client
         {
             get
             {
-                return _getBlogPageByIdService == null ? new GetBlogPageByIdService(db) : _getBlogPageByIdService;
+                return _getBlogPageByIdService ?? new GetBlogPageByIdService(db);
+            }
+        }
+
+        private AddNewVisitService _addNewVisitService;
+        public IAddNewVisitService AddNewVisit
+        {
+            get
+            {
+                return _addNewVisitService ?? new AddNewVisitService(db);
             }
         }
     }
