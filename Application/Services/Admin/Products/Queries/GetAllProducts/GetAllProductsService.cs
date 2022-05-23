@@ -14,7 +14,7 @@ namespace Application.Services.Admin.Products.Queries.GetAllProducts
             db = context;
         }
 
-        public ResultDto<ResultGetAllProductsDto> Execute(int pageNumber , int pageSize)
+        public ResultDto<ResultGetAllProductsDto> Execute(int pageNumber, int pageSize)
         {
             int totalRows;
             List<GetAllProductDto> products = new List<GetAllProductDto>();
@@ -25,15 +25,15 @@ namespace Application.Services.Admin.Products.Queries.GetAllProducts
                 Name = p.Name,
                 Brand = p.Brand,
                 Inventory = p.Inventory,
-                VisitNumber = p.VisitNumber,
+                VisitNumber = p.Visits.Count(),
                 CategoryName = p.Category.Name,
                 CategoryId = p.CategoryId,
-            }).ToPaged(out totalRows , pageNumber , pageSize).ToList();
+            }).ToPaged(out totalRows, pageNumber, pageSize).ToList();
 
             if (products != null)
                 return new ResultDto<ResultGetAllProductsDto>
                 {
-                    Data = new ResultGetAllProductsDto 
+                    Data = new ResultGetAllProductsDto
                     {
                         Products = products,
                         TotalRows = totalRows

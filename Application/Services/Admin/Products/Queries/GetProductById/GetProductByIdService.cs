@@ -32,7 +32,7 @@ namespace Application.Services.Admin.Products.Queries.GetProductById
                     CategoryId =  p.Category.Id,
                     CategoryName = p. Category.Name,
                     CreateDate = p.CreateDate.ToShamsi(),
-                    VisitNumber = p.VisitNumber,
+                    VisitNumber = p.Visits.Count(),
                     Keywords = p.Keywords.Select(k=> new KeywordViewModel { KeywordValue = k.Value}).ToList(),
                     Sizes = p.Sizes.Select(s=> new SizeViewModel { SizeValue = s.Size.Value}).ToList(),
                     Colors = p.Colors.Select(c=> new ColorViewModel { Name = c.Color.Name}).ToList(),

@@ -18,7 +18,7 @@ namespace Application.Services.Common.Product.Queries.GetProductsByFilter
         public ResultDto<ResultGetProductByFilterDto> Execute(int pageNumber , int pageSize, int categoryId = 0)
         {
             int totalRows;
-            var products = db.Products.OrderByDescending(p => p.VisitNumber).Include(p=> p.Images).Select(p => new GetProductByFilterDto
+            var products = db.Products.OrderByDescending(p => p.Visits.Count()).Include(p=> p.Images).Select(p => new GetProductByFilterDto
             {
                 Id = p.Id,
                 Name = p.Name,

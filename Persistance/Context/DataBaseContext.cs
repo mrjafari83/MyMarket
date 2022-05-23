@@ -35,8 +35,10 @@ namespace Persistance.Context
         public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ProductsVisit> ProductsVisits { get; set; }
         public DbSet<Category<Product>> ProductCategories { get; set; }
         public DbSet<BlogPage> BlogPages { get; set; }
+        public DbSet<BlogPagesVisit> BlogPagesVisits { get; set; }
         public DbSet<Category<BlogPage>> BlogPageCategories { get; set; }
         public DbSet<Keyword<Product>> ProductKeywords { get; set; }
         public DbSet<Keyword<BlogPage>> BlogKeywords { get; set; }
@@ -51,6 +53,7 @@ namespace Persistance.Context
         public DbSet<Email> Emails { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<CriticismMessage> CriticismMessages { get; set; }
+        public DbSet<Browser> Browsers { get; set; }
 
         //relation tables
         public DbSet<ColorInProduct> ColorsInProducts { get; set; }

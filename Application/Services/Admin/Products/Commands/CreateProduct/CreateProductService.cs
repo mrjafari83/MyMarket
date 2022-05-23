@@ -37,7 +37,6 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                 Inventory = entry.Inventory,
                 Price = entry.Price,
                 CreateDate = DateTime.Now,
-                VisitNumber = 0,
                 CategoryId = entry.CategoryId,
                 Category = db.ProductCategories.Find(entry.CategoryId)
             };

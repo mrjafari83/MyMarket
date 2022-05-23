@@ -23,7 +23,6 @@ namespace Domain.Entities.Products
         public string ShortDescription { get; set; }
         [AllowHtml]
         public string Description { get; set; }
-        public int VisitNumber { get; set; }
         public int Price { get; set; }
         public DateTime CreateDate { get; set; }
 
@@ -36,5 +35,6 @@ namespace Domain.Entities.Products
         public virtual ICollection<ProductImage> Images { get; set; }
         public virtual ICollection<Comment<Product>> Comments { get; set; }
         public virtual ICollection<ProductInCart> ProductInCarts { get; set; }
+        public virtual ICollection<ProductsVisit> Visits { get; set; }
     }
 }

@@ -29,8 +29,10 @@ namespace Application.Interfaces.Context
         DbSet<ProductColor> ProductColors { get; set; }
         DbSet<Category<Product>> ProductCategories { get; set; }
         DbSet<BlogPage> BlogPages { get; set; }
+        DbSet<BlogPagesVisit> BlogPagesVisits { get; set; }
         DbSet<Category<BlogPage>> BlogPageCategories { get; set; }
         DbSet<ProductImage> ProductImages { get; set; }
+        DbSet<ProductsVisit> ProductsVisits { get; set; }
         DbSet<Keyword<Product>> ProductKeywords { get; set; }
         DbSet<Keyword<BlogPage>> BlogKeywords { get; set; }
         DbSet<Comment<Product>> ProductComments { get; set; }
@@ -43,6 +45,7 @@ namespace Application.Interfaces.Context
         DbSet<Email> Emails { get; set; }
         DbSet<News> News { get; set; }
         DbSet<CriticismMessage> CriticismMessages { get; set; }
+        DbSet<Browser> Browsers { get; set; }
 
         //relation tables
         DbSet<ColorInProduct> ColorsInProducts { get; set; }

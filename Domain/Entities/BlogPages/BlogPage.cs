@@ -24,5 +24,6 @@ namespace Domain.Entities.BlogPages
         public virtual Category<BlogPage> Category { get; set; }
         public virtual ICollection<Keyword<BlogPage>> Keywords { get; set; }
         public virtual ICollection<Comment<BlogPage>> Comments { get; set; }
+        public virtual ICollection<BlogPagesVisit> Visits { get; set; }
     }
 }
