@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "589c5d11-62e7-47a7-a582-82ac1679c178": {
+      "ProjectGuid": "589c5d11-62e7-47a7-a582-82ac1679c178",
+      "DisplayName": "Market.EndPoint",
+      "ColorIndex": 0
+    },
+    "9fa7c73e-5a37-462e-83d9-a9cedb932190": {
+      "ProjectGuid": "9fa7c73e-5a37-462e-83d9-a9cedb932190",
+      "DisplayName": "Common",
+      "ColorIndex": 1
+    },
+    "eea43efc-3905-4dfe-a0f3-beacc451ddb1": {
+      "ProjectGuid": "eea43efc-3905-4dfe-a0f3-beacc451ddb1",
+      "DisplayName": "Application",
+      "ColorIndex": 2
+    },
+    "776c80e4-9ff9-439c-b256-c4cc7fbdc9e3": {
+      "ProjectGuid": "776c80e4-9ff9-439c-b256-c4cc7fbdc9e3",
+      "DisplayName": "Domain",
+      "ColorIndex": 3
+    },
+    "b0b7b422-ae56-48d2-a145-f131792b1533": {
+      "ProjectGuid": "b0b7b422-ae56-48d2-a145-f131792b1533",
+      "DisplayName": "Persistance",
+      "ColorIndex": 4
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 5
+}

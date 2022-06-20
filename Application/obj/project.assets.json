@@ -2151,25 +2151,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Kar1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj",
-      "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-      "outputPath": "E:\\asp.net projects\\MyMarket\\Application\\obj\\",
+      "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj",
+      "packagesPath": "C:\\Users\\Kar1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Mohammad.Jafari\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Kar1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -2182,11 +2177,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj": {
-              "projectPath": "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj"
+            "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj": {
+              "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj"
             },
-            "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj": {
-              "projectPath": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj"
+            "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj"
             }
           }
         }
@@ -2225,7 +2220,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   },

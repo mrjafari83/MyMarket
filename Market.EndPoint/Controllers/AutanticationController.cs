@@ -90,25 +90,27 @@ namespace Market.EndPoint.Controllers
                 return Redirect("/");
 
             var dbUser = userManager.FindByNameAsync(user.UserName).Result;
-            var userRole = userManager.GetRolesAsync(dbUser).Result.FirstOrDefault();
-            if(userRole == RoleNames.Customer)
+            if (dbUser != null)
             {
-                int cartId;
-                cartId = _clientCartFacad.GetUserCart.Execute(user.UserName).Data.CartId;
-                CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
-                var result = await signInManager.PasswordSignInAsync(user.UserName, user.Password, user.RememberMe, true);
-                if (result.IsNotAllowed)
+                var userRole = userManager.GetRolesAsync(dbUser).Result.FirstOrDefault();
+                if (userRole != null && userRole == RoleNames.Customer)
                 {
-                    ViewBag.LoginError = "نام کاربری یا رمز عبور اشتباهست.";
-                    return ViewComponent("Login");
-                }
+                    int cartId;
+                    cartId = _clientCartFacad.GetUserCart.Execute(user.UserName).Data.CartId;
+                    CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
+                    var result = await signInManager.PasswordSignInAsync(user.UserName, user.Password, user.RememberMe, true);
+                    if (result.IsNotAllowed)
+                    {
+                        ViewBag.LoginError = "نام کاربری یا رمز عبور اشتباهست.";
+                        return ViewComponent("Login");
+                    }
 
-                if (result.Succeeded)
-                {
-                    return Json(true);
+                    if (result.Succeeded)
+                    {
+                        return Json(true);
+                    }
                 }
             }
-
 
             return Json(false);
         }
@@ -160,22 +162,25 @@ namespace Market.EndPoint.Controllers
         public async Task<IActionResult> EditUserInfo(EditUserViewModel model)
         {
             var user = userManager.FindByNameAsync(User.Identity.Name).Result;
-            user.Name = model.Name;
-            user.Family = model.Family;
-            user.Email = model.Email;
-            user.UserName = model.UserName;
-            user.PhoneNumber = model.PhoneNumber;
-
-            if (model.Image != null)
+            if(user != null)
             {
-                FileUploader.Delete(user.ProfileImageSrc);
-                user.ProfileImageSrc = FileUploader.Upload(model.Image, _hostingEnvironment, "Users/" + model.UserName);
+                user.Name = model.Name;
+                user.Family = model.Family;
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+                user.PhoneNumber = model.PhoneNumber;
+
+                if (model.Image != null)
+                {
+                    FileUploader.Delete(user.ProfileImageSrc);
+                    user.ProfileImageSrc = FileUploader.Upload(model.Image, _hostingEnvironment, "Users/" + model.UserName);
+                }
+
+                var result = await userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                    return Json(true);
             }
-
-            var result = await userManager.UpdateAsync(user);
-
-            if (result.Succeeded)
-                return Json(true);
 
             return Json(false);
         }
@@ -193,10 +198,13 @@ namespace Market.EndPoint.Controllers
         public async Task<IActionResult> ResetPassword(string currentPassword = "", string newPassword = "")
         {
             var user = userManager.FindByNameAsync(User.Identity.Name).Result;
-            var result = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            if(user != null)
+            {
+                var result = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
 
-            if (result.Succeeded)
-                return Json(true);
+                if (result.Succeeded)
+                    return Json(true);
+            }
 
             return Json(false);
         }

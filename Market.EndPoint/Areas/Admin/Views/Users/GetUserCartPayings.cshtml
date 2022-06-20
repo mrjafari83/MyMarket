@@ -21,7 +21,6 @@
                 <tr>
                     <td>@item.FullName</td>
                     <td>@item.ProductsCount</td>
-                    <td>@item.ProductsPrice</td>
                     <td>
                         <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/Cart/CartPayingInfo?id=@item.Id">مشاهده سبد</a>
                     </td>
@@ -39,7 +38,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>جمع خرید ها : @Model.Sum(p=> p.ProductsPrice)</td>
+            <td>جمع خرید ها : </td>
         </tr>
     </tbody>
 </table>

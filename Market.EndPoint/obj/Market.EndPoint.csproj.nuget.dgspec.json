@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj": {}
+    "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj": {}
   },
   "projects": {
-    "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj": {
+    "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-        "outputPath": "E:\\asp.net projects\\MyMarket\\Application\\obj\\",
+        "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\Kar1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Mohammad.Jafari\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Kar1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -32,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj": {
-                "projectPath": "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj"
+              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj"
               },
-              "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj"
+              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj"
               }
             }
           }
@@ -75,26 +71,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj": {
+    "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "E:\\asp.net projects\\MyMarket\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-        "outputPath": "E:\\asp.net projects\\MyMarket\\Common\\obj\\",
+        "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\Kar1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Mohammad.Jafari\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Kar1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -151,26 +143,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj": {
+    "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-        "outputPath": "E:\\asp.net projects\\MyMarket\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\Kar1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Mohammad.Jafari\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Kar1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -227,26 +215,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj": {
+    "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj",
+        "projectUniqueName": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj",
         "projectName": "Market.EndPoint",
-        "projectPath": "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj",
-        "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-        "outputPath": "E:\\asp.net projects\\MyMarket\\Market.EndPoint\\obj\\",
+        "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj",
+        "packagesPath": "C:\\Users\\Kar1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market.EndPoint\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Mohammad.Jafari\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Kar1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -259,11 +243,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj": {
-                "projectPath": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj"
+              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj"
               },
-              "E:\\asp.net projects\\MyMarket\\Persistance\\Persistance.csproj": {
-                "projectPath": "E:\\asp.net projects\\MyMarket\\Persistance\\Persistance.csproj"
+              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj": {
+                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj"
               }
             }
           }
@@ -278,35 +262,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Chart.js": {
-              "target": "Package",
-              "version": "[2.9.3, )"
-            },
-            "Microsoft.AspNetCore.Identity": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Microsoft.AspNetCore.Razor.Runtime": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.13, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[5.0.13, )"
-            },
-            "Microsoft.EntityFrameworkCore.Relational": {
-              "target": "Package",
-              "version": "[5.0.13, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[5.0.13, )"
+              "version": "[5.0.17, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -331,26 +289,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\asp.net projects\\MyMarket\\Persistance\\Persistance.csproj": {
+    "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\asp.net projects\\MyMarket\\Persistance\\Persistance.csproj",
+        "projectUniqueName": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj",
         "projectName": "Persistance",
-        "projectPath": "E:\\asp.net projects\\MyMarket\\Persistance\\Persistance.csproj",
-        "packagesPath": "C:\\Users\\Mohammad.Jafari\\.nuget\\packages\\",
-        "outputPath": "E:\\asp.net projects\\MyMarket\\Persistance\\obj\\",
+        "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj",
+        "packagesPath": "C:\\Users\\Kar1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Mohammad.Jafari\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Kar1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -363,11 +317,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj": {
-                "projectPath": "E:\\asp.net projects\\MyMarket\\Application\\Application.csproj"
+              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj"
               },
-              "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\asp.net projects\\MyMarket\\Domain\\Domain.csproj"
+              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain\\Domain.csproj"
               }
             }
           }
@@ -392,7 +346,11 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.13, )"
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.17, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -420,7 +378,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

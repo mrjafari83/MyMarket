@@ -26,12 +26,12 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllPriceByDate
         {
             int price = 0;
             var date = DateTime.Now.AddDays(daysAgo);
-            var products = db.ProductsInCart.Include(p => p.CartPayingInfo).Include(p => p.Product)
+            var products = db.ProductsInCart.Include(p=> p.ProductInventoryAndPrice).Include(p => p.CartPayingInfo).Include(p => p.Product)
                 .Where(p => p.CartPayingInfo.PayDate.Day == date.Day).ToList();
 
-            foreach(var item in products)
+            foreach (var item in products)
             {
-                price += item.Count * item.Product.Price;
+                price += item.Count * item.ProductInventoryAndPrice.Price;
             }
 
             return new ResultDto<int>

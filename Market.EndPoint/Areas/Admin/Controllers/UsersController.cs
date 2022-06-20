@@ -21,7 +21,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly ICartPayingFacad _cartPayingFacad;
         private readonly ICommonCartFacad _commonCartFacad;
         public UsersController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager
-            ,ICartPayingFacad cartPayingFacad , ICommonCartFacad commonCartFacad)
+            , ICartPayingFacad cartPayingFacad, ICommonCartFacad commonCartFacad)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -57,27 +57,33 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(string email, string userName, string password)
         {
-            await _userManager.CreateAsync(new ApplicationUser
+            var result = await _userManager.CreateAsync(new ApplicationUser
             {
                 Email = email,
                 UserName = userName
             }, password);
 
-            return Redirect("/Admin/Users");
+            if (result.Succeeded)
+                return Redirect("/Admin/Users");
+            return Redirect("/Admin/Users/Create");
         }
 
         [HttpGet]
         public IActionResult Delete(string userName)
         {
             var user = _userManager.FindByNameAsync(userName).Result;
-            UserViewModel userViewModel = new UserViewModel()
+            if (user != null)
             {
-                Email = user.Email,
-                UserName = user.UserName,
-                Id = user.Id
-            };
+                UserViewModel userViewModel = new UserViewModel()
+                {
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    Id = user.Id
+                };
 
-            return View(userViewModel);
+                return View(userViewModel);
+            }
+            return Redirect("/Admin/NotFound");
         }
 
         [HttpPost]
@@ -101,28 +107,31 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUserRoles(EditUserRolesViewModel model)
         {
-            if ((model.Admin && model.Owner) || (model.Admin && model.Customer) 
+            if ((model.Admin && model.Owner) || (model.Admin && model.Customer)
                 || (model.Customer && model.Owner) || (model.Admin && model.Owner && model.Customer))
                 return Redirect("/Admin/Users");
 
             var user = _userManager.FindByNameAsync(model.UserName).Result;
-            var roles = new List<string>() { "Owner", "Admin", "Customer" };
-            if (model.Owner)
+            if (user != null)
             {
-                await _userManager.RemoveFromRolesAsync(user, roles);
-                await _userManager.AddToRoleAsync(user, "Owner");
-            }
+                var roles = new List<string>() { "Owner", "Admin", "Customer" };
+                if (model.Owner)
+                {
+                    await _userManager.RemoveFromRolesAsync(user, roles);
+                    await _userManager.AddToRoleAsync(user, "Owner");
+                }
 
-            else if (model.Admin)
-            {
-                await _userManager.RemoveFromRolesAsync(user, roles);
-                await _userManager.AddToRoleAsync(user, "Admin");
-            }
+                else if (model.Admin)
+                {
+                    await _userManager.RemoveFromRolesAsync(user, roles);
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                }
 
-            else if (model.Customer)
-            {
-                await _userManager.RemoveFromRolesAsync(user, roles);
-                await _userManager.AddToRoleAsync(user, "Customer");
+                else if (model.Customer)
+                {
+                    await _userManager.RemoveFromRolesAsync(user, roles);
+                    await _userManager.AddToRoleAsync(user, "Customer");
+                }
             }
 
             return Redirect("/Admin/Users");

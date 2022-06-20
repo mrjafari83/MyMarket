@@ -19,11 +19,9 @@ namespace Domain.Entities.Products
         [Required]
         public string Name { get; set; }
         public string Brand { get; set; }
-        public int Inventory { get; set; }
         public string ShortDescription { get; set; }
         [AllowHtml]
         public string Description { get; set; }
-        public int Price { get; set; }
         public DateTime CreateDate { get; set; }
 
         public virtual Category<Product> Category { get; set; }
@@ -36,5 +34,6 @@ namespace Domain.Entities.Products
         public virtual ICollection<Comment<Product>> Comments { get; set; }
         public virtual ICollection<ProductInCart> ProductInCarts { get; set; }
         public virtual ICollection<ProductsVisit> Visits { get; set; }
+        public virtual ICollection<ProductInventory> Inventories { get; set; }
     }
 }

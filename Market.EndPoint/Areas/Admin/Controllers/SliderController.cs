@@ -21,7 +21,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private IProductFacad _productFacad;
         private readonly IHostingEnvironment _environment;
         public SliderController(ICommonOptionFacad commonOptionFacad, ISliderFacad sliderFacad
-            ,IProductFacad productFacad , IHostingEnvironment environment)
+            , IProductFacad productFacad, IHostingEnvironment environment)
         {
             _optionFacad = commonOptionFacad;
             _sliderFacad = sliderFacad;
@@ -41,11 +41,13 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string url , IFormFile image)
+        public IActionResult Create(string url, IFormFile image)
         {
-            string imageSrc = FileUploader.Upload(image, _environment, "Slider/");
-
-            _sliderFacad.CreateSlider.Execute(url , imageSrc);
+            if (image != null && url != null)
+            {
+                string imageSrc = FileUploader.Upload(image, _environment, "Slider/");
+                _sliderFacad.CreateSlider.Execute(url, imageSrc);
+            }
             return Redirect("/Admin/Slider");
         }
 
@@ -57,11 +59,13 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Replace(int sliderId , string url , IFormFile image)
+        public IActionResult Replace(int sliderId, string url, IFormFile image)
         {
-            string imageSrc = FileUploader.Upload(image, _environment, "Slider/");
-
-            _sliderFacad.ReplaceSlider.Execute(sliderId, url , imageSrc);
+            if(image != null && url != null && sliderId != 0)
+            {
+                string imageSrc = FileUploader.Upload(image, _environment, "Slider/");
+                _sliderFacad.ReplaceSlider.Execute(sliderId, url, imageSrc);
+            }
             return Redirect("/Admin/Slider");
         }
 

@@ -26,13 +26,12 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         public ResultDto Execute(EditProductDto entry)
         {
             var product = db.Products.Include(p => p.Keywords).Include(p => p.Images).Include(p => p.Colors).ThenInclude(c => c.Color)
-                .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Where(p => p.Id == entry.Id).FirstOrDefault();
+                .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Include(p => p.Inventories)
+                .Where(p => p.Id == entry.Id).FirstOrDefault();
 
             product.Name = entry.Name;
             product.Brand = entry.Brand;
-            product.Inventory = entry.Inventory;
             product.Description = entry.Description;
-            product.Price = entry.Price;
             product.ShortDescription = entry.ShortDescription;
 
             if (entry.CategoryId != 0)
@@ -60,6 +59,8 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
 
             DeleteKeywords(entry.Keywords, product.Keywords.ToList());
             DeleteFeatures(entry.Features, product.Features.ToList());
+
+            EditInventoryAndPrice(entry.InventoryAndPrices, product.Inventories.ToList(), product);
 
             db.Products.Update(product);
             db.SaveChanges();
@@ -207,6 +208,45 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             {
                 FileUploader.Delete(item.Src);
                 db.ProductImages.Remove(item);
+            }
+        }
+
+        private void EditInventoryAndPrice(List<InventoryAndPriceViewModel> inventoryAndPrices
+            , List<ProductInventory> productInventories, Product product)
+        {
+            var itemsInDB = productInventories;
+            if (productInventories != null && inventoryAndPrices != null)
+            {
+                foreach (var item in inventoryAndPrices)
+                {
+                    var myItem = productInventories.Where(p => p.ColorName == item.ColorName
+                    && p.SizeName == item.SizeName
+                    && p.ProductId == item.ProductId).FirstOrDefault();
+
+                    if (myItem != null)
+                    {
+                        myItem.Price = item.Price;
+                        myItem.Inventory = item.Inventory;
+                        db.ProductInventories.Update(myItem);
+                    }
+
+                    else
+                    {
+                        db.ProductInventories.Add(new ProductInventory
+                        {
+                            Product = product,
+                            Inventory = item.Inventory,
+                            Price = item.Price,
+                            ColorName = item.ColorName,
+                            SizeName = item.SizeName,
+                        });
+                    }
+                }
+                foreach(var item in inventoryAndPrices)
+                    if (itemsInDB.Any(p => p.ColorName == item.ColorName && p.SizeName == item.SizeName))
+                        itemsInDB.Remove(itemsInDB.First(p => p.ColorName == item.ColorName && p.SizeName == item.SizeName));
+
+                db.ProductInventories.RemoveRange(itemsInDB);
             }
         }
     }

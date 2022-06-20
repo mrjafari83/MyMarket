@@ -1,50 +1,54 @@
 ﻿@using Application.Services.Admin.Products.Queries.GetBestSellingProducts
 @model ResultGetBestSellingProductDto
 
-    <div class="col s12 l8">
-        <div class="card">
-            <div class="card-content">
-                <!-- title -->
-                <div class="d-flex align-items-center">
-                    <div>
-                        <h5 class="card-title">پرفروش ترین محصولات</h5>
-                    </div>
+<div class="col s12 l8">
+    <div class="card">
+        <div class="card-content">
+            <!-- title -->
+            <div class="d-flex align-items-center">
+                <div>
+                    <h5 class="card-title">پرفروش ترین محصولات</h5>
                 </div>
-                <!-- title -->
-                <div class="table-responsive scrollable p-o ps ps--theme_default ps--active-y" style="height:400px;" data-ps-id="343a55d2-428e-9509-fabf-7cd459b7081c">
-                    <table class="">
-                        <thead>
-                            <tr>
-                                <th>محصولات</th>
-                                <th>تعداد فروخته شده</th>
-                                <th>تعداد موجود</th>
-                                <th>قیمت</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null)
+            </div>
+            <!-- title -->
+            <div class="table-responsive scrollable p-o ps ps--theme_default ps--active-y" style="height:400px;" data-ps-id="343a55d2-428e-9509-fabf-7cd459b7081c">
+                <table class="">
+                    <thead>
+                        <tr>
+                            <th>نام محصول</th>
+                            <th>رنگ</th>
+                            <th>سایز</th>
+                            <th>تعداد فروخته شده</th>
+                            <th>تعداد موجود</th>
+                            <th>قیمت</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model.Products)
                             {
-                                foreach (var item in Model.Products)
-                                {
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex no-block align-items-center">
-                                                <div class="m-r-10"><img src="@item.ImageSrc" alt="user" class="circle" width="45"></div>
-                                                <div class="">
-                                                    <h5 class="m-b-0 font-16 font-medium">@item.Name</h5>
-                                                </div>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="m-r-10"><img src="@item.ImageSrc" alt="user" class="circle" width="45"></div>
+                                            <div class="">
+                                                <h5 class="m-b-0 font-16 font-medium">@item.Name</h5>
                                             </div>
-                                        </td>
-                                        <td>@item.SellingCount</td>
-                                        <td>@item.Inventory</td>
-                                        <td class="blue-grey-text  text-darken-4 font-medium">@item.Price تومان</td>
-                                    </tr>
-                                }
+                                        </div>
+                                    </td>
+                                    <td>@item.Color</td>
+                                    <td>@item.Size</td>
+                                    <td>@item.SellingCount</td>
+                                    <td>@item.Inventory</td>
+                                    <td class="blue-grey-text  text-darken-4 font-medium">@item.Price</td>
+                                </tr>
                             }
-                        </tbody>
-                    </table>
-                    <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 400px; right: 682px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 374px;"></div></div>
-                </div>
+                        }
+                    </tbody>
+                </table>
+                <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 400px; right: 682px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 374px;"></div></div>
             </div>
         </div>
     </div>
+</div>

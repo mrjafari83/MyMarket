@@ -48,3 +48,15 @@ E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.dll
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\ref\Common.dll
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.pdb
 E:\asp.net projects\MyMarket\Common\obj\Debug\net5.0\Common.csproj.AssemblyReference.cache
+C:\Users\Kar1\Desktop\MyMarket\Common\bin\Debug\net5.0\Common.deps.json
+C:\Users\Kar1\Desktop\MyMarket\Common\bin\Debug\net5.0\Common.dll
+C:\Users\Kar1\Desktop\MyMarket\Common\bin\Debug\net5.0\ref\Common.dll
+C:\Users\Kar1\Desktop\MyMarket\Common\bin\Debug\net5.0\Common.pdb
+C:\Users\Kar1\Desktop\MyMarket\Common\obj\Debug\net5.0\Common.csproj.AssemblyReference.cache
+C:\Users\Kar1\Desktop\MyMarket\Common\obj\Debug\net5.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kar1\Desktop\MyMarket\Common\obj\Debug\net5.0\Common.AssemblyInfoInputs.cache
+C:\Users\Kar1\Desktop\MyMarket\Common\obj\Debug\net5.0\Common.AssemblyInfo.cs
+C:\Users\Kar1\Desktop\MyMarket\Common\obj\Debug\net5.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\Kar1\Desktop\MyMarket\Common\obj\Debug\net5.0\Common.dll
+C:\Users\Kar1\Desktop\MyMarket\Common\obj\Debug\net5.0\ref\Common.dll
+C:\Users\Kar1\Desktop\MyMarket\Common\obj\Debug\net5.0\Common.pdb

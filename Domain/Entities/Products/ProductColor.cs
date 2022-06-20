@@ -13,6 +13,6 @@ namespace Domain.Entities.Products
     {
         public string Name { get; set; }
 
-        public virtual ICollection<ColorInProduct> Products { get; set; }
+        public virtual ICollection<ColorInProduct> Products { get; set; } 
     }
 }

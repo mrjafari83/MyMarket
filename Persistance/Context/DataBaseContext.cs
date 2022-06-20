@@ -55,6 +55,7 @@ namespace Persistance.Context
         public DbSet<News> News { get; set; }
         public DbSet<CriticismMessage> CriticismMessages { get; set; }
         public DbSet<Browser> Browsers { get; set; }
+        public DbSet<ProductInventory> ProductInventories { get; set; }
 
         //relation tables
         public DbSet<ColorInProduct> ColorsInProducts { get; set; }
@@ -115,6 +116,13 @@ namespace Persistance.Context
                     Id = RoleNames.Admin,
                     Name = RoleNames.Admin,
                     NormalizedName = "ADMIN"
+                });
+
+                builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+                {
+                    Id = RoleNames.Owner,
+                    Name = RoleNames.Owner,
+                    NormalizedName = "OWNER"
                 });
             }
         }

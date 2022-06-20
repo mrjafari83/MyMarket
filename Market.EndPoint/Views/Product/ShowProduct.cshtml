@@ -90,18 +90,18 @@
                 <div class="product-title">
                     <h1 class="name">@Model.Name</h1>
                     <div class="meta">
-                        <span class="tag">@Model.Price تومان</span>
+                        <span class="tag"><span id="price"></span>تومان</span>
                         <span class="stock">
-                            @if (Model.Inventory != 0)
-                            {
+                            @*                            @if (Model.Inventory != 0)
+                                {
                                 <span class="btn btn-success">موجود</span>
 
-                            }
-                            else
-                            {
+                                }
+                                else
+                                {
                                 <span class="btn btn-danger">اتمام موجودی</span>
 
-                            }
+                                }*@
                         </span>
                     </div>
                 </div>
@@ -140,10 +140,11 @@
                                 }
                             </select>
                         }
-                        @if (Model.Inventory != 0)
-                        {
+
+                        <div id="AddToCart">
                             <button id="btnAddToCart" class="btn btn-danger pull-right"><i class="icon-shopping-cart"></i> اضافه به سبد خرید</button>
-                        }
+                        </div>
+
                     </div>
 
                     <hr>
@@ -183,9 +184,6 @@
                 <li>
                     <a href="#tab-3" data-toggle="tab">نظرات</a>
                 </li>
-                <li>
-                    <a href="#tab-4" data-toggle="tab">جزئیات ارسال</a>
-                </li>
             </ul>
             <div class="tab-content">
                 <div class="fade in tab-pane active" id="tab-1">
@@ -204,11 +202,6 @@
                 <div class="fade tab-pane" id="tab-3">
                     @await Component.InvokeAsync("Comment", new { pageId = Model.Id, categoryType = Common.Enums.Enums.CategoryType.Product })
                 </div>
-                <div class="fade tab-pane" id="tab-4">
-                    <p>
-                        لورم ایپسوم متنی است که ساختگی برای طراحی و چاپ آن مورد است. صنعت چاپ زمانی لازم بود شرایطی شما باید فکر ثبت نام و طراحی، لازمه خروج می باشد. در ضمن قاعده همفکری ها جوابگوی سئوالات زیاد شاید باشد، آنچنان که لازم بود طراحی گرافیکی خوب بود. کتابهای زیادی شرایط سخت ، دشوار و کمی در سالهای دور لازم است. هدف از این نسخه فرهنگ پس از آن و دستاوردهای خوب شاید باشد. حروفچینی لازم در شرایط فعلی لازمه تکنولوژی بود که گذشته، حال و آینده را شامل گردد. سی و پنج درصد از طراحان در قرن پانزدهم میبایست پرینتر در ستون و سطر حروف لازم است، بلکه شناخت این ابزار گاه اساسا بدون هدف بود و سئوالهای زیادی در گذشته بوجود می آید، تنها لازمه آن بود...
-                    </p>
-                </div>
             </div>
         </div>
     </div>
@@ -216,66 +209,101 @@
 
 @section scripts
 {
-    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script>
-        var commentId = 0;
-        var commenterName = "";
-        var visitingParent = 0;
+<script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+<script>
+    var commentId = 0;
+    var commenterName = "";
+    var visitingParent = 0;
 
-        $(document).ready(function () {
-            $(".btnAnswer").click(function (e) {
-                commentId = this.getAttribute("commentId");
-                commenterName = this.getAttribute("commenterName");
-                visitingParent = this.getAttribute("visitingParent");
-                document.getElementById("answerTo").innerHTML = "پاسخ به " + commenterName;
+    $(document).ready(function () {
+        GetPrice();
+
+        $(".btnAnswer").click(function (e) {
+            commentId = this.getAttribute("commentId");
+            commenterName = this.getAttribute("commenterName");
+            visitingParent = this.getAttribute("visitingParent");
+            document.getElementById("answerTo").innerHTML = "پاسخ به " + commenterName;
+        });
+
+        $("#btnSendComment").click(function () {
+            var commentData = new FormData();
+
+            commentData.append("Name", $("#name").val());
+            commentData.append("Email", $("#email").val());
+            commentData.append("Text", $("#text").val());
+            commentData.append("PageId", @Model.Id);
+            commentData.append("ParentId", commentId);
+            commentData.append("VisitingParent", visitingParent)
+
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                cache: false,
+                url: "/Product/CreateComment",
+                data: commentData,
+                success: function (response) {
+                    location.reload();
+                }
             });
+        });
 
-            $("#btnSendComment").click(function () {
-                var commentData = new FormData();
+        $("#btnAddToCart").click(function (e) {
+                var data = new FormData();
 
-                commentData.append("Name", $("#name").val());
-                commentData.append("Email", $("#email").val());
-                commentData.append("Text", $("#text").val());
-                commentData.append("PageId", @Model.Id);
-                commentData.append("ParentId", commentId);
-                commentData.append("VisitingParent", visitingParent)
+                data.append("count", $("#count").val());
+                data.append("color", $("#colorSelector").find(":selected").text());
+                data.append("size", $("#sizeSelector").find(":selected").text());
+                data.append("price", $("#price").text());
+                data.append("productId", @Model.Id);
 
                 $.ajax({
                     type: "POST",
+                    url: "/AddToCart",
                     processData: false,
                     contentType: false,
                     cache: false,
-                    url: "/Product/CreateComment",
-                    data: commentData,
+                    data: data,
                     success: function (response) {
                         location.reload();
                     }
                 });
-            });
 
-            $("#btnAddToCart").click(function (e) {
-                    var data = new FormData();
-
-                    data.append("count", $("#count").val());
-                    data.append("color", $("#colorSelector").find(":selected").text());
-                    data.append("size", $("#sizeSelector").find(":selected").text());
-                    data.append("productId", @Model.Id);
-
-                    $.ajax({
-                        type: "POST",
-                        url: "/AddToCart",
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        data: data,
-                        success: function (response) {
-                            location.reload();
-                        }
-                    });
-
-            });
         });
-    </script>
+
+        function GetPrice(){
+            var data = new FormData();
+            data.append("colorName", $("#colorSelector").find(":selected").text());
+            data.append("sizeName", $("#sizeSelector").find(":selected").text());
+            data.append("productId", @Model.Id);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Product/GetPriceByColorAndSize",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: data,
+                    success: function (response) {
+                        $("#price").text(response.price);
+                        debugger;
+                        if(response.inventory === 0){
+                            var button = document.getElementById("AddToCart");
+                            button.setAttribute("hidden" , "true");
+                        }
+                    }
+                });
+        };
+
+        $("#sizeSelector").change(function(e){
+            GetPrice();
+        })
+
+        $("#colorSelector").change(function(e){
+            GetPrice();
+        })
+    });
+</script>
 }
 
 

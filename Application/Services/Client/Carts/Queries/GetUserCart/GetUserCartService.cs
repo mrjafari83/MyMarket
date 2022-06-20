@@ -12,7 +12,6 @@ namespace Application.Services.Client.Carts.Queries.GetUserCart
         {
             db = context;
         }
-
         public ResultDto<GetUserCartDto> Execute(string userName)
         {
             var userCart = db.Carts.Where(c => c.UserName == userName).Select(c => new GetUserCartDto
@@ -21,15 +20,15 @@ namespace Application.Services.Client.Carts.Queries.GetUserCart
                 UserName = c.UserName,
             }).FirstOrDefault();
 
-            userCart.Products = db.ProductsInCart.Include(p=> p.Product).Where(c => c.Cart.Id == userCart.CartId).Select(p=> new CartProductDto 
+            userCart.Products = db.ProductsInCart.Include(p => p.Product).Where(c => c.Cart.Id == userCart.CartId).Select(p => new CartProductDto
             {
                 Id = p.Product.Id,
                 Name = p.Product.Name,
-                Price = p.Product.Price,
                 Count = p.Count,
                 Image = p.Product.Images.FirstOrDefault().Src,
                 ProductInCartId = p.Id,
-                ProductInventory = p.Product.Inventory
+                Price = p.ProductInventoryAndPrice.Price == null ? 0 : p.ProductInventoryAndPrice.Price,
+                ProductInventory = p.ProductInventoryAndPrice.Inventory == null ? 0 : p.ProductInventoryAndPrice.Inventory
             }).ToList();
 
             return new ResultDto<GetUserCartDto>

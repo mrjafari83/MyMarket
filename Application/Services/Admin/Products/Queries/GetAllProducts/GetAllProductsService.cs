@@ -24,7 +24,6 @@ namespace Application.Services.Admin.Products.Queries.GetAllProducts
                 Id = p.Id,
                 Name = p.Name,
                 Brand = p.Brand,
-                Inventory = p.Inventory,
                 VisitNumber = p.Visits.Count(),
                 CategoryName = p.Category.Name,
                 CategoryId = p.CategoryId,

@@ -24,6 +24,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly IProductFacad _productFacad;
         private readonly IProductCategoryFacad _productCategoryFacad;
         private readonly ICommonCategorisFacad _commonCategorisFacad;
+
         public ProductController(IProductFacad productFacad
             , IProductCategoryFacad productCategoryFacad
             , ICommonCategorisFacad commonCategorisFacad)
@@ -54,30 +55,25 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         [HttpPost]
         public IActionResult Create(ProductViewModel request, List<KeywordViewModel> Keywords
-            , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features)
+            , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
+            , List<InventoryAndPriceViewModel> inventoryAndPrice)
         {
-            if (ModelState.IsValid)
-            {
                 _productFacad.CreateProductService.Execute(new CreateProductServiceDto
                 {
                     Name = request.Name,
                     Brand = request.Brand,
                     ShortDescription = request.ShortDescription,
                     Description = request.Description,
-                    Inventory = request.Inventory,
-                    Price = request.Price,
                     CategoryId = request.CategoryId,
                     Keywords = Keywords,
                     Colors = colors,
                     Sizes = sizes,
                     Features = features,
-                    Images = request.Images
+                    Images = request.Images,
+                    InventoryAndPrices = inventoryAndPrice
                 });
 
-                return Redirect("/Admin/Product");
-            }
-
-            return View();
+            return Json(true);
         }
 
         [HttpGet]
@@ -98,7 +94,8 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         [HttpPost]
         public IActionResult Edit(ProductViewModel product, List<KeywordViewModel> Keywords
-            , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features)
+            , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
+            ,List<InventoryAndPriceViewModel> inventoryAndPrice)
         {
             _productFacad.EditProductService.Execute(new EditProductDto
             {
@@ -107,14 +104,13 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                 Brand = product.Brand,
                 ShortDescription = product.ShortDescription,
                 Description = product.Description,
-                Price = product.Price,
-                Inventory = product.Inventory,
                 CategoryId = product.CategoryId,
                 Images = product.Images,
                 Keywords = Keywords,
                 Colors = colors,
                 Sizes = sizes,
-                Features = features
+                Features = features,
+                InventoryAndPrices = inventoryAndPrice
             });
 
             return Redirect("/Admin/Product");

@@ -84,11 +84,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [Route("Admin/Login")]
         public async Task<IActionResult> Login(LoginViwModel model)
         {
-            //if (_signInManager.IsSignedIn(User))
-            //    return Redirect("/");
+            if (_signInManager.IsSignedIn(User))
+                return Redirect("/");
             var dbUser = _userManager.FindByNameAsync(model.UserName).Result;
             var userRole = _userManager.GetRolesAsync(dbUser).Result.FirstOrDefault();
-            if (userRole == "Admin" || userRole == "Owner")
+            if (userRole != null && (userRole == "Admin" || userRole == "Owner"))
             {
                 int cartId;
                 cartId = _clientCartFacad.GetUserCart.Execute(model.UserName).Data.CartId;
@@ -123,27 +123,31 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EditUserInfo(string userName, string name, string family, string phoneNumber, string email , Microsoft.AspNetCore.Http.IFormFile image)
         {
-            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
-            user.Name = name;
-            user.Family = family;
-            user.Email = email;
-            user.UserName = userName;
-            user.PhoneNumber = phoneNumber;
-
-            if (image != null)
+            if (_signInManager.IsSignedIn(User))
             {
-                FileUploader.Delete(user.ProfileImageSrc);
-                user.ProfileImageSrc = FileUploader.Upload(image, _hostingEnvironment, "Users/" + userName);
+                var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+                user.Name = name;
+                user.Family = family;
+                user.Email = email;
+                user.UserName = userName;
+                user.PhoneNumber = phoneNumber;
+
+                if (image != null)
+                {
+                    FileUploader.Delete(user.ProfileImageSrc);
+                    user.ProfileImageSrc = FileUploader.Upload(image, _hostingEnvironment, "Users/" + userName);
+                }
+
+                var result = _userManager.UpdateAsync(user).Result;
+
+                if (result.Succeeded)
+                {
+                    return Json(true);
+                }
+
+                return Json(false);
             }
-
-            var result = _userManager.UpdateAsync(user).Result;
-
-            if (result.Succeeded)
-            {
-                return Json(true);
-            }
-
-            return Json(false);
+            return Redirect("/Admin");
         }
 
         [Route("Admin/ResetPassword")]
@@ -158,10 +162,12 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult ResetPassword(string currentPassword, string newPassword)
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
-            var result = _userManager.ChangePasswordAsync(user, currentPassword, newPassword).Result;
+            if(user != null) {
+                var result = _userManager.ChangePasswordAsync(user, currentPassword, newPassword).Result;
 
-            if (result.Succeeded)
-                return Json(true);
+                if (result.Succeeded)
+                    return Json(true);
+            }
             return Json(false);
         }
 

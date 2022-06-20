@@ -1,6 +1,7 @@
 ﻿using Common.Dto;
 using Application.Interfaces.Context;
 using Domain.Entities.Cart;
+using System.Linq;
 
 namespace Application.Services.Client.Carts.Commands.AddProductToCart
 {
@@ -12,7 +13,7 @@ namespace Application.Services.Client.Carts.Commands.AddProductToCart
             db = context;
         }
 
-        public ResultDto Execute(int cartId, int productId, int productCount , string productColor = "", string productSize = "")
+        public ResultDto Execute(int cartId, int productId, int productCount , int productPrice , string productColor = "", string productSize = "")
         {
             var cart = db.Carts.Find(cartId);
             var product = db.Products.Find(productId);
@@ -22,7 +23,9 @@ namespace Application.Services.Client.Carts.Commands.AddProductToCart
                 Color = productColor,
                 Size = productSize,
                 Count = productCount,
-                Cart = cart
+                Cart = cart,
+                ProductInventoryAndPrice = db.ProductInventories.FirstOrDefault(p=> p.ProductId == productId
+                && p.SizeName == productSize && p.ColorName == productColor && p.Price == productPrice)
             }).Entity;
             db.SaveChanges();
 

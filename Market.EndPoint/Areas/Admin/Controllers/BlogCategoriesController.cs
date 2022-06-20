@@ -50,9 +50,9 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(string name , int parentId)
         {
-            if (ModelState.IsValid && name != null)
+            if (name != null)
             {
-                var result = _blogPageCategoryFacad.Create.Execute(new CreateCategoryDto
+                _blogPageCategoryFacad.Create.Execute(new CreateCategoryDto
                 {
                     Name = name,
                     ParentId = parentId

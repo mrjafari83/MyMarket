@@ -22,13 +22,15 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
         public ResultDto Execute(int id)
         {
             var product = db.Products.Include(p => p.Keywords).Include(p => p.Images).Include(p => p.Colors).ThenInclude(c => c.Color)
-                 .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Where(p => p.Id == id).FirstOrDefault();
+                 .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Include(p=> p.Inventories)
+                 .Where(p => p.Id == id).FirstOrDefault();
             product.IsRemoved = true;
             product.RemoveTime = DateTime.Now;
 
             DeleteKeywords(product.Keywords.ToList());
             DeleteFeatures(product.Features.ToList());
             DeleteImages(product.Images.ToList());
+            DeleteInventoryAndPrice(product.Inventories.ToList());
             DeleteColors(product.Colors.Select(c => new ProductColor { Id = c.Color.Id}).ToList(), product.Colors.ToList());
             DeleteSizes(product.Sizes.Select(s => new ProductSize { Id = s.Size.Id }).ToList(), product.Sizes.ToList());
 
@@ -73,34 +75,50 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
 
         private void DeleteColors(List<ProductColor> productColors, List<ColorInProduct> colorInProducts)
         {
-            foreach (var item in productColors)
+            if(productColors != null && colorInProducts != null)
             {
-                item.IsRemoved = true;
-                item.RemoveTime = System.DateTime.Now;
-                db.ProductColors.Update(item);
-            }
-            foreach (var item in colorInProducts)
-            {
-                item.IsRemoved = true;
-                item.RemoveTime = DateTime.Now;
-                db.ColorsInProducts.Update(item);
+                foreach (var item in productColors)
+                {
+                    var color = db.ProductColors.Find(item.Id);
+                    color.IsRemoved = true;
+                    color.RemoveTime = System.DateTime.Now;
+                    db.ProductColors.Update(color);
+                }
+                foreach (var item in colorInProducts)
+                {
+                    var colorInProdcut = db.ColorsInProducts.Find(item.Id);
+                    colorInProdcut.IsRemoved = true;
+                    colorInProdcut.RemoveTime = DateTime.Now;
+                    db.ColorsInProducts.Update(colorInProdcut);
+                }
             }
         }
 
         private void DeleteSizes(List<ProductSize> productSizes, List<SizeInProduct> sizeInProducts)
         {
-            foreach (var item in productSizes)
+            if(productSizes != null && sizeInProducts != null)
             {
-                item.IsRemoved = true;
-                item.RemoveTime = System.DateTime.Now;
-                db.ProductSizes.Update(item);
+                foreach (var item in productSizes)
+                {
+                    var size = db.ProductSizes.Find(item.Id);
+                    size.IsRemoved = true;
+                    size.RemoveTime = System.DateTime.Now;
+                    db.ProductSizes.Update(size);
+                }
+                foreach (var item in sizeInProducts)
+                {
+                    var sizeInProduct = db.SizesInProducts.Find(item.Id);
+                    sizeInProduct.IsRemoved = true;
+                    sizeInProduct.RemoveTime = DateTime.Now;
+                    db.SizesInProducts.Update(sizeInProduct);
+                }
             }
-            foreach (var item in sizeInProducts)
-            {
-                item.IsRemoved = true;
-                item.RemoveTime = DateTime.Now;
-                db.SizesInProducts.Update(item);
-            }
+        }
+
+        private void DeleteInventoryAndPrice(List<ProductInventory> productInventories)
+        {
+            foreach (var item in productInventories)
+                db.ProductInventories.RemoveRange(productInventories);
         }
     }
 }

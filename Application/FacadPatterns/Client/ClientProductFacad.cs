@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Client;
 using Application.Services.Client.Products.Commands.AddNewVisit;
+using Application.Services.Client.Products.Queries.GetPriceByColorAndSize;
 
 namespace Application.FacadPatterns.Client
 {
@@ -23,6 +24,15 @@ namespace Application.FacadPatterns.Client
             get
             {
                 return _addNewVisitService ?? new AddNewVisitService(db);
+            }
+        }
+
+        private GetPriceAndInventoryByColorAndSizeService _getPriceByColorAndSize;
+        public IGetPriceAndInventoryByColorAndSizeService GetPriceByColorAndSize
+        {
+            get
+            {
+                return _getPriceByColorAndSize ?? new GetPriceAndInventoryByColorAndSizeService(db);
             }
         }
     }

@@ -22,7 +22,6 @@ namespace Application.Services.Common.Cart.Queries.GetUserCartPayings
                     Id = c.Id,
                     FullName = $"{c.Name} {c.Family}",
                     ProductsCount = c.Products.Count(),
-                    ProductsPrice = c.Products.Sum(p => p.Product.Price),
                 }).ToList();
 
             if (cartPayings == null)

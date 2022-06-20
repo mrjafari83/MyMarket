@@ -34,8 +34,6 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                 Brand = entry.Brand,
                 Description = entry.Description,
                 ShortDescription = entry.ShortDescription,
-                Inventory = entry.Inventory,
-                Price = entry.Price,
                 CreateDate = DateTime.Now,
                 CategoryId = entry.CategoryId,
                 Category = db.ProductCategories.Find(entry.CategoryId)
@@ -48,6 +46,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             db.ProductImages.AddRange(AddImages(product, entry.Images));
             db.ProductKeywords.AddRange(AddKeywords(product, entry.Keywords));
             db.ProductFutures.AddRange(AddFeature(product, entry.Features));
+            SetInventoryAndPrice(product, entry.InventoryAndPrices);
 
             db.Products.Add(product);
 
@@ -82,7 +81,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                 finallyImages.Add(new ProductImage
                 {
                     Product = product,
-                    Src = FileUploader.Upload(item, _environment , "Products/" + product.Name)
+                    Src = FileUploader.Upload(item, _environment, "Products/" + product.Name)
                 });
             }
 
@@ -109,19 +108,14 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             {
                 foreach (var item in entrycolors)
                 {
-                    if(db.ProductColors.Where(c=> c.Name == item.Name).Count() == 0)
-                    {
-                        var color = db.ProductColors.Add(new ProductColor { Name = item.Name });
-                        db.ColorsInProducts.Add(new ColorInProduct
-                        {
-                            Product = product,
-                            Color = color.Entity
-                        });
-                    }
+                    var color = db.ProductColors.Where(c => c.Name == item.Name).FirstOrDefault();
+                    if (color != null)
+                        db.ColorsInProducts.Add(new ColorInProduct { Color = color, Product = product });
+
                     else
                     {
-                        var dbColor = db.ProductColors.Where(c => c.Name == item.Name).FirstOrDefault();
-                        db.ColorsInProducts.Add(new ColorInProduct { Color = dbColor, Product = product });
+                        var newColor = db.ProductColors.Add(new ProductColor { Name = item.Name }).Entity;
+                        db.ColorsInProducts.Add(new ColorInProduct { Color = newColor, Product = product });
                     }
                 }
             }
@@ -129,28 +123,38 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
 
         private void SetSizes(Product product, List<SizeViewModel> entrySizes)
         {
-            if(entrySizes != null)
+            if (entrySizes != null)
             {
-                foreach(var item in entrySizes)
+                foreach (var item in entrySizes)
                 {
-                    if(db.ProductSizes.Where(s=> s.Value == item.SizeValue).Count() == 0)
-                    {
-                        var size = db.ProductSizes.Add(new ProductSize { Value = item.SizeValue });
-                        db.SizesInProducts.Add(new SizeInProduct
-                        {
-                            Size = size.Entity,
-                            Product = product
-                        });
-                    }
+                    var size = db.ProductSizes.Where(c => c.Value == item.SizeValue).FirstOrDefault();
+                    if (size != null)
+                        db.SizesInProducts.Add(new SizeInProduct { Size = size, Product = product });
+
                     else
                     {
-                        var size = db.ProductSizes.Where(s => s.Value == item.SizeValue).FirstOrDefault();
-                        db.SizesInProducts.Add(new SizeInProduct
-                        {
-                            Product = product,
-                            Size = size
-                        });
+                        var newSize = db.ProductSizes.Add(new ProductSize { Value = item.SizeValue }).Entity;
+                        db.SizesInProducts.Add(new SizeInProduct { Size = newSize, Product = product });
                     }
+                }
+            }
+        }
+
+        private void SetInventoryAndPrice(Product product , List<InventoryAndPriceViewModel> inventoryAndPrices)
+        {
+            if(inventoryAndPrices != null)
+            {
+                foreach(var item in inventoryAndPrices)
+                {
+                    db.ProductInventories.Add(new ProductInventory
+                    {
+                        ColorName = item.ColorName,
+                        SizeName = item.SizeName,
+                        Product = product,
+                        Price = item.Price,
+                        Inventory = item.Inventory,
+                        ProductId = product.Id
+                    });
                 }
             }
         }

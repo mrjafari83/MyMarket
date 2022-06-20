@@ -27,11 +27,11 @@ namespace Application.Services.Client.Carts.Commands.VerifyPaying
             var cartPaying = db.CartPayings.Find(cartPayingId);
             cartPaying.IsPayed = true;
 
-            var products = db.ProductsInCart.Include(p=> p.Product).Where(p => p.Cart.Id == cartId).ToList();
+            var products = db.ProductsInCart.Include(p=> p.Product).Include(p=> p.ProductInventoryAndPrice).Where(p => p.Cart.Id == cartId).ToList();
             foreach (var item in products)
             {
                 item.CartPayingInfo = cartPaying;
-                item.Product.Inventory = item.Product.Inventory - item.Count;
+                item.ProductInventoryAndPrice.Inventory -= item.Count;
             }
 
             db.CartPayings.Update(cartPaying);

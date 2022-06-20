@@ -21,10 +21,10 @@ namespace Market.EndPoint.Controllers
 
         [Route("AddToCart")]
         [HttpPost]
-        public IActionResult AddToCart(int productId, int count, string color = "", string size = "")
+        public IActionResult AddToCart(int productId, int count, int price, string color = "", string size = "")
         {
             int cartId = Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId"));
-            _clientCartFacad.AddProductToCart.Execute(cartId, productId, count, color, size);
+            _clientCartFacad.AddProductToCart.Execute(cartId, productId, count, price, color, size);
 
             return Json(true);
         }
@@ -33,7 +33,7 @@ namespace Market.EndPoint.Controllers
         [HttpPost]
         public IActionResult DeleteProductFromCart(int productInCartId)
         {
-            _clientCartFacad.DeleteProductFromCart.Execute(productInCartId , Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
+            _clientCartFacad.DeleteProductFromCart.Execute(productInCartId, Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
             return Redirect("/");
         }
 
@@ -46,7 +46,7 @@ namespace Market.EndPoint.Controllers
 
         [Route("EditCount")]
         [HttpPost]
-        public IActionResult EditCount(int count , int productInCartId)
+        public IActionResult EditCount(int count, int productInCartId)
         {
             _clientCartFacad.EditProductCount.Execute(productInCartId, count);
 
@@ -81,7 +81,7 @@ namespace Market.EndPoint.Controllers
         [HttpPost]
         public IActionResult Paying()
         {
-            _clientCartFacad.VerifyPaying.Execute(Int32.Parse(CookiesManager.GetCookieValue(HttpContext , "cartPayingId")) , Int32.Parse(CookiesManager.GetCookieValue(HttpContext , "CartId")));
+            _clientCartFacad.VerifyPaying.Execute(Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "cartPayingId")), Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
 
             return Redirect("/VerifyCart");
         }
@@ -98,9 +98,9 @@ namespace Market.EndPoint.Controllers
         public IActionResult DeleteCartData()
         {
             var products = _clientCartFacad.GetUserCart.Execute(User.Identity.Name).Data.Products;
-            foreach(var item in products)
+            foreach (var item in products)
             {
-                _clientCartFacad.DeleteProductFromCart.Execute(item.ProductInCartId , Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
+                _clientCartFacad.DeleteProductFromCart.Execute(item.ProductInCartId, Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
             }
 
             return Redirect("/");

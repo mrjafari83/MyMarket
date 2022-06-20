@@ -21,11 +21,10 @@ namespace Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying
                 Id = p.Product.Id,
                 Brand = p.Product.Brand,
                 Name = p.Product.Name,
-                Price = p.Product.Price,
                 Color = p.Color,
                 Count = p.Count,
                 Size = p.Size,
-                ImageSrc = p.Product.Images.FirstOrDefault().Src
+                ImageSrc = p.Product.Images.FirstOrDefault().Src,
             }).ToList();
 
             if (products == null)

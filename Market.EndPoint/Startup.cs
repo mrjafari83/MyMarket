@@ -45,12 +45,13 @@ namespace Market.EndPoint
 
             //DbContext Injection
             services.AddDbContext<DataBaseContext>(optons =>
-            optons.UseSqlServer(@"Data Source= .; Initial Catalog= Market_DB; Integrated Security= true;")
+            optons.UseSqlServer(@"Data Source= .; Initial Catalog= Market_DB; Integrated Security= False;User Id=sa;Password=123;")
             );
 
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddMvc();
+
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
             {

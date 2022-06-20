@@ -16,5 +16,6 @@ namespace Domain.Entities.Cart
         public int Count { get; set; }
         public string Color { get; set; }
         public string Size { get; set; }
+        public ProductInventory ProductInventoryAndPrice { get; set; }
     }
 }

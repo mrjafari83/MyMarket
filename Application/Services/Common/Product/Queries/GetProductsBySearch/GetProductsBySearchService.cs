@@ -29,7 +29,6 @@ namespace Application.Services.Common.Product.Queries.GetProductsBySearch
                     {
                         Id = p.Id,
                         Name = p.Name,
-                        Price = p.Price,
                         ShortDescription = p.ShortDescription,
                         Image = p.Images.First().Src
                     }).ToPaged(out totalRows, pagNumber, pageSize).ToList();

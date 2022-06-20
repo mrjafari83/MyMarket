@@ -22,9 +22,8 @@ namespace Application.Services.Common.Product.Queries.GetProductsByFilter
             {
                 Id = p.Id,
                 Name = p.Name,
-                Price = p.Price,
                 Image = p.Images.FirstOrDefault().Src,
-                ShortDescription = p.ShortDescription
+                ShortDescription = p.ShortDescription,
             }).ToPaged(out totalRows , pageNumber , pageSize).ToList();
 
             if (products != null)

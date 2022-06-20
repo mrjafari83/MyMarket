@@ -17,14 +17,16 @@ namespace Market.EndPoint.Controllers
         ICommonCommentFacad _commonCommentFacad;
         ICommonCategorisFacad _commonCategorisFacad;
         IClientCartFacad _clientCartFacad;
+        IClientProductFacad _clientProductFacad;
 
         public ProductController(ICommonProductFacad commonProductFacad, ICommonCommentFacad commonCommentFacad
-            , ICommonCategorisFacad commonCategorisFacad, IClientCartFacad clientCartFacad)
+            , ICommonCategorisFacad commonCategorisFacad, IClientCartFacad clientCartFacad , IClientProductFacad clientProductFacad)
         {
             _commonProductFacad = commonProductFacad;
             _commonCommentFacad = commonCommentFacad;
             _commonCategorisFacad = commonCategorisFacad;
             _clientCartFacad = clientCartFacad;
+            _clientProductFacad = clientProductFacad;
         }
 
         [Route("Products")]
@@ -76,6 +78,12 @@ namespace Market.EndPoint.Controllers
             ViewBag.HeaderTitle = "جستوجو : " + searchKey;
             ViewBag.TopbarTitle = "جستوجو";
             return View(viewName: "Index", _commonProductFacad.GetProductsBySearch.Execute(searchKey, 12, currentPage).Data);
+        }
+
+        [HttpPost]
+        public IActionResult GetPriceByColorAndSize(string colorName,string sizeName , int productId)
+        {
+            return Json(_clientProductFacad.GetPriceByColorAndSize.Execute(productId ,colorName, sizeName).Data);
         }
     }
 }

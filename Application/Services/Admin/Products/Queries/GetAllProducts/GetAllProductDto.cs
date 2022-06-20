@@ -7,7 +7,6 @@
         public string CategoryName { get; set; }
         public int CategoryId { get; set; }
         public string Brand { get; set; }
-        public int Inventory { get; set; }
         public int VisitNumber { get; set; }
     }
 }

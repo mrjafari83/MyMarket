@@ -16,7 +16,7 @@ namespace Persistance.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.13")
+                .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Domain.Entities.BlogPages.BlogPage", b =>
@@ -49,9 +49,6 @@ namespace Persistance.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VisitNumber")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -178,6 +175,9 @@ namespace Persistance.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProductInventoryAndPriceId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -191,6 +191,8 @@ namespace Persistance.Migrations
                     b.HasIndex("CartPayingInfoId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("ProductInventoryAndPriceId");
 
                     b.ToTable("ProductsInCart");
                 });
@@ -517,18 +519,12 @@ namespace Persistance.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Inventory")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -611,6 +607,35 @@ namespace Persistance.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Products.ProductInventory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ColorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Inventory")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SizeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductInventories");
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.ProductSize", b =>
@@ -742,21 +767,21 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = "Customer",
-                            ConcurrencyStamp = "ef7e1de6-6734-4ebf-a2d8-5c17783e5c99",
+                            ConcurrencyStamp = "73db3b88-8ea5-4fd3-96ff-49a42914dab7",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "Admin",
-                            ConcurrencyStamp = "d507c8b8-7f84-4a53-99ac-a3d46746fcac",
+                            ConcurrencyStamp = "d46a792f-c421-4469-92c0-12ce65a41071",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "Owner",
-                            ConcurrencyStamp = "edf10fcb-586f-4e42-9bab-98a5087e3bfb",
+                            ConcurrencyStamp = "f6c9d431-e2f4-4381-8a1b-abaee570fe90",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -1002,11 +1027,17 @@ namespace Persistance.Migrations
                         .WithMany("ProductInCarts")
                         .HasForeignKey("ProductId");
 
+                    b.HasOne("Domain.Entities.Products.ProductInventory", "ProductInventoryAndPrice")
+                        .WithMany()
+                        .HasForeignKey("ProductInventoryAndPriceId");
+
                     b.Navigation("Cart");
 
                     b.Navigation("CartPayingInfo");
 
                     b.Navigation("Product");
+
+                    b.Navigation("ProductInventoryAndPrice");
                 });
 
             modelBuilder.Entity("Domain.Entities.Categories.Category<Domain.Entities.BlogPages.BlogPage>", b =>
@@ -1100,6 +1131,17 @@ namespace Persistance.Migrations
                     b.HasOne("Domain.Entities.Products.Product", "Product")
                         .WithMany("Images")
                         .HasForeignKey("ProductId");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Products.ProductInventory", b =>
+                {
+                    b.HasOne("Domain.Entities.Products.Product", "Product")
+                        .WithMany("Inventories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
                 });
@@ -1254,6 +1296,8 @@ namespace Persistance.Migrations
                     b.Navigation("Features");
 
                     b.Navigation("Images");
+
+                    b.Navigation("Inventories");
 
                     b.Navigation("Keywords");
 

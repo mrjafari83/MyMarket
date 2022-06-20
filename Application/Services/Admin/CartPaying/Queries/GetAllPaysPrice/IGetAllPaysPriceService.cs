@@ -25,10 +25,10 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllPaysPrice
         public ResultDto<int> Execute()
         {
             int total = 0;
-            var products = db.ProductsInCart.Include(p=> p.CartPayingInfo).Include(p=> p.Product).Where(p=> p.CartPayingInfo.IsPayed).ToList();
-            foreach(var item in products)
+            var products = db.ProductsInCart.Include(p=> p.ProductInventoryAndPrice).Include(p=> p.CartPayingInfo).Include(p=> p.Product).Where(p=> p.CartPayingInfo.IsPayed).ToList();
+            foreach (var item in products)
             {
-                total += item.Count * item.Product.Price;
+                total += item.Count * item.ProductInventoryAndPrice.Price;
             }
 
             return new ResultDto<int>

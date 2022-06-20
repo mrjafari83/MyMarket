@@ -46,6 +46,7 @@ namespace Application.Interfaces.Context
         DbSet<News> News { get; set; }
         DbSet<CriticismMessage> CriticismMessages { get; set; }
         DbSet<Browser> Browsers { get; set; }
+        DbSet<ProductInventory> ProductInventories { get; set; }
 
         //relation tables
         DbSet<ColorInProduct> ColorsInProducts { get; set; }

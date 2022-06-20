@@ -27,8 +27,6 @@ namespace Application.Services.Admin.Products.Queries.GetProductById
                     Brand  = p.Brand,
                     ShortDescription = p.ShortDescription,
                     Description = p.Description,
-                    Inventory = p.Inventory,
-                    Price = p.Price,
                     CategoryId =  p.Category.Id,
                     CategoryName = p. Category.Name,
                     CreateDate = p.CreateDate.ToShamsi(),
@@ -36,7 +34,15 @@ namespace Application.Services.Admin.Products.Queries.GetProductById
                     Keywords = p.Keywords.Select(k=> new KeywordViewModel { KeywordValue = k.Value}).ToList(),
                     Sizes = p.Sizes.Select(s=> new SizeViewModel { SizeValue = s.Size.Value}).ToList(),
                     Colors = p.Colors.Select(c=> new ColorViewModel { Name = c.Color.Name}).ToList(),
-                    Features = p.Features.Select(f=> new FeatureViewModel { Display = f.Display , FeatureValue = f.Value}).ToList()
+                    Features = p.Features.Select(f=> new FeatureViewModel { Display = f.Display , FeatureValue = f.Value}).ToList(),
+                    InventoryAndPrices = p.Inventories.Select(p=> new InventoryAndPriceViewModel
+                    {
+                        Price = p.Price,
+                        ColorName = p.ColorName,
+                        SizeName = p.SizeName,
+                        Inventory = p.Inventory,
+                        ProductId = p.ProductId,
+                    }).ToList(),
                 }).First();
 
             if (product != null)
