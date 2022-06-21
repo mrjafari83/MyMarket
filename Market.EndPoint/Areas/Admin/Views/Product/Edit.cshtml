@@ -202,6 +202,7 @@
                                 }
                             </tbody>
                         </table>
+                        <p id="invemtoryTableError" style="color:red;font-size:110%"></p>
                         <div class="input-field col s12">
                             <button class="btn waves-effect waves-light right submit green" type="submit" name="action">افزودن</button>
                         </div>
@@ -271,8 +272,6 @@
                 }
             },
             submitHandler: function () {
-                debugger;
-
                 var formdata = new FormData();
                 formdata.append("Id", "@Model.Id");
                 formdata.append("Name", $("#name").val());
@@ -345,7 +344,14 @@
                     formdata.append('[' + i + '].ProductId', val.ProductId);
                 });
 
-                $.ajax({
+                debugger;
+                var colorRowsCount = document.getElementById("colorTable").rows.length;
+                var sizeRowsCount = document.getElementById("sizeTable").rows.length;;
+                var inventoryAndPriceCount = inventoryAndPrice.length;
+
+                if((colorRowsCount * sizeRowsCount === inventoryAndPriceCount && inventoryAndPriceCount != 0)
+                || (colorRowsCount != 0 && inventoryAndPriceCount != 0) || (sizeRowsCount != 0 && inventoryAndPriceCount != 0)){
+                    $.ajax({
                     type: "POST",
                     processData: false,
                     contentType: false,
@@ -357,6 +363,11 @@
                         window.location.href = "/Admin/Product";
                     }
                 });
+                }
+
+                else{
+                    document.getElementById("invemtoryTableError").innerHTML = "لطفا اطلاعات جدول قیمت ها و موجودی ها را پر کنید."
+                }
             }
         });
 

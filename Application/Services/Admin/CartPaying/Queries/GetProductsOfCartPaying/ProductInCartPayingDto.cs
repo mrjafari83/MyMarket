@@ -9,5 +9,6 @@
         public string Color { get; set; }
         public string Size { get; set; }
         public string ImageSrc { get; set; }
+        public int Price { get; set; }
     }
 }

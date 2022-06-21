@@ -2,34 +2,30 @@
 using Application.Interfaces.Context;
 using Domain.Entities.Cart;
 using System.Linq;
+using AutoMapper;
 
 namespace Application.Services.Client.Carts.Commands.AddProductToCart
 {
     public class AddProductToCartService : IAddProductToCartService
     {
         private readonly IDataBaseContext db;
-        public AddProductToCartService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public AddProductToCartService(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
-        public ResultDto Execute(int cartId, int productId, int productCount , int productPrice , string productColor = "", string productSize = "")
-        {
-            var cart = db.Carts.Find(cartId);
-            var product = db.Products.Find(productId);
-            var addingProduct = db.ProductsInCart.Add(new ProductInCart()
-            {
-                Product = product,
-                Color = productColor,
-                Size = productSize,
-                Count = productCount,
-                Cart = cart,
-                ProductInventoryAndPrice = db.ProductInventories.FirstOrDefault(p=> p.ProductId == productId
-                && p.SizeName == productSize && p.ColorName == productColor && p.Price == productPrice)
-            }).Entity;
+        public ResultDto Execute(AddProductToCartDto model)
+         {
+            var cart = db.Carts.Find(model.CartId);
+            var product = _mapper.Map<ProductInCart>(model);
+            product.ProductInventoryAndPrice = db.ProductInventories.FirstOrDefault(p => p.ProductId == product.ProductId 
+            && (p.ColorName == product.Color || p.ColorName == null) && (p.SizeName == product.Size || p.SizeName == null));
+            db.ProductsInCart.Add(product);
             db.SaveChanges();
 
-            cart.Products.Add(db.ProductsInCart.Find(addingProduct.Id));
+            cart.Products.Add(db.ProductsInCart.Find(product.Id));
 
             db.Carts.Update(cart);
             db.SaveChanges();
@@ -38,5 +34,15 @@ namespace Application.Services.Client.Carts.Commands.AddProductToCart
                 IsSuccess = true
             };
         }
+    }
+
+    public class AddProductToCartDto
+    {
+        public int CartId { get; set; }
+        public int ProductId { get; set; }
+        public int Count{ get; set; }
+        public int Price { get; set; }
+        public string Color { get; set; } = "";
+        public string Size { get; set; } = "";
     }
 }

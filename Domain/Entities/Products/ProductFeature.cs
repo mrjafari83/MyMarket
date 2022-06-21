@@ -12,7 +12,7 @@ namespace Domain.Entities.Products
     public class ProductFeature : BaseEntity
     {
         public string Display { get; set; }
-        public string Value { get; set; }
+        public string FeatureValue { get; set; }
 
         public virtual Product Product { get; set; }
     }

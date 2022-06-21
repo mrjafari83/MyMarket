@@ -28,7 +28,7 @@ namespace Market.EndPoint.Controllers
         }
 
         [Route("Blogs")]
-        public IActionResult Index(int currentPage = 1 , int categoryId = 0)
+        public async Task<IActionResult> Index(int currentPage = 1 , int categoryId = 0)
         {
             ViewBag.CurrentPage = currentPage;
             if (categoryId == 0)
@@ -36,7 +36,8 @@ namespace Market.EndPoint.Controllers
             else
                 ViewBag.HeaderTitle = _commonCategorisFacad.GetBlogCategoryById.Execute(categoryId).Data.Name;
 
-            return View(_commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber: currentPage , categoryId:categoryId).Data);
+            var pages = _commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber: currentPage, categoryId: categoryId).Data;
+            return View(pages);
         }
 
         [Route("Blog")]

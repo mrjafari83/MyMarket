@@ -26,7 +26,7 @@ namespace Persistance.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -110,7 +110,7 @@ namespace Persistance.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -157,7 +157,7 @@ namespace Persistance.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CartPayingInfoId")
@@ -172,7 +172,10 @@ namespace Persistance.Migrations
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<bool>("IsShow")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProductInventoryAndPriceId")
@@ -570,6 +573,9 @@ namespace Persistance.Migrations
                     b.Property<string>("Display")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FeatureValue")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
@@ -578,9 +584,6 @@ namespace Persistance.Migrations
 
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -651,7 +654,7 @@ namespace Persistance.Migrations
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Value")
+                    b.Property<string>("SizeValue")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -767,21 +770,21 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = "Customer",
-                            ConcurrencyStamp = "73db3b88-8ea5-4fd3-96ff-49a42914dab7",
+                            ConcurrencyStamp = "4080af89-e6f0-4048-8d11-7d334c0877a9",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "Admin",
-                            ConcurrencyStamp = "d46a792f-c421-4469-92c0-12ce65a41071",
+                            ConcurrencyStamp = "7a404050-1923-4f1f-bb42-faaf69e5d420",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "Owner",
-                            ConcurrencyStamp = "f6c9d431-e2f4-4381-8a1b-abaee570fe90",
+                            ConcurrencyStamp = "29cf5eda-0f86-47c8-b4cf-12c53efd1c17",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -984,7 +987,9 @@ namespace Persistance.Migrations
                 {
                     b.HasOne("Domain.Entities.Categories.Category<Domain.Entities.BlogPages.BlogPage>", "Category")
                         .WithMany("Location")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
@@ -1008,7 +1013,9 @@ namespace Persistance.Migrations
                 {
                     b.HasOne("Domain.Entities.Cart.Cart", "Cart")
                         .WithMany("CartPayings")
-                        .HasForeignKey("CartId");
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cart");
                 });
@@ -1017,7 +1024,9 @@ namespace Persistance.Migrations
                 {
                     b.HasOne("Domain.Entities.Cart.Cart", "Cart")
                         .WithMany("Products")
-                        .HasForeignKey("CartId");
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.Cart.CartPayingInfo", "CartPayingInfo")
                         .WithMany("Products")
@@ -1025,10 +1034,12 @@ namespace Persistance.Migrations
 
                     b.HasOne("Domain.Entities.Products.Product", "Product")
                         .WithMany("ProductInCarts")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.Products.ProductInventory", "ProductInventoryAndPrice")
-                        .WithMany()
+                        .WithMany("ProductInCarts")
                         .HasForeignKey("ProductInventoryAndPriceId");
 
                     b.Navigation("Cart");
@@ -1311,6 +1322,11 @@ namespace Persistance.Migrations
             modelBuilder.Entity("Domain.Entities.Products.ProductColor", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Products.ProductInventory", b =>
+                {
+                    b.Navigation("ProductInCarts");
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.ProductSize", b =>

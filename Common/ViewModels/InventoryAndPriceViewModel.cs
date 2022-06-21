@@ -8,6 +8,7 @@ namespace Common.ViewModels
 {
     public class InventoryAndPriceViewModel
     {
+        public int Id { get; set; } = 0;
         public int ProductId { get; set; }
         public string ColorName { get; set; }
         public string SizeName { get; set; }

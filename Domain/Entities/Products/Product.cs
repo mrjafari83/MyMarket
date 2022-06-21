@@ -22,10 +22,10 @@ namespace Domain.Entities.Products
         public string ShortDescription { get; set; }
         [AllowHtml]
         public string Description { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
-        public virtual Category<Product> Category { get; set; }
         public int CategoryId { get; set; }
+        public virtual Category<Product> Category { get; set; }
         public virtual ICollection<ProductFeature> Features { get; set; }
         public virtual ICollection<SizeInProduct> Sizes { get; set; }
         public virtual ICollection<ColorInProduct> Colors { get; set; }

@@ -12,6 +12,7 @@ using Application.Services.Admin.Products.Queries.GetBestSellingProducts;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.Context;
 using Microsoft.AspNetCore.Hosting;
+using AutoMapper;
 
 namespace Application.FacadPatterns.Admin
 {
@@ -19,11 +20,13 @@ namespace Application.FacadPatterns.Admin
     {
         private readonly IDataBaseContext db;
         private readonly IHostingEnvironment _environment;
+        private readonly IMapper _mapper;
         public ProductFacad(IDataBaseContext context
-            , IHostingEnvironment environment)
+            , IHostingEnvironment environment , IMapper mapper)
         {
             db = context;
             _environment = environment;
+            _mapper = mapper;
         }
 
         private GetAllProductsService _getAllProductsService;
@@ -31,7 +34,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return _getAllProductsService == null ? new GetAllProductsService(db) : _getAllProductsService;
+                return _getAllProductsService == null ? new GetAllProductsService(db,_mapper) : _getAllProductsService;
             }
         }
 
@@ -40,7 +43,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return _getProductByIdService == null ? new GetProductByIdService(db) : _getProductByIdService;
+                return _getProductByIdService == null ? new GetProductByIdService(db , _mapper) : _getProductByIdService;
             }
         }
 
@@ -49,7 +52,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return _createProductService == null ? new CreateProductService(db , _environment) : _createProductService;
+                return _createProductService == null ? new CreateProductService(db , _environment , _mapper) : _createProductService;
             }
         }
 
@@ -76,7 +79,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return _getBestSellingProductsService ?? new GetBestSellingProductsService(db);
+                return _getBestSellingProductsService ?? new GetBestSellingProductsService(db,_mapper);
             }
         }
     }

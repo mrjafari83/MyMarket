@@ -2,20 +2,23 @@
 using Application.Interfaces.Context;
 using Common.Dto;
 using Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying;
+using AutoMapper;
 
 namespace Application.Services.Common.Cart.Queries.GetCartPayingById
 {
     public class GetCartPayingByIdService : IGetCartPayingByIdService
     {
         private readonly IDataBaseContext db;
-        public GetCartPayingByIdService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public GetCartPayingByIdService(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         public ResultDto<GetCartPayingByIdDto> Execute(int id)
         {
-            var products = new GetProductsOfCartPayingService(db).Execute(id).Data;
+            var products = new GetProductsOfCartPayingService(db,_mapper).Execute(id).Data;
 
             var cartPaying = db.CartPayings.Where(c => c.Id == id).Select(c => new GetCartPayingByIdDto
             {

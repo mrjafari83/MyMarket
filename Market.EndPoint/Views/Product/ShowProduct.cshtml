@@ -273,6 +273,7 @@
 
         function GetPrice(){
             var data = new FormData();
+
             data.append("colorName", $("#colorSelector").find(":selected").text());
             data.append("sizeName", $("#sizeSelector").find(":selected").text());
             data.append("productId", @Model.Id);

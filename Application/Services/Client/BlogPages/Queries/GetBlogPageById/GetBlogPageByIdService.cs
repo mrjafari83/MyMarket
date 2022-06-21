@@ -1,30 +1,25 @@
 ﻿using System.Linq;
 using Application.Interfaces.Context;
+using AutoMapper;
 using Common.Dto;
 using Common.Utilities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Client.BlogPages.Queries.GetBlogPageById
 {
     public class GetBlogPageByIdService : IGetBlogPageByIdService
     {
         private readonly IDataBaseContext db;
-        public GetBlogPageByIdService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public GetBlogPageByIdService(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         public ResultDto<GetBlogPageByIdDto> Execute(int id)
         {
-            GetBlogPageByIdDto blogPage = db.BlogPages.Where(b => b.Id == id).Select(b => new GetBlogPageByIdDto
-            {
-                Id = b.Id,
-                Title = b.Title,
-                Text = b.Text,
-                Image = b.Image,
-                CreateDate = b.CreateDate.ToShamsi(),
-                CategoryId = b.Category.Id,
-                CategoryName = b.Category.Name
-            }).FirstOrDefault();
+            var blogPage = _mapper.Map<GetBlogPageByIdDto>(db.BlogPages.Include(b => b.Category).Include(b => b.Visits).FirstOrDefault(b => b.Id == id));
 
             if (blogPage != null)
                 return new ResultDto<GetBlogPageByIdDto>

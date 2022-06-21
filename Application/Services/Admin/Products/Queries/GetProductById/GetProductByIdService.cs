@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Application.Interfaces.Context;
+using AutoMapper;
 using Common.Dto;
 using Common.Utilities;
 using Common.ViewModels;
@@ -10,40 +11,17 @@ namespace Application.Services.Admin.Products.Queries.GetProductById
     public class GetProductByIdService : IGetProductByIdService
     {
         private readonly IDataBaseContext db;
-        public GetProductByIdService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public GetProductByIdService(IDataBaseContext context, IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         public ResultDto<GetProductByIdDto> Execute(int id)
         {
-            GetProductByIdDto product = new GetProductByIdDto();
-
-            product = db.Products.Include(p => p.Features).Include(p => p.Keywords)
-                .Include(p => p.Colors).ThenInclude(c=> c.Color).Include(p => p.Sizes).Where(p => p.Id == id).Select(p => new GetProductByIdDto 
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Brand  = p.Brand,
-                    ShortDescription = p.ShortDescription,
-                    Description = p.Description,
-                    CategoryId =  p.Category.Id,
-                    CategoryName = p. Category.Name,
-                    CreateDate = p.CreateDate.ToShamsi(),
-                    VisitNumber = p.Visits.Count(),
-                    Keywords = p.Keywords.Select(k=> new KeywordViewModel { KeywordValue = k.Value}).ToList(),
-                    Sizes = p.Sizes.Select(s=> new SizeViewModel { SizeValue = s.Size.Value}).ToList(),
-                    Colors = p.Colors.Select(c=> new ColorViewModel { Name = c.Color.Name}).ToList(),
-                    Features = p.Features.Select(f=> new FeatureViewModel { Display = f.Display , FeatureValue = f.Value}).ToList(),
-                    InventoryAndPrices = p.Inventories.Select(p=> new InventoryAndPriceViewModel
-                    {
-                        Price = p.Price,
-                        ColorName = p.ColorName,
-                        SizeName = p.SizeName,
-                        Inventory = p.Inventory,
-                        ProductId = p.ProductId,
-                    }).ToList(),
-                }).First();
+            var product = _mapper.Map<GetProductByIdDto>(db.Products.Include(p => p.Features).Include(p => p.Keywords).Include(p => p.Inventories)
+                .Include(p => p.Colors).ThenInclude(c => c.Color).Include(p => p.Sizes).ThenInclude(p => p.Size).Where(p => p.Id == id).FirstOrDefault());
 
             if (product != null)
                 return new ResultDto<GetProductByIdDto>

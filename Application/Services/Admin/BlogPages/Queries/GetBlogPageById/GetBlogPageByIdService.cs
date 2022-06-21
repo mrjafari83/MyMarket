@@ -4,40 +4,31 @@ using Common.Utilities;
 using Application.Interfaces.Context;
 using Common.ViewModels;
 using System.Collections.Generic;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.BlogPages.Queries.GetBlogPageById
 {
     public class GetBlogPageByIdService : IGetBlogPageByIdService
     {
         private readonly IDataBaseContext db;
-        public GetBlogPageByIdService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public GetBlogPageByIdService(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
-        public ResultDto<GetBlogPageByIdDto> Execute(int id)
+        public async Task<ResultDto<GetBlogPageByIdDto>> Execute(int id)
         {
-            var page = db.BlogPages.Where(p => p.Id == id).Select(p => new GetBlogPageByIdDto
-            {
-                Id = p.Id,
-                Title = p.Title,
-                ShortDescription = p.ShortDescription,
-                Text = p.Text,
-                Image = p.Image,
-                VisitNumber = p.Visits.Count(),
-                CategoryId = p.Category.Id,
-                CategoryName = p.Category.Name,
-                CreateDate = p.CreateDate.ToShamsi(),
-                Keywords = p.Keywords.Select(k=> new KeywordViewModel
-                {
-                    KeywordValue = k.Value,
-                }).ToList()
-            }).FirstOrDefault();
+            var blogPage= _mapper.Map<GetBlogPageByIdDto>(await db.BlogPages.Include(b=> b.Category)
+                .Include(b=> b.Visits).Include(b=> b.Keywords).AsNoTracking().FirstOrDefaultAsync(b=> b.Id == id));
 
-            if (page != null)
+            if (blogPage != null)
                 return new ResultDto<GetBlogPageByIdDto>
                 {
-                    Data = page,
+                    Data = blogPage,
                     IsSuccess = true
                 };
             else

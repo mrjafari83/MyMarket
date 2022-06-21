@@ -14,6 +14,8 @@ using Application.Services.Admin.Products.Commands.EditProduct;
 using Application.Services.Admin.Products.Commands.DeleteProduct;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
+using Domain.Entities.Products;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -24,14 +26,16 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly IProductFacad _productFacad;
         private readonly IProductCategoryFacad _productCategoryFacad;
         private readonly ICommonCategorisFacad _commonCategorisFacad;
+        private readonly IMapper _mapper;
 
         public ProductController(IProductFacad productFacad
             , IProductCategoryFacad productCategoryFacad
-            , ICommonCategorisFacad commonCategorisFacad)
+            , ICommonCategorisFacad commonCategorisFacad , IMapper mapper)
         {
             _productFacad = productFacad;
             _productCategoryFacad = productCategoryFacad;
             _commonCategorisFacad = commonCategorisFacad;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -56,20 +60,16 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(ProductViewModel request, List<KeywordViewModel> Keywords
             , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
-            , List<InventoryAndPriceViewModel> inventoryAndPrice)
+            , List<InventoryAndPriceViewModel> inventoryAndPrice, List<IFormFile> Images)
         {
                 _productFacad.CreateProductService.Execute(new CreateProductServiceDto
                 {
-                    Name = request.Name,
-                    Brand = request.Brand,
-                    ShortDescription = request.ShortDescription,
-                    Description = request.Description,
-                    CategoryId = request.CategoryId,
+                    Product = request,
                     Keywords = Keywords,
                     Colors = colors,
                     Sizes = sizes,
                     Features = features,
-                    Images = request.Images,
+                    Images = Images,
                     InventoryAndPrices = inventoryAndPrice
                 });
 
@@ -95,17 +95,12 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(ProductViewModel product, List<KeywordViewModel> Keywords
             , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
-            ,List<InventoryAndPriceViewModel> inventoryAndPrice)
+            ,List<InventoryAndPriceViewModel> inventoryAndPrice ,List<IFormFile> Images)
         {
             _productFacad.EditProductService.Execute(new EditProductDto
             {
-                Id = product.Id,
-                Name = product.Name,
-                Brand = product.Brand,
-                ShortDescription = product.ShortDescription,
-                Description = product.Description,
-                CategoryId = product.CategoryId,
-                Images = product.Images,
+                Product = product,
+                Images = Images,
                 Keywords = Keywords,
                 Colors = colors,
                 Sizes = sizes,

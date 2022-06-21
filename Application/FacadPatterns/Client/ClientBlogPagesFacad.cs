@@ -7,15 +7,18 @@ using Application.Services.Client.BlogPages.Queries.GetBlogPageById;
 using Application.Services.Client.BlogPages.Commands.AddNewVisit;
 using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Client;
+using AutoMapper;
 
 namespace Application.FacadPatterns.Client
 {
     public class ClientBlogPagesFacad : IClientBlogPageFacad
     {
         private readonly IDataBaseContext db;
-        public ClientBlogPagesFacad(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public ClientBlogPagesFacad(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         private GetBlogPageByIdService _getBlogPageByIdService;
@@ -23,7 +26,7 @@ namespace Application.FacadPatterns.Client
         {
             get
             {
-                return _getBlogPageByIdService ?? new GetBlogPageByIdService(db);
+                return _getBlogPageByIdService ?? new GetBlogPageByIdService(db,_mapper);
             }
         }
 

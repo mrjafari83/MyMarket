@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Context;
+using AutoMapper;
 using Common.Dto;
 using Common.ViewModels;
 using Domain.Entities.Cart;
@@ -8,29 +9,22 @@ namespace Application.Services.Client.Carts.Commands.AddCartPaying
     public class AddCartPayingService : IAddCartPayingService
     {
         private readonly IDataBaseContext db;
-        public AddCartPayingService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public AddCartPayingService(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         public ResultDto<int> Execute(CartPayingViewModel model)
         {
-            var cartPaying = db.CartPayings.Add(new CartPayingInfo
-            {
-                Name = model.Name,
-                Family = model.Family,
-                Address = model.Address,
-                PhoneNumber = model.PhoneNumber,
-                PostalCode = model.PostalCode,
-                Email = model.Email,
-                Cart = db.Carts.Find(model.CartId),
-            });
-
+            var cartPaying = _mapper.Map<CartPayingInfo>(model);
+            db.CartPayings.Add(cartPaying);
             db.SaveChanges();
 
             return new ResultDto<int>
             {
-                Data = cartPaying.Entity.Id,
+                Data = cartPaying.Id,
                 IsSuccess = true,
             };
         }

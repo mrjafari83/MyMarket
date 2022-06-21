@@ -19,7 +19,7 @@ namespace Application.Services.Admin.ProductFeature.Queries.GetAllProductFeature
             {
                 Id = f.Id,
                 Name = f.Display,
-                Value = f.Value
+                Value = f.FeatureValue
             }).ToList();
 
             if (features != null)

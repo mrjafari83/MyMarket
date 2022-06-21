@@ -8,6 +8,6 @@ namespace Application.Services.Admin.BlogPages.Commands.CreateBlogPage
 {
     public interface ICreateBlogPageService
     {
-        ResultDto Execute(CreateBlogPageDto entry);
+        Task<ResultDto> Execute(CreateBlogPageDto entry);
     }
 }

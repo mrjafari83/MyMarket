@@ -42,25 +42,3 @@ E:\asp.net projects\MyMarket\Persistance\obj\Debug\net5.0\Persistance.dll
 E:\asp.net projects\MyMarket\Persistance\obj\Debug\net5.0\ref\Persistance.dll
 E:\asp.net projects\MyMarket\Persistance\obj\Debug\net5.0\Persistance.pdb
 E:\asp.net projects\MyMarket\Persistance\obj\Debug\net5.0\Persistance.genruntimeconfig.cache
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Persistance.deps.json
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Persistance.runtimeconfig.json
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Persistance.runtimeconfig.dev.json
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Persistance.dll
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\ref\Persistance.dll
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Persistance.pdb
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Application.dll
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Common.dll
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Domain.dll
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Application.pdb
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Domain.pdb
-C:\Users\Kar1\Desktop\MyMarket\Persistance\bin\Debug\net5.0\Common.pdb
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.csproj.AssemblyReference.cache
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.AssemblyInfoInputs.cache
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.AssemblyInfo.cs
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.csproj.CoreCompileInputs.cache
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.csproj.CopyComplete
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.dll
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\ref\Persistance.dll
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.pdb
-C:\Users\Kar1\Desktop\MyMarket\Persistance\obj\Debug\net5.0\Persistance.genruntimeconfig.cache

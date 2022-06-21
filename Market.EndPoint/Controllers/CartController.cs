@@ -24,7 +24,15 @@ namespace Market.EndPoint.Controllers
         public IActionResult AddToCart(int productId, int count, int price, string color = "", string size = "")
         {
             int cartId = Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId"));
-            _clientCartFacad.AddProductToCart.Execute(cartId, productId, count, price, color, size);
+            _clientCartFacad.AddProductToCart.Execute(new Application.Services.Client.Carts.Commands.AddProductToCart.AddProductToCartDto
+            {
+                ProductId = productId,
+                Count = count,
+                Price = price,
+                Color = color,
+                Size = size,
+                CartId = cartId,
+            });
 
             return Json(true);
         }

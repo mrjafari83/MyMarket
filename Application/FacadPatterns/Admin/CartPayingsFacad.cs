@@ -11,15 +11,18 @@ using Application.Services.Admin.CartPaying.Queries.GetAllPaysPrice;
 using Application.Services.Admin.CartPaying.Queries.GetAllNotSendedPrice;
 using Application.Services.Admin.CartPaying.Queries.GetNotSendedCount;
 using Application.Services.Admin.CartPaying.Queries.GetAllPriceByDate;
+using AutoMapper;
 
 namespace Application.FacadPatterns.Admin
 {
     public class CartPayingsFacad : ICartPayingFacad
     {
         private readonly IDataBaseContext db;
-        public CartPayingsFacad(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public CartPayingsFacad(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         private GetAllCartPayingsService getAllCartPayingsService;
@@ -27,7 +30,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return getAllCartPayingsService ?? new GetAllCartPayingsService(db);
+                return getAllCartPayingsService ?? new GetAllCartPayingsService(db,_mapper);
             } 
         }
 

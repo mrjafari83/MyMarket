@@ -17,7 +17,7 @@ namespace Application.Services.Admin.ProductFeature.Commands.CreateProductFeatur
             db.ProductFutures.Add(new Domain.Entities.Products.ProductFeature
             {
                 Display = entry.Name,
-                Value = entry.Value,
+                FeatureValue = entry.Value,
             });
 
             db.SaveChanges();

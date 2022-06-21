@@ -12,6 +12,7 @@ using Domain.Entities.Common;
 using Application.Services.Admin.Keyword.Commands.CreateKeyword;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using AutoMapper;
 
 namespace Application.Services.Admin.Products.Commands.CreateProduct
 {
@@ -19,25 +20,18 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
     {
         private readonly IDataBaseContext db;
         private readonly IHostingEnvironment _environment;
+        private readonly IMapper _mapper;
         public CreateProductService(IDataBaseContext context
-            , IHostingEnvironment environment)
+            , IHostingEnvironment environment , IMapper mapper)
         {
             db = context;
             _environment = environment;
+            _mapper = mapper;   
         }
 
         public ResultDto Execute(CreateProductServiceDto entry)
         {
-            var product = new Product()
-            {
-                Name = entry.Name,
-                Brand = entry.Brand,
-                Description = entry.Description,
-                ShortDescription = entry.ShortDescription,
-                CreateDate = DateTime.Now,
-                CategoryId = entry.CategoryId,
-                Category = db.ProductCategories.Find(entry.CategoryId)
-            };
+            var product = _mapper.Map<ProductViewModel , Product>(entry.Product);
 
             SetColors(product, entry.Colors);
             SetSizes(product, entry.Sizes);
@@ -65,8 +59,8 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             {
                 finallykeywords.Add(new Keyword<Product>
                 {
+                    Value = item.KeywordValue,
                     Parent = product,
-                    Value = item.KeywordValue
                 });
             }
 
@@ -92,13 +86,11 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
         {
             List<Domain.Entities.Products.ProductFeature> finallyFeatures = new List<Domain.Entities.Products.ProductFeature>();
             foreach (var item in features)
-                finallyFeatures.Add(new Domain.Entities.Products.ProductFeature
-                {
-                    Display = item.Display,
-                    Value = item.FeatureValue,
-                    Product = product
-                });
-
+            {
+                var feature = _mapper.Map<FeatureViewModel, Domain.Entities.Products.ProductFeature>(item);
+                feature.Product = product;
+                finallyFeatures.Add(feature);
+            }
             return finallyFeatures;
         }
 
@@ -127,13 +119,13 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             {
                 foreach (var item in entrySizes)
                 {
-                    var size = db.ProductSizes.Where(c => c.Value == item.SizeValue).FirstOrDefault();
+                    var size = db.ProductSizes.Where(c => c.SizeValue == item.SizeValue).FirstOrDefault();
                     if (size != null)
                         db.SizesInProducts.Add(new SizeInProduct { Size = size, Product = product });
 
                     else
                     {
-                        var newSize = db.ProductSizes.Add(new ProductSize { Value = item.SizeValue }).Entity;
+                        var newSize = db.ProductSizes.Add(new ProductSize { SizeValue = item.SizeValue }).Entity;
                         db.SizesInProducts.Add(new SizeInProduct { Size = newSize, Product = product });
                     }
                 }
@@ -146,15 +138,9 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             {
                 foreach(var item in inventoryAndPrices)
                 {
-                    db.ProductInventories.Add(new ProductInventory
-                    {
-                        ColorName = item.ColorName,
-                        SizeName = item.SizeName,
-                        Product = product,
-                        Price = item.Price,
-                        Inventory = item.Inventory,
-                        ProductId = product.Id
-                    });
+                    var addingItem = _mapper.Map<InventoryAndPriceViewModel, ProductInventory>(item);
+                    addingItem.Product = product;
+                    db.ProductInventories.Add(addingItem);
                 }
             }
         }

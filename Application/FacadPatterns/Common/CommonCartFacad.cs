@@ -7,15 +7,18 @@ using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Common;
 using Application.Services.Common.Cart.Queries.GetUserCartPayings;
 using Application.Services.Common.Cart.Queries.GetCartPayingById;
+using AutoMapper;
 
 namespace Application.FacadPatterns.Common
 {
     public class CommonCartFacad : ICommonCartFacad
     {
         private readonly IDataBaseContext db;
-        public CommonCartFacad(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public CommonCartFacad(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         private GetUserCartPayingsService _getUserCartPayingsService;
@@ -32,7 +35,7 @@ namespace Application.FacadPatterns.Common
         {
             get
             {
-                return _getCartPayingByIdService ?? new GetCartPayingByIdService(db);
+                return _getCartPayingByIdService ?? new GetCartPayingByIdService(db,_mapper);
             }
         }
     }

@@ -1,33 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Application.Interfaces.Context;
+using AutoMapper;
 using Common.Dto;
 using Common.Utilities;
+using Domain.Entities.Products;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Admin.Products.Queries.GetAllProducts
 {
     public class GetAllProductsService : IGetAllProductsService
     {
         private readonly IDataBaseContext db;
-        public GetAllProductsService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public GetAllProductsService(IDataBaseContext context, IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         public ResultDto<ResultGetAllProductsDto> Execute(int pageNumber, int pageSize)
         {
             int totalRows;
-            List<GetAllProductDto> products = new List<GetAllProductDto>();
-
-            products = db.Products.Select(p => new GetAllProductDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Brand = p.Brand,
-                VisitNumber = p.Visits.Count(),
-                CategoryName = p.Category.Name,
-                CategoryId = p.CategoryId,
-            }).ToPaged(out totalRows, pageNumber, pageSize).ToList();
+            var products = _mapper.Map<List<GetAllProductDto>>(db.Products.Include(p=> p.Category).Include(p=> p.Visits).ToList())
+                .ToPaged(out totalRows, pageNumber, pageSize).ToList();
 
             if (products != null)
                 return new ResultDto<ResultGetAllProductsDto>

@@ -6,32 +6,27 @@ using Domain.Entities.Common;
 using System.Collections.Generic;
 using Domain.Entities.Products;
 using Common.ViewModels;
+using AutoMapper;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.BlogPages.Commands.CreateBlogPage
 {
     public class CreateBlogPageService : ICreateBlogPageService
     {
         private readonly IDataBaseContext db;
-        public CreateBlogPageService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public CreateBlogPageService(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
-        public ResultDto Execute(CreateBlogPageDto entry)
+        public async Task<ResultDto> Execute(CreateBlogPageDto entry)
         {
-            BlogPage blogPage = new BlogPage()
-            {
-                Title = entry.Title,
-                ShortDescription = entry.ShortDescription,
-                Text = entry.Text,
-                Image = entry.Image,
-                Category = db.BlogPageCategories.Find(entry.CategoryId),
-                CreateDate = DateTime.Now,
-            };
-
-            db.BlogKeywords.AddRange(AddKeywords(blogPage , entry.Keywords));
+            var blogPage = _mapper.Map<BlogPage>(entry);
             db.BlogPages.Add(blogPage);
-            db.SaveChanges();
+            blogPage.Keywords = AddKeywords(blogPage, entry.Keywords);
+            await db.SaveChangesAsync();
             return new ResultDto
             {
                 IsSuccess = true,

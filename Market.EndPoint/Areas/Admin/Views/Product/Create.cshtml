@@ -295,7 +295,7 @@
                 var inventoryAndPriceCount = inventoryAndPrice.length;
 
                 if((colorRowsCount * sizeRowsCount === inventoryAndPriceCount && inventoryAndPriceCount != 0)
-                || colorRowsCount != 0 || sizeRowsCount != 0){
+                || (colorRowsCount != 0 && inventoryAndPriceCount != 0) || (sizeRowsCount != 0 && inventoryAndPriceCount != 0)){
                     $.ajax({
                     type: "POST",
                     processData: false,

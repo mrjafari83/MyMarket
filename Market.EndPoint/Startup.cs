@@ -23,6 +23,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Common.Utilities.MessageSender;
 using Domain.Entities.User;
+using AutoMapper;
+using Application.Mapper;
 
 namespace Market.EndPoint
 {
@@ -38,6 +40,8 @@ namespace Market.EndPoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            MapperConfig(services);
+
             AdminInjections(services);
             ClientInjections(services);
             CommonInjection(services);
@@ -145,6 +149,18 @@ namespace Market.EndPoint
         private void InjectionUtilities(IServiceCollection services)
         {
             services.AddScoped<IMessageSender, GmailSender>();
+        }
+
+        private void MapperConfig(IServiceCollection services)
+        {
+            var mapperConfig = new MapperConfiguration(mc => {
+                mc.AddProfile(new ProductProfiler());
+                mc.AddProfile(new BlogPageProfiler());
+                mc.AddProfile(new CartProfiler());
+                mc.AddProfile(new CommentProfiler());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Application.Services.Admin.ProductSizes.Queries.GetAllProductSizes
             var sizes = db.ProductSizes.Select(s => new GetAllProductSizesDto
             {
                 Id = s.Id,
-                Value = s.Value,
+                Value = s.SizeValue,
             }).ToList();
 
             if (sizes != null)

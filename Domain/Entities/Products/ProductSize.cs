@@ -12,7 +12,7 @@ namespace Domain.Entities.Products
 {
     public class ProductSize : BaseEntity
     {
-        public string Value { get; set; }
+        public string SizeValue { get; set; }
 
         public virtual ICollection<SizeInProduct> Products { get; set; }
     }

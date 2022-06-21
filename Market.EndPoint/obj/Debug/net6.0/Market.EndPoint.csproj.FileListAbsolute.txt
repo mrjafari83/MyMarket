@@ -1,0 +1,8 @@
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net6.0\Market.EndPoint.csproj.AssemblyReference.cache
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net6.0\Market.EndPoint.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net6.0\Market.EndPoint.AssemblyInfoInputs.cache
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net6.0\Market.EndPoint.AssemblyInfo.cs
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net6.0\Market.EndPoint.csproj.CoreCompileInputs.cache
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net6.0\Market.EndPoint.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net6.0\Market.EndPoint.RazorAssemblyInfo.cache
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net6.0\Market.EndPoint.RazorAssemblyInfo.cs

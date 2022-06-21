@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Application.Interfaces.Context;
+using AutoMapper;
 using Common.Dto;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,23 +10,18 @@ namespace Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying
     public class GetProductsOfCartPayingService : IGetProductsOfCartPayingService
     {
         private readonly IDataBaseContext db;
-        public GetProductsOfCartPayingService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public GetProductsOfCartPayingService(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         public ResultDto<List<ProductInCartPayingDto>> Execute(int cartPayingId)
         {
-            var products = db.ProductsInCart.Include(p => p.Product).ThenInclude(p => p.Images).Where(p => p.CartPayingInfo.Id == cartPayingId).Select(p => new ProductInCartPayingDto
-            {
-                Id = p.Product.Id,
-                Brand = p.Product.Brand,
-                Name = p.Product.Name,
-                Color = p.Color,
-                Count = p.Count,
-                Size = p.Size,
-                ImageSrc = p.Product.Images.FirstOrDefault().Src,
-            }).ToList();
+            var products = _mapper.Map<List<ProductInCartPayingDto>>(db.ProductsInCart.Include(p => p.Product).ThenInclude(p=> p.Inventories)
+                .Include(p => p.Product).ThenInclude(p => p.Images)
+                .Where(p => p.CartPayingInfo.Id == cartPayingId));
 
             if (products == null)
                 return new ResultDto<List<ProductInCartPayingDto>>

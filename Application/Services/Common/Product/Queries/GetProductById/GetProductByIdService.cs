@@ -31,8 +31,8 @@ namespace Application.Services.Common.Product.Queries.GetProductById
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Images = p.Images.Select(s=> new ImageViewModel { Src = s.Src}).ToList(),
-                    Features = p.Features.Select(f => new FeatureViewModel { Display = f.Display, FeatureValue = f.Value }).ToList(),
-                    Sizes = p.Sizes.Select(s => new SizeViewModel { SizeValue = s.Size.Value }).ToList(),
+                    Features = p.Features.Select(f => new FeatureViewModel { Display = f.Display, FeatureValue = f.FeatureValue }).ToList(),
+                    Sizes = p.Sizes.Select(s => new SizeViewModel { SizeValue = s.Size.SizeValue }).ToList(),
                     Colors = p.Colors.Select(c => new ColorViewModel { Name = c.Color.Name }).ToList(),
                 }).FirstOrDefault();
 

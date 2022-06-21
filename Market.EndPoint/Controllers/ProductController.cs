@@ -83,7 +83,7 @@ namespace Market.EndPoint.Controllers
         [HttpPost]
         public IActionResult GetPriceByColorAndSize(string colorName,string sizeName , int productId)
         {
-            return Json(_clientProductFacad.GetPriceByColorAndSize.Execute(productId ,colorName, sizeName).Data);
+            return Json(_clientProductFacad.GetPriceByColorAndSize.Execute(productId , colorName , sizeName).Data);
         }
     }
 }

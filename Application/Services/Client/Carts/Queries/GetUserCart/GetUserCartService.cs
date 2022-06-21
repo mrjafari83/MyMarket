@@ -2,15 +2,19 @@
 using Common.Dto;
 using Application.Interfaces.Context;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace Application.Services.Client.Carts.Queries.GetUserCart
 {
     public class GetUserCartService : IGetUserCartService
     {
         private readonly IDataBaseContext db;
-        public GetUserCartService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public GetUserCartService(IDataBaseContext context,IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
         public ResultDto<GetUserCartDto> Execute(string userName)
         {
@@ -20,16 +24,9 @@ namespace Application.Services.Client.Carts.Queries.GetUserCart
                 UserName = c.UserName,
             }).FirstOrDefault();
 
-            userCart.Products = db.ProductsInCart.Include(p => p.Product).Where(c => c.Cart.Id == userCart.CartId).Select(p => new CartProductDto
-            {
-                Id = p.Product.Id,
-                Name = p.Product.Name,
-                Count = p.Count,
-                Image = p.Product.Images.FirstOrDefault().Src,
-                ProductInCartId = p.Id,
-                Price = p.ProductInventoryAndPrice.Price == null ? 0 : p.ProductInventoryAndPrice.Price,
-                ProductInventory = p.ProductInventoryAndPrice.Inventory == null ? 0 : p.ProductInventoryAndPrice.Inventory
-            }).ToList();
+            userCart.Products = _mapper.Map<List<CartProductDto>>(db.ProductsInCart.Include(p => p.Product).ThenInclude(p=> p.Images)
+                .Include(p=> p.ProductInventoryAndPrice)
+                .Where(c => c.Cart.Id == userCart.CartId && c.IsShow));
 
             return new ResultDto<GetUserCartDto>
             {

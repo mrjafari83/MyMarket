@@ -13,15 +13,18 @@ using Application.Services.Client.Carts.Commands.EditProductCount;
 using Application.Services.Client.Carts.Queries.GetUserCart;
 using Application.Services.Client.Carts.Commands.AddCartPaying;
 using Application.Services.Client.Carts.Commands.VerifyPaying;
+using AutoMapper;
 
 namespace Application.FacadPatterns.Client
 {
     public class ClientCartFacad : IClientCartFacad
     {
         private readonly IDataBaseContext db;
-        public ClientCartFacad(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public ClientCartFacad(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         private GetUserCartService _getUserCartService;
@@ -29,7 +32,7 @@ namespace Application.FacadPatterns.Client
         {
             get
             {
-                return _getUserCartService ?? new GetUserCartService(db);
+                return _getUserCartService ?? new GetUserCartService(db,_mapper);
             }
         }
 
@@ -47,7 +50,7 @@ namespace Application.FacadPatterns.Client
         {
             get
             {
-                return _addProductToCartService ?? new AddProductToCartService(db);
+                return _addProductToCartService ?? new AddProductToCartService(db,_mapper);
             }
         }
 
@@ -83,7 +86,7 @@ namespace Application.FacadPatterns.Client
         {
             get
             {
-                return _addCartPayingService ?? new AddCartPayingService(db);
+                return _addCartPayingService ?? new AddCartPayingService(db,_mapper);
             }
         }
 

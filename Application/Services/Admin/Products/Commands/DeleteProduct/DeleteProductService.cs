@@ -77,13 +77,13 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
         {
             if(productColors != null && colorInProducts != null)
             {
-                foreach (var item in productColors)
-                {
-                    var color = db.ProductColors.Find(item.Id);
-                    color.IsRemoved = true;
-                    color.RemoveTime = System.DateTime.Now;
-                    db.ProductColors.Update(color);
-                }
+                //foreach (var item in productColors)
+                //{
+                ////    var color = db.ProductColors.Find(item.Id);
+                ////    color.IsRemoved = true;
+                ////    color.RemoveTime = System.DateTime.Now;
+                ////    db.ProductColors.Update(color);
+                ////}
                 foreach (var item in colorInProducts)
                 {
                     var colorInProdcut = db.ColorsInProducts.Find(item.Id);
@@ -98,13 +98,13 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
         {
             if(productSizes != null && sizeInProducts != null)
             {
-                foreach (var item in productSizes)
-                {
-                    var size = db.ProductSizes.Find(item.Id);
-                    size.IsRemoved = true;
-                    size.RemoveTime = System.DateTime.Now;
-                    db.ProductSizes.Update(size);
-                }
+                //foreach (var item in productSizes)
+                //{
+                //    var size = db.ProductSizes.Find(item.Id);
+                //    size.IsRemoved = true;
+                //    size.RemoveTime = System.DateTime.Now;
+                //    db.ProductSizes.Update(size);
+                //}
                 foreach (var item in sizeInProducts)
                 {
                     var sizeInProduct = db.SizesInProducts.Find(item.Id);

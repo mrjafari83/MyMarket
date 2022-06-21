@@ -17,7 +17,7 @@ namespace Application.Services.Admin.ProductSizes.Queries.GetAllSizes
         {
             var sizes = db.ProductSizes.Select(s => new SizeViewModel
             {
-                SizeValue = s.Value
+                SizeValue = s.SizeValue
             }).ToList();
 
             return new ResultDto<List<SizeViewModel>>

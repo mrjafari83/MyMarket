@@ -9,15 +9,18 @@ using Application.Services.Admin.BlogPages.Commands.DeleteBlogPage;
 using Application.Services.Admin.BlogPages.Queries.GetBlogPageById;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.Context;
+using AutoMapper;
 
 namespace Application.FacadPatterns.Admin
 {
     public class BlogPageFacad : IBlogPageFacad
     {
         private readonly IDataBaseContext db;
-        public BlogPageFacad(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public BlogPageFacad(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         private GetBlogPageByIdService _getBlogPageByIdService;
@@ -25,7 +28,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return _getBlogPageByIdService == null ? new GetBlogPageByIdService(db) : _getBlogPageByIdService;
+                return _getBlogPageByIdService == null ? new GetBlogPageByIdService(db,_mapper) : _getBlogPageByIdService;
             }
         }
 
@@ -34,7 +37,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return _createBlogPageService == null ? new CreateBlogPageService(db) : _createBlogPageService;
+                return _createBlogPageService == null ? new CreateBlogPageService(db,_mapper) : _createBlogPageService;
             }
         }
 

@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Services.Admin.Comment.Queries.GetAllComments;
+using AutoMapper;
 
 namespace Application.FacadPatterns.Admin
 {
     public class CommentFacad : ICommentFacad
     {
         private readonly IDataBaseContext db;
-        public CommentFacad(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public CommentFacad(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         private GetAllProductCommentsService getAllProductCommentsService;
@@ -22,7 +25,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return getAllProductCommentsService ?? new GetAllProductCommentsService(db);
+                return getAllProductCommentsService ?? new GetAllProductCommentsService(db , _mapper);
             }
         }
 
@@ -31,7 +34,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return getAllBlogCommentsService ?? new GetAllBlogCommentsService(db);
+                return getAllBlogCommentsService ?? new GetAllBlogCommentsService(db,_mapper);
             }
         }
 

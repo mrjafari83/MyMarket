@@ -18,8 +18,9 @@ namespace Domain.Entities.BlogPages
         [AllowHtml]
         public string Text { get; set; }
         public string Image { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
+        public int CategoryId { get; set; }
         public virtual Category<BlogPage> Category { get; set; }
         public virtual ICollection<Keyword<BlogPage>> Keywords { get; set; }
         public virtual ICollection<Comment<BlogPage>> Comments { get; set; }

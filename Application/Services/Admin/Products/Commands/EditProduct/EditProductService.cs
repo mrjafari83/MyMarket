@@ -10,6 +10,7 @@ using System.Linq;
 using Common.Utilities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using AutoMapper;
 
 namespace Application.Services.Admin.Products.Commands.EditProduct
 {
@@ -27,17 +28,17 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         {
             var product = db.Products.Include(p => p.Keywords).Include(p => p.Images).Include(p => p.Colors).ThenInclude(c => c.Color)
                 .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Include(p => p.Inventories)
-                .Where(p => p.Id == entry.Id).FirstOrDefault();
+                .Where(p => p.Id == entry.Product.Id).FirstOrDefault();
 
-            product.Name = entry.Name;
-            product.Brand = entry.Brand;
-            product.Description = entry.Description;
-            product.ShortDescription = entry.ShortDescription;
+            product.Name = entry.Product.Name;
+            product.Brand = entry.Product.Brand;
+            product.Description = entry.Product.Description;
+            product.ShortDescription = entry.Product.ShortDescription;
 
-            if (entry.CategoryId != 0)
+            if (entry.Product.CategoryId != 0)
             {
-                product.CategoryId = entry.CategoryId;
-                product.Category = db.ProductCategories.Find(entry.CategoryId);
+                product.CategoryId = entry.Product.CategoryId;
+                product.Category = db.ProductCategories.Find(entry.Product.CategoryId);
             }
 
             if (entry.Images != null)
@@ -50,7 +51,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             AddColors(product, entry.Colors, colors);
             DeleteColors(entry.Colors, colors, product);
 
-            List<ProductSize> sizes = product.Sizes.Select(s => new ProductSize { Id = s.Size.Id, Value = s.Size.Value }).ToList();
+            List<ProductSize> sizes = product.Sizes.Select(s => new ProductSize { Id = s.Size.Id, SizeValue = s.Size.SizeValue }).ToList();
             AddSizes(product, entry.Sizes, sizes);
             DeleteSizes(product, entry.Sizes, sizes);
 
@@ -101,13 +102,13 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         {
             foreach (var item in features)
             {
-                if (productFeatures.Where(k => k.Display == item.Display && k.Value == item.FeatureValue).ToList().Count() != 0)
+                if (productFeatures.Where(k => k.Display == item.Display && k.FeatureValue == item.FeatureValue).ToList().Count() != 0)
                     continue;
 
                 db.ProductFutures.Add(new Domain.Entities.Products.ProductFeature
                 {
                     Display = item.Display,
-                    Value = item.FeatureValue,
+                    FeatureValue = item.FeatureValue,
                     Product = product
                 });
             }
@@ -117,7 +118,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         {
             foreach (var item in productFeatures)
             {
-                if (features.Where(k => k.Display == item.Display && k.FeatureValue == item.Value).Count() == 0)
+                if (features.Where(k => k.Display == item.Display && k.FeatureValue == item.FeatureValue).Count() == 0)
                 {
                     var feature = db.ProductFutures.Find(item.Id);
                     feature.IsRemoved = true;
@@ -163,14 +164,14 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         {
             foreach (var item in sizes)
             {
-                if (productSizes.Where(s => s.Value == item.SizeValue).ToList().Count() != 0)
+                if (productSizes.Where(s => s.SizeValue == item.SizeValue).ToList().Count() != 0)
                     continue;
 
                 ProductSize size = new ProductSize();
-                if (db.ProductSizes.Where(s => s.Value == item.SizeValue).Any())
-                    size = db.ProductSizes.Where(s => s.Value == item.SizeValue).First();
+                if (db.ProductSizes.Where(s => s.SizeValue == item.SizeValue).Any())
+                    size = db.ProductSizes.Where(s => s.SizeValue == item.SizeValue).First();
                 else
-                    size = db.ProductSizes.Add(new ProductSize { Value = item.SizeValue }).Entity;
+                    size = db.ProductSizes.Add(new ProductSize { SizeValue = item.SizeValue }).Entity;
                 db.SizesInProducts.Add(new SizeInProduct { Product = product, Size = size });
             }
         }
@@ -179,7 +180,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
         {
             foreach (var item in productSizes)
             {
-                if (sizes.Where(s => s.SizeValue == item.Value).Count() == 0)
+                if (sizes.Where(s => s.SizeValue == item.SizeValue).Count() == 0)
                 {
                     var size = db.ProductSizes.Find(item.Id);
                     var relation = db.SizesInProducts.Where(s => s.Size == size && s.Product == product).FirstOrDefault();

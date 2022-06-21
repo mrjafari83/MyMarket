@@ -16,11 +16,8 @@ namespace Application.Services.Client.Carts.Commands.DeleteProductFromCart
         public ResultDto Execute(int productInCartId , int cartId)
         {
             var produtInCart = db.ProductsInCart.Find(productInCartId);
-            var cart = db.Carts.Find(cartId);
-            cart.Products.Remove(produtInCart);
-            produtInCart.Cart = null;
+            produtInCart.IsShow = false;
             db.ProductsInCart.Update(produtInCart);
-            db.Carts.Update(cart);
             db.SaveChanges();
 
             return new ResultDto

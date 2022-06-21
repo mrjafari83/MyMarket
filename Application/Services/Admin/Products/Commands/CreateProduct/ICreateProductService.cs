@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Dto;
+using Common.ViewModels;
 
 namespace Application.Services.Admin.Products.Commands.CreateProduct
 {
