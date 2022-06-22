@@ -8,6 +8,6 @@ namespace Application.Services.Admin.Slider.Commands.ReplaceSlider
 {
     public interface IReplaceSliderService
     {
-        ResultDto Execute(int lastProductId, string url , string imageSrc);
+        Task<ResultDto> Execute(int lastProductId, string url , string imageSrc);
     }
 }

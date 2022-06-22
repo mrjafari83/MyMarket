@@ -18,7 +18,7 @@ namespace Market.EndPoint.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            return View(viewName: "NewestBlogPaes" , _commonBlogPageFacad.GetAllBlogPages.Execute(Enums.PagesFilter.Newest , 1 , 6).Data);
+            return View(viewName: "NewestBlogPaes" , _commonBlogPageFacad.GetAllBlogPages.Execute(Enums.PagesFilter.Newest , 1 , 6).Result.Data);
         }
     }
 }

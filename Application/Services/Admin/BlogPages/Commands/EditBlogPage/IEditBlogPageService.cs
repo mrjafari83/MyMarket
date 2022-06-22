@@ -9,6 +9,6 @@ namespace Application.Services.Admin.BlogPages.Commands.EditBlogPage
 {
     public interface IEditBlogPageService
     {
-        ResultDto Execute(EditBlogPageDto entry);
+        Task<ResultDto> Execute(EditBlogPageDto entry);
     }
 }

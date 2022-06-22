@@ -6,6 +6,7 @@ using Common.Utilities;
 using AutoMapper;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Comment.Queries.GetAllComments
 {
@@ -19,12 +20,12 @@ namespace Application.Services.Admin.Comment.Queries.GetAllComments
             _mapper = mapper;
         }
 
-        public ResultDto<ResultGetAllCommentsDto> Execute(int pageNumber = 1, int pageSize = 10)
+        public async Task<ResultDto<ResultGetAllCommentsDto>> Execute(int pageNumber = 1, int pageSize = 10)
         {
             int totalRows = 0;
-            var com = _mapper.Map<List<CommentViewModel>>(db.ProductComments.Include(c=> c.Parent).Include(c=> c.Location))
+            var com =  await _mapper.ProjectTo<CommentViewModel>(db.ProductComments.Include(c=> c.Parent).Include(c=> c.Location))
                 .OrderByDescending(c => c.Id)
-                .ToPaged(out totalRows, pageNumber, pageSize).ToList();
+                .ToPaged(out totalRows, pageNumber, pageSize).ToListAsync();
 
             return new ResultDto<ResultGetAllCommentsDto>
             {

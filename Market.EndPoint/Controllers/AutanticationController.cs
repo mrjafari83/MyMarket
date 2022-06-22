@@ -96,7 +96,7 @@ namespace Market.EndPoint.Controllers
                 if (userRole != null && userRole == RoleNames.Customer)
                 {
                     int cartId;
-                    cartId = _clientCartFacad.GetUserCart.Execute(user.UserName).Data.CartId;
+                    cartId = _clientCartFacad.GetUserCart.Execute(user.UserName).Result.Data.CartId;
                     CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
                     var result = await signInManager.PasswordSignInAsync(user.UserName, user.Password, user.RememberMe, true);
                     if (result.IsNotAllowed)
@@ -173,7 +173,7 @@ namespace Market.EndPoint.Controllers
                 if (model.Image != null)
                 {
                     FileUploader.Delete(user.ProfileImageSrc);
-                    user.ProfileImageSrc = FileUploader.Upload(model.Image, _hostingEnvironment, "Users/" + model.UserName);
+                    user.ProfileImageSrc = FileUploader.Upload(model.Image, _hostingEnvironment, "Users/" + model.UserName).Result;
                 }
 
                 var result = await userManager.UpdateAsync(user);
@@ -211,9 +211,10 @@ namespace Market.EndPoint.Controllers
 
         [Route("MyPays")]
         [Authorize]
-        public IActionResult MyPays()
+        public async Task<IActionResult> MyPays()
         {
-            return View(_commonCartFacad.GetUserCartPayings.Execute(User.Identity.Name).Data);
+            var cart = await _commonCartFacad.GetUserCartPayings.Execute(User.Identity.Name);
+            return View(cart.Data);
         }
     }
 }

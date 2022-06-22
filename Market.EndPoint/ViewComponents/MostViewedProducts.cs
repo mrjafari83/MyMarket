@@ -16,8 +16,8 @@ namespace Market.EndPoint.ViewComponents
         }
 
         public IViewComponentResult Invoke()
-        {
-            return View("MostViewedProducts", _commonProductFacad.GetMostViewedProduct.Execute(1,3).Data);
+        { 
+            return View("MostViewedProducts", _commonProductFacad.GetMostViewedProduct.Execute(1, 3).Result.Data);
         } 
     }
 }

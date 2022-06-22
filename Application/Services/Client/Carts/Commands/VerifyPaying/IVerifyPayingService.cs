@@ -11,7 +11,7 @@ namespace Application.Services.Client.Carts.Commands.VerifyPaying
 {
     public interface IVerifyPayingService
     {
-        ResultDto Execute(int cartPayingId , int cartId);
+         Task<ResultDto> Execute(int cartPayingId , int cartId);
     }
 
     public class VerifyPayingService : IVerifyPayingService
@@ -22,12 +22,13 @@ namespace Application.Services.Client.Carts.Commands.VerifyPaying
             db = context;
         }
 
-        public ResultDto Execute(int cartPayingId , int cartId)
+        public async Task<ResultDto> Execute(int cartPayingId , int cartId)
         {
-            var cartPaying = db.CartPayings.Find(cartPayingId);
+            var cartPaying = await db.CartPayings.FindAsync(cartPayingId);
             cartPaying.IsPayed = true;
 
-            var products = db.ProductsInCart.Include(p=> p.Product).Include(p=> p.ProductInventoryAndPrice).Where(p => p.Cart.Id == cartId).ToList();
+            var products = await db.ProductsInCart.Include(p=> p.Product).Include(p=> p.ProductInventoryAndPrice)
+                .Where(p => p.Cart.Id == cartId && p.IsShow).ToListAsync();
             foreach (var item in products)
             {
                 item.CartPayingInfo = cartPaying;
@@ -35,7 +36,7 @@ namespace Application.Services.Client.Carts.Commands.VerifyPaying
             }
 
             db.CartPayings.Update(cartPaying);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {

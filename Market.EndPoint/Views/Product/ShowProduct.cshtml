@@ -1,6 +1,6 @@
 ﻿@using System.Linq
 @using Application.Services.Common.Product.Queries.GetProductById
-@model GetProductByIdDto
+@model ResultDto<GetProductByIdDto>
 @using Application.Interfaces.FacadPatterns.Client
 @using Application.Interfaces.FacadPatterns.Common
 @using Common.Utilities
@@ -14,13 +14,13 @@
     if (CookiesManager.ContainCookie(Context, "BrowserCode"))
     {
         var code = CookiesManager.GetCookieValue(Context, "BrowserCode");
-        _clientProductFacad.AddNewVisit.Execute(Model.Id, code);
+        _clientProductFacad.AddNewVisit.Execute(Model.Data.Id, code);
     }
     else
     {
         string code = _commonOptionFacad.CreateBrowser.Execute().Data;
         CookiesManager.AddCookie(Context, "BrowserCode", code);
-        _clientProductFacad.AddNewVisit.Execute(Model.Id, code);
+        _clientProductFacad.AddNewVisit.Execute(Model.Data.Id, code);
     }
 }
 <link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
@@ -35,11 +35,11 @@
                     </li>
                     <li><span class="icon-chevron-right"></span></li>
                     <li>
-                        <a href="shop.html">@Model.CategoryName</a>
+                        <a href="shop.html">@Model.Data.CategoryName</a>
                     </li>
                     <li><span class="icon-chevron-right"></span></li>
                     <li>
-                        <a href="product.html">@Model.Name</a>
+                        <a href="product.html">@Model.Data.Name</a>
                     </li>
                 </ul>
             </div>
@@ -61,12 +61,12 @@
             <div class="span5">
                 <div class="product-preview">
                     <div class="picture">
-                        <img src="@Model.Images[0].Src" alt="" width="940" height="940" id="mainPreviewImg">
+                        <img src="@Model.Data.Images[0].Src" alt="" width="940" height="940" id="mainPreviewImg">
                     </div>
                     <div class="thumbs clearfix">
-                        @foreach (var item in Model.Images)
+                        @foreach (var item in Model.Data.Images)
                         {
-                            if (item == Model.Images[0])
+                            if (item == Model.Data.Images[0])
                             {
                                 <div class="thumb active">
                                     <a href="#mainPreviewImg"><img src="@item.Src" alt="" width="940" height="940"></a>
@@ -88,7 +88,7 @@
             <!--  ==========  -->
             <div class="span7">
                 <div class="product-title">
-                    <h1 class="name">@Model.Name</h1>
+                    <h1 class="name">@Model.Data.Name</h1>
                     <div class="meta">
                         <span class="tag"><span id="price"></span>تومان</span>
                         <span class="stock">
@@ -107,7 +107,7 @@
                 </div>
                 <div class="product-description">
                     <p>
-                        @Model.ShortDescription
+                        @Model.Data.ShortDescription
                     </p>
                     <hr>
 
@@ -121,20 +121,20 @@
                             <span class="clickable remove-one icon-minus-sign-alt"></span>
                         </div>
                         &nbsp;
-                        @if (Model.Colors.Count() != 0)
+                        @if (Model.Data.Colors.Count() != 0)
                         {
                             <select class="span2" id="colorSelector">
-                                @foreach (var color in Model.Colors)
+                                @foreach (var color in Model.Data.Colors)
                                 {
                                     <option value="@color.Name">@color.Name</option>
                                 }
                             </select>
                         }
                         &nbsp;
-                        @if (Model.Sizes.Count() != 0)
+                        @if (Model.Data.Sizes.Count() != 0)
                         {
                             <select class="span2" id="sizeSelector">
-                                @foreach (var size in Model.Sizes)
+                                @foreach (var size in Model.Data.Sizes)
                                 {
                                     <option value="@size.SizeValue">@size.SizeValue</option>
                                 }
@@ -188,10 +188,10 @@
             <div class="tab-content">
                 <div class="fade in tab-pane active" id="tab-1">
                     <h3>توضیحات محصول</h3>
-                    @Html.Raw(Model.Description)
+                    @Html.Raw(Model.Data.Description)
                     <h3>ویژگی های محصول</h3>
                     <ul dir="rtl">
-                        @foreach (var item in Model.Features)
+                        @foreach (var item in Model.Data.Features)
                         {
                             <li dir="rtl">
                                 @item.Display : @item.FeatureValue
@@ -200,7 +200,7 @@
                     </ul>
                 </div>
                 <div class="fade tab-pane" id="tab-3">
-                    @await Component.InvokeAsync("Comment", new { pageId = Model.Id, categoryType = Common.Enums.Enums.CategoryType.Product })
+                    @await Component.InvokeAsync("Comment", new { pageId = Model.Data.Id, categoryType = Common.Enums.Enums.CategoryType.Product })
                 </div>
             </div>
         </div>
@@ -231,7 +231,7 @@
             commentData.append("Name", $("#name").val());
             commentData.append("Email", $("#email").val());
             commentData.append("Text", $("#text").val());
-            commentData.append("PageId", @Model.Id);
+            commentData.append("PageId", @Model.Data.Id);
             commentData.append("ParentId", commentId);
             commentData.append("VisitingParent", visitingParent)
 
@@ -255,7 +255,7 @@
                 data.append("color", $("#colorSelector").find(":selected").text());
                 data.append("size", $("#sizeSelector").find(":selected").text());
                 data.append("price", $("#price").text());
-                data.append("productId", @Model.Id);
+                data.append("productId", @Model.Data.Id);
 
                 $.ajax({
                     type: "POST",
@@ -276,7 +276,7 @@
 
             data.append("colorName", $("#colorSelector").find(":selected").text());
             data.append("sizeName", $("#sizeSelector").find(":selected").text());
-            data.append("productId", @Model.Id);
+            data.append("productId", @Model.Data.Id);
 
                 $.ajax({
                     type: "POST",

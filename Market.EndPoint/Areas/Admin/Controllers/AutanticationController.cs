@@ -91,7 +91,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             if (userRole != null && (userRole == "Admin" || userRole == "Owner"))
             {
                 int cartId;
-                cartId = _clientCartFacad.GetUserCart.Execute(model.UserName).Data.CartId;
+                cartId = _clientCartFacad.GetUserCart.Execute(model.UserName).Result.Data.CartId;
                 CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
                 if (result.IsNotAllowed)
@@ -135,7 +135,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                 if (image != null)
                 {
                     FileUploader.Delete(user.ProfileImageSrc);
-                    user.ProfileImageSrc = FileUploader.Upload(image, _hostingEnvironment, "Users/" + userName);
+                    user.ProfileImageSrc = FileUploader.Upload(image, _hostingEnvironment, "Users/" + userName).Result;
                 }
 
                 var result = _userManager.UpdateAsync(user).Result;
@@ -173,9 +173,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         [Route("/Admin/MyPays")]
         [HttpGet]
-        public IActionResult MyPays()
+        public async Task<IActionResult> MyPays()
         {
-            return View(_commonCartFacad.GetUserCartPayings.Execute(User.Identity.Name).Data);
+            var cart = await _commonCartFacad.GetUserCartPayings.Execute(User.Identity.Name);
+            return View(cart.Data);
         }
     }
 }

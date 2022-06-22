@@ -8,7 +8,7 @@ namespace Application.Services.Common.BlogPage.Queries.GetAllBlogPages
 {
     public interface IGetAllBlogPagesService
     {
-        ResultDto<GetAllBlogPagesResult> Execute(Enums.PagesFilter filter = Enums.PagesFilter.Newest
+        Task<ResultDto<GetAllBlogPagesResult>> Execute(Enums.PagesFilter filter = Enums.PagesFilter.Newest
             , int pageNumber = 1, int pageSize = 10 , string searchKey = "" , int categoryId = 0);
     }
 }

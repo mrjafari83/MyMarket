@@ -7,6 +7,6 @@ namespace Application.Services.Admin.Products.Queries.GetBestSellingProducts
 {
     public interface IGetBestSellingProductsService
     {
-        ResultDto<ResultGetBestSellingProductDto> Execute(int pageNumber, int pageSize);
+        Task<ResultDto<ResultGetBestSellingProductDto>> Execute(int pageNumber, int pageSize);
     }
 }

@@ -137,9 +137,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             return Redirect("/Admin/Users");
         }
 
-        public IActionResult GetUserCartPayings(string userName)
+        public async Task<IActionResult> GetUserCartPayings(string userName)
         {
-            return View(_commonCartFacad.GetUserCartPayings.Execute(userName).Data);
+            var cart = await _commonCartFacad.GetUserCartPayings.Execute(userName);
+            return View(cart.Data);
         }
     }
 }

@@ -6,7 +6,7 @@
 }
 
 @using Application.Services.Common.BlogPage.Queries.GetAllBlogPages
-@model GetAllBlogPagesResult
+@model ResultDto<GetAllBlogPagesResult>
 
 <div class="darker-stripe">
     <div class="container">
@@ -38,7 +38,7 @@
             <!--  = Main content =  -->
             <!--  ==========  -->
             <section class="span8 blog">
-                @foreach (var item in Model.BlogPages)
+                @foreach (var item in Model.Data.BlogPages)
                 {
                     <article class="post format-image">
                         <div class="post-inner">
@@ -72,7 +72,7 @@
                             <li><a href="/Blogs?currentPage=@back" class="btn btn-primary"><span class="icon-chevron-left"></span></a></li>
                         }
 
-                        @for (int i = 1; i <= Model.TotalRows; i++)
+                        @for (int i = 1; i <= Model.Data.TotalRows; i++)
                         {
                             if (i == ViewBag.CurrentRow)
                             {
@@ -84,7 +84,7 @@
                             }
                         }
 
-                        @if (ViewBag.CurrentRow == Model.TotalRows)
+                        @if (ViewBag.CurrentRow == Model.Data.TotalRows)
                         {
                             <li><a class="btn btn-primary"><span class="icon-chevron-right"></span></a></li>
                         }

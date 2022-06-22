@@ -8,6 +8,6 @@ namespace Application.Services.Admin.Comment.Queries.GetAllComments
 {
     public interface IGetAllCommentsService
     {
-        ResultDto<ResultGetAllCommentsDto> Execute(int pageNumber = 1 , int pageSize = 10);
+        Task<ResultDto<ResultGetAllCommentsDto>> Execute(int pageNumber = 1 , int pageSize = 10);
     }
 }

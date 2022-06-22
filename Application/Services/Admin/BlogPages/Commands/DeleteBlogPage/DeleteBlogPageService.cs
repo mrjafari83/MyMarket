@@ -2,6 +2,7 @@
 using Common.Dto;
 using Application.Interfaces.Context;
 using Common.Utilities;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.BlogPages.Commands.DeleteBlogPage
 {
@@ -13,16 +14,16 @@ namespace Application.Services.Admin.BlogPages.Commands.DeleteBlogPage
             db = context;
         }
 
-        public ResultDto Execute(int id)
+        public async Task<ResultDto> Execute(int id)
         {
-            var page = db.BlogPages.Find(id);
+            var page = await db.BlogPages.FindAsync(id);
 
             page.IsRemoved = true;
             page.RemoveTime = DateTime.Now;
             FileUploader.Delete(page.Image);
             
             db.BlogPages.Update(page);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {

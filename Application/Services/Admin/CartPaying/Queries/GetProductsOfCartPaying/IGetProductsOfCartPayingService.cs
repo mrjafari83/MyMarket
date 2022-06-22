@@ -8,6 +8,6 @@ namespace Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying
 {
     public interface IGetProductsOfCartPayingService
     {
-        ResultDto<List<ProductInCartPayingDto>> Execute(int cartPayingId);
+        Task<ResultDto<List<ProductInCartPayingDto>>> Execute(int cartPayingId);
     }
 }

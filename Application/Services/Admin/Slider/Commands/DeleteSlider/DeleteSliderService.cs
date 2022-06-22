@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Common.Dto;
 
@@ -12,13 +13,13 @@ namespace Application.Services.Admin.Slider.Commands.DeleteSlider
             db = context; ;
         }
 
-        public ResultDto Execute(int sliderId)
+        public async Task<ResultDto> Execute(int sliderId)
         {
-            var slider = db.Sliders.Find(sliderId);
+            var slider = await db.Sliders.FindAsync(sliderId);
             slider.IsRemoved = true;
             slider.RemoveTime = DateTime.Now;
             db.Sliders.Update(slider);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {

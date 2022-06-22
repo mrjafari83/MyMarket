@@ -3,6 +3,8 @@ using System.Linq;
 using Common.Dto;
 using Common.Utilities;
 using Application.Interfaces.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Application.Services.Common.Comment.Queries.GetAllCommentsByPageId
 {
@@ -14,9 +16,9 @@ namespace Application.Services.Common.Comment.Queries.GetAllCommentsByPageId
             db = context;
         }
 
-        public ResultDto<List<GetAllCommentsByPageIdDto>> Execute(int pageId)
+        public async Task<ResultDto<List<GetAllCommentsByPageIdDto>>> Execute(int pageId)
         {
-            var comments = db.BlogPageComments.Where(b => b.Location.Id == pageId).Select(b => new GetAllCommentsByPageIdDto
+            var comments = await db.BlogPageComments.Where(b => b.Location.Id == pageId).Select(b => new GetAllCommentsByPageIdDto
             {
                 Id = b.Id,
                 Name = b.Name,
@@ -26,7 +28,7 @@ namespace Application.Services.Common.Comment.Queries.GetAllCommentsByPageId
                 ParentName = b.Parent.Name == null ? null : b.Parent.Name,
                 ParentId = b.Parent.Id == null ? 0 : b.Parent.Id,
                 VisitingParent = b.VisitingParent
-            }).ToList();
+            }).AsNoTracking().ToListAsync();
 
             return new ResultDto<List<GetAllCommentsByPageIdDto>>
             {

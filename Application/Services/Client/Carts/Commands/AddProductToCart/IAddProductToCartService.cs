@@ -9,6 +9,6 @@ namespace Application.Services.Client.Carts.Commands.AddProductToCart
 {
     public interface IAddProductToCartService
     {
-        ResultDto Execute(AddProductToCartDto model);
+        Task<ResultDto> Execute(AddProductToCartDto model);
     }
 }

@@ -27,28 +27,25 @@ namespace Application.Mapper
             CreateMap<ColorViewModel, ProductColor>().ReverseMap();
             CreateMap<SizeViewModel, ProductSize>().ReverseMap();
             CreateMap<InventoryAndPriceViewModel, ProductInventory>().ReverseMap();
-            CreateMap<Product, GetAllProductDto>().ForMember(dest => dest.CategoryName, i => i.MapFrom(src => src.Category.Name))
-                .ForMember(dest => dest.VisitNumber, i => i.MapFrom(src => src.Visits.Count())).ReverseMap();
-            CreateMap<ProductInventory, GetBestSellingDto>()
+            CreateProjection<Product, GetAllProductDto>().ForMember(dest => dest.CategoryName, i => i.MapFrom(src => src.Category.Name))
+                .ForMember(dest => dest.VisitNumber, i => i.MapFrom(src => src.Visits.Count()));
+            CreateProjection<ProductInventory, GetBestSellingDto>()
                 .ForMember(d => d.SellingCount, i => i.MapFrom(s => s.ProductInCarts.Sum(c => c.Count)))
                 .ForMember(d => d.ImageSrc, i => i.MapFrom(s => s.Product.Images.FirstOrDefault().Src))
-                .ForMember(d => d.Name, i => i.MapFrom(s => s.Product.Name))
-                .ReverseMap();
-            CreateMap<ProductInCart, ProductInCartPayingDto>()
+                .ForMember(d => d.Name, i => i.MapFrom(s => s.Product.Name));
+            CreateProjection<ProductInCart, ProductInCartPayingDto>()
                 .ForMember(d => d.ImageSrc, i => i.MapFrom(s => s.Product.Images.FirstOrDefault().Src))
-                .ForMember(d=>d.Brand,i=> i.MapFrom(s=> s.Product.Brand))
-                .ForMember(d=>d.Name,i=> i.MapFrom(s=> s.Product.Name))
-                .ForMember(d=>d.Id,i=> i.MapFrom(s=> s.Product.Id))
-                .ForMember(d=>d.Price,i=> i.MapFrom(s=> s.Product.Inventories.FirstOrDefault(k=> k.ProductId == s.Product.Id && (k.ColorName == s.Color || k.ColorName == null) && (k.SizeName == s.Size || k.SizeName == null)).Price))
-                .ReverseMap();
-            CreateMap<ProductInCart, CartProductDto>()
+                .ForMember(d => d.Brand, i => i.MapFrom(s => s.Product.Brand))
+                .ForMember(d => d.Name, i => i.MapFrom(s => s.Product.Name))
+                .ForMember(d => d.Id, i => i.MapFrom(s => s.Product.Id))
+                .ForMember(d => d.Price, i => i.MapFrom(s => s.Product.Inventories.FirstOrDefault(k => k.ProductId == s.Product.Id && (k.ColorName == s.Color || k.ColorName == null) && (k.SizeName == s.Size || k.SizeName == null)).Price));
+            CreateProjection<ProductInCart, CartProductDto>()
                 .ForMember(d => d.Id, i => i.MapFrom(s => s.ProductId))
                 .ForMember(d => d.Name, i => i.MapFrom(s => s.Product.Name))
-                .ForMember(d => d.Price, i => i.MapFrom(s => s.ProductInventoryAndPrice.Price == null?0:s.ProductInventoryAndPrice.Price))
+                .ForMember(d => d.Price, i => i.MapFrom(s => s.ProductInventoryAndPrice.Price == null ? 0 : s.ProductInventoryAndPrice.Price))
                 .ForMember(d => d.Image, i => i.MapFrom(s => s.Product.Images.FirstOrDefault().Src))
-                .ForMember(d => d.ProductInventory, i => i.MapFrom(s => s.ProductInventoryAndPrice.Inventory==null?0: s.ProductInventoryAndPrice.Inventory))
-                .ForMember(d => d.ProductInCartId, i => i.MapFrom(s => s.Id))
-                .ReverseMap();
+                .ForMember(d => d.ProductInventory, i => i.MapFrom(s => s.ProductInventoryAndPrice.Inventory == null ? 0 : s.ProductInventoryAndPrice.Inventory))
+                .ForMember(d => d.ProductInCartId, i => i.MapFrom(s => s.Id));
 
             GetByIdMapper();
 

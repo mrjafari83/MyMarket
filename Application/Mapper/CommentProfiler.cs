@@ -16,14 +16,12 @@ namespace Application.Mapper
     {
         public CommentProfiler()
         {
-            CreateMap<Comment<Product>, CommentViewModel>()
-                .ForMember(d=> d.PageId,i=> i.MapFrom(s=> s.Location.Id == null ?0: s.Location.Id))
-                .ForMember(d => d.ParentId, i => i.MapFrom(s => s.Parent.Id == null ? 0 : s.Location.Id))
-                .ReverseMap();
-            CreateMap<Comment<BlogPage>, CommentViewModel>()
+            CreateProjection<Comment<Product>, CommentViewModel>()
                 .ForMember(d => d.PageId, i => i.MapFrom(s => s.Location.Id == null ? 0 : s.Location.Id))
-                .ForMember(d => d.ParentId, i => i.MapFrom(s => s.Parent.Id == null ? 0 : s.Location.Id))
-                .ReverseMap();
+                .ForMember(d => d.ParentId, i => i.MapFrom(s => s.Parent.Id == null ? 0 : s.Location.Id));
+            CreateProjection<Comment<BlogPage>, CommentViewModel>()
+                .ForMember(d => d.PageId, i => i.MapFrom(s => s.Location.Id == null ? 0 : s.Location.Id))
+                .ForMember(d => d.ParentId, i => i.MapFrom(s => s.Parent.Id == null ? 0 : s.Location.Id));
         }
     }
 }

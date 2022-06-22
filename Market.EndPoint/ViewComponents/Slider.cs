@@ -17,7 +17,7 @@ namespace Market.EndPoint.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            return View(viewName: "Slider" , _optionFacad.GetAllSlider.Execute().Data);
+            return View(viewName: "Slider" , _optionFacad.GetAllSlider.Execute().Result.Data);
         }
     }
 }

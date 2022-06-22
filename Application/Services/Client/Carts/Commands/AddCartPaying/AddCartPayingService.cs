@@ -3,6 +3,9 @@ using AutoMapper;
 using Common.Dto;
 using Common.ViewModels;
 using Domain.Entities.Cart;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Client.Carts.Commands.AddCartPaying
 {
@@ -16,11 +19,11 @@ namespace Application.Services.Client.Carts.Commands.AddCartPaying
             _mapper = mapper;
         }
 
-        public ResultDto<int> Execute(CartPayingViewModel model)
+        public async Task<ResultDto<int>> Execute(CartPayingViewModel model)
         {
             var cartPaying = _mapper.Map<CartPayingInfo>(model);
-            db.CartPayings.Add(cartPaying);
-            db.SaveChanges();
+            var result = await db.CartPayings.AddAsync(cartPaying);
+            await db.SaveChangesAsync();
 
             return new ResultDto<int>
             {

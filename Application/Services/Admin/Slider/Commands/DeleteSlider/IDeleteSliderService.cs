@@ -8,6 +8,6 @@ namespace Application.Services.Admin.Slider.Commands.DeleteSlider
 {
     public interface IDeleteSliderService
     {
-        ResultDto Execute(int sliderId);
+        Task<ResultDto> Execute(int sliderId);
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using Application.Services.Admin.Products.Queries.GetAllProducts
-@model ResultGetAllProductsDto
+@using Common.Dto
+@model ResultDto<ResultGetAllProductsDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -28,7 +29,7 @@
             <th>تعداد بازدید</th>
         </tr>
 
-        @foreach (var item in Model.Products)
+        @foreach (var item in Model.Data.Products)
         {
             <tr>
                 <td>@item.Name</td>
@@ -54,7 +55,7 @@
                 <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
             }
 
-            @for (int i = 1; i <= Model.TotalRows; i++)
+            @for (int i = 1; i <= Model.Data.TotalRows; i++)
             {
                 if (i == ViewBag.CurrentRow)
                 {
@@ -66,7 +67,7 @@
                 }
             }
 
-            @if (ViewBag.CurrentRow == Model.TotalRows)
+            @if (ViewBag.CurrentRow == Model.Data.TotalRows)
             {
                 <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
             }

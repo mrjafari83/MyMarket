@@ -3,6 +3,8 @@ using Common.Dto;
 using Common.ViewModels;
 using Common.Utilities;
 using Application.Interfaces.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Message.Queries.GetAllCriticismMessages
 {
@@ -14,21 +16,21 @@ namespace Application.Services.Admin.Message.Queries.GetAllCriticismMessages
             db = context;
         }
 
-        public ResultDto<GetAllCriticsmMessagesDto> Execute(int pageNumber = 1, int pageSize = 10)
+        public async Task<ResultDto<GetAllCriticsmMessagesDto>> Execute(int pageNumber = 1, int pageSize = 10)
         {
             int totalRows = 0;
-            var messages = db.CriticismMessages.Select(m => new CriticismMessageViewModel
+            var messages = await db.CriticismMessages.Select(m => new CriticismMessageViewModel
             {
                 Name = m.Name,
                 Email = m.Email,
                 Website = m.Website,
                 Message = m.Message
-            }).ToPaged(out totalRows, pageNumber, pageSize).ToList();
+            }).ToPaged(out totalRows, pageNumber, pageSize).ToListAsync();
 
             if (messages.Count() == 0)
                 return new ResultDto<GetAllCriticsmMessagesDto>
                 {
-                    Data = null,
+                    Data = new GetAllCriticsmMessagesDto(),
                     IsSuccess = false
                 };
             return new ResultDto<GetAllCriticsmMessagesDto>

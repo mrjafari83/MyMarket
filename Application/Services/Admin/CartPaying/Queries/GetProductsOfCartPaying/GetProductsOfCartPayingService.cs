@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using AutoMapper;
 using Common.Dto;
@@ -17,9 +18,9 @@ namespace Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying
             _mapper = mapper;
         }
 
-        public ResultDto<List<ProductInCartPayingDto>> Execute(int cartPayingId)
+        public async Task<ResultDto<List<ProductInCartPayingDto>>> Execute(int cartPayingId)
         {
-            var products = _mapper.Map<List<ProductInCartPayingDto>>(db.ProductsInCart.Include(p => p.Product).ThenInclude(p=> p.Inventories)
+            var products = _mapper.ProjectTo<ProductInCartPayingDto>(db.ProductsInCart.Include(p => p.Product).ThenInclude(p=> p.Inventories)
                 .Include(p => p.Product).ThenInclude(p => p.Images)
                 .Where(p => p.CartPayingInfo.Id == cartPayingId));
 
@@ -31,7 +32,7 @@ namespace Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying
                 };
             return new ResultDto<List<ProductInCartPayingDto>>
             {
-                Data = products,
+                Data = await products.AsNoTracking().ToListAsync(),
                 IsSuccess = true
             };
         }

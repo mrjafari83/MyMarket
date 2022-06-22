@@ -11,6 +11,7 @@ using Common.Utilities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Products.Commands.EditProduct
 {
@@ -24,11 +25,11 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             _environment = environment;
         }
 
-        public ResultDto Execute(EditProductDto entry)
+        public async Task<ResultDto> Execute(EditProductDto entry)
         {
-            var product = db.Products.Include(p => p.Keywords).Include(p => p.Images).Include(p => p.Colors).ThenInclude(c => c.Color)
+            var product = await db.Products.Include(p => p.Keywords).Include(p => p.Images).Include(p => p.Colors).ThenInclude(c => c.Color)
                 .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Include(p => p.Inventories)
-                .Where(p => p.Id == entry.Product.Id).FirstOrDefault();
+                .Where(p => p.Id == entry.Product.Id).FirstOrDefaultAsync();
 
             product.Name = entry.Product.Name;
             product.Brand = entry.Product.Brand;
@@ -38,33 +39,33 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             if (entry.Product.CategoryId != 0)
             {
                 product.CategoryId = entry.Product.CategoryId;
-                product.Category = db.ProductCategories.Find(entry.Product.CategoryId);
+                product.Category = await db.ProductCategories.FindAsync(entry.Product.CategoryId);
             }
 
             if (entry.Images != null)
             {
                 DeleteImages(product.Images.ToList());
-                AddImages(product, entry.Images);
+                await AddImages(product, entry.Images);
             }
 
             List<ProductColor> colors = product.Colors.Select(c => new ProductColor { Id = c.Color.Id, Name = c.Color.Name }).ToList();
-            AddColors(product, entry.Colors, colors);
-            DeleteColors(entry.Colors, colors, product);
+            await AddColors(product, entry.Colors, colors);
+            await DeleteColors(entry.Colors, colors, product);
 
             List<ProductSize> sizes = product.Sizes.Select(s => new ProductSize { Id = s.Size.Id, SizeValue = s.Size.SizeValue }).ToList();
-            AddSizes(product, entry.Sizes, sizes);
-            DeleteSizes(product, entry.Sizes, sizes);
+            await AddSizes(product, entry.Sizes, sizes);
+            await DeleteSizes(product, entry.Sizes, sizes);
 
-            AddKeywords(product, entry.Keywords, product.Keywords.ToList());
-            AddFeaturs(product, entry.Features, product.Features.ToList());
+            await AddKeywords(product, entry.Keywords, product.Keywords.ToList());
+            await AddFeaturs(product, entry.Features, product.Features.ToList());
 
-            DeleteKeywords(entry.Keywords, product.Keywords.ToList());
-            DeleteFeatures(entry.Features, product.Features.ToList());
+            await DeleteKeywords(entry.Keywords, product.Keywords.ToList());
+            await DeleteFeatures(entry.Features, product.Features.ToList());
 
-            EditInventoryAndPrice(entry.InventoryAndPrices, product.Inventories.ToList(), product);
+            await EditInventoryAndPrice(entry.InventoryAndPrices, product.Inventories.ToList(), product);
 
             db.Products.Update(product);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {
@@ -73,24 +74,24 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             };
         }
 
-        private void AddKeywords(Product product, List<KeywordViewModel> keywords, List<Keyword<Product>> productKeywords)
+        private async Task AddKeywords(Product product, List<KeywordViewModel> keywords, List<Keyword<Product>> productKeywords)
         {
             foreach (var item in keywords)
             {
-                if (productKeywords.Where(k => k.Value == item.KeywordValue).ToList().Count() != 0)
+                if (productKeywords.Where(k => k.Value == item.KeywordValue).Count() != 0)
                     continue;
 
-                db.ProductKeywords.Add(new Keyword<Product> { Value = item.KeywordValue, Parent = product });
+                await db.ProductKeywords.AddAsync(new Keyword<Product> { Value = item.KeywordValue, Parent = product });
             }
         }
 
-        private void DeleteKeywords(List<KeywordViewModel> keywords, List<Keyword<Product>> productKeywords)
+        private async Task DeleteKeywords(List<KeywordViewModel> keywords, List<Keyword<Product>> productKeywords)
         {
             foreach (var item in productKeywords)
             {
                 if (keywords.Where(k => k.KeywordValue == item.Value).Count() == 0)
                 {
-                    var keyword = db.ProductKeywords.Find(item.Id);
+                    var keyword = await db.ProductKeywords.FindAsync(item.Id);
                     keyword.IsRemoved = true;
                     keyword.RemoveTime = System.DateTime.Now;
                     db.ProductKeywords.Update(keyword);
@@ -98,14 +99,14 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             }
         }
 
-        private void AddFeaturs(Product product, List<FeatureViewModel> features, List<Domain.Entities.Products.ProductFeature> productFeatures)
+        private async Task AddFeaturs(Product product, List<FeatureViewModel> features, List<Domain.Entities.Products.ProductFeature> productFeatures)
         {
             foreach (var item in features)
             {
-                if (productFeatures.Where(k => k.Display == item.Display && k.FeatureValue == item.FeatureValue).ToList().Count() != 0)
+                if (productFeatures.Where(k => k.Display == item.Display && k.FeatureValue == item.FeatureValue).Count() != 0)
                     continue;
 
-                db.ProductFutures.Add(new Domain.Entities.Products.ProductFeature
+                await db.ProductFutures.AddAsync(new Domain.Entities.Products.ProductFeature
                 {
                     Display = item.Display,
                     FeatureValue = item.FeatureValue,
@@ -114,13 +115,13 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             }
         }
 
-        private void DeleteFeatures(List<FeatureViewModel> features, List<Domain.Entities.Products.ProductFeature> productFeatures)
+        private async Task DeleteFeatures(List<FeatureViewModel> features, List<Domain.Entities.Products.ProductFeature> productFeatures)
         {
             foreach (var item in productFeatures)
             {
                 if (features.Where(k => k.Display == item.Display && k.FeatureValue == item.FeatureValue).Count() == 0)
                 {
-                    var feature = db.ProductFutures.Find(item.Id);
+                    var feature = await db.ProductFutures.FindAsync(item.Id);
                     feature.IsRemoved = true;
                     feature.RemoveTime = System.DateTime.Now;
                     db.ProductFutures.Update(feature);
@@ -128,7 +129,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             }
         }
 
-        private void AddColors(Product product, List<ColorViewModel> colors, List<ProductColor> productColors)
+        private async Task AddColors(Product product, List<ColorViewModel> colors, List<ProductColor> productColors)
         {
             foreach (var item in colors)
             {
@@ -137,22 +138,24 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
 
                 ProductColor color = new ProductColor();
                 if (db.ProductColors.Where(c => c.Name == item.Name).Any())
-                    color = db.ProductColors.Where(c => c.Name == item.Name).First();
+                    color = await db.ProductColors.Where(c => c.Name == item.Name).FirstAsync();
                 else
-                    color = db.ProductColors.Add(new ProductColor { Name = item.Name }).Entity;
-
-                db.ColorsInProducts.Add(new ColorInProduct { Product = product, Color = color });
+                {
+                    var add = await db.ProductColors.AddAsync(new ProductColor { Name = item.Name });
+                    color = add.Entity;
+                }
+                await db.ColorsInProducts.AddAsync(new ColorInProduct { Product = product, Color = color });
             }
         }
 
-        private void DeleteColors(List<ColorViewModel> colors, List<ProductColor> productColors, Product product)
+        private async Task DeleteColors(List<ColorViewModel> colors, List<ProductColor> productColors, Product product)
         {
             foreach (var item in productColors)
             {
                 if (colors.Where(c => c.Name == item.Name).Count() == 0)
                 {
-                    var color = db.ProductColors.Find(item.Id);
-                    var relation = db.ColorsInProducts.Where(c => c.Color == color && c.Product == product).FirstOrDefault();
+                    var color = await db.ProductColors.FindAsync(item.Id);
+                    var relation = await db.ColorsInProducts.Where(c => c.Color == color && c.Product == product).FirstOrDefaultAsync();
                     relation.IsRemoved = true;
                     relation.RemoveTime = System.DateTime.Now;
                     db.ColorsInProducts.Update(relation);
@@ -160,7 +163,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             }
         }
 
-        private void AddSizes(Product product, List<SizeViewModel> sizes, List<ProductSize> productSizes)
+        private async Task AddSizes(Product product, List<SizeViewModel> sizes, List<ProductSize> productSizes)
         {
             foreach (var item in sizes)
             {
@@ -169,21 +172,24 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
 
                 ProductSize size = new ProductSize();
                 if (db.ProductSizes.Where(s => s.SizeValue == item.SizeValue).Any())
-                    size = db.ProductSizes.Where(s => s.SizeValue == item.SizeValue).First();
+                    size = await db.ProductSizes.Where(s => s.SizeValue == item.SizeValue).FirstAsync();
                 else
-                    size = db.ProductSizes.Add(new ProductSize { SizeValue = item.SizeValue }).Entity;
-                db.SizesInProducts.Add(new SizeInProduct { Product = product, Size = size });
+                {
+                    var add = await db.ProductSizes.AddAsync(new ProductSize { SizeValue = item.SizeValue });
+                    size = add.Entity;
+                }
+                await db.SizesInProducts.AddAsync(new SizeInProduct { Product = product, Size = size });
             }
         }
 
-        private void DeleteSizes(Product product, List<SizeViewModel> sizes, List<ProductSize> productSizes)
+        private async Task DeleteSizes(Product product, List<SizeViewModel> sizes, List<ProductSize> productSizes)
         {
             foreach (var item in productSizes)
             {
                 if (sizes.Where(s => s.SizeValue == item.SizeValue).Count() == 0)
                 {
-                    var size = db.ProductSizes.Find(item.Id);
-                    var relation = db.SizesInProducts.Where(s => s.Size == size && s.Product == product).FirstOrDefault();
+                    var size = await db.ProductSizes.FindAsync(item.Id);
+                    var relation = await db.SizesInProducts.Where(s => s.Size == size && s.Product == product).FirstOrDefaultAsync();
                     relation.IsRemoved = true;
                     relation.RemoveTime = System.DateTime.Now;
                     db.SizesInProducts.Update(relation);
@@ -191,14 +197,14 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             }
         }
 
-        private void AddImages(Product product, List<IFormFile> images)
+        private async Task AddImages(Product product, List<IFormFile> images)
         {
             foreach (var item in images)
             {
                 db.ProductImages.Add(new ProductImage
                 {
                     Product = product,
-                    Src = FileUploader.Upload(item, _environment, "products/" + product.Name)
+                    Src = await FileUploader.Upload(item, _environment, "products/" + product.Name)
                 });
             }
         }
@@ -212,7 +218,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             }
         }
 
-        private void EditInventoryAndPrice(List<InventoryAndPriceViewModel> inventoryAndPrices
+        private async Task EditInventoryAndPrice(List<InventoryAndPriceViewModel> inventoryAndPrices
             , List<ProductInventory> productInventories, Product product)
         {
             var itemsInDB = productInventories;
@@ -233,7 +239,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
 
                     else
                     {
-                        db.ProductInventories.Add(new ProductInventory
+                        await db.ProductInventories.AddAsync(new ProductInventory
                         {
                             Product = product,
                             Inventory = item.Inventory,
@@ -243,7 +249,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
                         });
                     }
                 }
-                foreach(var item in inventoryAndPrices)
+                foreach (var item in inventoryAndPrices)
                     if (itemsInDB.Any(p => p.ColorName == item.ColorName && p.SizeName == item.SizeName))
                         itemsInDB.Remove(itemsInDB.First(p => p.ColorName == item.ColorName && p.SizeName == item.SizeName));
 

@@ -11,7 +11,7 @@ namespace Application.Services.Admin.CartPaying.Queries.GetNotSendedCount
 {
     public interface IGetNotSendedCountSevice
     {
-        ResultDto<int> Execute();
+        Task<ResultDto<int>> Execute();
     }
 
     public class GetNotSendedCountSevice : IGetNotSendedCountSevice
@@ -22,11 +22,11 @@ namespace Application.Services.Admin.CartPaying.Queries.GetNotSendedCount
             db = context;
         }
 
-        public ResultDto<int> Execute()
+        public async Task<ResultDto<int>> Execute()
         {
             return new ResultDto<int>
             {
-                Data = db.CartPayings.Where(c => c.IsPayed && !c.Sended).Count(),
+                Data = await db.CartPayings.Where(c => c.IsPayed && !c.Sended).CountAsync(),
                 IsSuccess = true
             };
         }

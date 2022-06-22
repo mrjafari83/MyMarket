@@ -15,8 +15,8 @@ namespace Application.Mapper
     {
         public CartProfiler()
         {
-            CreateMap<CartPayingInfo,GetAllCartPayingsDto>()
-                .ForMember(d=> d.CartPayingId,i=> i.MapFrom(s=> s.Id)).ReverseMap();
+            CreateProjection<CartPayingInfo,GetAllCartPayingsDto>()
+                .ForMember(d=> d.CartPayingId,i=> i.MapFrom(s=> s.Id));
             CreateMap<CartPayingViewModel ,CartPayingInfo>().ReverseMap();
             CreateMap<AddProductToCartDto, ProductInCart>()
                 .ReverseMap();

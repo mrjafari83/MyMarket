@@ -8,6 +8,6 @@ namespace Application.Services.Client.Products.Queries.GetPriceByColorAndSize
 {
     public interface IGetPriceAndInventoryByColorAndSizeService
     {
-        ResultDto<GetPriceAndInventoryByColorAndSizeDto> Execute(int productId,string colorName, string sizeName);
+        Task<ResultDto<GetPriceAndInventoryByColorAndSizeDto>> Execute(int productId,string colorName, string sizeName);
     }
 }

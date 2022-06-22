@@ -2,6 +2,8 @@
 using Common.Dto;
 using Common.Utilities;
 using Application.Interfaces.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Application.Services.Common.Product.Queries.GetProductsBySearch
 {
@@ -13,7 +15,7 @@ namespace Application.Services.Common.Product.Queries.GetProductsBySearch
             db = context;
         }
 
-        public ResultDto<ResultGetProductByFilterDto> Execute(string searchKey, int pageSize, int pagNumber = 1)
+        public async Task<ResultDto<ResultGetProductByFilterDto>> Execute(string searchKey, int pageSize, int pagNumber = 1)
         {
             if (searchKey == "")
                 return new ResultDto<ResultGetProductByFilterDto>
@@ -31,11 +33,14 @@ namespace Application.Services.Common.Product.Queries.GetProductsBySearch
                         Name = p.Name,
                         ShortDescription = p.ShortDescription,
                         Image = p.Images.First().Src
-                    }).ToPaged(out totalRows, pagNumber, pageSize).ToList();
+                    }).ToPaged(out totalRows, pagNumber, pageSize);
 
                 return new ResultDto<ResultGetProductByFilterDto>
                 {
-                    Data = new ResultGetProductByFilterDto { Products = products, TotalRows = totalRows },
+                    Data = new ResultGetProductByFilterDto 
+                    { Products = await products.AsNoTracking().ToListAsync(),
+                        TotalRows = totalRows
+                    },
                     IsSuccess = true
                 };
             }

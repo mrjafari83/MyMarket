@@ -8,6 +8,6 @@ namespace Application.Services.Client.BlogPages.Queries.GetBlogPageById
 {
     public interface IGetBlogPageByIdService
     {
-        ResultDto<GetBlogPageByIdDto> Execute(int id);
+        Task<ResultDto<GetBlogPageByIdDto>> Execute(int id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Common.Dto;
 using Domain.Entities.Option;
@@ -13,19 +14,19 @@ namespace Application.Services.Admin.Slider.Commands.ReplaceSlider
             db = context;
         }
 
-        public ResultDto Execute(int lastSliderId, string url, string imageSrc)
+        public async Task<ResultDto> Execute(int lastSliderId, string url, string imageSrc)
         {
-            var lastSlider = db.Sliders.Find(lastSliderId);
+            var lastSlider = await db.Sliders.FindAsync(lastSliderId);
             lastSlider.IsRemoved = true;
             lastSlider.RemoveTime = DateTime.Now;
             db.Sliders.Update(lastSlider);
 
-            db.Sliders.Add(new Domain.Entities.Option.Slider 
+            await db.Sliders.AddAsync(new Domain.Entities.Option.Slider 
             {
                 Url = url,
                 ImageSrc = imageSrc
             });
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {

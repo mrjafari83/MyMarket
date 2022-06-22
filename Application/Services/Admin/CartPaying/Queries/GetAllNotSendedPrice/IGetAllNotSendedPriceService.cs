@@ -8,6 +8,6 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllNotSendedPrice
 {
     public interface IGetAllNotSendedPriceService
     {
-        ResultDto<int> Execute();
+        Task<ResultDto<int>> Execute();
     }
 }

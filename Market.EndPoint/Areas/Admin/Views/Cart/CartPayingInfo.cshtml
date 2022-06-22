@@ -1,5 +1,6 @@
 ﻿@using Application.Services.Common.Cart.Queries.GetCartPayingById
-@model GetCartPayingByIdDto
+@using Common.Dto
+@model ResultDto<GetCartPayingByIdDto>
 @{
     ViewData["Title"] = "CartPayingInfo";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -16,13 +17,13 @@
 <hr />
 <h4>اطلاعات فردی</h4>
 <ul>
-    <li>نام : @Model.Name</li>
-    <li>نام خانوادگی : @Model.Family</li>
-    <li>ایمیل : @Model.Email</li>
-    <li>شماره تماس : @Model.PhoneNymber</li>
-    <li>کد پستی : @Model.PostalCode</li>
-    <li>آدرس : @Model.Address</li>
-    @if (Model.Sended)
+    <li>نام : @Model.Data.Name</li>
+    <li>نام خانوادگی : @Model.Data.Family</li>
+    <li>ایمیل : @Model.Data.Email</li>
+    <li>شماره تماس : @Model.Data.PhoneNymber</li>
+    <li>کد پستی : @Model.Data.PostalCode</li>
+    <li>آدرس : @Model.Data.Address</li>
+    @if (Model.Data.Sended)
     {
         <li>وضعیت : ارسال شده</li>
     }
@@ -48,7 +49,7 @@
     </thead>
     <tbody>
         @if (Model != null)
-            foreach (var item in Model.Products)
+            foreach (var item in Model.Data.Products)
             {
                 <tr>
                     <td><img style="max-width:100%" src="@item.ImageSrc" /></td>

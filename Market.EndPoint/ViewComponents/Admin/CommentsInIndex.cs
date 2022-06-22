@@ -21,11 +21,11 @@ namespace Market.EndPoint.ViewComponents.Admin
             if(categoryType == Enums.CategoryType.BlogPage)
             {
                 ViewBag.CategiryType = "وبلاگ";
-                return View("CommentsInIndex", _commentFacad.GetAllBlogComments.Execute().Data);
+                return View("CommentsInIndex", _commentFacad.GetAllBlogComments.Execute().Result.Data);
             }
 
             ViewBag.CategiryType = "محصولات";
-            return View("CommentsInIndex" , _commentFacad.GetAllProductComments.Execute().Data);
+            return View("CommentsInIndex" , _commentFacad.GetAllProductComments.Execute().Result.Data);
         }
     }
 }

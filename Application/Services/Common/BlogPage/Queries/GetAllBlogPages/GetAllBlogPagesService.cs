@@ -1,22 +1,27 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.Context;
+using AutoMapper;
 using Common.Dto;
 using Common.Enums;
 using Common.Utilities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Common.BlogPage.Queries.GetAllBlogPages
 {
     public class GetAllBlogPagesService : IGetAllBlogPagesService
     {
         private readonly IDataBaseContext db;
-        public GetAllBlogPagesService(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public GetAllBlogPagesService(IDataBaseContext context,IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
-        public ResultDto<GetAllBlogPagesResult> Execute(Enums.PagesFilter filter = Enums.PagesFilter.Newest
-            , int pageNumber = 1, int pageSize = 10 , string searchKey ="" , int categoryId = 0)
+        public async Task<ResultDto<GetAllBlogPagesResult>> Execute(Enums.PagesFilter filter = Enums.PagesFilter.Newest
+            , int pageNumber = 1, int pageSize = 10, string searchKey = "", int categoryId = 0)
         {
             int totalRows = 0;
             var blogPages = db.BlogPages.AsQueryable();
@@ -25,12 +30,12 @@ namespace Application.Services.Common.BlogPage.Queries.GetAllBlogPages
             {
                 case Enums.PagesFilter.Newest:
                     {
-                        blogPages.OrderByDescending(b => b.CreateDate);
+                        blogPages = blogPages.OrderByDescending(b => b.CreateDate).AsQueryable();
                         break;
                     }
                 case Enums.PagesFilter.MostViewed:
                     {
-                        blogPages.OrderByDescending(b => b.Visits.Count());
+                        blogPages = blogPages.OrderByDescending(b => b.Visits.Count()).AsQueryable();
                         break;
                     }
             }
@@ -41,23 +46,15 @@ namespace Application.Services.Common.BlogPage.Queries.GetAllBlogPages
             if (categoryId != 0)
                 blogPages = blogPages.Where(b => b.Category.Id == categoryId).AsQueryable();
 
-            var finallyBlogPages = blogPages.Select(b => new GetAllBlogPagesDto
-            {
-                Id = b.Id,
-                Title = b.Title,
-                ShortDescription = b.ShortDescription,
-                Image = b.Image,
-                CategoryName = b.Category.Name,
-                CreateDate = b.CreateDate.ToShamsi(),
-                VisitNumber = b.Visits.Count(),
-            }).ToPaged(out totalRows, pageNumber, pageSize).ToList();
+            var finallyBlogPages = _mapper.ProjectTo<GetAllBlogPagesDto>(blogPages)
+                .ToPaged(out totalRows, pageNumber, pageSize);
 
             if (blogPages != null)
                 return new ResultDto<GetAllBlogPagesResult>
                 {
                     Data = new GetAllBlogPagesResult
                     {
-                        BlogPages = finallyBlogPages,
+                        BlogPages = await finallyBlogPages.AsNoTracking().ToListAsync(),
                         TotalRows = totalRows
                     },
                     IsSuccess = true

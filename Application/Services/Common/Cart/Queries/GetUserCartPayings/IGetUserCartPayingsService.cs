@@ -8,6 +8,6 @@ namespace Application.Services.Common.Cart.Queries.GetUserCartPayings
 {
     public interface IGetUserCartPayingsService
     {
-        ResultDto<List<GetUserCartPayingsDto>> Execute(string userName);
+         Task<ResultDto<List<GetUserCartPayingsDto>>> Execute(string userName);
     }
 }

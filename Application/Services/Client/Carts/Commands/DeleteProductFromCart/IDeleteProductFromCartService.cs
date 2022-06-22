@@ -8,6 +8,6 @@ namespace Application.Services.Client.Carts.Commands.DeleteProductFromCart
 {
     public interface IDeleteProductFromCartService
     {
-        ResultDto Execute(int productInCartId, int cartId);
+        Task<ResultDto> Execute(int productInCartId, int cartId);
     }
 }

@@ -7,6 +7,6 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllCartPayings
 {
     public interface IGetAllCartPayingsService
     {
-        ResultDto<ResultGetAllCartPayingsDto> Execute(int pageNumber = 1 , int pageSize = 10 , bool sended = false);
+        Task<ResultDto<ResultGetAllCartPayingsDto>> Execute(int pageNumber = 1 , int pageSize = 10 , bool sended = false);
     }
 }

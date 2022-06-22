@@ -7,6 +7,6 @@ namespace Application.Services.Client.Carts.Queries.GetUserCart
 {
     public interface IGetUserCartService
     {
-        ResultDto<GetUserCartDto> Execute(string userName);
+        Task<ResultDto<GetUserCartDto>> Execute(string userName);
     }
 }

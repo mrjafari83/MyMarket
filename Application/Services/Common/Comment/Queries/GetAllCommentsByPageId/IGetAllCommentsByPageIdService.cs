@@ -8,6 +8,6 @@ namespace Application.Services.Common.Comment.Queries.GetAllCommentsByPageId
 {
     public interface IGetAllCommentsByPageIdService
     {
-        ResultDto<List<GetAllCommentsByPageIdDto>> Execute(int pageId);
+        Task<ResultDto<List<GetAllCommentsByPageIdDto>>> Execute(int pageId);
     }
 }

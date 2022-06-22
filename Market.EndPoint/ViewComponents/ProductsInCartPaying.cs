@@ -17,7 +17,7 @@ namespace Market.EndPoint.ViewComponents
 
         public IViewComponentResult Invoke(int id)
         {
-            return View("GetCartPayingProducts" , _commonCartFacad.GetCartPayingById.Execute(id).Data.Products);
+            return View("GetCartPayingProducts" , _commonCartFacad.GetCartPayingById.Execute(id).Result.Data.Products);
         }
     }
 }

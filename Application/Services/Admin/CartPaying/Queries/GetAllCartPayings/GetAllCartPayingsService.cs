@@ -6,6 +6,7 @@ using Common.Utilities;
 using Domain.Entities.Cart;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.CartPaying.Queries.GetAllCartPayings
 {
@@ -19,20 +20,20 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllCartPayings
             _mapper = mapper;
         }
 
-        public ResultDto<ResultGetAllCartPayingsDto> Execute(int pageNumber = 1, int pageSize = 10, bool sended = false)
+        public async Task<ResultDto<ResultGetAllCartPayingsDto>> Execute(int pageNumber = 1, int pageSize = 10, bool sended = false)
         {
             int totalRows = 0;
-            var cartPayings = _mapper.Map<List<GetAllCartPayingsDto>>(db.CartPayings.Where(c => c.IsPayed));
+            var cartPayings = _mapper.ProjectTo<GetAllCartPayingsDto>(db.CartPayings.Where(c => c.IsPayed));
 
             if (sended)
-                cartPayings = cartPayings.Where(c => c.Sended).ToList();
+                cartPayings = cartPayings.Where(c => c.Sended);
 
             if (cartPayings.Any())
                 return new ResultDto<ResultGetAllCartPayingsDto>
                 {
                     Data = new ResultGetAllCartPayingsDto
                     {
-                        CartPayings = cartPayings.OrderByDescending(c => c.CartPayingId).ToPaged(out totalRows, pageNumber, pageSize).ToList(),
+                        CartPayings = await cartPayings.OrderByDescending(c => c.CartPayingId).ToPaged(out totalRows, pageNumber, pageSize).AsNoTracking().ToListAsync(),
                         TotalRows = totalRows
                     },
                     IsSuccess = true,

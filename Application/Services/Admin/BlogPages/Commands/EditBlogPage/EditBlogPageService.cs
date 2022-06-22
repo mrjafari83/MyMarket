@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Common.ViewModels;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.BlogPages.Commands.EditBlogPage
 {
@@ -17,9 +18,9 @@ namespace Application.Services.Admin.BlogPages.Commands.EditBlogPage
             db = context;
         }
 
-        public ResultDto Execute(EditBlogPageDto entry)
+        public async Task<ResultDto> Execute(EditBlogPageDto entry)
         {
-            var page = db.BlogPages.Include(b => b.Keywords).Where(b => b.Id == entry.Id).First();
+            var page = await db.BlogPages.Include(b => b.Keywords).FirstAsync(b => b.Id == entry.Id);
 
             page.Title = entry.Title;
             page.ShortDescription = entry.ShortDescription;
@@ -27,15 +28,15 @@ namespace Application.Services.Admin.BlogPages.Commands.EditBlogPage
             page.Image = entry.Image;
 
             if (entry.CategoryId != 0)
-                page.Category = db.BlogPageCategories.Find(entry.CategoryId);
+                page.Category = await db.BlogPageCategories.FindAsync(entry.CategoryId);
 
             var keywords = AddKeywords(page, entry.Keywords, page.Keywords.ToList());
-            DeleteKeywords(entry.Keywords, page.Keywords.ToList());
+            await DeleteKeywords(entry.Keywords, page.Keywords.ToList());
             if (keywords != null)
                 db.BlogKeywords.AddRange(keywords);
 
             db.BlogPages.Update(page);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {
@@ -49,7 +50,7 @@ namespace Application.Services.Admin.BlogPages.Commands.EditBlogPage
             List<Keyword<BlogPage>> finallykeywords = new List<Keyword<BlogPage>>();
             foreach (var item in keywords)
             {
-                if (blogKeywords.Where(k => k.Value == item.KeywordValue).ToList().Count() != 0)
+                if (blogKeywords.Where(k => k.Value == item.KeywordValue).Count() != 0)
                     continue;
 
                 finallykeywords.Add(new Keyword<BlogPage>
@@ -62,13 +63,13 @@ namespace Application.Services.Admin.BlogPages.Commands.EditBlogPage
             return finallykeywords;
         }
 
-        private void DeleteKeywords(List<KeywordViewModel> keywords, List<Keyword<BlogPage>> blogKeywords)
+        private async Task DeleteKeywords(List<KeywordViewModel> keywords, List<Keyword<BlogPage>> blogKeywords)
         {
             foreach (var item in blogKeywords)
             {
                 if (keywords.Where(k => k.KeywordValue == item.Value).Count() == 0)
                 {
-                    var keyword = db.BlogKeywords.Find(item.Id);
+                    var keyword = await db.BlogKeywords.FindAsync(item.Id);
                     keyword.IsRemoved = true;
                     keyword.RemoveTime = System.DateTime.Now;
                     db.BlogKeywords.Update(keyword);

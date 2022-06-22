@@ -22,7 +22,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             ViewBag.CurrentRow = currentPage;
 
-            return View(_messageFacad.GetAllCriticsmMessages.Execute(currentPage).Data);
+            return View(_messageFacad.GetAllCriticsmMessages.Execute(currentPage).Result.Data);
         }
     }
 }

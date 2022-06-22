@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces.Context;
 using Common.Dto;
+using System.Threading.Tasks;
 
 namespace Application.Services.Client.Carts.Commands.EditProductCount
 {
@@ -10,12 +11,12 @@ namespace Application.Services.Client.Carts.Commands.EditProductCount
         {
             this.db = context;
         }
-        public ResultDto Execute(int productInCartId, int count)
+        public async Task<ResultDto> Execute(int productInCartId, int count)
         {
-            var product = db.ProductsInCart.Find(productInCartId);
+            var product =await db.ProductsInCart.FindAsync(productInCartId);
             product.Count = count;
             db.ProductsInCart.Update(product);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {

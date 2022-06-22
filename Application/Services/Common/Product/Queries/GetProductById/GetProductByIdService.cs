@@ -5,6 +5,7 @@ using Common.ViewModels;
 using Common.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Application.Services.Common.Comment.Queries.GetAllCommentsByPageId;
+using System.Threading.Tasks;
 
 namespace Application.Services.Common.Product.Queries.GetProductById
 {
@@ -16,9 +17,9 @@ namespace Application.Services.Common.Product.Queries.GetProductById
             db = context;
         }
 
-        public ResultDto<GetProductByIdDto> Execute(int id)
+        public async Task<ResultDto<GetProductByIdDto>> Execute(int id)
         {
-            var product = db.Products.Include(p => p.Images).Include(p => p.Features).Include(p => p.Category).Include(p=> p.Comments)
+            var product = await db.Products.Include(p => p.Images).Include(p => p.Features).Include(p => p.Category).Include(p=> p.Comments)
                 .Include(p => p.Colors).ThenInclude(c => c.Color)
                 .Include(p => p.Sizes).ThenInclude(s => s.Size)
                 .Where(p => p.Id == id).Select(p => new GetProductByIdDto
@@ -34,7 +35,7 @@ namespace Application.Services.Common.Product.Queries.GetProductById
                     Features = p.Features.Select(f => new FeatureViewModel { Display = f.Display, FeatureValue = f.FeatureValue }).ToList(),
                     Sizes = p.Sizes.Select(s => new SizeViewModel { SizeValue = s.Size.SizeValue }).ToList(),
                     Colors = p.Colors.Select(c => new ColorViewModel { Name = c.Color.Name }).ToList(),
-                }).FirstOrDefault();
+                }).FirstOrDefaultAsync();
 
             if (product != null)
                 return new ResultDto<GetProductByIdDto>

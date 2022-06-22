@@ -8,7 +8,7 @@ namespace Common.Utilities
 {
     public static class Pagination
     {
-        public static IEnumerable<TSource> ToPaged<TSource>(this IEnumerable<TSource> sources
+        public static IQueryable<TSource> ToPaged<TSource>(this IQueryable<TSource> sources
            , out int rowsCount, int pageNumber = 1, int pageSize = 10)
         {
             rowsCount = sources.Count() / pageSize + 1;

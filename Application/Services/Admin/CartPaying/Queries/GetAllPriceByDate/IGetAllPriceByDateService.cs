@@ -11,7 +11,7 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllPriceByDate
 {
     public interface IGetAllPriceByDateService
     {
-        ResultDto<int> Execute(int daysAgo);
+        Task<ResultDto<int>> Execute(int daysAgo);
     }
 
     public class GetAllPriceByDateService : IGetAllPriceByDateService
@@ -22,12 +22,12 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllPriceByDate
             db = context;
         }
 
-        public ResultDto<int> Execute(int daysAgo)
+        public async Task<ResultDto<int>> Execute(int daysAgo)
         {
             int price = 0;
             var date = DateTime.Now.AddDays(daysAgo);
-            var products = db.ProductsInCart.Include(p=> p.ProductInventoryAndPrice).Include(p => p.CartPayingInfo).Include(p => p.Product)
-                .Where(p => p.CartPayingInfo.PayDate.Day == date.Day).ToList();
+            var products = await db.ProductsInCart.Include(p=> p.ProductInventoryAndPrice).Include(p => p.CartPayingInfo).Include(p => p.Product)
+                .Where(p => p.CartPayingInfo.PayDate.Day == date.Day).ToListAsync();
 
             foreach (var item in products)
             {

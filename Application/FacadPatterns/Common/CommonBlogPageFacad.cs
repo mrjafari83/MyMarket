@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using Application.Services.Common.BlogPage.Queries.GetAllBlogPages;
 using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Common;
+using AutoMapper;
 
 namespace Application.FacadPatterns.Common
 {
     public class CommonBlogPageFacad : ICommonBlogPageFacad
     {
         private readonly IDataBaseContext db;
-        public CommonBlogPageFacad(IDataBaseContext context)
+        private readonly IMapper _mapper;
+        public CommonBlogPageFacad(IDataBaseContext context , IMapper mapper)
         {
             db = context;
+            _mapper = mapper;
         }
 
         private GetAllBlogPagesService _getAllBlogPagesService;
@@ -22,7 +25,7 @@ namespace Application.FacadPatterns.Common
         {
             get
             {
-                return _getAllBlogPagesService ?? new GetAllBlogPagesService(db);
+                return _getAllBlogPagesService ?? new GetAllBlogPagesService(db ,_mapper);
             }
         }
     }

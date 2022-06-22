@@ -1,5 +1,6 @@
 ﻿@using Application.Services.Admin.CartPaying.Queries.GetAllCartPayings
-@model ResultGetAllCartPayingsDto
+@using Common.Dto
+@model ResultDto<ResultGetAllCartPayingsDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -26,7 +27,7 @@
                         </thead>
                         <tbody>
                             @if (Model != null)
-                                foreach (var item in Model.CartPayings)
+                                foreach (var item in Model.Data.CartPayings)
                                 {
                                     <tr>
                                         <td>

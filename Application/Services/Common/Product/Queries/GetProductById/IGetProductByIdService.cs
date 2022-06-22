@@ -7,6 +7,6 @@ namespace Application.Services.Common.Product.Queries.GetProductById
 {
     public interface IGetProductByIdService
     {
-        ResultDto<GetProductByIdDto> Execute(int id);
+        Task<ResultDto<GetProductByIdDto>> Execute(int id);
     }
 }

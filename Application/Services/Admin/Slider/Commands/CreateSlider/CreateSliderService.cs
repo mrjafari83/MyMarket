@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Context;
 using Common.Dto;
 using Domain.Entities.Option;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Slider.Commands.CreateSlider
 {
@@ -12,14 +13,14 @@ namespace Application.Services.Admin.Slider.Commands.CreateSlider
             db = context;
         }
 
-        public ResultDto Execute(string url , string imageSrc)
+        public async Task<ResultDto> Execute(string url , string imageSrc)
         {
-            db.Sliders.Add(new Domain.Entities.Option.Slider
+            await db.Sliders.AddAsync(new Domain.Entities.Option.Slider
             {
                 Url = url,
                 ImageSrc = imageSrc
             });
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {

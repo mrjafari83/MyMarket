@@ -8,6 +8,7 @@ using Domain.Entities.Products;
 using Domain.Entities.Products.Relations;
 using Microsoft.EntityFrameworkCore;
 using Common.Utilities;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Products.Commands.DeleteProduct
 {
@@ -19,11 +20,11 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
             db = context;
         }
 
-        public ResultDto Execute(int id)
+        public async Task<ResultDto> Execute(int id)
         {
-            var product = db.Products.Include(p => p.Keywords).Include(p => p.Images).Include(p => p.Colors).ThenInclude(c => c.Color)
-                 .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Include(p=> p.Inventories)
-                 .Where(p => p.Id == id).FirstOrDefault();
+            var product = await db.Products.Include(p => p.Keywords).Include(p => p.Images).Include(p => p.Colors).ThenInclude(c => c.Color)
+                 .Include(p => p.Sizes).ThenInclude(s => s.Size).Include(p => p.Features).Include(p => p.Inventories)
+                 .Where(p => p.Id == id).FirstOrDefaultAsync();
             product.IsRemoved = true;
             product.RemoveTime = DateTime.Now;
 
@@ -31,11 +32,10 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
             DeleteFeatures(product.Features.ToList());
             DeleteImages(product.Images.ToList());
             DeleteInventoryAndPrice(product.Inventories.ToList());
-            DeleteColors(product.Colors.Select(c => new ProductColor { Id = c.Color.Id}).ToList(), product.Colors.ToList());
-            DeleteSizes(product.Sizes.Select(s => new ProductSize { Id = s.Size.Id }).ToList(), product.Sizes.ToList());
-
+            await DeleteColors(product.Colors.Select(c => new ProductColor { Id = c.Color.Id}).ToList(), product.Colors.ToList());
+            await DeleteSizes(product.Sizes.Select(s => new ProductSize { Id = s.Size.Id }).ToList(), product.Sizes.ToList());
             db.Products.Update(product);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {
@@ -73,7 +73,7 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
             }
         }
 
-        private void DeleteColors(List<ProductColor> productColors, List<ColorInProduct> colorInProducts)
+        private async Task DeleteColors(List<ProductColor> productColors, List<ColorInProduct> colorInProducts)
         {
             if(productColors != null && colorInProducts != null)
             {
@@ -86,7 +86,7 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
                 ////}
                 foreach (var item in colorInProducts)
                 {
-                    var colorInProdcut = db.ColorsInProducts.Find(item.Id);
+                    var colorInProdcut = await db.ColorsInProducts.FindAsync(item.Id);
                     colorInProdcut.IsRemoved = true;
                     colorInProdcut.RemoveTime = DateTime.Now;
                     db.ColorsInProducts.Update(colorInProdcut);
@@ -94,7 +94,7 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
             }
         }
 
-        private void DeleteSizes(List<ProductSize> productSizes, List<SizeInProduct> sizeInProducts)
+        private async Task DeleteSizes(List<ProductSize> productSizes, List<SizeInProduct> sizeInProducts)
         {
             if(productSizes != null && sizeInProducts != null)
             {
@@ -107,7 +107,7 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
                 //}
                 foreach (var item in sizeInProducts)
                 {
-                    var sizeInProduct = db.SizesInProducts.Find(item.Id);
+                    var sizeInProduct = await db.SizesInProducts.FindAsync(item.Id);
                     sizeInProduct.IsRemoved = true;
                     sizeInProduct.RemoveTime = DateTime.Now;
                     db.SizesInProducts.Update(sizeInProduct);

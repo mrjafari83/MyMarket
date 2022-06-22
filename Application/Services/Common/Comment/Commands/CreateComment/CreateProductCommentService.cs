@@ -1,6 +1,7 @@
 ﻿using Common.Dto;
 using Application.Interfaces.Context;
 using Domain.Entities.Comments;
+using System.Threading.Tasks;
 
 namespace Application.Services.Common.Comment.Commands.CreateComment
 {
@@ -12,9 +13,9 @@ namespace Application.Services.Common.Comment.Commands.CreateComment
             db = context;
         }
 
-        public ResultDto Execute(CreateCommentDto comment)
+        public async Task<ResultDto> Execute(CreateCommentDto comment)
         {
-            db.ProductComments.Add(new Comment<Domain.Entities.Products.Product>
+            await db.ProductComments.AddAsync(new Comment<Domain.Entities.Products.Product>
             {
                 Name = comment.Name,
                 Email = comment.Email,
@@ -26,7 +27,7 @@ namespace Application.Services.Common.Comment.Commands.CreateComment
                 VisitingParent = comment.VisitingParent
             });
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return new ResultDto
             {
                 IsSuccess = true,

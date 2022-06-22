@@ -1,5 +1,6 @@
 ﻿@using Application.Services.Common.BlogPage.Queries.GetAllBlogPages
-@model GetAllBlogPagesResult
+@using Common.Dto
+@model ResultDto<GetAllBlogPagesResult>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -31,7 +32,7 @@
                 <th></th>
             </tr>
         </thead>
-        @foreach (var item in Model.BlogPages)
+        @foreach (var item in Model.Data.BlogPages)
         {
             <tr>
                 <td><img style="max-width:100px" src="@item.Image" /></td>
@@ -61,7 +62,7 @@
                 <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
             }
 
-            @for (int i = 1; i <= Model.TotalRows; i++)
+            @for (int i = 1; i <= Model.Data.TotalRows; i++)
             {
                 if (i == ViewBag.CurrentRow)
                 {
@@ -73,7 +74,7 @@
                 }
             }
 
-            @if (ViewBag.CurrentRow == Model.TotalRows)
+            @if (ViewBag.CurrentRow == Model.Data.TotalRows)
             {
                 <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
             }

@@ -39,10 +39,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int currentPage = 1)
+        public async Task<IActionResult> Index(int currentPage = 1)
         {
             ViewBag.CurrentRow = currentPage;
-            return View(_commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber: currentPage).Data);
+            return View(await _commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber: currentPage));
         }
 
         [HttpGet]
@@ -58,12 +58,12 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(BlogPageViewModel model, List<KeywordViewModel> keywords)
+        public async Task<IActionResult> Create(BlogPageViewModel model, List<KeywordViewModel> keywords)
         {
 
-            string imageSrc = FileUploader.Upload(model.Image, _environment , "BlogPages/" + model.Title);
+            string imageSrc = FileUploader.Upload(model.Image, _environment, "BlogPages/" + model.Title).Result;
 
-            _blogPageFacad.CreateBlogPageService.Execute(new CreateBlogPageDto
+            await _blogPageFacad.CreateBlogPageService.Execute(new CreateBlogPageDto
             {
                 Title = model.Title,
                 ShortDescription = model.ShortDescription,
@@ -85,7 +85,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                 , "Name"
                 );
 
-            var blogPage = _blogPageFacad.GetBlogPageByIdService.Execute(id);
+            var blogPage = _blogPageFacad.GetBlogPageByIdService.Execute(id).Result;
             if (blogPage.IsSuccess)
                 return View(blogPage.Data);
             else
@@ -93,16 +93,16 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, string title, string shortDescription, string text, int categoryId, string imageName, IFormFile image, List<KeywordViewModel> keywords)
+        public async Task<IActionResult> Edit(int id, string title, string shortDescription, string text, int categoryId, string imageName, IFormFile image, List<KeywordViewModel> keywords)
         {
 
             string imageSrc;
             if (image != null)
-                imageSrc = FileUploader.Upload(image, _environment , "BlogPages/" + title);
+                imageSrc = FileUploader.Upload(image, _environment, "BlogPages/" + title).Result;
             else
                 imageSrc = imageName;
 
-            _blogPageFacad.EditBlogPageService.Execute(new EditBlogPageDto
+            await _blogPageFacad.EditBlogPageService.Execute(new EditBlogPageDto
             {
                 Id = id,
                 Title = title,
@@ -119,7 +119,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var blogPage = _blogPageFacad.GetBlogPageByIdService.Execute(id);
+            var blogPage = _blogPageFacad.GetBlogPageByIdService.Execute(id).Result;
             if (blogPage.IsSuccess)
                 return View(blogPage.Data);
             else
@@ -127,9 +127,9 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Deleting(int id)
+        public async Task<IActionResult> Deleting(int id)
         {
-            _blogPageFacad.DeleteBlogPageService.Execute(id);
+            await _blogPageFacad.DeleteBlogPageService.Execute(id);
 
             return Redirect("/Admin/BlogPages");
         }

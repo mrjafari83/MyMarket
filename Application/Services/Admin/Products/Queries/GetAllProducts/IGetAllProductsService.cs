@@ -8,6 +8,6 @@ namespace Application.Services.Admin.Products.Queries.GetAllProducts
 {
     public interface IGetAllProductsService
     {
-        ResultDto<ResultGetAllProductsDto> Execute(int pageNumber , int pageSize);
+        Task<ResultDto<ResultGetAllProductsDto>> Execute(int pageNumber , int pageSize);
     }
 }

@@ -2,6 +2,7 @@
 using Common.Dto;
 using Common.Utilities;
 using Application.Interfaces.Context;
+using System.Threading.Tasks;
 
 namespace Application.Services.Client.Carts.Commands.DeleteProductFromCart
 {
@@ -13,12 +14,12 @@ namespace Application.Services.Client.Carts.Commands.DeleteProductFromCart
             db = context;
         }
 
-        public ResultDto Execute(int productInCartId , int cartId)
+        public async Task<ResultDto> Execute(int productInCartId , int cartId)
         {
-            var produtInCart = db.ProductsInCart.Find(productInCartId);
+            var produtInCart = await db.ProductsInCart.FindAsync(productInCartId);
             produtInCart.IsShow = false;
             db.ProductsInCart.Update(produtInCart);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {

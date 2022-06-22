@@ -8,6 +8,6 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
 {
     public interface IDeleteProductService
     {
-        ResultDto Execute(int id);
+        Task<ResultDto> Execute(int id);
     }
 }

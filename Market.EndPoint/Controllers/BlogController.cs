@@ -36,14 +36,13 @@ namespace Market.EndPoint.Controllers
             else
                 ViewBag.HeaderTitle = _commonCategorisFacad.GetBlogCategoryById.Execute(categoryId).Data.Name;
 
-            var pages = _commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber: currentPage, categoryId: categoryId).Data;
-            return View(pages);
+            return View(await _commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber: currentPage, categoryId: categoryId));
         }
 
         [Route("Blog")]
         public IActionResult ShowBlogPages(int id)
         {
-            return View(_clientBlogPageFacad.GetBlogPageByIdService.Execute(id).Data);
+            return View(_clientBlogPageFacad.GetBlogPageByIdService.Execute(id).Result.Data);
         }
 
         public IActionResult CreateComment(CommentViewModel comment)
@@ -68,7 +67,7 @@ namespace Market.EndPoint.Controllers
             ViewBag.CurrentPage = currentPage;
             ViewBag.SearchKey = searchKey;
             ViewBag.PageTitle = "جستوجو برای " + searchKey;
-            return View(_commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber:currentPage , searchKey:searchKey).Data);
+            return View(_commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber:currentPage , searchKey:searchKey).Result.Data);
         }
     }
 }

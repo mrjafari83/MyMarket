@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Common.Dto;
 
@@ -12,13 +13,13 @@ namespace Application.Services.Client.Carts.Commands.DeleteCart
             db = context;
         }
 
-        public ResultDto Execute(int cartId)
+        public async Task<ResultDto> Execute(int cartId)
         {
-            var cart = db.Carts.Find(cartId);
+            var cart = await db.Carts.FindAsync(cartId);
             cart.IsRemoved = true;
             cart.RemoveTime = DateTime.Now;
             db.Carts.Update(cart);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return new ResultDto
             {

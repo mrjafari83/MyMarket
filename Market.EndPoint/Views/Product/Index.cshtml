@@ -1,11 +1,11 @@
 ﻿@using System.Linq
 @using Common.Dto
-@model ResultGetProductByFilterDto
+@model ResultDto<ResultGetProductByFilterDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    int productCount = Model.Products.Count();
+    int productCount = Model.Data.Products.Count();
     int back = ViewBag.CurrentRow - 1;
     int forward = ViewBag.CurrentRow + 1;
 
@@ -82,9 +82,9 @@
 
                                     <div class="product-img">
                                         <div class="picture">
-                                            <img width="540" height="374" alt="" src="@Model.Products[i].Image">
+                                            <img width="540" height="374" alt="" src="@Model.Data.Products[i].Image">
                                             <div class="img-overlay">
-                                                <a class="btn more btn-primary" href="/Product?id=@Model.Products[i].Id">توضیحات بیشتر</a>
+                                                <a class="btn more btn-primary" href="/Product?id=@Model.Data.Products[i].Id">توضیحات بیشتر</a>
                                             </div>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
 
                                         <h4 class="title"> تومان</h4>
 
-                                        <h5 class="no-margin isotope--title">@Model.Products[i].Name</h5>
+                                        <h5 class="no-margin isotope--title">@Model.Data.Products[i].Name</h5>
                                     </div>
                                 </div>
                             </div> <!-- /single product -->
@@ -116,7 +116,7 @@
                             <li><a href="/Products?currentPage=@back&categoryId=@ViewBag.CategoryId&categoryName=@ViewBag.CategoryName" class="btn btn-primary"><span class="icon-chevron-left"></span></a></li>
                         }
 
-                        @for (int i = 1; i <= Model.TotalRows; i++)
+                        @for (int i = 1; i <= Model.Data.TotalRows; i++)
                         {
                             if (i == ViewBag.CurrentRow)
                             {
@@ -128,7 +128,7 @@
                             }
                         }
 
-                        @if (ViewBag.CurrentRow == Model.TotalRows)
+                        @if (ViewBag.CurrentRow == Model.Data.TotalRows)
                         {
                             <li><a class="btn btn-primary"><span class="icon-chevron-right"></span></a></li>
                         }

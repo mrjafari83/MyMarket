@@ -11,7 +11,7 @@ namespace Common.Utilities
 {
     public static class FileUploader
     {
-        public static string Upload(IFormFile file , IHostingEnvironment environment, string path)
+        public static async Task<string> Upload(IFormFile file , IHostingEnvironment environment, string path)
         {
             if(file != null)
             {
@@ -28,7 +28,7 @@ namespace Common.Utilities
 
                 using(var fileStream = new FileStream(fileAddress , FileMode.Create))
                 {
-                    file.CopyTo(fileStream);
+                    await file.CopyToAsync(fileStream);
                 }
 
                 return folderAddress + fileName;

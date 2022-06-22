@@ -10,7 +10,7 @@ namespace Application.Services.Client.BlogPages.Commands.AddNewVisit
 {
     public interface IAddNewVisitService
     {
-        ResultDto Execute(int id, string browserCode);
+        Task<ResultDto> Execute(int id, string browserCode);
     }
 
     public class AddNewVisitService : IAddNewVisitService
@@ -21,8 +21,8 @@ namespace Application.Services.Client.BlogPages.Commands.AddNewVisit
             db = context;
         }
 
-        public ResultDto Execute(int id, string browserCode)
-        {
+        public async Task<ResultDto> Execute(int id, string browserCode)
+        { 
             var blogPage = db.BlogPages.Find(id);
             var browser = db.Browsers.Where(b => b.BrowserCode == browserCode).FirstOrDefault();
 

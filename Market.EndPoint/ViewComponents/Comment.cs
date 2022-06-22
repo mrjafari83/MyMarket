@@ -25,12 +25,12 @@ namespace Market.EndPoint.ViewComponents
             {
                 case Enums.CategoryType.Product:
                     {
-                        comments = _commonCommentFacad.GetAllProductCommentsById.Execute(pageId).Data;
+                        comments = _commonCommentFacad.GetAllProductCommentsById.Execute(pageId).Result.Data;
                         break;
                     }
                 case Enums.CategoryType.BlogPage:
                     {
-                        comments = _commonCommentFacad.GetAllBlogPageCommentsById.Execute(pageId).Data;
+                        comments = _commonCommentFacad.GetAllBlogPageCommentsById.Execute(pageId).Result.Data;
                         break;
                     }
             }

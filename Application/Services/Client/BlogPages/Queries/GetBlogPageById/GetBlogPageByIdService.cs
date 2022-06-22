@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using AutoMapper;
 using Common.Dto;
@@ -17,9 +18,9 @@ namespace Application.Services.Client.BlogPages.Queries.GetBlogPageById
             _mapper = mapper;
         }
 
-        public ResultDto<GetBlogPageByIdDto> Execute(int id)
+        public async Task<ResultDto<GetBlogPageByIdDto>> Execute(int id)
         {
-            var blogPage = _mapper.Map<GetBlogPageByIdDto>(db.BlogPages.Include(b => b.Category).Include(b => b.Visits).FirstOrDefault(b => b.Id == id));
+            var blogPage = _mapper.Map<GetBlogPageByIdDto>(await db.BlogPages.Include(b => b.Category).Include(b => b.Visits).FirstOrDefaultAsync(b => b.Id == id));
 
             if (blogPage != null)
                 return new ResultDto<GetBlogPageByIdDto>

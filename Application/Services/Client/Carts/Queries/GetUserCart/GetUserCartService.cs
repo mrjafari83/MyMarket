@@ -4,6 +4,7 @@ using Application.Interfaces.Context;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Application.Services.Client.Carts.Queries.GetUserCart
 {
@@ -16,17 +17,17 @@ namespace Application.Services.Client.Carts.Queries.GetUserCart
             db = context;
             _mapper = mapper;
         }
-        public ResultDto<GetUserCartDto> Execute(string userName)
+        public async Task<ResultDto<GetUserCartDto>> Execute(string userName)
         {
-            var userCart = db.Carts.Where(c => c.UserName == userName).Select(c => new GetUserCartDto
+            var userCart = await db.Carts.Where(c => c.UserName == userName).Select(c => new GetUserCartDto
             {
                 CartId = c.Id,
                 UserName = c.UserName,
-            }).FirstOrDefault();
+            }).FirstOrDefaultAsync();
 
-            userCart.Products = _mapper.Map<List<CartProductDto>>(db.ProductsInCart.Include(p => p.Product).ThenInclude(p=> p.Images)
-                .Include(p=> p.ProductInventoryAndPrice)
-                .Where(c => c.Cart.Id == userCart.CartId && c.IsShow));
+            userCart.Products = await _mapper.ProjectTo<CartProductDto>(db.ProductsInCart.Include(p => p.Product).ThenInclude(p => p.Images)
+                .Include(p => p.ProductInventoryAndPrice)
+                .Where(c => c.Cart.Id == userCart.CartId && c.IsShow)).ToListAsync();
 
             return new ResultDto<GetUserCartDto>
             {

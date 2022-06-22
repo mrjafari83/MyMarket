@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using AutoMapper;
 using Common.Dto;
@@ -18,10 +19,10 @@ namespace Application.Services.Admin.Products.Queries.GetProductById
             _mapper = mapper;
         }
 
-        public ResultDto<GetProductByIdDto> Execute(int id)
+        public async Task<ResultDto<GetProductByIdDto>> Execute(int id)
         {
-            var product = _mapper.Map<GetProductByIdDto>(db.Products.Include(p => p.Features).Include(p => p.Keywords).Include(p => p.Inventories)
-                .Include(p => p.Colors).ThenInclude(c => c.Color).Include(p => p.Sizes).ThenInclude(p => p.Size).Where(p => p.Id == id).FirstOrDefault());
+            var product = _mapper.Map<GetProductByIdDto>(await db.Products.Include(p => p.Features).Include(p => p.Keywords).Include(p => p.Inventories)
+                .Include(p => p.Colors).ThenInclude(c => c.Color).Include(p => p.Sizes).ThenInclude(p => p.Size).FirstOrDefaultAsync(p => p.Id == id));
 
             if (product != null)
                 return new ResultDto<GetProductByIdDto>

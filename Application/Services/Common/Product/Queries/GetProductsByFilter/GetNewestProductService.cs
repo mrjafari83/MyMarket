@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Common.Dto;
 using Common.Utilities;
@@ -15,7 +16,7 @@ namespace Application.Services.Common.Product.Queries.GetProductsByFilter
             db = context;
         }
 
-        public ResultDto<ResultGetProductByFilterDto> Execute(int pageNumber, int pageSize, int categoryId = 0)
+        public async Task<ResultDto<ResultGetProductByFilterDto>> Execute(int pageNumber, int pageSize, int categoryId = 0)
         {
             int totalRows;
             var products = db.Products.OrderByDescending(p => p.CreateDate).Include(p => p.Images).AsQueryable();
@@ -29,14 +30,14 @@ namespace Application.Services.Common.Product.Queries.GetProductsByFilter
                 Name = p.Name,
                 ShortDescription = p.ShortDescription,
                 Image = p.Images.FirstOrDefault().Src
-            }).ToPaged(out totalRows, pageNumber, pageSize).ToList();
+            }).ToPaged(out totalRows, pageNumber, pageSize);
 
             if (products != null)
                 return new ResultDto<ResultGetProductByFilterDto>
                 {
                     Data = new ResultGetProductByFilterDto
                     {
-                        Products = finallyProducts,
+                        Products = await finallyProducts.AsNoTracking().ToListAsync(),
                         TotalRows = totalRows
                     },
                     IsSuccess = true

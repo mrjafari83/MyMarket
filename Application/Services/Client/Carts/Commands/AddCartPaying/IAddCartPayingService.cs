@@ -10,6 +10,6 @@ namespace Application.Services.Client.Carts.Commands.AddCartPaying
 {
     public interface IAddCartPayingService
     {
-        ResultDto<int> Execute(CartPayingViewModel model);
+        Task<ResultDto<int>> Execute(CartPayingViewModel model);
     }
 }

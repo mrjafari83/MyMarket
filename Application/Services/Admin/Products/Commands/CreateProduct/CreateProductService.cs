@@ -13,6 +13,7 @@ using Application.Services.Admin.Keyword.Commands.CreateKeyword;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Products.Commands.CreateProduct
 {
@@ -29,22 +30,22 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             _mapper = mapper;   
         }
 
-        public ResultDto Execute(CreateProductServiceDto entry)
+        public async Task<ResultDto> Execute(CreateProductServiceDto entry)
         {
             var product = _mapper.Map<ProductViewModel , Product>(entry.Product);
 
-            SetColors(product, entry.Colors);
-            SetSizes(product, entry.Sizes);
+            await SetColors(product, entry.Colors);
+            await SetSizes(product, entry.Sizes);
 
             //set product options in database
-            db.ProductImages.AddRange(AddImages(product, entry.Images));
+            db.ProductImages.AddRange(await AddImages(product, entry.Images));
             db.ProductKeywords.AddRange(AddKeywords(product, entry.Keywords));
             db.ProductFutures.AddRange(AddFeature(product, entry.Features));
-            SetInventoryAndPrice(product, entry.InventoryAndPrices);
+            await SetInventoryAndPrice(product, entry.InventoryAndPrices);
 
-            db.Products.Add(product);
+            await db.Products.AddAsync(product);
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return new ResultDto
             {
                 IsSuccess = true,
@@ -67,7 +68,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             return finallykeywords;
         }
 
-        private List<ProductImage> AddImages(Product product, List<IFormFile> images)
+        private async Task<List<ProductImage>> AddImages(Product product, List<IFormFile> images)
         {
             List<ProductImage> finallyImages = new List<ProductImage>();
             foreach (var item in images)
@@ -75,7 +76,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                 finallyImages.Add(new ProductImage
                 {
                     Product = product,
-                    Src = FileUploader.Upload(item, _environment, "Products/" + product.Name)
+                    Src = await FileUploader.Upload(item, _environment, "Products/" + product.Name)
                 });
             }
 
@@ -94,7 +95,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             return finallyFeatures;
         }
 
-        private void SetColors(Product product, List<ColorViewModel> entrycolors)
+        private async Task SetColors(Product product, List<ColorViewModel> entrycolors)
         {
             if (entrycolors != null)
             {
@@ -102,18 +103,18 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                 {
                     var color = db.ProductColors.Where(c => c.Name == item.Name).FirstOrDefault();
                     if (color != null)
-                        db.ColorsInProducts.Add(new ColorInProduct { Color = color, Product = product });
+                        await db.ColorsInProducts.AddAsync(new ColorInProduct { Color = color, Product = product });
 
                     else
                     {
-                        var newColor = db.ProductColors.Add(new ProductColor { Name = item.Name }).Entity;
-                        db.ColorsInProducts.Add(new ColorInProduct { Color = newColor, Product = product });
+                        var newColor = await db.ProductColors.AddAsync(new ProductColor { Name = item.Name });
+                        await db.ColorsInProducts.AddAsync(new ColorInProduct { Color = newColor.Entity, Product = product });
                     }
                 }
             }
         }
 
-        private void SetSizes(Product product, List<SizeViewModel> entrySizes)
+        private async Task SetSizes(Product product, List<SizeViewModel> entrySizes)
         {
             if (entrySizes != null)
             {
@@ -121,18 +122,18 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                 {
                     var size = db.ProductSizes.Where(c => c.SizeValue == item.SizeValue).FirstOrDefault();
                     if (size != null)
-                        db.SizesInProducts.Add(new SizeInProduct { Size = size, Product = product });
+                        await db.SizesInProducts.AddAsync(new SizeInProduct { Size = size, Product = product });
 
                     else
                     {
-                        var newSize = db.ProductSizes.Add(new ProductSize { SizeValue = item.SizeValue }).Entity;
-                        db.SizesInProducts.Add(new SizeInProduct { Size = newSize, Product = product });
+                        var newSize = await db.ProductSizes.AddAsync(new ProductSize { SizeValue = item.SizeValue });
+                        await db.SizesInProducts.AddAsync(new SizeInProduct { Size = newSize.Entity, Product = product });
                     }
                 }
             }
         }
 
-        private void SetInventoryAndPrice(Product product , List<InventoryAndPriceViewModel> inventoryAndPrices)
+        private async Task SetInventoryAndPrice(Product product , List<InventoryAndPriceViewModel> inventoryAndPrices)
         {
             if(inventoryAndPrices != null)
             {
@@ -140,7 +141,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
                 {
                     var addingItem = _mapper.Map<InventoryAndPriceViewModel, ProductInventory>(item);
                     addingItem.Product = product;
-                    db.ProductInventories.Add(addingItem);
+                    await db.ProductInventories.AddAsync(addingItem);
                 }
             }
         }

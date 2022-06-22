@@ -7,6 +7,6 @@ namespace Application.Services.Common.Product.Queries.GetProductsBySearch
 {
     public interface IGetProductsBySearchService
     {
-        ResultDto<ResultGetProductByFilterDto> Execute(string searchKey , int pageSize , int pagNumber = 1);
+        Task<ResultDto<ResultGetProductByFilterDto>> Execute(string searchKey , int pageSize , int pagNumber = 1);
     }
 }

@@ -30,7 +30,7 @@ namespace Market.EndPoint.Controllers
         }
 
         [Route("Products")]
-        public IActionResult Index(int currentPage = 1, int categoryId = 0)
+        public async Task<IActionResult> Index(int currentPage = 1, int categoryId = 0)
         {
             ViewBag.CurrentRow = currentPage;
             ViewBag.CategoryId = categoryId;
@@ -46,13 +46,13 @@ namespace Market.EndPoint.Controllers
                 ViewBag.HeaderTitle = "دسته بندی : " + categoryName;
                 ViewBag.TopbarTitle = "دسته بندی : " + categoryName;
             }
-            return View(_commonProductFacad.GetNewestProduct.Execute(currentPage, 12, categoryId).Data);
+            return View(await _commonProductFacad.GetNewestProduct.Execute(currentPage, 12, categoryId));
         }
 
         [Route("Product")]
-        public IActionResult ShowProduct(int id)
+        public async Task<IActionResult> ShowProduct(int id)
         {
-            return View(_commonProductFacad.GetProductById.Execute(id).Data);
+            return View(await _commonProductFacad.GetProductById.Execute(id));
         }
 
         public IActionResult CreateComment(CommentViewModel comment)
@@ -72,18 +72,19 @@ namespace Market.EndPoint.Controllers
 
         [Route("SearchProducts")]
         [HttpPost]
-        public IActionResult SearchProducts(int currentPage = 1, string searchKey = "")
+        public async Task<IActionResult> SearchProducts(int currentPage = 1, string searchKey = "")
         {
             ViewBag.CurrentRow = currentPage;
             ViewBag.HeaderTitle = "جستوجو : " + searchKey;
             ViewBag.TopbarTitle = "جستوجو";
-            return View(viewName: "Index", _commonProductFacad.GetProductsBySearch.Execute(searchKey, 12, currentPage).Data);
+            return View(viewName: "Index", await _commonProductFacad.GetProductsBySearch.Execute(searchKey, 12, currentPage));
         }
 
         [HttpPost]
-        public IActionResult GetPriceByColorAndSize(string colorName,string sizeName , int productId)
+        public async  Task<IActionResult> GetPriceByColorAndSize(string colorName,string sizeName , int productId)
         {
-            return Json(_clientProductFacad.GetPriceByColorAndSize.Execute(productId , colorName , sizeName).Data);
+            var price = await _clientProductFacad.GetPriceByColorAndSize.Execute(productId, colorName, sizeName);
+            return Json(price.Data);
         }
     }
 }

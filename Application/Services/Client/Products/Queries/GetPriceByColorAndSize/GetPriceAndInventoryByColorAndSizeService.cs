@@ -1,6 +1,8 @@
 ﻿using Common.Dto;
 using System.Linq;
 using Application.Interfaces.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Application.Services.Client.Products.Queries.GetPriceByColorAndSize
 {
@@ -12,9 +14,9 @@ namespace Application.Services.Client.Products.Queries.GetPriceByColorAndSize
             db = context;
         }
 
-        public ResultDto<GetPriceAndInventoryByColorAndSizeDto> Execute(int productId ,string colorName, string sizeName)
+        public async Task<ResultDto<GetPriceAndInventoryByColorAndSizeDto>> Execute(int productId ,string colorName, string sizeName)
         {
-            var item = db.ProductInventories.FirstOrDefault(p => p.ProductId == productId
+            var item = await db.ProductInventories.FirstOrDefaultAsync(p => p.ProductId == productId
             && (p.ColorName == colorName || p.ColorName == null) && (p.SizeName == sizeName || p.SizeName == null));
             int price = item.Price;
             int inventory = item.Inventory;

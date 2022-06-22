@@ -7,6 +7,6 @@ namespace Application.Services.Admin.Message.Queries.GetAllCriticismMessages
 {
     public interface IGetAllCriticsmMessagesService
     {
-        ResultDto<GetAllCriticsmMessagesDto> Execute(int pageNumber = 1, int pageSize = 10);
+        Task<ResultDto<GetAllCriticsmMessagesDto>> Execute(int pageNumber = 1, int pageSize = 10);
     }
 }

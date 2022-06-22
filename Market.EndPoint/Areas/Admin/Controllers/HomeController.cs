@@ -41,27 +41,29 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult NewestProduct()
+        public async Task<IActionResult> NewestProduct()
         {
-            return Json(_commonProductFacad.GetNewestProduct.Execute(1 , 10).Data.Products);
+            var products = await _commonProductFacad.GetNewestProduct.Execute(1, 10);
+            return Json(products.Data.Products);
         }
 
         [HttpGet]
-        public IActionResult MostViewedProduct()
+        public async Task<IActionResult> MostViewedProduct()
         {
-            return Json(_commonProductFacad.GetMostViewedProduct.Execute(1 , 10).Data.Products);
+            var products = await _commonProductFacad.GetMostViewedProduct.Execute(1, 10);
+            return Json(products.Data.Products);
         }
 
         [HttpGet]
         public IActionResult NewestBlogPage()
         {
-            return Json(_commonBlogPageFacad.GetAllBlogPages.Execute(filter:Enums.PagesFilter.Newest).Data);
+            return Json(_commonBlogPageFacad.GetAllBlogPages.Execute(filter:Enums.PagesFilter.Newest).Result.Data);
         }
 
         [HttpGet]
         public IActionResult MostViewedBlogPage()
         {
-            return Json(_commonBlogPageFacad.GetAllBlogPages.Execute(filter: Enums.PagesFilter.MostViewed).Data);
+            return Json(_commonBlogPageFacad.GetAllBlogPages.Execute(filter: Enums.PagesFilter.MostViewed).Result.Data);
         }
     }
 }

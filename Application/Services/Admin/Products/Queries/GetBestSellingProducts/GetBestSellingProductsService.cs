@@ -5,6 +5,7 @@ using Common.Dto;
 using Common.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Products.Queries.GetBestSellingProducts
 {
@@ -18,14 +19,14 @@ namespace Application.Services.Admin.Products.Queries.GetBestSellingProducts
             _mapper = mapper;
         }
 
-        public ResultDto<ResultGetBestSellingProductDto> Execute(int pageNumber, int pageSize)
+        public async Task<ResultDto<ResultGetBestSellingProductDto>> Execute(int pageNumber, int pageSize)
         {
             int totalRows = 0;
 
-            var products = _mapper.Map<List<GetBestSellingDto>>
+            var products = _mapper.ProjectTo<GetBestSellingDto>
                 (db.ProductInventories.Include(p => p.Product).ThenInclude(p => p.Images)
-                .Include(p => p.ProductInCarts).ToList())
-                .OrderByDescending(p => p.SellingCount).ToPaged(out totalRows, pageNumber, pageSize).ToList();
+                .Include(p => p.ProductInCarts))
+                .OrderByDescending(p => p.SellingCount).ToPaged(out totalRows, pageNumber, pageSize);
 
             if (products == null)
                 return new ResultDto<ResultGetBestSellingProductDto>
@@ -37,7 +38,7 @@ namespace Application.Services.Admin.Products.Queries.GetBestSellingProducts
             {
                 Data = new ResultGetBestSellingProductDto
                 {
-                    Products = products,
+                    Products = await products.ToListAsync(),
                     TotalRows = totalRows
                 },
                 IsSuccess = true

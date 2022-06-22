@@ -17,7 +17,7 @@ namespace Market.EndPoint.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            return View("LastBlogPagesInFotter" , _commonBlogPageFacad.GetAllBlogPages.Execute(Common.Enums.Enums.PagesFilter.Newest ,1 , 2).Data);
+            return View("LastBlogPagesInFotter" , _commonBlogPageFacad.GetAllBlogPages.Execute(Common.Enums.Enums.PagesFilter.Newest ,1 , 2).Result.Data);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Common.Dto;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,11 @@ namespace Application.Services.Admin.CartPaying.Queries.GetAllNotSendedPrice
             db = context;
         }
 
-        public ResultDto<int> Execute()
+        public async Task<ResultDto<int>> Execute()
         {
             int price = 0;
-            var products = db.ProductsInCart.Include(p=> p.ProductInventoryAndPrice).Include(p => p.CartPayingInfo).Include(p=> p.Product)
-                .Where(p => !p.CartPayingInfo.Sended && p.CartPayingInfo.IsPayed).ToList();
+            var products = await db.ProductsInCart.Include(p=> p.ProductInventoryAndPrice).Include(p => p.CartPayingInfo).Include(p=> p.Product)
+                .Where(p => !p.CartPayingInfo.Sended && p.CartPayingInfo.IsPayed).ToListAsync();
 
             foreach (var item in products)
             {

@@ -3,6 +3,8 @@ using Application.Interfaces.Context;
 using Common.Dto;
 using Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying;
 using AutoMapper;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Common.Cart.Queries.GetCartPayingById
 {
@@ -16,11 +18,12 @@ namespace Application.Services.Common.Cart.Queries.GetCartPayingById
             _mapper = mapper;
         }
 
-        public ResultDto<GetCartPayingByIdDto> Execute(int id)
+        public async Task<ResultDto<GetCartPayingByIdDto>> Execute(int id)
         {
-            var products = new GetProductsOfCartPayingService(db,_mapper).Execute(id).Data;
+            var service = new GetProductsOfCartPayingService(db, _mapper);
+            var products = await service.Execute(id);
 
-            var cartPaying = db.CartPayings.Where(c => c.Id == id).Select(c => new GetCartPayingByIdDto
+            var cartPaying = await db.CartPayings.Where(c => c.Id == id).Select(c => new GetCartPayingByIdDto
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -30,8 +33,8 @@ namespace Application.Services.Common.Cart.Queries.GetCartPayingById
                 Address = c.Address,
                 PostalCode = c.PostalCode,
                 Sended = c.Sended,
-                Products = products
-            }).FirstOrDefault();
+                Products = products.Data
+            }).FirstOrDefaultAsync();
 
             if (cartPaying == null)
                 return new ResultDto<GetCartPayingByIdDto>

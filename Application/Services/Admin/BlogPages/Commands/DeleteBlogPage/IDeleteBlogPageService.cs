@@ -8,6 +8,6 @@ namespace Application.Services.Admin.BlogPages.Commands.DeleteBlogPage
 {
     public interface IDeleteBlogPageService
     {
-        ResultDto Execute(int id);
+        Task<ResultDto> Execute(int id);
     }
 }

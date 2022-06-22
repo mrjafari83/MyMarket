@@ -18,7 +18,7 @@ namespace Market.EndPoint.ViewComponents
 
         public IViewComponentResult Invoke(string userName)
         {
-            var cart = _clientCartFacad.GetUserCart.Execute(userName).Data;
+            var cart = _clientCartFacad.GetUserCart.Execute(userName).Result.Data;
             if (!CookiesManager.ContainCookie(HttpContext, "CartId"))
                 CookiesManager.AddCookie(HttpContext, "CartId", cart.CartId.ToString());
             return View("Cart", cart);

@@ -21,10 +21,10 @@ namespace Market.EndPoint.Controllers
 
         [Route("AddToCart")]
         [HttpPost]
-        public IActionResult AddToCart(int productId, int count, int price, string color = "", string size = "")
+        public async Task<IActionResult> AddToCart(int productId, int count, int price, string color = "", string size = "")
         {
             int cartId = Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId"));
-            _clientCartFacad.AddProductToCart.Execute(new Application.Services.Client.Carts.Commands.AddProductToCart.AddProductToCartDto
+            await _clientCartFacad.AddProductToCart.Execute(new Application.Services.Client.Carts.Commands.AddProductToCart.AddProductToCartDto
             {
                 ProductId = productId,
                 Count = count,
@@ -39,24 +39,25 @@ namespace Market.EndPoint.Controllers
 
         [Route("DeleteProductFromCart")]
         [HttpPost]
-        public IActionResult DeleteProductFromCart(int productInCartId)
+        public async Task<IActionResult> DeleteProductFromCart(int productInCartId)
         {
-            _clientCartFacad.DeleteProductFromCart.Execute(productInCartId, Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
+            await _clientCartFacad.DeleteProductFromCart.Execute(productInCartId, Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
             return Redirect("/");
         }
 
         [Route("CartReview")]
         [HttpGet]
-        public IActionResult CartReview()
+        public async Task<IActionResult> CartReview()
         {
-            return View(_clientCartFacad.GetUserCart.Execute(User.Identity.Name).Data);
+            var cart = await _clientCartFacad.GetUserCart.Execute(User.Identity.Name);
+            return View(cart.Data);
         }
 
         [Route("EditCount")]
         [HttpPost]
-        public IActionResult EditCount(int count, int productInCartId)
+        public async Task<IActionResult> EditCount(int count, int productInCartId)
         {
-            _clientCartFacad.EditProductCount.Execute(productInCartId, count);
+            await _clientCartFacad.EditProductCount.Execute(productInCartId, count);
 
             return Redirect("/");
         }
@@ -70,11 +71,11 @@ namespace Market.EndPoint.Controllers
 
         [Route("SetAddress")]
         [HttpPost]
-        public IActionResult SetAddress(CartPayingViewModel model)
+        public async Task<IActionResult> SetAddress(CartPayingViewModel model)
         {
             model.CartId = Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId"));
-            var cartPayingId = _clientCartFacad.AddCartPaying.Execute(model).Data;
-            CookiesManager.AddCookie(HttpContext, "cartPayingId", cartPayingId.ToString());
+            var cartPayingId = await _clientCartFacad.AddCartPaying.Execute(model);
+            CookiesManager.AddCookie(HttpContext, "cartPayingId", cartPayingId.Data.ToString());
             return Redirect("/Paying");
         }
 
@@ -87,28 +88,29 @@ namespace Market.EndPoint.Controllers
 
         [Route("Paying")]
         [HttpPost]
-        public IActionResult Paying()
+        public async  Task<IActionResult> Paying()
         {
-            _clientCartFacad.VerifyPaying.Execute(Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "cartPayingId")), Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
+            await _clientCartFacad.VerifyPaying.Execute(Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "cartPayingId")), Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
 
             return Redirect("/VerifyCart");
         }
 
         [Route("VerifyCart")]
         [HttpGet]
-        public IActionResult VerifyCart()
+        public async Task<IActionResult> VerifyCart()
         {
-            return View(_clientCartFacad.GetUserCart.Execute(User.Identity.Name).Data);
+            var cart = await _clientCartFacad.GetUserCart.Execute(User.Identity.Name);
+            return View(cart.Data);
         }
 
         [Route("DeleteCartData")]
         [HttpGet]
-        public IActionResult DeleteCartData()
+        public async Task<IActionResult> DeleteCartData()
         {
-            var products = _clientCartFacad.GetUserCart.Execute(User.Identity.Name).Data.Products;
-            foreach (var item in products)
+            var products = await _clientCartFacad.GetUserCart.Execute(User.Identity.Name);
+            foreach (var item in products.Data.Products)
             {
-                _clientCartFacad.DeleteProductFromCart.Execute(item.ProductInCartId, Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
+                await _clientCartFacad.DeleteProductFromCart.Execute(item.ProductInCartId, Int32.Parse(CookiesManager.GetCookieValue(HttpContext, "CartId")));
             }
 
             return Redirect("/");

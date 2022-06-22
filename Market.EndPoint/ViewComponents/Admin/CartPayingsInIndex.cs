@@ -17,7 +17,7 @@ namespace Market.EndPoint.ViewComponents.Admin
 
         public IViewComponentResult Invoke()
         {
-            return View("CartPayingsInIndex" , _cartPayingFacad.GetAllCartPayings.Execute().Data);
+            return View("CartPayingsInIndex" , _cartPayingFacad.GetAllCartPayings.Execute().Result.Data);
         }
     }
 }

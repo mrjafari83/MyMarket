@@ -9,6 +9,6 @@ namespace Application.Services.Common.Product.Queries.GetProductsByFilter
 {
     public interface IGetProductsByFilterService
     {
-        ResultDto<ResultGetProductByFilterDto> Execute(int pageNumber, int pageSize , int categoryId = 0);
+         Task<ResultDto<ResultGetProductByFilterDto>> Execute(int pageNumber, int pageSize , int categoryId = 0);
     }
 }

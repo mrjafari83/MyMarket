@@ -8,6 +8,6 @@ namespace Application.Services.Common.Option.Queries.GetAllSliders
 {
     public interface IGetAllSliderService
     {
-        ResultDto<List<GetAllSlidersDto>> Execute();
+        Task<ResultDto<List<GetAllSlidersDto>>> Execute();
     }
 }

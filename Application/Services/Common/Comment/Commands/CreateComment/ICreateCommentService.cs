@@ -9,6 +9,6 @@ namespace Application.Services.Common.Comment.Commands.CreateComment
 {
     public interface ICreateCommentService
     {
-        ResultDto Execute(CreateCommentDto comment);
+        Task<ResultDto> Execute(CreateCommentDto comment);
     }
 }

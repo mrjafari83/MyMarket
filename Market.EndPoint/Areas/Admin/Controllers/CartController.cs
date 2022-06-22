@@ -21,14 +21,14 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _commonCartFacad = commonCartFacad;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_cartPayingFacad.GetAllCartPayings.Execute().Data);
+            return View(await _cartPayingFacad.GetAllCartPayings.Execute());
         }
 
-        public IActionResult CartPayingInfo(int id)
+        public async Task<IActionResult> CartPayingInfo(int id)
         {
-            return View(_commonCartFacad.GetCartPayingById.Execute(id).Data);
+            return View(await _commonCartFacad.GetCartPayingById.Execute(id));
         }
 
         public IActionResult OKSend(int cartPayingId)
@@ -38,21 +38,22 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             return Redirect("/Admin");
         }
 
-        public IActionResult GetAllPaysPrice()
+        public async Task<IActionResult> GetAllPaysPrice()
         {
-            var data = _cartPayingFacad.GetAllPaysPrice.Execute().Data;
-            return Json(data);
+            var data = await _cartPayingFacad.GetAllPaysPrice.Execute();
+            return Json(data.Data);
         }
 
-        public IActionResult GetNotSendedPrice()
+        public async Task<IActionResult> GetNotSendedPrice()
         {
-            var data = _cartPayingFacad.GetAllNotSendedPrice.Execute().Data;
-            return Json(data);
+            var data = await _cartPayingFacad.GetAllNotSendedPrice.Execute();
+            return Json(data.Data);
         }
 
-        public IActionResult GetNotSendedCount()
+        public async Task<IActionResult> GetNotSendedCount()
         {
-            return Json(_cartPayingFacad.GetNotSendedCount.Execute().Data);
+            var count = await _cartPayingFacad.GetNotSendedCount.Execute();
+            return Json(count.Data);
         }
     }
 }

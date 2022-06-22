@@ -29,9 +29,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _environment = environment;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_optionFacad.GetAllSlider.Execute().Data);
+            var slider = await _optionFacad.GetAllSlider.Execute();
+            return View(slider.Data);
         }
 
         [HttpGet]
@@ -41,12 +42,12 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string url, IFormFile image)
+        public async Task<IActionResult> Create(string url, IFormFile image)
         {
             if (image != null && url != null)
             {
-                string imageSrc = FileUploader.Upload(image, _environment, "Slider/");
-                _sliderFacad.CreateSlider.Execute(url, imageSrc);
+                string imageSrc = await FileUploader.Upload(image, _environment, "Slider/");
+                await _sliderFacad.CreateSlider.Execute(url, imageSrc);
             }
             return Redirect("/Admin/Slider");
         }
@@ -59,19 +60,19 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Replace(int sliderId, string url, IFormFile image)
+        public async Task<IActionResult> Replace(int sliderId, string url, IFormFile image)
         {
-            if(image != null && url != null && sliderId != 0)
+            if (image != null && url != null && sliderId != 0)
             {
-                string imageSrc = FileUploader.Upload(image, _environment, "Slider/");
-                _sliderFacad.ReplaceSlider.Execute(sliderId, url, imageSrc);
+                string imageSrc = await FileUploader.Upload(image, _environment, "Slider/");
+                await _sliderFacad.ReplaceSlider.Execute(sliderId, url, imageSrc);
             }
             return Redirect("/Admin/Slider");
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _sliderFacad.DeleteSlider.Execute(id);
+            await _sliderFacad.DeleteSlider.Execute(id);
             return Redirect("/Admin/Slider");
         }
     }

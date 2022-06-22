@@ -7,6 +7,6 @@ namespace Application.Services.Common.Cart.Queries.GetCartPayingById
 {
     public interface IGetCartPayingByIdService
     {
-        ResultDto<GetCartPayingByIdDto> Execute(int id);
+        Task<ResultDto<GetCartPayingByIdDto>> Execute(int id);
     }
 }

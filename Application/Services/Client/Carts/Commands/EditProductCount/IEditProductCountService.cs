@@ -9,6 +9,6 @@ namespace Application.Services.Client.Carts.Commands.EditProductCount
 {
     public interface IEditProductCountService
     {
-        ResultDto Execute(int productInCartId, int count);
+        Task<ResultDto> Execute(int productInCartId, int count);
     }
 }

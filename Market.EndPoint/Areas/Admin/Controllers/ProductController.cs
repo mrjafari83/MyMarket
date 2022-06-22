@@ -39,10 +39,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int currentPage = 1)
+        public async Task<IActionResult> Index(int currentPage = 1)
         {
             ViewBag.CurrentRow = currentPage;
-            return View(_productFacad.GetAllProductsService.Execute(currentPage, 10).Data);
+            return View(await _productFacad.GetAllProductsService.Execute(currentPage, 10));
         }
 
         [HttpGet]
@@ -58,11 +58,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductViewModel request, List<KeywordViewModel> Keywords
+        public async Task<IActionResult> Create(ProductViewModel request, List<KeywordViewModel> Keywords
             , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
             , List<InventoryAndPriceViewModel> inventoryAndPrice, List<IFormFile> Images)
         {
-                _productFacad.CreateProductService.Execute(new CreateProductServiceDto
+                await _productFacad.CreateProductService.Execute(new CreateProductServiceDto
                 {
                     Product = request,
                     Keywords = Keywords,
@@ -77,7 +77,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             ViewBag.categories = new SelectList(
                 _commonCategorisFacad.GetAllProductCategories.Execute(false, Enums.CategoriesFilter.ForPagesList).Data
@@ -85,7 +85,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                 , "Name"
                 );
 
-            var product = _productFacad.GetProductByIdService.Execute(id);
+            var product = await _productFacad.GetProductByIdService.Execute(id);
             if (product.IsSuccess)
                 return View(product.Data);
             else
@@ -93,11 +93,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductViewModel product, List<KeywordViewModel> Keywords
+        public async  Task<IActionResult> Edit(ProductViewModel product, List<KeywordViewModel> Keywords
             , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
             ,List<InventoryAndPriceViewModel> inventoryAndPrice ,List<IFormFile> Images)
         {
-            _productFacad.EditProductService.Execute(new EditProductDto
+            await _productFacad.EditProductService.Execute(new EditProductDto
             {
                 Product = product,
                 Images = Images,
@@ -112,9 +112,9 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async  Task<IActionResult> Delete(int id)
         {
-            var product = _productFacad.GetProductByIdService.Execute(id);
+            var product = await _productFacad.GetProductByIdService.Execute(id);
             if (product.IsSuccess)
                 return View(product.Data);
             else
@@ -122,9 +122,9 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Deleting(int id)
+        public async  Task<IActionResult> Deleting(int id)
         {
-            _productFacad.DeleteProductService.Execute(id);
+            await _productFacad.DeleteProductService.Execute(id);
 
             return Redirect("/Admin/Product");
         }

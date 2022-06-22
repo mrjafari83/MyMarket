@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using AutoMapper;
 using Common.Dto;
@@ -19,18 +20,18 @@ namespace Application.Services.Admin.Products.Queries.GetAllProducts
             _mapper = mapper;
         }
 
-        public ResultDto<ResultGetAllProductsDto> Execute(int pageNumber, int pageSize)
+        public async Task<ResultDto<ResultGetAllProductsDto>> Execute(int pageNumber, int pageSize)
         {
             int totalRows;
-            var products = _mapper.Map<List<GetAllProductDto>>(db.Products.Include(p=> p.Category).Include(p=> p.Visits).ToList())
-                .ToPaged(out totalRows, pageNumber, pageSize).ToList();
+            var products = _mapper.ProjectTo<GetAllProductDto>(db.Products.Include(p => p.Category).Include(p => p.Visits))
+                .ToPaged(out totalRows, pageNumber, pageSize);
 
             if (products != null)
                 return new ResultDto<ResultGetAllProductsDto>
                 {
                     Data = new ResultGetAllProductsDto
                     {
-                        Products = products,
+                        Products = await products.ToListAsync(),
                         TotalRows = totalRows
                     },
                     IsSuccess = true

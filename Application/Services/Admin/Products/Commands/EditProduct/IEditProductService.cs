@@ -9,6 +9,6 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
 {
     public interface IEditProductService
     {
-        ResultDto Execute(EditProductDto entry);
+        Task<ResultDto> Execute(EditProductDto entry);
     }
 }

@@ -17,7 +17,7 @@ namespace Market.EndPoint.ViewComponents.Admin
 
         public IViewComponentResult Invoke()
         {
-            return View("BestSellingProductsInIndex", _productFacad.GetBestSellingProducts.Execute(1, 4).Data);
+            return View("BestSellingProductsInIndex", _productFacad.GetBestSellingProducts.Execute(1, 4).Result.Data);
         }
     }
 }
