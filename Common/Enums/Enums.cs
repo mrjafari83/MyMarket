@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,18 @@ namespace Common.Enums
 
         public enum PagesFilter
         {
-            Newest,
-            MostViewed
+            [Display(Name ="جدیدترین")]
+            Newest = 0,
+            [Display(Name = "قدیمی ترین")]
+            Oldest = 1,
+            [Display(Name = "بیشترین بازدید")]
+            MostViewed =2 ,
+            [Display(Name = "بیشترین فروش")]
+            MostSelled =3,
+            [Display(Name = "کمترین بازدید")]
+            LessViewed = 4,
+            [Display(Name = "کمترین خرید")]
+            LessSelled = 5
         }
 
         public enum CategoriesFilter
@@ -26,6 +37,15 @@ namespace Common.Enums
             ForPagesList,
             ForCategoriesList,
             Menu
+        }
+
+        public enum PageFilterCategory{
+            [Display(Name = "نام")]
+            Name = 0,
+            [Display(Name = "برند")]
+            Brand = 1,
+            [Display(Name = "نام دسته بندی")]
+            CategoryName = 2
         }
     }
 }

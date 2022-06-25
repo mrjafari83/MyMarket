@@ -1,15 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Domain.Entities.User
 @inject UserManager<ApplicationUser> userManager
-@{ 
+@{
     var user = userManager.FindByNameAsync(User.Identity.Name).Result;
 }
 
-<!DOCTYPE html>
+<!DOCTaPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meMj_AnnabAnnabcharset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="/Admin/assets/images/favicon.png">
@@ -20,7 +20,7 @@
     <link href="/Admin/dist/css/style.css" rel="stylesheet">
     <!-- This page CSS -->
     <link href="/Admin/dist/css/pages/dashboard1.css" rel="stylesheet">
-    <link href="~/Css/CustomStyle.css" rel="stylesheet" />
+    <link href="/Css/CustomStyle.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,6 +30,11 @@
 </head>
 
 <body class="rtl">
+    <style>
+        * {
+            font-family: 'B Homa';
+        }
+    </style>
     <div class="main-wrapper" id="main-wrapper">
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
@@ -95,7 +100,7 @@
                         <!-- Profile icon scss in header.scss -->
                         <!-- ============================================================== -->
                         <li>
-                            <a class="dropdown-trigger" href="javascript: void(0);" data-target="user_dropdown"><img src="@user.ProfileImageSrc" alt="user" class="circle profile-pic"></a>
+                            <a style="text-align:center" class="dropdown-trigger" href="javascript: void(0);" data-target="user_dropdown"><img style="margin:60%" src="@user.ProfileImageSrc" alt="user" class="circle profile-pic"></a>
                             <ul id="user_dropdown" class="mailbox dropdown-content dropdown-user">
                                 <li>
                                     <div class="dw-user-box">
@@ -184,6 +189,9 @@
                         <li>
                             <a href="/Admin/Slider" class="collapsible-header" tabindex="0"><i class="material-icons">photo</i><span class="hide-menu">اسلایدر</span></a>
                         </li>
+                        <li>
+                            <a href="/Admin/Report" class="collapsible-header" tabindex="0"><i class="material-icons">equalizer</i><span class="hide-menu">گزارشات</span></a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -202,7 +210,7 @@
             <!-- Container fluid scss in scafholding.scss -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                @RenderBody()
+                    @RenderBody()
             </div>
 
             <!-- ============================================================== -->
@@ -557,8 +565,8 @@
     <script src="/Admin/assets/extra-libs/sparkline/sparkline.js"></script>
     <script src="/Admin/dist/js/pages/dashboards/dashboard1.js"></script>
 
-    @RenderSection("modal", false)
-    @RenderSection("scripts", false)
+        @RenderSection("modal", false)
+        @RenderSection("scripts", false)
 </body>
 
 </html>

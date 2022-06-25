@@ -25,6 +25,7 @@ using Common.Utilities.MessageSender;
 using Domain.Entities.User;
 using AutoMapper;
 using Application.Mapper;
+using Market.EndPoint.Utilities;
 
 namespace Market.EndPoint
 {
@@ -46,6 +47,8 @@ namespace Market.EndPoint
             ClientInjections(services);
             CommonInjection(services);
             InjectionUtilities(services);
+
+            services.AddScoped<IGetProductDetailsExcel,GetProductDetailsExcel>();
 
             //DbContext Injection
             services.AddDbContext<DataBaseContext>(optons =>
@@ -126,6 +129,7 @@ namespace Market.EndPoint
             services.AddScoped<ICommentFacad, CommentFacad>();
             services.AddScoped<INewsBulletinFacad, NewsBulletinFacad>();
             services.AddScoped<IMessageFacad, MessageFacad>();
+            services.AddScoped<IOptionFacade, OptionFacade>();
         }
 
         private void ClientInjections(IServiceCollection services)

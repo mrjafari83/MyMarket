@@ -11,6 +11,6 @@ namespace Domain.Entities.User
     {
         public string Name { get; set; }
         public string Family { get; set; }
-        public string ProfileImageSrc { get; set; }
+        public string ProfileImageSrc { get; set; } = "/Images/DefaultUser.jpg";
     }
 }

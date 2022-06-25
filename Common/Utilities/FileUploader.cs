@@ -39,7 +39,7 @@ namespace Common.Utilities
 
         public static bool Delete(string path)
         {
-            if (Directory.Exists(path))
+            if (File.Exists(path))
             {
                 File.Delete(path);
                 return true;

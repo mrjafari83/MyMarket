@@ -1,82 +1,204 @@
 ﻿@using Application.Services.Admin.Products.Queries.GetAllProducts
 @using Common.Dto
+@using Common.Enums
 @model ResultDto<ResultGetAllProductsDto>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     int back = ViewBag.CurrentRow - 1;
     int forward = ViewBag.CurrentRow + 1;
+
+    List<int> Ids = new List<int>();
+    foreach (var item in Model.Data.Products)
+        Ids.Add(item.Id);
+
+    TempData["Ids"] = Ids;
 }
 
 <style>
     th, td {
-        width: 16%;
+        width: 20%;
         text-align: right;
     }
 </style>
+<h3 style="margin:0% 2%">محصولات</h3>
+<hr />
 
-<div class="row">
+<div class="row" style="margin:2%;">
     <table dir="rtl" style="text-align : right">
-        <tr>
-            <th>
-                <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/Product/Create">افزودن</a>
-            </th>
-        </tr>
-        <tr>
-            <th>نام</th>
-            <th>نام دسته بندی</th>
-            <th>برند</th>
-            <th>تعداد بازدید</th>
-        </tr>
-
-        @foreach (var item in Model.Data.Products)
-        {
+        <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>@item.CategoryName</td>
-                <td>@item.Brand</td>
-                <td>@item.VisitNumber</td>
+                <th>
+                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="/Admin/Product/Create">افزودن</a>
+                </th>
+                <th>
+                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" id="btnGetExcel">دریافت فایل اکسل</a>
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <form id="searchForm" method="get" action="/Admin/Product/Index">
+            <tr>
                 <td>
-                    <a style="width:50%" class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/Product/Edit/@item.Id">ویرایش</a>
-                    <a style="width:50%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/Product/Delete/@item.Id">حذف</a>
+                    <label for="searchKey">جستوجو کنید : </label>
+                    <input type="text" id="searchKey" value="@ViewBag.SearchKey" />
+                </td>
+                <td>
+                    <label for="searchBy">بر اساس : </label>
+                    <select id="searchBy" asp-items="Html.GetEnumSelectList<Enums.PageFilterCategory>().OrderBy(p=> p.Value != ViewBag.SearchBy.ToString())"></select>
+                </td>
+                <td>
+                        @if (ViewBag.StartPrice == 0)
+                        {
+                        <label for="startPrice">از قیمت :</label>
+                        <input type="number" id="startPrice" />
+                        }
+                        else
+                        {
+                        <label for="startPrice">از قیمت :</label>
+                        <input type="number" value="@ViewBag.StartPrice" id="startPrice" />
+                        }
+                </td>
+                <td>
+                        @if (ViewBag.EndPrice == 0)
+                        {
+                        <label for="endPrice">تا قیمت : </label>
+                        <input type="number" id="endPrice" />
+                        }
+                        else
+                        {
+                        <label for="endPrice">تا قیمت : </label>
+                        <input type="number" value="@ViewBag.StartPrice" id="endPrice" />
+                        }
+                </td>
+                <td>
+                    <label for="orderBy">مرتب سازی بر اساس : </label>
+                    <select id="orderBy" asp-items="Html.GetEnumSelectList<Enums.PagesFilter>().OrderBy(p=> p.Value != ViewBag.OrderBy.ToString())"></select>
                 </td>
             </tr>
-        }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="waves-effect waves-light btn modal-trigger blue" id="btnSearch">جستوجو</a>
+                </td>
+            </tr>
+            </form>
+            <tr>
+                <th>نام</th>
+                <th>نام دسته بندی</th>
+                <th>برند</th>
+                <th>تعداد بازدید</th>
+            </tr>
+        </thead>
+
+        <tbody id="productTable">
+            @foreach (var item in Model.Data.Products)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.CategoryName</td>
+                    <td>@item.Brand</td>
+                    <td>@item.VisitNumber</td>
+                    <td>
+                        <a style="width:45%;background-color:#d1ac12" class="waves-effect waves-light btn modal-trigger" href="/Admin/Product/Edit/@item.Id">ویرایش</a>
+                        <a style="width:45%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/Product/Delete/@item.Id">حذف</a>
+                    </td>
+                    <td hidden>@item.Id</td>
+                </tr>
+            }
+        </tbody>
     </table>
 
-    <div class="pagination">
-        <ul>
-            @if (ViewBag.CurrentRow == 1)
-            {
-                <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
-            }
-            else
-            {
-                <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
-            }
-
-            @for (int i = 1; i <= Model.Data.TotalRows; i++)
-            {
-                if (i == ViewBag.CurrentRow)
+    <div style="margin-top:2% ; text-align:center">
+        <div class="pagination">
+            <ul>
+                @if (ViewBag.CurrentRow == 1)
                 {
-                    <li class="active"><a href="/Admin/Product/Index?currentPage=@i">@i</a></li>
+                    <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
                 }
                 else
                 {
-                    <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@i">@i</a></li>
+                    <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@back&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_right</i></a></li>
                 }
-            }
 
-            @if (ViewBag.CurrentRow == Model.Data.TotalRows)
-            {
-                <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
-            }
-            else
-            {
-        <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@forward"><i class="material-icons">chevron_left</i></a></li>
-            }
+                @for (int i = 1; i <= Model.Data.TotalRows; i++)
+                {
+                    if (i == ViewBag.CurrentRow)
+                    {
+                        <li class="active"><a href="/Admin/Product/Index?currentPage=@i&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@i&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy">@i</a></li>
+                    }
+                }
 
-        </ul>
-    </div> <!-- /pagination -->
+                @if (ViewBag.CurrentRow == Model.Data.TotalRows)
+                {
+                    <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+                }
+                else
+                {
+                    <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@forward&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_left</i></a></li>
+                }
+
+            </ul>
+        </div> <!-- /pagination -->
+    </div>
 </div>
+
+@section Scripts{
+<script>
+    $(document).ready(function(){
+        $("#btnGetExcel").click(function(e){
+            var formdata = new FormData();
+
+                var Ids = $('#productTable tr').map(function () {
+                    return {
+                        Value: $(this.cells[5]).text(),
+                    };
+                }).get();
+                debugger;
+                $.each(Ids, function (i, val) {
+                    formdata.append('[' + i + ']', val.Value);
+                });
+
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    url: "/Admin/Product/GetExcel",
+                    data: formdata,
+                    success: function (response) {
+                        window.location.href = "/Excels/" + response;
+                    }
+                });
+        });
+
+        $("#btnSearch").click(function(e){
+            debugger;
+             var formdata = new FormData();
+
+             var searchKey = $("#searchKey").val();
+             var searchBy = $("#searchBy").val();
+             var startPrice = $("#startPrice").val();
+             var endPrice = $("#endPrice").val();
+             var orderBy = $("#orderBy").val();
+
+             var address = "/Admin/Product/Index?currentPage=" + @ViewBag.CurrentRow
+             +"&searchKey="+ searchKey+"&searchBy=" +searchBy+"&startPrice="+startPrice
+             +"&endPrice="+endPrice+"&orderBy="+orderBy;
+
+             location.href = address;
+        });
+    });
+</script>
+}
 
