@@ -3,26 +3,10 @@
     text-align: right;
 }
 @font-face {
-    font-family: 'Mj_Annab';
-    src: url('file:///C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\wwwroot\Fonts\Mj_Annab.ttf') format('truetype');
+    font-family: 'B Homa';
+    src: url('\Fonts\fonts\BHoma.ttf') format('truetype');
 }
-@font-face {
-    font-family: 'XB Roya';
-    src: url('file:///C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\wwwroot\Fonts\XB_Font_analysisacademy\Roya\XB Roya.ttf') format('truetype');
+*{
+    font-family:'B Homa';
 }
-@font-face {
-    font-family: 'Mj_Vafa_0';
-    src: url('file:///C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\wwwroot\Fonts\Mj_Vafa_0.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Mj_Mohammad';
-    src: url('file:///C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\wwwroot\Fonts\Mj_Mohammad.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Negaar Regular';
-    src: url('file:///C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\wwwroot\Fonts\Negaar Regular.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Negaar Regular';
-    src: url('file:///C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\wwwroot\Fonts\Negaar Regular.ttf') format('truetype');
-}
+
