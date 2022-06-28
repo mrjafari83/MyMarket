@@ -47,5 +47,14 @@ namespace Common.Enums
             [Display(Name = "نام دسته بندی")]
             CategoryName = 2
         }
+
+        public enum Status
+        {
+            Created = 0,
+            SendToQueue = 1,
+            ReciveFromQueue = 2,
+            ExcelCreated = 3,
+            ThrowExeption = 4
+        }
     }
 }

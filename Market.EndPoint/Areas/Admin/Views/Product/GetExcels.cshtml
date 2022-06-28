@@ -1,0 +1,70 @@
+﻿@using Application.Services.Admin.Excel.Queries.GetAllExcels
+@model List<GetAllExcelsDto>
+
+<style>
+    td, th, tr {
+        text-align: center;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>نام </th>
+            <th>وضعیت</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FileName</td>
+                <td>
+                    @switch (item.StatusCode)
+                    {
+                        case 1:
+                            {
+                                <span class="label label-info ">ارسال درخواست به سرور</span>
+                                break;
+                            }
+                        case 2:
+                            {
+                                <span class="label label-info">دریافت درخواست توسط سرور</span>
+                                break;
+                            }
+                        case 3:
+                            {
+                                <span class="label label-info green">آماده دانلود</span>
+                                break;
+                            }
+                        case 4:
+                            {
+                                <span class="label label-warning">خطا</span>
+                                break;
+                            }
+                        default:
+                            {
+                                <span class="label label-warning">نامشخص</span>
+                                break;
+                            }
+                    }
+                </td>
+                <td>
+                    @if (item.StatusCode == 3)
+                    {
+                        <a class="waves-effect waves-light btn modal-trigger green" href="/Excels/@item.FileName">دانلود</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+            </td>
+        </tr>
+    </tfoot>
+</table>

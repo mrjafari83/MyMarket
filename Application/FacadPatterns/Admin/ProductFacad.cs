@@ -13,6 +13,7 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.Context;
 using Microsoft.AspNetCore.Hosting;
 using AutoMapper;
+using Application.Services.Admin.Common.Queries.GetProductsBySearch;
 
 namespace Application.FacadPatterns.Admin
 {

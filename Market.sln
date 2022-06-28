@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31911.196
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{0C7E8986-C615-4CDA-B093-4FB52A387774}"
 EndProject
@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{04BB49C8-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{9C35FF97-D078-4D9A-9455-B30561796FBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ", "RabbitMQ\RabbitMQ.csproj", "{D67F2152-55E0-4851-BA51-1CAB0CEDE580}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{589C5D11-62E7-47A7-A582-82AC1679C178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{589C5D11-62E7-47A7-A582-82AC1679C178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{589C5D11-62E7-47A7-A582-82AC1679C178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D67F2152-55E0-4851-BA51-1CAB0CEDE580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D67F2152-55E0-4851-BA51-1CAB0CEDE580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D67F2152-55E0-4851-BA51-1CAB0CEDE580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D67F2152-55E0-4851-BA51-1CAB0CEDE580}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{776C80E4-9FF9-439C-B256-C4CC7FBDC9E3} = {8BC14130-D580-46B2-BAAB-55AC8A5EBB34}
 		{B0B7B422-AE56-48D2-A145-F131792B1533} = {0E519EB5-6ED1-4ADC-A425-F48D2D03F0B3}
 		{589C5D11-62E7-47A7-A582-82AC1679C178} = {A6DE3623-BA71-43E3-A351-F12CB19DD8F7}
+		{D67F2152-55E0-4851-BA51-1CAB0CEDE580} = {A6DE3623-BA71-43E3-A351-F12CB19DD8F7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE11EF62-8F4E-4F1E-A313-99BC7F4633BE}

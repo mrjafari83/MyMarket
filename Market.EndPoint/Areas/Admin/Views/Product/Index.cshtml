@@ -33,9 +33,11 @@
                     <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="/Admin/Product/Create">افزودن</a>
                 </th>
                 <th>
-                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" id="btnGetExcel">دریافت فایل اکسل</a>
+                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" id="btnCreateExcel">درخواست فایل اکسل</a>
                 </th>
-                <th></th>
+                <th>
+                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="#modal1" id="btnGetExcel">فایل های اکسل</a>
+                </th>
                 <th></th>
                 <th></th>
             </tr>
@@ -70,7 +72,7 @@
                         else
                         {
                         <label for="endPrice">تا قیمت : </label>
-                        <input type="number" value="@ViewBag.StartPrice" id="endPrice" />
+                        <input type="number" value="@ViewBag.EndPrice" id="endPrice" />
                         }
                 </td>
                 <td>
@@ -152,38 +154,19 @@
     </div>
 </div>
 
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 id="title">Modal Header</h4>
+        <p id="body">A bunch of text</p>
+    </div>
+</div>
+
 @section Scripts{
 <script>
     $(document).ready(function(){
-        $("#btnGetExcel").click(function(e){
-            var formdata = new FormData();
-
-                var Ids = $('#productTable tr').map(function () {
-                    return {
-                        Value: $(this.cells[5]).text(),
-                    };
-                }).get();
-                debugger;
-                $.each(Ids, function (i, val) {
-                    formdata.append('[' + i + ']', val.Value);
-                });
-
-                $.ajax({
-                    type: "POST",
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    enctype: "multipart/form-data",
-                    url: "/Admin/Product/GetExcel",
-                    data: formdata,
-                    success: function (response) {
-                        window.location.href = "/Excels/" + response;
-                    }
-                });
-        });
 
         $("#btnSearch").click(function(e){
-            debugger;
              var formdata = new FormData();
 
              var searchKey = $("#searchKey").val();
@@ -193,10 +176,40 @@
              var orderBy = $("#orderBy").val();
 
              var address = "/Admin/Product/Index?currentPage=" + @ViewBag.CurrentRow
-             +"&searchKey="+ searchKey+"&searchBy=" +searchBy+"&startPrice="+startPrice
-             +"&endPrice="+endPrice+"&orderBy="+orderBy;
+             +"&SearchKey="+ searchKey+"&SearchBy=" +searchBy+"&StartPrice="+startPrice
+             +"&EndPrice="+endPrice+"&OrderBy="+orderBy;
 
              location.href = address;
+        });
+
+        $("#btnCreateExcel").click(function(e){
+             var formdata = new FormData();
+
+             formdata.append("SearchKey",$("#searchKey").val());
+             formdata.append("SearchBy",$("#searchBy").val());
+             formdata.append("StartPrice",$("#startPrice").val());
+             formdata.append("EndPrice",$("#endPrice").val());
+             formdata.append("OrderBy",$("#orderBy").val());
+
+             $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    url: "/Admin/Product/CreateExcel",
+                    data: formdata,
+                    success: function (response) {
+                        location.href = "/Admin/Product";
+                    }
+                });
+        });
+
+        $("#btnGetExcel").click(function () {
+            $.get("/Admin/Product/GetExcels", function (result) {
+                $("#title").html("فایل های اکسل");
+                $("#body").html(result);
+            });
         });
     });
 </script>

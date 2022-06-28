@@ -8,6 +8,6 @@ namespace Application.Services.Admin.Options.Queries.GetAllProductDetails
 {
     public interface IGetAllProductDetailsService
     {
-        Task<ResultDto<List<GetAllProductDetailsDto>>> Execute(List<int> Ids);
+        ResultDto<List<GetAllProductDetailsDto>> Execute(int id);
     }
 }

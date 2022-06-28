@@ -543,6 +543,7 @@ C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.Visual
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\RabbitMQ.Client.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Composition.AttributedModel.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Composition.Convention.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Composition.Hosting.dll
@@ -674,8 +675,8 @@ C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admi
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\Create.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\Delete.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\Edit.cshtml.g.cs
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\GetExcels.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\Index.cshtml.g.cs
-C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Report\Index.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\Components\BestSellingProductsInIndex\BestSellingProductsInIndex.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\Components\ColorsInSelectList\ColorsInSelectList.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\Components\SizesInSelectList\SizesInSelectList.cshtml.g.cs

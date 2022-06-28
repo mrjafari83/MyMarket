@@ -16,7 +16,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Domain.Entities.Products;
-using Market.EndPoint.Utilities;
+using Market.EndPoint.Utilities.RabbitMQ;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -28,34 +30,36 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly IProductCategoryFacad _productCategoryFacad;
         private readonly ICommonCategorisFacad _commonCategorisFacad;
         private readonly IMapper _mapper;
-        private readonly IGetProductDetailsExcel _getProductDetailsExcel;
+        private readonly IExcelFacade _excelFacade;
+        private readonly ISend _send;
+        private readonly IHostingEnvironment _environment;
 
         public ProductController(IProductFacad productFacad
             , IProductCategoryFacad productCategoryFacad
             , ICommonCategorisFacad commonCategorisFacad, IMapper mapper
-            , IGetProductDetailsExcel getProductDetailsExcel)
+            , IExcelFacade excelFacade, ISend send
+            ,IHostingEnvironment environment)
         {
             _productFacad = productFacad;
             _productCategoryFacad = productCategoryFacad;
             _commonCategorisFacad = commonCategorisFacad;
             _mapper = mapper;
-            _getProductDetailsExcel = getProductDetailsExcel;
+            _excelFacade = excelFacade;
+            _send = send;
+            _environment = environment;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int currentPage = 1, string searchKey = "", int startPrice = 0
-            , int endPrice = 0, Enums.PagesFilter orderBy = Enums.PagesFilter.Newest, Enums.PageFilterCategory searchBy = Enums.PageFilterCategory.Name
-            )
+        public async Task<IActionResult> Index(SearchViewModel model, int currentPage = 1)
         {
             ViewBag.CurrentRow = currentPage;
-            ViewBag.SearchKey = searchKey;
-            ViewBag.StartPrice = startPrice;
-            ViewBag.EndPrice = endPrice;
-            ViewBag.OrderBy = (int)orderBy;
-            ViewBag.SearchBy = (int)searchBy;
+            ViewBag.SearchKey = model.SearchKey;
+            ViewBag.StartPrice = model.StartPrice;
+            ViewBag.EndPrice = model.EndPrice;
+            ViewBag.OrderBy = (int)model.OrderBy;
+            ViewBag.SearchBy = (int)model.SearchBy;
 
-            return View(await _productFacad.GetAllProductsService.Execute(currentPage, 10, startPrice, endPrice, searchKey
-                , searchBy, orderBy));
+            return View(await _productFacad.GetAllProductsService.Execute(currentPage, 10, model));
         }
 
         [HttpGet]
@@ -143,10 +147,35 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetExcel(List<int> Ids)
+        public async Task<IActionResult> CreateExcel(SearchViewModel model)
         {
-            var address = await _getProductDetailsExcel.GetProductDetails(Ids);
-            return Json(address);
+            var entity = await _excelFacade.CreateExcelKey.Execute(model);
+            int id = entity.Data;
+
+            _send.SendToCreateExcel(id);
+
+            return Json("");
+        }
+
+        [HttpGet]
+        public IActionResult GetExcels()
+        {
+            return View(_excelFacade.GetAllExcels.Execute().Data);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteAllExcels()
+        {
+            DirectoryInfo directory = new DirectoryInfo(_environment.WebRootPath + "/Excels/");
+            var files = directory.GetFiles("*.xlsx");
+            foreach (var file in files)
+            {
+                System.IO.File.Delete(file.FullName);
+            }
+
+            _excelFacade.DeleteAll.Execute();
+
+            return Redirect("/Admin/Product/Index");
         }
     }
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Admin.Options.Queries.GetAllProductDetails;
 using Application.Interfaces.FacadPatterns.Admin;
+using Application.Services.Admin.Common.Queries.GetProductsBySearch;
 
 namespace Application.FacadPatterns.Admin
 {
