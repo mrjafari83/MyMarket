@@ -27,6 +27,7 @@ namespace Application.Mapper
             CreateMap<ColorViewModel, ProductColor>().ReverseMap();
             CreateMap<SizeViewModel, ProductSize>().ReverseMap();
             CreateMap<InventoryAndPriceViewModel, ProductInventory>().ReverseMap();
+            CreateMap<InventoryAndPriceViewModelCreate, ProductInventory>().ReverseMap();
             CreateProjection<Product, GetAllProductDto>().ForMember(dest => dest.CategoryName, i => i.MapFrom(src => src.Category.Name))
                 .ForMember(dest => dest.VisitNumber, i => i.MapFrom(src => src.Visits.Count()));
             CreateProjection<ProductInventory, GetBestSellingDto>()

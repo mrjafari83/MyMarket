@@ -33,10 +33,10 @@
                     <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="/Admin/Product/Create">افزودن</a>
                 </th>
                 <th>
-                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" id="btnCreateExcel">درخواست فایل اکسل</a>
+                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="#modal1" id="btnApplyingToCreateExcel">درخواست فایل اکسل</a>
                 </th>
                 <th>
-                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="#modal1" id="btnGetExcel">فایل های اکسل</a>
+                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="/Admin/Product/GetExcels">فایل های اکسل</a>
                 </th>
                 <th></th>
                 <th></th>
@@ -182,7 +182,13 @@
              location.href = address;
         });
 
-        $("#btnCreateExcel").click(function(e){
+        $("#btnApplyingToCreateExcel").click(function(e){
+
+            //$.get("/Admin/Product/CreateExcel", function (result) {
+            //    $("#title").html("درخواست فایل اکسل");
+            //    $("#body").html(result);
+            //});
+
              var formdata = new FormData();
 
              formdata.append("SearchKey",$("#searchKey").val());
@@ -200,7 +206,8 @@
                     url: "/Admin/Product/CreateExcel",
                     data: formdata,
                     success: function (response) {
-                        location.href = "/Admin/Product";
+                        $("#title").html("درخواست فایل اکسل");
+                        $("#body").html(response);
                     }
                 });
         });
@@ -211,6 +218,7 @@
                 $("#body").html(result);
             });
         });
+
     });
 </script>
 }

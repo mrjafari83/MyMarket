@@ -550,6 +550,7 @@ C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Compositi
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Composition.Runtime.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Composition.TypedParts.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Data.SqlClient.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\System.IO.Pipelines.dll
@@ -620,6 +621,11 @@ C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win-x86
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\bin\Debug\net5.0\Application.dll
@@ -673,7 +679,9 @@ C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admi
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\ProductCategories\GetChildren.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\ProductCategories\Index.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\Create.cshtml.g.cs
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\CreateExcel.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\Delete.cshtml.g.cs
+C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\DeleteAllExcels.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\Edit.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\GetExcels.cshtml.g.cs
 C:\Users\Kar1\Desktop\MyMarket\Market.EndPoint\obj\Debug\net5.0\Razor\Areas\Admin\Views\Product\Index.cshtml.g.cs

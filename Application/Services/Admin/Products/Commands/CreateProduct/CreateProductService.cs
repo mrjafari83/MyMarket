@@ -32,13 +32,13 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
 
         public async Task<ResultDto> Execute(CreateProductServiceDto entry)
         {
-            var product = _mapper.Map<ProductViewModel , Product>(entry.Product);
+            var product = _mapper.Map<ProductViewModel , Product>(new ProductViewModel { Name = entry.Name , Brand = entry.Brand,ShortDescription = entry.ShortDescription, Description = entry.Description,CategoryId = entry.CategoryId});
 
             await SetColors(product, entry.Colors);
             await SetSizes(product, entry.Sizes);
 
             //set product options in database
-            db.ProductImages.AddRange(await AddImages(product, entry.Images));
+            //db.ProductImages.AddRange(await AddImages(product, entry.Images));
             db.ProductKeywords.AddRange(AddKeywords(product, entry.Keywords));
             db.ProductFutures.AddRange(AddFeature(product, entry.Features));
             await SetInventoryAndPrice(product, entry.InventoryAndPrices);
@@ -95,7 +95,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             return finallyFeatures;
         }
 
-        private async Task SetColors(Product product, List<ColorViewModel> entrycolors)
+        private async Task SetColors(Product product, List<ColorViewModelCreate> entrycolors)
         {
             if (entrycolors != null)
             {
@@ -133,13 +133,13 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             }
         }
 
-        private async Task SetInventoryAndPrice(Product product , List<InventoryAndPriceViewModel> inventoryAndPrices)
+        private async Task SetInventoryAndPrice(Product product , List<InventoryAndPriceViewModelCreate> inventoryAndPrices)
         {
             if(inventoryAndPrices != null)
             {
                 foreach(var item in inventoryAndPrices)
                 {
-                    var addingItem = _mapper.Map<InventoryAndPriceViewModel, ProductInventory>(item);
+                    var addingItem = _mapper.Map<InventoryAndPriceViewModelCreate, ProductInventory>(item);
                     addingItem.Product = product;
                     await db.ProductInventories.AddAsync(addingItem);
                 }

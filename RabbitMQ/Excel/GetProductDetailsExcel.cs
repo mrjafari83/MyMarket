@@ -56,7 +56,7 @@ namespace RabbitMQ.Excel
                             data.Add(row);
                         }
 
-                    for (int i = 1; i <= data.Count + 1; i++)
+                    for (int i = 1; i <= data.Count; i++)
                     {
                         if (i == 1)
                         {

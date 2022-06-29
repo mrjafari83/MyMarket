@@ -38,7 +38,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             , IProductCategoryFacad productCategoryFacad
             , ICommonCategorisFacad commonCategorisFacad, IMapper mapper
             , IExcelFacade excelFacade, ISend send
-            ,IHostingEnvironment environment)
+            , IHostingEnvironment environment)
         {
             _productFacad = productFacad;
             _productCategoryFacad = productCategoryFacad;
@@ -76,17 +76,21 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Create(ProductViewModel request, List<KeywordViewModel> Keywords
-            , List<ColorViewModel> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
-            , List<InventoryAndPriceViewModel> inventoryAndPrice, List<IFormFile> Images)
+            , List<ColorViewModelCreate> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
+            , List<InventoryAndPriceViewModelCreate> inventoryAndPrice, List<IFormFile> Images)
         {
             await _productFacad.CreateProductService.Execute(new CreateProductServiceDto
             {
-                Product = request,
+                Name = request.Name,
+                Brand = request.Brand,
+                ShortDescription = request.ShortDescription,
+                Description = request.Description,
+                CategoryId = request.CategoryId,
                 Keywords = Keywords,
                 Colors = colors,
                 Sizes = sizes,
                 Features = features,
-                Images = Images,
+                //Images = Images,
                 InventoryAndPrices = inventoryAndPrice
             });
 
@@ -147,14 +151,54 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateExcel(SearchViewModel model)
+        public IActionResult CreateExcel(SearchViewModel model)
         {
+            TempData["SearchKey"] = model.SearchKey;
+            TempData["StartPrice"] = model.StartPrice;
+            TempData["EndPrice"] = model.EndPrice;
+            TempData["OrderBy"] = (int)model.OrderBy;
+            TempData["SearchBy"] = (int)model.SearchBy;
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateExcelConfirmed()
+        {
+            var orderBy = TempData["OrderBy"] switch
+            {
+                0 => Enums.PagesFilter.Newest,
+                1 => Enums.PagesFilter.Oldest,
+                2 => Enums.PagesFilter.MostViewed,
+                3 => Enums.PagesFilter.MostSelled,
+                4 => Enums.PagesFilter.LessViewed,
+                5 => Enums.PagesFilter.LessSelled,
+                _ => Enums.PagesFilter.Newest,
+            };
+
+            var searchBy = TempData["SearchBy"] switch
+            {
+                0 => Enums.PageFilterCategory.Name,
+                1 => Enums.PageFilterCategory.Brand,
+                2 => Enums.PageFilterCategory.CategoryName,
+                _=> Enums.PageFilterCategory.Name
+            };
+
+            var model = new SearchViewModel
+            {
+                SearchKey = TempData["SearchKey"] == null ? "" : TempData["SearchKey"].ToString(),
+                StartPrice = TempData["StartPrice"]==null ? 0 : (int)TempData["StartPrice"],
+                EndPrice = TempData["EndPrice"] == null ? 0 : (int)TempData["EndPrice"],
+                OrderBy = orderBy,
+                SearchBy = searchBy
+            };
+
             var entity = await _excelFacade.CreateExcelKey.Execute(model);
             int id = entity.Data;
 
             _send.SendToCreateExcel(id);
 
-            return Json("");
+            return Redirect("/Admin/Product");
         }
 
         [HttpGet]
@@ -165,6 +209,12 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         [HttpGet]
         public IActionResult DeleteAllExcels()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult DeleteAllExcelsConfirmed()
         {
             DirectoryInfo directory = new DirectoryInfo(_environment.WebRootPath + "/Excels/");
             var files = directory.GetFiles("*.xlsx");

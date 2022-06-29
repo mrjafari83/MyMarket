@@ -1,70 +1,112 @@
 ﻿@using Application.Services.Admin.Excel.Queries.GetAllExcels
 @model List<GetAllExcelsDto>
 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
 <style>
     td, th, tr {
         text-align: center;
     }
 </style>
 
-<table>
-    <thead>
-        <tr>
-            <th>نام </th>
-            <th>وضعیت</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model.Count() != 0)
+{
+    <table>
+        <thead>
             <tr>
-                <td>@item.FileName</td>
-                <td>
-                    @switch (item.StatusCode)
-                    {
-                        case 1:
-                            {
-                                <span class="label label-info ">ارسال درخواست به سرور</span>
-                                break;
-                            }
-                        case 2:
-                            {
-                                <span class="label label-info">دریافت درخواست توسط سرور</span>
-                                break;
-                            }
-                        case 3:
-                            {
-                                <span class="label label-info green">آماده دانلود</span>
-                                break;
-                            }
-                        case 4:
-                            {
-                                <span class="label label-warning">خطا</span>
-                                break;
-                            }
-                        default:
-                            {
-                                <span class="label label-warning">نامشخص</span>
-                                break;
-                            }
-                    }
-                </td>
-                <td>
-                    @if (item.StatusCode == 3)
-                    {
-                        <a class="waves-effect waves-light btn modal-trigger green" href="/Excels/@item.FileName">دانلود</a>
-                    }
-                </td>
+                <th>نام </th>
+                <th>وضعیت</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FileName</td>
+                    <td>
+                        @switch (item.StatusCode)
+                        {
+                            case 1:
+                                {
+                                    <span class="label label-info ">ارسال درخواست به سرور</span>
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    <span class="label label-info">دریافت درخواست توسط سرور</span>
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    <span class="label label-info green">آماده دانلود</span>
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    <span class="label label-warning">خطا</span>
+                                    break;
+                                }
+                            default:
+                                {
+                                    <span class="label label-warning">نامشخص</span>
+                                    break;
+                                }
+                        }
+                    </td>
+                    <td>
+                        @if (item.StatusCode == 3)
+                        {
+                            <a class="waves-effect waves-light btn modal-trigger green" href="/Excels/@item.FileName">دانلود</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                @if (Model.Count() != 0)
+                {
+                    <td>
+                        <a class="waves-effect waves-light btn modal-trigger red" id="btnDelteExcels" href="#modal1">حذف همه</a>
+                    </td>
+                }
+            </tr>
+        </tfoot>
+    </table>
+}
+
+else
+{
+    <h3>
+        چیزی یافت نشد.
+    </h3>
+}
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 id="title">Modal Header</h4>
+        <p id="body">A bunch of text</p>
+    </div>
+</div>
+
+@section Scripts{
+<script>
+    $(document).ready(function(){
+
+        $("#btnDelteExcels").click(function () {
+            $.get("/Admin/Product/DeleteAllExcels", function (result) {
+                $("#title").html("حذف");
+                $("#body").html(result);
+            });
+        });
+
+    });
+</script>
+}
