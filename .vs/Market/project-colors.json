@@ -45,7 +45,12 @@
       "ProjectGuid": "d67f2152-55e0-4851-ba51-1cab0cede580",
       "DisplayName": "RabbitMQ",
       "ColorIndex": 7
+    },
+    "c5b139ad-df06-4c2e-b039-e956555810fe": {
+      "ProjectGuid": "c5b139ad-df06-4c2e-b039-e956555810fe",
+      "DisplayName": "EndPoint.Api",
+      "ColorIndex": 8
     }
   },
-  "NextColorIndex": 8
+  "NextColorIndex": 9
 }

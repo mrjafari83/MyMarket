@@ -59,7 +59,6 @@ namespace Market.EndPoint
             services.AddHttpContextAccessor();
             services.AddMvc();
 
-
             services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
             {
                 option.Password.RequireLowercase = false;

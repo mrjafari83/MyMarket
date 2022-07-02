@@ -5,9 +5,13 @@ using Common.ViewModels;
 using Application.Services.Admin.Products.Queries.GetAllProducts;
 using Application.Services.Admin.Products.Queries.GetProductById;
 using Common.Enums;
+using Microsoft.AspNetCore.Authorization;
+using Common.Classes;
+using Microsoft.AspNetCore.Http;
 
 namespace EndPoint.Api.Controllers
 {
+    [Authorize(Roles = "Admin,Owner")]
     [ApiController]
     [Route("[controller]")]
     public class ProductController : ControllerBase
@@ -19,7 +23,7 @@ namespace EndPoint.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ResultGetAllProductsDto> GetAll(int pageNumber, int pageSize,[FromQuery]SearchViewModel searchViewModel)
+        public async Task<ResultGetAllProductsDto> GetAll([FromQuery]SearchViewModel searchViewModel, int pageNumber = 1, int pageSize = 10)
         {
             var result = await _productFacad.GetAllProductsService.Execute(pageNumber, pageSize, searchViewModel);
             if (result.IsSuccess && result.Data.Products.Count() != 0)
@@ -44,13 +48,13 @@ namespace EndPoint.Api.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public async Task<bool> Create([FromBody] CreateProductServiceDto model)
+        public async Task<int> Create([FromBody] CreateProductServiceDto model)
         {
             var result = await _productFacad.CreateProductService.Execute(model);
 
             if (result.IsSuccess)
-                return true;
-            return false;
+                return result.Data;
+            return 0;
         }
 
         [HttpDelete]

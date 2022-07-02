@@ -30,7 +30,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             _mapper = mapper;   
         }
 
-        public async Task<ResultDto> Execute(CreateProductServiceDto entry)
+        public async Task<ResultDto<int>> Execute(CreateProductServiceDto entry)
         {
             var product = _mapper.Map<ProductViewModel , Product>(new ProductViewModel { Name = entry.Name , Brand = entry.Brand,ShortDescription = entry.ShortDescription, Description = entry.Description,CategoryId = entry.CategoryId});
 
@@ -43,11 +43,12 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             db.ProductFutures.AddRange(AddFeature(product, entry.Features));
             await SetInventoryAndPrice(product, entry.InventoryAndPrices);
 
-            await db.Products.AddAsync(product);
+            var result = await db.Products.AddAsync(product);
 
             await db.SaveChangesAsync();
-            return new ResultDto
+            return new ResultDto<int>
             {
+                Data = result.Entity.Id,
                 IsSuccess = true,
                 Message = "محصول با موفقیت اضافه شد."
             };

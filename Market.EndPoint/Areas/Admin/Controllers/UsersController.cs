@@ -114,22 +114,22 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             var user = _userManager.FindByNameAsync(model.UserName).Result;
             if (user != null)
             {
-                var roles = new List<string>() { "Owner", "Admin", "Customer" };
+                await _userManager.RemoveFromRoleAsync(user, "Customer");
+                await _userManager.RemoveFromRoleAsync(user, "Admin");
+                await _userManager.RemoveFromRoleAsync(user, "Owner");
+
                 if (model.Owner)
                 {
-                    await _userManager.RemoveFromRolesAsync(user, roles);
                     await _userManager.AddToRoleAsync(user, "Owner");
                 }
 
                 else if (model.Admin)
                 {
-                    await _userManager.RemoveFromRolesAsync(user, roles);
                     await _userManager.AddToRoleAsync(user, "Admin");
                 }
 
                 else if (model.Customer)
                 {
-                    await _userManager.RemoveFromRolesAsync(user, roles);
                     await _userManager.AddToRoleAsync(user, "Customer");
                 }
             }

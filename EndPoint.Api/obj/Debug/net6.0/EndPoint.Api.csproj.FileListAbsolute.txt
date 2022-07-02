@@ -19,6 +19,7 @@ C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\System.Web.Helpers.
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\System.Web.WebPages.dll
+C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

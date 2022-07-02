@@ -9,6 +9,6 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
 {
     public interface ICreateProductService
     {
-        Task<ResultDto> Execute(CreateProductServiceDto entry);
+        Task<ResultDto<int>> Execute(CreateProductServiceDto entry);
     }
 }

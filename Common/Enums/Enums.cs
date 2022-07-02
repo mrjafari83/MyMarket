@@ -56,5 +56,15 @@ namespace Common.Enums
             ExcelCreated = 3,
             ThrowExeption = 4
         }
+
+        public enum Roles
+        {
+            [Display(Name = "مشتری")]
+            Customer = 0,
+            [Display(Name = "ادمین")]
+            Admin = 1,
+            [Display(Name = "مدیریت")]
+            Owner = 2
+        }
     }
 }
