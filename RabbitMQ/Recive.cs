@@ -77,7 +77,7 @@ namespace RabbitMQ
         {
             using(var scope = Services.CreateScope())
             {
-                var worker = scope.ServiceProvider.GetRequiredService<IGetProductDetailsExcel>();
+                var worker = scope.ServiceProvider.GetRequiredService<IGetExcel>();
                 var excelFacade = scope.ServiceProvider.GetRequiredService<IExcelFacade>();
                 var products = scope.ServiceProvider.GetRequiredService<IOptionFacade>();
 

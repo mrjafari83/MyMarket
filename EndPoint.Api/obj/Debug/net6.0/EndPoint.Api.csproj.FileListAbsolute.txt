@@ -6,6 +6,7 @@ C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.runtim
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\ref\EndPoint.Api.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.pdb
+C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.xml
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EntityFramework.SqlServer.dll
@@ -97,5 +98,7 @@ C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\scopedcss\bundle\En
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\EndPoint.Api.csproj.CopyComplete
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\EndPoint.Api.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\ref\EndPoint.Api.dll
+C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\EndPoint.Api.xml
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\EndPoint.Api.pdb
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\EndPoint.Api.genruntimeconfig.cache
+C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.staticwebassets.runtime.json

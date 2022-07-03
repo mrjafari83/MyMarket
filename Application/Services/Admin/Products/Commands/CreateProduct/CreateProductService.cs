@@ -32,7 +32,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
 
         public async Task<ResultDto<int>> Execute(CreateProductServiceDto entry)
         {
-            var product = _mapper.Map<ProductViewModel , Product>(new ProductViewModel { Name = entry.Name , Brand = entry.Brand,ShortDescription = entry.ShortDescription, Description = entry.Description,CategoryId = entry.CategoryId});
+            var product = new Product { Name = entry.Name , Brand = entry.Brand,ShortDescription = entry.ShortDescription, Description = entry.Description,CategoryId = entry.CategoryId};
 
             await SetColors(product, entry.Colors);
             await SetSizes(product, entry.Sizes);
@@ -89,7 +89,7 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             List<Domain.Entities.Products.ProductFeature> finallyFeatures = new List<Domain.Entities.Products.ProductFeature>();
             foreach (var item in features)
             {
-                var feature = _mapper.Map<FeatureViewModel, Domain.Entities.Products.ProductFeature>(item);
+                var feature = _mapper.Map<Domain.Entities.Products.ProductFeature>(item);
                 feature.Product = product;
                 finallyFeatures.Add(feature);
             }

@@ -13,7 +13,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddScoped<IDataBaseContext, DataBaseContext>();
         services.AddHostedService<RabbitBackService>();
         services.AddSingleton<IRecive, Recive>();
-        services.AddScoped<IGetProductDetailsExcel, GetProductDetailsExcel>();
+        services.AddScoped<IGetExcel, GetExcel>();
         services.AddScoped<IExcelFacade, ExcelFacade>();
         services.AddScoped<IOptionFacade, OptionFacade>();
 

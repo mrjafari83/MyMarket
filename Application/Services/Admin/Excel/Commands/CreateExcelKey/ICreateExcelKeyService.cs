@@ -25,7 +25,7 @@ namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
 
         public async Task<ResultDto<int>> Execute(SearchViewModel model)
         {
-            var entity = await db.ExcelKeys.AddAsync(new Domain.Entities.Option.ExcelKeys
+            var entity = await db.ExcelKeys.AddAsync(new Domain.Entities.Option.SearchFilter
             {
                 SearchKey = model.SearchKey,
                 SearchBy = (int)model.SearchBy,

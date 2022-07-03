@@ -1,24 +1,26 @@
-using Application.FacadPatterns.Admin;
+﻿using Application.FacadPatterns.Admin;
 using Application.FacadPatterns.Client;
 using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Client;
-using Application.Mapper;
 using AutoMapper;
 using Domain.Entities.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.JsonPatch.Operations;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Converters;
 using Persistance.Context;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
+using EndPoint.Api.MapperProfile;
+using Application.Mapper;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,7 @@ builder.Services.AddDbContext<DataBaseContext>(optons =>
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IProductFacad, ProductFacad>();
 builder.Services.AddScoped<IClientCartFacad, ClientCartFacad>();
+MapperConfig(builder.Services);
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
 {
@@ -53,15 +56,18 @@ builder.Services.AddAuthentication(opt =>
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "https://localhost:5001",
+            ValidIssuer = "Mohammad",
             ValidAudience = "https://localhost:5001",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345")),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt").GetChildren().FirstOrDefault(config=> config.Key == "SecretKey").Value)),
             RequireExpirationTime = true,
             ClockSkew = TimeSpan.Zero,
         };
     });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+{
+    options.ClientErrorMapping[401].Title = "احراز هویت نشده!";
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -77,24 +83,10 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "bearer",
     });
     c.OperationFilter<AuthResponsesOperationFilter>();
-    //c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    //{
-    //    {
-    //        new OpenApiSecurityScheme
-    //        {
-    //            Reference = new OpenApiReference
-    //            {
-    //                Type=ReferenceType.SecurityScheme,
-    //                Id="Bearer"
-    //            }
-    //        },
-    //        new string[]{}
-    //    }
-    //});
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 }
 );
-
-MapperConfig(builder.Services);
 
 builder.Services.AddControllers().AddJsonOptions(x =>
 {
@@ -108,6 +100,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -117,23 +111,25 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseStaticFiles();
+
 app.MapControllers();
 
 app.Run();
 
 void MapperConfig(IServiceCollection services)
 {
-    var mapperConfig = new MapperConfiguration(mc =>
-    {
+    var mapperConfig = new MapperConfiguration(mc => {
         mc.AddProfile(new ProductProfiler());
         mc.AddProfile(new BlogPageProfiler());
         mc.AddProfile(new CartProfiler());
         mc.AddProfile(new CommentProfiler());
+
+        mc.AddProfile(new ProductProfile());
     });
     IMapper mapper = mapperConfig.CreateMapper();
     services.AddSingleton(mapper);
 }
-
 
 public class AuthResponsesOperationFilter : IOperationFilter
 {

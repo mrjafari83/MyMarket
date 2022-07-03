@@ -10,6 +10,7 @@ using Common.Enums;
 using Application.Interfaces.FacadPatterns.Client;
 using EndPoint.Api.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace EndPoint.Api.Controllers
 {
@@ -20,15 +21,21 @@ namespace EndPoint.Api.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IClientCartFacad _clientCartFacad;
+        private readonly IConfiguration _configuration;
 
         public AuthanticationController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager
-            , IClientCartFacad clientCartFacad)
+            , IClientCartFacad clientCartFacad,IConfiguration configuration)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _clientCartFacad = clientCartFacad;
+            _configuration = configuration;
         }
 
+        ///<summary>ورود به سایت</summary>
+        /// <response code="200">موفق</response>
+        /// <response code="401">لطفا وارد سایت شوید.</response>
+        /// <response code="400">خطایی رخ داده است.</response>
         [HttpPost("Login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromForm] EndPoint.Api.ViewModels.LoginViewModel model)
@@ -49,9 +56,12 @@ namespace EndPoint.Api.Controllers
                     Message = "",
                 });
 
-            return Unauthorized();
+            return BadRequest();
         }
 
+        ///<summary>ثبت نام در سایت</summary>
+        /// <response code="200">موفق</response>
+        /// <response code="400">خطایی رخ داده است.</response>
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromForm]RegisterViewModel model)
@@ -83,11 +93,15 @@ namespace EndPoint.Api.Controllers
             return BadRequest("خطایی رخ داده است.");
         }
 
+        ///<summary>تغییر مقام کاربران</summary>
+        /// <response code="200">موفق</response>
+        /// <response code="401">لطفا وارد سایت شوید</response>
+        /// <response code="400">خطایی رخ داده است.</response>
         [Authorize(Roles = "Owner")]
         [HttpPost("ChangeRole")]
-        public async Task<IActionResult> ChangeRole(string userName , Enums.Roles role)
+        public async Task<IActionResult> ChangeRole([FromForm]ChangeRoleViewModel model)
         {
-            var user = await _userManager.FindByNameAsync (userName);
+            var user = await _userManager.FindByNameAsync (model.UserName);
             if (user == null)
                 return BadRequest("کاربری وجود ندارد.");
 
@@ -95,7 +109,7 @@ namespace EndPoint.Api.Controllers
             await _userManager.RemoveFromRoleAsync(user, "Admin");
             await _userManager.RemoveFromRoleAsync(user, "Owner");
 
-            var result = await _userManager.AddToRoleAsync (user, role switch
+            var result = await _userManager.AddToRoleAsync (user, model.Role switch
             {
                 Enums.Roles.Owner => RoleNames.Owner,
                 Enums.Roles.Admin => RoleNames.Admin,
@@ -108,6 +122,10 @@ namespace EndPoint.Api.Controllers
             return BadRequest("خطایی رخ داده است.");
         }
 
+        ///<summary>دریافت اطلاعات کاربر فعلی </summary>
+        ///<response code="200">موفق</response>
+        ///<response code="401">لطفا وارد سایت شوید</response>
+        ///<response code="400">خطایی رخ داده است.</response>
         [Authorize]
         [HttpGet("UserDetail")]
         public async Task<IActionResult> GetUserDetail()
@@ -139,10 +157,10 @@ namespace EndPoint.Api.Controllers
             foreach (var role in roles)
                 claims.Add(new Claim(ClaimTypes.Role, role));
 
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("Jwt").GetChildren().FirstOrDefault(config => config.Key == "SecretKey").Value));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
-                issuer: "https://localhost:5001",
+                issuer: "Mohammad",
                 audience: "https://localhost:5001",
                 claims: claims,
                 expires: DateTime.UtcNow.AddMinutes(1),
