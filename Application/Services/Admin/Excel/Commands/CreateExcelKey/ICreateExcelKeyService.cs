@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application.Interfaces.Context;
 using Common.Dto;
 using Common.Enums;
+using Common.Utilities;
 using Common.ViewModels;
 
 namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
@@ -25,14 +26,9 @@ namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
 
         public async Task<ResultDto<int>> Execute(SearchViewModel model)
         {
-            var entity = await db.ExcelKeys.AddAsync(new Domain.Entities.Option.SearchFilter
+            var entity = await db.SearchFilter.AddAsync(new Domain.Entities.Option.SearchFilter
             {
-                SearchKey = model.SearchKey,
-                SearchBy = (int)model.SearchBy,
-                OrderBy = (int)model.OrderBy,
-                StartPrice = model.StartPrice,
-                EndPrice = model.EndPrice,
-                Status = (int)Enums.Status.Created
+                FilterXml = XmlConvertor<SearchViewModel>.ToXML(model),
             });
 
             await db.SaveChangesAsync();

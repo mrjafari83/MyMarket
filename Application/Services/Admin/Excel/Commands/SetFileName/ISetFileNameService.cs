@@ -23,7 +23,7 @@ namespace Application.Services.Admin.Excel.Commands.SetFileName
 
         public ResultDto SetFileName(string fileName, int id)
         {
-            var entity = db.ExcelKeys.Find(id);
+            var entity = db.SearchFilter.Find(id);
             entity.FileName = fileName;
             db.SaveChanges();
 

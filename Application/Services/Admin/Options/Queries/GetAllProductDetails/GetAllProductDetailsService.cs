@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Services.Admin.Common.Queries.GetProductsBySearch;
 using Common.ViewModels;
+using Common.Utilities;
 
 namespace Application.Services.Admin.Options.Queries.GetAllProductDetails
 {
@@ -24,33 +25,16 @@ namespace Application.Services.Admin.Options.Queries.GetAllProductDetails
 
         public ResultDto<List<GetAllProductDetailsDto>> Execute(int filterId)
         {
-            var filters = db.ExcelKeys.FirstOrDefault(k=> k.Id == filterId);
-            Enums.PagesFilter orderBy = filters.OrderBy switch
-            {
-                0 => Enums.PagesFilter.Newest,
-                1 => Enums.PagesFilter.Oldest,
-                2 => Enums.PagesFilter.MostViewed,
-                3 => Enums.PagesFilter.MostSelled,
-                4 => Enums.PagesFilter.LessViewed,
-                5 => Enums.PagesFilter.LessSelled,
-                _ => Enums.PagesFilter.Newest
-            };
-
-            Enums.PageFilterCategory searchBy = filters.SearchBy switch
-            {
-                0 => Enums.PageFilterCategory.Name,
-                1 => Enums.PageFilterCategory.Brand,
-                2 => Enums.PageFilterCategory.CategoryName,
-                _ => Enums.PageFilterCategory.Name
-            };
+            var filters = db.SearchFilter.FirstOrDefault(k=> k.Id == filterId);
+            var filterXml = XmlConvertor<SearchViewModel>.LoadFromXMLString(filters.FilterXml);
 
             var products = _getProductsBySearch.GetProducts(new SearchViewModel
             {
-                SearchKey = filters.SearchKey,
-                SearchBy = searchBy,
-                OrderBy = orderBy,
-                StartPrice = filters.StartPrice,
-                EndPrice = filters.EndPrice,
+                SearchKey = filterXml.SearchKey,
+                StartPrice = filterXml.StartPrice,
+                EndPrice = filterXml.EndPrice,
+                SearchBy = filterXml.SearchBy,
+                OrderBy = filterXml.OrderBy,
             }).Include(p=> p.ProductInCarts).Select(p=> new GetAllProductDetailsDto
             {
                 Name = p.Name,

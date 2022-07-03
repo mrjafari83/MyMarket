@@ -1,5 +1,6 @@
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\appsettings.json
+C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.staticwebassets.runtime.json
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.exe
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.deps.json
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.runtimeconfig.json
@@ -11,6 +12,7 @@ C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EntityFramework.SqlServer.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EntityFramework.dll
+C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\JWT.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.AspNet.Identity.EntityFramework.dll
@@ -29,8 +31,10 @@ C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.AspNetCor
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\Microsoft.Identity.Client.dll
@@ -59,13 +63,9 @@ C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\System.Windows.Exte
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
@@ -101,4 +101,3 @@ C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\ref\EndPoint.Api.dl
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\EndPoint.Api.xml
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\EndPoint.Api.pdb
 C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\obj\Debug\net6.0\EndPoint.Api.genruntimeconfig.cache
-C:\Users\Kar1\Desktop\MyMarket\EndPoint.Api\bin\Debug\net6.0\EndPoint.Api.staticwebassets.runtime.json

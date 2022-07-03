@@ -28,17 +28,17 @@ namespace Application.Services.Admin.Common.Queries.GetProductsBySearch
                 {
                     case Enums.PageFilterCategory.Name:
                         {
-                            products = products.Where(p => p.Name.Contains(model.SearchKey)).AsQueryable();
+                            products = products.Where(p => p.Name.Contains(model.SearchKey));
                             break;
                         }
                     case Enums.PageFilterCategory.Brand:
                         {
-                            products = products.Where(p => p.Brand.Contains(model.SearchKey)).AsQueryable();
+                            products = products.Where(p => p.Brand.Contains(model.SearchKey));
                             break;
                         }
                     case Enums.PageFilterCategory.CategoryName:
                         {
-                            products = products.Where(p => p.Category.Name.Contains(model.SearchKey)).AsQueryable();
+                            products = products.Where(p => p.Category.Name.Contains(model.SearchKey));
                             break;
                         }
                 }
@@ -47,34 +47,34 @@ namespace Application.Services.Admin.Common.Queries.GetProductsBySearch
             {
                 case Enums.PagesFilter.LessViewed:
                     {
-                        products = products.OrderBy(p => p.Visits.Count()).AsQueryable();
+                        products = products.OrderBy(p => p.Visits.Count());
                         break;
                     }
                 case Enums.PagesFilter.MostViewed:
                     {
-                        products = products.OrderByDescending(p => p.Visits.Count()).AsQueryable();
+                        products = products.OrderByDescending(p => p.Visits.Count());
                         break;
                     }
                 case Enums.PagesFilter.Newest:
                     {
-                        products = products.OrderByDescending(p => p.CreateDate).AsQueryable();
+                        products = products.OrderByDescending(p => p.CreateDate);
                         break;
                     }
                 case Enums.PagesFilter.Oldest:
                     {
-                        products = products.OrderBy(p => p.CreateDate).AsQueryable();
+                        products = products.OrderBy(p => p.CreateDate);
                         break;
                     }
                 case Enums.PagesFilter.MostSelled:
                     {
                         products = products.OrderByDescending(p => p.ProductInCarts.Where(p => !p.IsShow)
-                        .Sum(c => c.Count * c.ProductInventoryAndPrice.Price)).AsQueryable();
+                        .Sum(c => c.Count * c.ProductInventoryAndPrice.Price));
                         break;
                     }
                 case Enums.PagesFilter.LessSelled:
                     {
                         products = products.OrderBy(p => p.ProductInCarts.Where(p => !p.IsShow)
-                        .Sum(c => c.Count * c.ProductInventoryAndPrice.Price)).AsQueryable();
+                        .Sum(c => c.Count * c.ProductInventoryAndPrice.Price));
                         break;
                     }
             }

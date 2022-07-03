@@ -15,5 +15,8 @@ namespace Domain.Entities.Option
     {
         [Column(TypeName = "xml")]
         public string FilterXml { get; set; }
+
+        public int Status { get; set; } = 0;
+        public string FileName { get; set; }
     }
 }

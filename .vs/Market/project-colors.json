@@ -55,7 +55,12 @@
       "ProjectGuid": "253e1db5-b981-49f0-9c32-e0350804d2d7",
       "DisplayName": "RabbitMQ_Test",
       "ColorIndex": 9
+    },
+    "ec1e9285-44f3-4c41-a15c-79e041cbea1a": {
+      "ProjectGuid": "ec1e9285-44f3-4c41-a15c-79e041cbea1a",
+      "DisplayName": "RabbitMQ_Test",
+      "ColorIndex": 10
     }
   },
-  "NextColorIndex": 10
+  "NextColorIndex": 11
 }

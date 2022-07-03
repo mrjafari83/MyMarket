@@ -23,7 +23,7 @@ namespace Application.Services.Admin.Excel.Commands.DeleteAll
 
         public ResultDto Execute()
         {
-            var entities = db.ExcelKeys.ToList();
+            var entities = db.SearchFilter.ToList();
             foreach(var entity in entities)
             {
                 entity.IsRemoved = true;

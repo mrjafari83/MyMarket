@@ -9,12 +9,12 @@ namespace Common.Utilities
 {
     public class XmlConvertor<Class> where Class : class
     {
-        public string ToXML()
+        public static string ToXML(Class source)
         {
             using (var stringWriter = new System.IO.StringWriter())
             {
-                var serializer = new XmlSerializer(this.GetType());
-                serializer.Serialize(stringWriter, this);
+                var serializer = new XmlSerializer(source.GetType());
+                serializer.Serialize(stringWriter, source);
                 return stringWriter.ToString();
             }
         }
