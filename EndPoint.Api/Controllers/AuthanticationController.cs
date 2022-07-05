@@ -11,6 +11,8 @@ using Application.Interfaces.FacadPatterns.Client;
 using EndPoint.Api.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
+using Application.Interfaces.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace EndPoint.Api.Controllers
 {
@@ -22,14 +24,16 @@ namespace EndPoint.Api.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IClientCartFacad _clientCartFacad;
         private readonly IConfiguration _configuration;
+        private readonly IDataBaseContext db;
 
         public AuthanticationController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager
-            , IClientCartFacad clientCartFacad,IConfiguration configuration)
+            , IClientCartFacad clientCartFacad,IConfiguration configuration,IDataBaseContext context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _clientCartFacad = clientCartFacad;
             _configuration = configuration;
+            db = context;
         }
 
         ///<summary>ورود به سایت</summary>
@@ -46,15 +50,15 @@ namespace EndPoint.Api.Controllers
 
             var signIn = await _signInManager.PasswordSignInAsync(user, model.Password, false, true);
 
+            user = await db.ApplicationUsers.FirstOrDefaultAsync(u => u.UserName == model.UserName);
+            if(user != null)
+                return Ok(await getToken(user));
+
             if (!signIn.Succeeded)
                 return BadRequest("نام کاربری یا کلمه عبور اشتباهست.");
 
             if (signIn.Succeeded)
-                return Ok(new UserResponse()
-                {
-                    Token = await getToken(user),
-                    Message = "",
-                });
+                return Ok(await getToken(user));
 
             return BadRequest();
         }
@@ -150,20 +154,20 @@ namespace EndPoint.Api.Controllers
         {
             var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name , user.UserName),
+                    new Claim("name" , user.UserName),
                 };
 
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                claims.Add(new Claim("role", role));
 
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("Jwt").GetChildren().FirstOrDefault(config => config.Key == "SecretKey").Value));
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"].ToString()));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
                 issuer: "Mohammad",
                 audience: "https://localhost:5001",
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(1),
+                expires: DateTime.UtcNow.AddHours(6),
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);

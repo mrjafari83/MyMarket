@@ -13,7 +13,7 @@ namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
 {
     public interface ICreateExcelKeyService
     {
-        Task<ResultDto<int>> Execute(SearchViewModel model);
+        Task<ResultDto<int>> Execute(int searchId);
     }
 
     public class CreateExcelKeyService : ICreateExcelKeyService
@@ -24,11 +24,13 @@ namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
             db = context;
         }
 
-        public async Task<ResultDto<int>> Execute(SearchViewModel model)
+        public async Task<ResultDto<int>> Execute(int searchId)
         {
-            var entity = await db.SearchFilter.AddAsync(new Domain.Entities.Option.SearchFilter
+            var entity = await db.ExcelStatuses.AddAsync(new Domain.Entities.Option.ExcelStatus
             {
-                FilterXml = XmlConvertor<SearchViewModel>.ToXML(model),
+                Status = 0,
+                FileName = "",
+                SearchFilterId = searchId
             });
 
             await db.SaveChangesAsync();

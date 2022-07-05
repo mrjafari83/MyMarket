@@ -13,7 +13,8 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.Context;
 using Microsoft.AspNetCore.Hosting;
 using AutoMapper;
-using Application.Services.Admin.Common.Queries.GetProductsBySearch;
+using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
+using Microsoft.Extensions.Logging;
 
 namespace Application.FacadPatterns.Admin
 {
@@ -22,12 +23,15 @@ namespace Application.FacadPatterns.Admin
         private readonly IDataBaseContext db;
         private readonly IHostingEnvironment _environment;
         private readonly IMapper _mapper;
+        private readonly ILogger<GetEntitiesByFilterService> _logger;
         public ProductFacad(IDataBaseContext context
-            , IHostingEnvironment environment , IMapper mapper)
+            , IHostingEnvironment environment , IMapper mapper
+            ,ILogger<GetEntitiesByFilterService> logger)
         {
             db = context;
             _environment = environment;
             _mapper = mapper;
+            _logger = logger;
         }
 
         private GetAllProductsService _getAllProductsService;
@@ -35,7 +39,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return _getAllProductsService == null ? new GetAllProductsService(db,_mapper) : _getAllProductsService;
+                return _getAllProductsService == null ? new GetAllProductsService(db,_mapper , _logger) : _getAllProductsService;
             }
         }
 

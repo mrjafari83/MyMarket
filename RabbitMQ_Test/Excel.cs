@@ -19,7 +19,7 @@ namespace RabbitMQ_Test
                 samples.Add(new Sample() { Id = random.Next()});
 
             IGetExcel get = new GetExcel();
-            var actual = get.GetProductDetails<Sample>(samples, "/Excel/", "Sample");
+            var actual = get.GetExcelFile<Sample>(samples, "/Excel/", "Sample");
 
             Assert.AreNotEqual(actual, "");
         }

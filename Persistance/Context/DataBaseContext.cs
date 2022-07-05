@@ -57,6 +57,7 @@ namespace Persistance.Context
         public DbSet<Browser> Browsers { get; set; }
         public DbSet<ProductInventory> ProductInventories { get; set; }
         public DbSet<SearchFilter> SearchFilter { get; set; }
+        public DbSet<ExcelStatus> ExcelStatuses { get; set; }
 
         //relation tables
         public DbSet<ColorInProduct> ColorsInProducts { get; set; }

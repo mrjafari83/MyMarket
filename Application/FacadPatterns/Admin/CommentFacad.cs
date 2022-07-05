@@ -14,18 +14,18 @@ namespace Application.FacadPatterns.Admin
     {
         private readonly IDataBaseContext db;
         private readonly IMapper _mapper;
-        public CommentFacad(IDataBaseContext context , IMapper mapper)
+        public CommentFacad(IDataBaseContext context, IMapper mapper)
         {
             db = context;
             _mapper = mapper;
         }
 
         private GetAllProductCommentsService getAllProductCommentsService;
-        public IGetAllCommentsService GetAllProductComments 
+        public IGetAllCommentsService GetAllProductComments
         {
             get
             {
-                return getAllProductCommentsService ?? new GetAllProductCommentsService(db , _mapper);
+                return getAllProductCommentsService ?? new GetAllProductCommentsService(db, _mapper);
             }
         }
 
@@ -34,7 +34,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return getAllBlogCommentsService ?? new GetAllBlogCommentsService(db,_mapper);
+                return getAllBlogCommentsService ?? new GetAllBlogCommentsService(db, _mapper);
             }
         }
 

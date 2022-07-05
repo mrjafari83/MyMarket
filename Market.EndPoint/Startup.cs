@@ -26,6 +26,11 @@ using Domain.Entities.User;
 using AutoMapper;
 using Application.Mapper;
 using Market.EndPoint.Utilities.RabbitMQ;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Common.Utilities;
+using Microsoft.Extensions.Logging;
 
 namespace Market.EndPoint
 {
@@ -55,9 +60,32 @@ namespace Market.EndPoint
             optons.UseSqlServer(@"Data Source= .; Initial Catalog= Market_DB; Integrated Security= False;User Id=sa;Password=123;")
             );
 
+            services.AddLogging(options=>
+            {
+                options.AddDebug();
+                options.AddConfiguration(Configuration);
+            });
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddMvc();
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false,
+                    ValidIssuer = "Mohammad",
+                    ValidAudience = "https://localhost:5001",
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"]))
+                };
+            });
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
             {
@@ -73,11 +101,12 @@ namespace Market.EndPoint
             {
                 option.AccessDeniedPath = "/Admin/Login";
                 option.LoginPath = "/Login";
+                option.Cookie.HttpOnly = true;
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env , ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -89,6 +118,7 @@ namespace Market.EndPoint
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -125,11 +155,11 @@ namespace Market.EndPoint
             services.AddScoped<IBlogPageCategoryFacad, BlogPageCategoryFacad>();
             services.AddScoped<ISliderFacad, SliderFacad>();
             services.AddScoped<ICartPayingFacad, CartPayingsFacad>();
-            services.AddScoped<ICommentFacad, CommentFacad>();
             services.AddScoped<INewsBulletinFacad, NewsBulletinFacad>();
             services.AddScoped<IMessageFacad, MessageFacad>();
             services.AddScoped<IOptionFacade, OptionFacade>();
             services.AddScoped<IExcelFacade, ExcelFacade>();
+            services.AddScoped<ICommentFacad, CommentFacad>();
         }
 
         private void ClientInjections(IServiceCollection services)
@@ -153,11 +183,13 @@ namespace Market.EndPoint
         private void InjectionUtilities(IServiceCollection services)
         {
             services.AddScoped<IMessageSender, GmailSender>();
+            services.AddScoped<SaveLogInFile>();
         }
 
         private void MapperConfig(IServiceCollection services)
         {
-            var mapperConfig = new MapperConfiguration(mc => {
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
                 mc.AddProfile(new ProductProfiler());
                 mc.AddProfile(new BlogPageProfiler());
                 mc.AddProfile(new CartProfiler());

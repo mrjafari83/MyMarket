@@ -8,15 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Domain.Entities.Option
 {
     public class SearchFilter : BaseEntity
     {
-        [Column(TypeName = "xml")]
-        public string FilterXml { get; set; }
+        public string FilterJson { get; set; }
+        public SearchItemType SearchType { get; set; }
+    }
 
-        public int Status { get; set; } = 0;
-        public string FileName { get; set; }
+    public enum SearchItemType
+    {
+        Product = 0,
     }
 }

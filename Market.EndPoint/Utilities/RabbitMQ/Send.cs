@@ -10,7 +10,7 @@ namespace Market.EndPoint.Utilities.RabbitMQ
 {
     public interface ISend
     {
-        void SendToCreateExcel(int id);
+        void SendToCreateExcel(int excelId, int searchId);
     }
 
     public class Send : ISend
@@ -21,7 +21,7 @@ namespace Market.EndPoint.Utilities.RabbitMQ
         private IExcelFacade _excelFacade;
         private readonly IHostingEnvironment _environment;
 
-        public Send(IExcelFacade excelFacade , IHostingEnvironment environment)
+        public Send(IExcelFacade excelFacade, IHostingEnvironment environment)
         {
             _factory = new ConnectionFactory() { HostName = "localhost" };
             _connection = _factory.CreateConnection();
@@ -32,14 +32,14 @@ namespace Market.EndPoint.Utilities.RabbitMQ
             _channel.ExchangeDeclare("Excel.ex", "direct", true, false, null);
         }
 
-        public void SendToCreateExcel(int id)
+        public void SendToCreateExcel(int excelId, int searchId)
         {
             try
             {
                 _channel.QueueDeclare("ExcelCreate", true, false, false, null);
                 _channel.QueueBind("ExcelCreate", "Excel.ex", "create", null);
 
-                var message = id.ToString() + "_" + _environment.WebRootPath;
+                var message = excelId.ToString() + "_" + searchId.ToString() + "_" + _environment.WebRootPath;
 
                 var body = Encoding.UTF8.GetBytes(message);
                 var properties = _channel.CreateBasicProperties();
@@ -47,11 +47,11 @@ namespace Market.EndPoint.Utilities.RabbitMQ
 
                 _channel.BasicPublish("Excel.ex", "create", properties, body);
 
-                _excelFacade.UpdateStatus.Execute(Enums.Status.SendToQueue , id);
+                _excelFacade.UpdateStatus.Execute(Enums.Status.SendToQueue, excelId);
             }
             catch
             {
-                _excelFacade.UpdateStatus.Execute(Enums.Status.ThrowExeption , id);
+                _excelFacade.UpdateStatus.Execute(Enums.Status.ThrowExeption, excelId);
             }
         }
     }

@@ -48,6 +48,7 @@ namespace Application.Interfaces.Context
         DbSet<Browser> Browsers { get; set; }
         DbSet<ProductInventory> ProductInventories { get; set; }
         DbSet<SearchFilter> SearchFilter { get; set; }
+        DbSet<ExcelStatus> ExcelStatuses { get; set; }
 
         //relation tables
         DbSet<ColorInProduct> ColorsInProducts { get; set; }

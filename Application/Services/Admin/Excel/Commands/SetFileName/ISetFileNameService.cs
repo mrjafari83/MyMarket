@@ -21,9 +21,9 @@ namespace Application.Services.Admin.Excel.Commands.SetFileName
             db = context;
         }
 
-        public ResultDto SetFileName(string fileName, int id)
+        public ResultDto SetFileName(string fileName, int excelId)
         {
-            var entity = db.SearchFilter.Find(id);
+            var entity = db.ExcelStatuses.Find(excelId);
             entity.FileName = fileName;
             db.SaveChanges();
 

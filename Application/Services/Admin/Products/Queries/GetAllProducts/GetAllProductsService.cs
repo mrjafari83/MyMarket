@@ -8,28 +8,28 @@ using Common.Enums;
 using Common.Utilities;
 using Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
-using Application.Services.Admin.Common.Queries.GetProductsBySearch;
 using Common.ViewModels;
+using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Services.Admin.Products.Queries.GetAllProducts
 {
     public class GetAllProductsService : IGetAllProductsService
     {
-        private readonly IDataBaseContext db;
         private readonly IMapper _mapper;
-        private readonly GetProductsBySearch _getProductsBySearch;
-        public GetAllProductsService(IDataBaseContext context, IMapper mapper)
+        private readonly IGetEntitiesByFilterService _getEntitiesByfilterService;
+        public GetAllProductsService(IDataBaseContext context, IMapper mapper
+            ,ILogger<GetEntitiesByFilterService> logger)
         {
-            db = context;
             _mapper = mapper;
-            _getProductsBySearch = new GetProductsBySearch(context);
+            _getEntitiesByfilterService = new GetEntitiesByFilterService(context, logger);
         }
 
-        public async Task<ResultDto<ResultGetAllProductsDto>> Execute(int pageNumber, int pageSize, SearchViewModel model)
+        public async Task<ResultDto<ResultGetAllProductsDto>> Execute(int pageNumber, int pageSize, ProducsSearchViewModel model)
         {
             int totalRows = 0;
 
-            var products = _getProductsBySearch.GetProducts(model);
+            var products = _getEntitiesByfilterService.GetProductsByFilter(model);
 
             if (products != null)
                 return new ResultDto<ResultGetAllProductsDto>

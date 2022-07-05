@@ -11,12 +11,14 @@ using Microsoft.AspNetCore.Http;
 using EndPoint.Api.ViewModels.Products;
 using AutoMapper;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Cors;
 
 namespace EndPoint.Api.Controllers
 {
     [Authorize(Roles = "Admin,Owner")]
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("AllowOrigin")]
     public class ProductController : ControllerBase
     {
         private readonly IProductFacad _productFacad;
@@ -33,7 +35,7 @@ namespace EndPoint.Api.Controllers
         [HttpGet]
         public async Task<ResultGetAllProductsDto> GetAll([FromQuery]CompleteSearchViewModel model)
         {
-            var result = await _productFacad.GetAllProductsService.Execute(model.PageNumber,model.PageSize, _Mapper.Map<Common.ViewModels.SearchViewModel>(model.Search));
+            var result = await _productFacad.GetAllProductsService.Execute(model.PageNumber,model.PageSize, _Mapper.Map<Common.ViewModels.ProducsSearchViewModel>(model.Search));
             if (result.IsSuccess && result.Data.Products.Count() != 0)
                 return result.Data;
            

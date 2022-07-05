@@ -5,7 +5,6 @@ using RabbitMQ.Client.Events;
 using System;
 using System.Text;
 using RabbitMQ.Excel;
-using Application.Services.Admin.Options.Queries.GetAllProductDetails;
 
 namespace RabbitMQ
 {
@@ -40,7 +39,7 @@ namespace RabbitMQ
 
         public void ReciveCreateExcel()
         {
-            int id = 0;
+            int excelId = 0;
 
             try
             {
@@ -55,12 +54,13 @@ namespace RabbitMQ
 
                     var messages = message.Split("_");
 
-                    int id = Int32.Parse(messages[0]);
-                    string address = messages[1];
-                    updateStatus(id,Enums.Status.ReciveFromQueue);
+                    excelId = Int32.Parse(messages[0]);
+                    int searchId = Int32.Parse(messages[1]);
+                    string address = messages[2];
+                    updateStatus(excelId, Enums.Status.ReciveFromQueue);
 
-                    getProductDetailsExcel(id,address);
-                    updateStatus(id,Enums.Status.ExcelCreated);
+                    getProductDetailsExcel(excelId,searchId,address);
+                    updateStatus(excelId, Enums.Status.ExcelCreated);
 
                     _channel.BasicAck(args.DeliveryTag, false);
                 };
@@ -69,11 +69,11 @@ namespace RabbitMQ
             }
             catch
             {
-                updateStatus(id, Enums.Status.ThrowExeption);
+                updateStatus(excelId, Enums.Status.ThrowExeption);
             }
         }
 
-        private void getProductDetailsExcel(int id,string address)
+        private void getProductDetailsExcel(int excelId , int searachId,string address)
         {
             using(var scope = Services.CreateScope())
             {
@@ -81,17 +81,17 @@ namespace RabbitMQ
                 var excelFacade = scope.ServiceProvider.GetRequiredService<IExcelFacade>();
                 var products = scope.ServiceProvider.GetRequiredService<IOptionFacade>();
 
-                var fileName = worker.GetProductDetails<GetAllProductDetailsDto>(products.GetAllProductDetailsService.Execute(id).Data,address,"محصولات");
-                excelFacade.SetFileName.SetFileName(fileName, id);
+                var fileName = worker.GetExcelFile<object>(products.GetEntitiesByFilter.Execute(searachId).Data.ToList(), address, "محصولات");
+                excelFacade.SetFileName.SetFileName(fileName,excelId);
             }
         }
 
-        private void updateStatus(int id  , Enums.Status status)
+        private void updateStatus(int excelId  , Enums.Status status)
         {
             using (var scope = Services.CreateScope())
             {
                 var worker = scope.ServiceProvider.GetRequiredService<IExcelFacade>();
-                worker.UpdateStatus.Execute(status, id);
+                worker.UpdateStatus.Execute(status, excelId);
             }
         }
     }

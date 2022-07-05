@@ -10,6 +10,6 @@ namespace Application.Services.Admin.Products.Queries.GetAllProducts
 {
     public interface IGetAllProductsService
     {
-        Task<ResultDto<ResultGetAllProductsDto>> Execute(int pageNumber , int pageSize , SearchViewModel model);
+        Task<ResultDto<ResultGetAllProductsDto>> Execute(int pageNumber , int pageSize , ProducsSearchViewModel model);
     }
 }

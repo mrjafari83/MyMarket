@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Persistance.Context;
 using RabbitMQ;
 using RabbitMQ.Excel;
-using Application.Services.Admin.Options.Queries.GetAllProductDetails;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>

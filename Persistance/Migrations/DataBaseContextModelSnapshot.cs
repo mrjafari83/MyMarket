@@ -42,7 +42,7 @@ namespace Persistance.Migrations
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ShortDescription")
@@ -95,7 +95,7 @@ namespace Persistance.Migrations
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
@@ -144,7 +144,7 @@ namespace Persistance.Migrations
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Sended")
@@ -189,7 +189,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ProductInventoryAndPriceId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Size")
@@ -228,7 +228,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -243,8 +243,7 @@ namespace Persistance.Migrations
                             Id = 1383,
                             IsParent = true,
                             IsRemoved = false,
-                            Name = "بدون دسته بندی",
-                            RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Name = "بدون دسته بندی"
                         });
                 });
 
@@ -268,7 +267,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -283,8 +282,7 @@ namespace Persistance.Migrations
                             Id = 1383,
                             IsParent = true,
                             IsRemoved = false,
-                            Name = "بدون دسته بندی",
-                            RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Name = "بدون دسته بندی"
                         });
                 });
 
@@ -317,7 +315,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Text")
@@ -364,7 +362,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Text")
@@ -396,7 +394,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Value")
@@ -423,7 +421,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Value")
@@ -496,7 +494,7 @@ namespace Persistance.Migrations
                     b.ToTable("News");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Option.SearchFilter", b =>
+            modelBuilder.Entity("Domain.Entities.Option.ExcelStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -507,16 +505,43 @@ namespace Persistance.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FilterXml")
-                        .HasColumnType("xml");
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SearchFilterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SearchFilterId");
+
+                    b.ToTable("ExcelStatuses");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Option.SearchFilter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FilterJson")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("SearchType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -538,7 +563,7 @@ namespace Persistance.Migrations
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
@@ -576,7 +601,7 @@ namespace Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ShortDescription")
@@ -603,7 +628,7 @@ namespace Persistance.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -631,7 +656,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -703,7 +728,7 @@ namespace Persistance.Migrations
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SizeValue")
@@ -731,7 +756,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -780,7 +805,7 @@ namespace Persistance.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("SizeId")
@@ -825,21 +850,21 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = "Customer",
-                            ConcurrencyStamp = "425a70bb-28bd-429c-af9a-90af3e6962c8",
+                            ConcurrencyStamp = "079df04b-18e2-42fa-97b0-dfe95eadcd93",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "Admin",
-                            ConcurrencyStamp = "02ad0b89-1291-48b4-93a4-1cb470c2a87b",
+                            ConcurrencyStamp = "4909d4ba-1a6b-4972-9af6-f518371b7c59",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "Owner",
-                            ConcurrencyStamp = "75e30050-d43e-4bb2-b37c-c4c70ebf3413",
+                            ConcurrencyStamp = "43b16434-a0eb-4efc-9feb-d8ee8e894df6",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -1173,6 +1198,17 @@ namespace Persistance.Migrations
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Option.ExcelStatus", b =>
+                {
+                    b.HasOne("Domain.Entities.Option.SearchFilter", "SearchFilter")
+                        .WithMany()
+                        .HasForeignKey("SearchFilterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SearchFilter");
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.Product", b =>

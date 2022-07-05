@@ -12,6 +12,9 @@ using Common.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Common.Classes;
+using System.Net;
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -24,14 +27,17 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly IClientCartFacad _clientCartFacad;
         private readonly ICommonCartFacad _commonCartFacad;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IConfiguration _configuration;
         public AutanticationController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager
-             , IClientCartFacad clientCartFacad , ICommonCartFacad commonCartFacad , IHostingEnvironment hostingEnvironment)
+             , IClientCartFacad clientCartFacad, ICommonCartFacad commonCartFacad, IHostingEnvironment hostingEnvironment
+            , IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _clientCartFacad = clientCartFacad;
             _commonCartFacad = commonCartFacad;
             _hostingEnvironment = hostingEnvironment;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -45,7 +51,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpPost]
         [Route("Admin/Register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(string userName , string email , string password)
+        public async Task<IActionResult> Register(string userName, string email, string password)
         {
             var newUser = new ApplicationUser()
             {
@@ -64,6 +70,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                 _clientCartFacad.CreateCart.Execute(userName, out cartId);
                 CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
                 await _signInManager.PasswordSignInAsync(userName, password, false, true);
+
                 return Redirect("/Admin");
             }
 
@@ -84,32 +91,35 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [Route("Admin/Login")]
         public async Task<IActionResult> Login(LoginViwModel model)
         {
-            if (_signInManager.IsSignedIn(User))
-                return Redirect("/");
             var dbUser = _userManager.FindByNameAsync(model.UserName).Result;
             var userRole = _userManager.GetRolesAsync(dbUser).Result.FirstOrDefault();
             if (userRole != null && (userRole == "Admin" || userRole == "Owner"))
             {
-                int cartId;
-                cartId = _clientCartFacad.GetUserCart.Execute(model.UserName).Result.Data.CartId;
-                CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
-                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
-                if (result.IsNotAllowed)
+                try
                 {
-                    ViewBag.LoginError = "نام کاربری یا رمز عبور اشتباهست.";
-                    return ViewComponent("Login");
-                }
+                    int cartId;
+                    cartId = _clientCartFacad.GetUserCart.Execute(model.UserName).Result.Data.CartId;
+                    CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
+                    var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+                    if (result.IsNotAllowed)
+                    {
+                        ViewBag.LoginError = "نام کاربری یا رمز عبور اشتباهست.";
+                        return ViewComponent("Login");
+                    }
 
-                if (result.Succeeded)
+                    if (result.Succeeded)
+                    {
+                        if (model.ReturnUrl == "" || model.ReturnUrl == null)
+                            return Redirect("/Admin");
+                        return Redirect(model.ReturnUrl);
+                    }
+                }
+                catch (Exception ex)
                 {
-                    if (model.ReturnUrl == "" || model.ReturnUrl == null)
-                        return Redirect("/Admin");
-                    return Redirect(model.ReturnUrl);
+                    return StatusCode(500);
                 }
             }
-
-
-            return Redirect("/");
+            return Redirect("/Admin/Login");
         }
 
         [Route("Admin/EditUserInfo")]
@@ -121,7 +131,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
         [Route("Admin/EditUserInfo")]
         [HttpPost]
-        public IActionResult EditUserInfo(string userName, string name, string family, string phoneNumber, string email , Microsoft.AspNetCore.Http.IFormFile image)
+        public IActionResult EditUserInfo(string userName, string name, string family, string phoneNumber, string email, Microsoft.AspNetCore.Http.IFormFile image)
         {
             if (_signInManager.IsSignedIn(User))
             {
@@ -162,7 +172,8 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult ResetPassword(string currentPassword, string newPassword)
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
-            if(user != null) {
+            if (user != null)
+            {
                 var result = _userManager.ChangePasswordAsync(user, currentPassword, newPassword).Result;
 
                 if (result.Succeeded)

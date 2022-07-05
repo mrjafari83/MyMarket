@@ -13,7 +13,7 @@ namespace RabbitMQ.Excel
 {
     public class GetExcel : IGetExcel
     {
-        public string GetProductDetails<Type>(List<Type> source, string address, string sheetName)
+        public string GetExcelFile<Type>(List<Type> source, string address, string sheetName)
        {
             if(source != null)
             {

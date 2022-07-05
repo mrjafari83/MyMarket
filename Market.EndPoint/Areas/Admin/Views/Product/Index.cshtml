@@ -1,7 +1,7 @@
 ﻿@using Application.Services.Admin.Products.Queries.GetAllProducts
 @using Common.Dto
 @using Common.Enums
-@model ResultDto<ResultGetAllProductsDto>
+@model ResultGetAllProductsDto
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Index";
@@ -10,7 +10,7 @@
     int forward = ViewBag.CurrentRow + 1;
 
     List<int> Ids = new List<int>();
-    foreach (var item in Model.Data.Products)
+    foreach (var item in Model.Products)
         Ids.Add(item.Id);
 
     TempData["Ids"] = Ids;
@@ -99,7 +99,7 @@
         </thead>
 
         <tbody id="productTable">
-            @foreach (var item in Model.Data.Products)
+            @foreach (var item in Model.Products)
             {
                 <tr>
                     <td>@item.Name</td>
@@ -128,7 +128,7 @@
                     <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@back&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_right</i></a></li>
                 }
 
-                @for (int i = 1; i <= Model.Data.TotalRows; i++)
+                @for (int i = 1; i <= Model.TotalRows; i++)
                 {
                     if (i == ViewBag.CurrentRow)
                     {
@@ -140,7 +140,7 @@
                     }
                 }
 
-                @if (ViewBag.CurrentRow == Model.Data.TotalRows)
+                @if (ViewBag.CurrentRow == Model.TotalRows)
                 {
                     <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
                 }
@@ -222,4 +222,3 @@
     });
 </script>
 }
-

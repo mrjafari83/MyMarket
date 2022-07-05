@@ -23,7 +23,7 @@ namespace Application.Services.Admin.Excel.Queries.GetAllExcels
 
         public ResultDto<List<GetAllExcelsDto>> Execute()
         {
-            var excels = db.SearchFilter.Select(e=> new GetAllExcelsDto
+            var excels = db.ExcelStatuses.Select(e=> new GetAllExcelsDto
             {
                 FileName = e.FileName,
                 StatusCode = e.Status

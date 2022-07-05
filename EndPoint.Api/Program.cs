@@ -33,6 +33,12 @@ builder.Services.AddScoped<IProductFacad, ProductFacad>();
 builder.Services.AddScoped<IClientCartFacad, ClientCartFacad>();
 MapperConfig(builder.Services);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin",
+        builder => builder.WithOrigins("http://localhost:3618").WithMethods("GET", "POST", "HEAD"));
+});
+
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
 {
     option.Password.RequireLowercase = false;
@@ -52,13 +58,13 @@ builder.Services.AddAuthentication(opt =>
     {
         options.TokenValidationParameters = new TokenValidationParameters()
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ValidIssuer = "Mohammad",
             ValidAudience = "https://localhost:5001",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt").GetChildren().FirstOrDefault(config=> config.Key == "SecretKey").Value)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"].ToString())),
             RequireExpirationTime = true,
             ClockSkew = TimeSpan.Zero,
         };
@@ -108,6 +114,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowOrigin");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -119,7 +127,8 @@ app.Run();
 
 void MapperConfig(IServiceCollection services)
 {
-    var mapperConfig = new MapperConfiguration(mc => {
+    var mapperConfig = new MapperConfiguration(mc =>
+    {
         mc.AddProfile(new ProductProfiler());
         mc.AddProfile(new BlogPageProfiler());
         mc.AddProfile(new CartProfiler());

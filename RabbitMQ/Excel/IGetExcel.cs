@@ -6,6 +6,6 @@ namespace RabbitMQ.Excel
 {
     public interface IGetExcel
     {
-        string GetProductDetails<Type>(List<Type> source, string address,string sheetName);
+        string GetExcelFile<Type>(List<Type> source, string address,string sheetName);
     }
 }

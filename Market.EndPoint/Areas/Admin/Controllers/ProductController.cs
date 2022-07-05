@@ -1,24 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Common.Enums;
-using Common.Classes;
 using Common.ViewModels;
 using Application.Services.Admin.Products.Commands.CreateProduct;
 using Application.Services.Admin.Products.Commands.EditProduct;
-using Application.Services.Admin.Products.Commands.DeleteProduct;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
-using Domain.Entities.Products;
 using Market.EndPoint.Utilities.RabbitMQ;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using System.Net;
+using Newtonsoft.Json;
+using Application.Services.Admin.Products.Queries.GetAllProducts;
+using Common.Utilities;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http;
+using Domain.Entities.User;
+using Microsoft.AspNetCore.Identity;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -26,6 +31,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
     [Authorize(Roles = "Admin,Owner")]
     public class ProductController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IProductFacad _productFacad;
         private readonly IProductCategoryFacad _productCategoryFacad;
         private readonly ICommonCategorisFacad _commonCategorisFacad;
@@ -33,12 +39,17 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly IExcelFacade _excelFacade;
         private readonly ISend _send;
         private readonly IHostingEnvironment _environment;
+        private readonly SaveLogInFile _saveLogInFile;
+        private readonly ILogger<ProductController> _logger;
+        private readonly IOptionFacade _optionFacade;
+        private readonly IConfiguration _configuration;
 
         public ProductController(IProductFacad productFacad
             , IProductCategoryFacad productCategoryFacad
             , ICommonCategorisFacad commonCategorisFacad, IMapper mapper
             , IExcelFacade excelFacade, ISend send
-            , IHostingEnvironment environment)
+            , IHostingEnvironment environment, SaveLogInFile saveLogInFile, ILogger<ProductController> logger
+            , IOptionFacade optionFacade, IConfiguration configuration , UserManager<ApplicationUser> userManager)
         {
             _productFacad = productFacad;
             _productCategoryFacad = productCategoryFacad;
@@ -47,19 +58,65 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _excelFacade = excelFacade;
             _send = send;
             _environment = environment;
+            _saveLogInFile = saveLogInFile;
+            _logger = logger;
+            _optionFacade = optionFacade;
+            _configuration = configuration;
+            _userManager = userManager;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(SearchViewModel model, int currentPage = 1)
+        public async Task<IActionResult> Index(ProducsSearchViewModel model, int currentPage = 1)
         {
-            ViewBag.CurrentRow = currentPage;
-            ViewBag.SearchKey = model.SearchKey;
-            ViewBag.StartPrice = model.StartPrice;
-            ViewBag.EndPrice = model.EndPrice;
-            ViewBag.OrderBy = (int)model.OrderBy;
-            ViewBag.SearchBy = (int)model.SearchBy;
+            try
+            {
+                ViewBag.CurrentRow = currentPage;
+                ViewBag.SearchKey = model.SearchKey;
+                ViewBag.StartPrice = model.StartPrice;
+                ViewBag.EndPrice = model.EndPrice;
+                ViewBag.OrderBy = (int)model.OrderBy;
+                ViewBag.SearchBy = (int)model.SearchBy;
 
-            return View(await _productFacad.GetAllProductsService.Execute(currentPage, 10, model));
+                var address = _configuration["Urls:ApiDomain"] + "/Product?";
+                address += "PageNumber=" + currentPage;
+                if (model.SearchKey != "")
+                    address += "&Search.SearchKey=" + model.SearchKey;
+                if (model.StartPrice != 0)
+                    address += "&Search.StartPrice=" + model.StartPrice;
+                if (model.EndPrice != 0)
+                    address += "&Search.EndPrice=" + model.EndPrice;
+
+                address += "&Search.OrderBy=" + (int)model.OrderBy + "&Search.SearchBy=" + (int)model.SearchBy;
+
+                try
+                {
+                    var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    HttpClient client = new HttpClient();
+                    var values = new Dictionary<string, string>
+                    {
+                        { "UserName", user.UserName },
+                        { "Password", user.PasswordHash }
+                    };
+                    var content = new FormUrlEncodedContent(values);
+                    var response = await client.PostAsync(_configuration["Urls:ApiDomain"]+"/Authantication/Login", content);
+                    var token = await response.Content.ReadAsStringAsync();
+
+                    var webClient = new WebClient();
+                    webClient.Headers.Add("Authorization", "Bearer " + token);
+                    var json = webClient.DownloadString(address);
+                    var product = JsonConvert.DeserializeObject<ResultGetAllProductsDto>(json);
+                    return View(product);
+                }
+                catch
+                {
+                    return Redirect("/Admin/Login");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest();
+            }
         }
 
         [HttpGet]
@@ -151,7 +208,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateExcel(SearchViewModel model)
+        public IActionResult CreateExcel(ProducsSearchViewModel model)
         {
             TempData["SearchKey"] = model.SearchKey;
             TempData["StartPrice"] = model.StartPrice;
@@ -165,40 +222,50 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateExcelConfirmed()
         {
-            var orderBy = TempData["OrderBy"] switch
+            try
             {
-                0 => Enums.PagesFilter.Newest,
-                1 => Enums.PagesFilter.Oldest,
-                2 => Enums.PagesFilter.MostViewed,
-                3 => Enums.PagesFilter.MostSelled,
-                4 => Enums.PagesFilter.LessViewed,
-                5 => Enums.PagesFilter.LessSelled,
-                _ => Enums.PagesFilter.Newest,
-            };
+                var orderBy = TempData["OrderBy"] switch
+                {
+                    0 => Enums.PagesFilter.Newest,
+                    1 => Enums.PagesFilter.Oldest,
+                    2 => Enums.PagesFilter.MostViewed,
+                    3 => Enums.PagesFilter.MostSelled,
+                    4 => Enums.PagesFilter.LessViewed,
+                    5 => Enums.PagesFilter.LessSelled,
+                    _ => Enums.PagesFilter.Newest,
+                };
 
-            var searchBy = TempData["SearchBy"] switch
+                var searchBy = TempData["SearchBy"] switch
+                {
+                    0 => Enums.PageFilterCategory.Name,
+                    1 => Enums.PageFilterCategory.Brand,
+                    2 => Enums.PageFilterCategory.CategoryName,
+                    _ => Enums.PageFilterCategory.Name
+                };
+
+                var model = new ProducsSearchViewModel
+                {
+                    SearchKey = TempData["SearchKey"] == null ? "" : TempData["SearchKey"].ToString(),
+                    StartPrice = TempData["StartPrice"] == null ? 0 : (int)TempData["StartPrice"],
+                    EndPrice = TempData["EndPrice"] == null ? 0 : (int)TempData["EndPrice"],
+                    OrderBy = orderBy,
+                    SearchBy = searchBy
+                };
+
+                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.Product);
+                var searchId = searchFilter.Data;
+
+                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
+                int excelId = excelKey.Data;
+
+                _send.SendToCreateExcel(excelId, searchId);
+
+                return Redirect("/Admin/Product");
+            }
+            catch (Exception ex)
             {
-                0 => Enums.PageFilterCategory.Name,
-                1 => Enums.PageFilterCategory.Brand,
-                2 => Enums.PageFilterCategory.CategoryName,
-                _=> Enums.PageFilterCategory.Name
-            };
-
-            var model = new SearchViewModel
-            {
-                SearchKey = TempData["SearchKey"] == null ? "" : TempData["SearchKey"].ToString(),
-                StartPrice = TempData["StartPrice"]==null ? 0 : (int)TempData["StartPrice"],
-                EndPrice = TempData["EndPrice"] == null ? 0 : (int)TempData["EndPrice"],
-                OrderBy = orderBy,
-                SearchBy = searchBy
-            };
-
-            var entity = await _excelFacade.CreateExcelKey.Execute(model);
-            int id = entity.Data;
-
-            _send.SendToCreateExcel(id);
-
-            return Redirect("/Admin/Product");
+                return StatusCode(500);
+            }
         }
 
         [HttpGet]
@@ -229,4 +296,9 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
     }
 
+    public class Sample
+    {
+        public string searchKey { get; set; }
+        public Enums.PagesFilter orderBy { get; set; }
+    }
 }
