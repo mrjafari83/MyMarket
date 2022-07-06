@@ -167,7 +167,7 @@ namespace EndPoint.Api.Controllers
                 issuer: "Mohammad",
                 audience: "https://localhost:5001",
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(6),
+                expires: DateTime.UtcNow.AddHours(12),
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);

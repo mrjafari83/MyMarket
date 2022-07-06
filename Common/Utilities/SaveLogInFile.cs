@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,30 +18,14 @@ namespace Common.Utilities
             _environment = environment;
         }
 
-        public void InformationLog(string message)
+        public void Log(LogLevel logLevel, string message, HttpContext context)
         {
-            SaveLog("InformationLogs.txt" , message);
-        }
-        public void WarningLog(string message)
-        {
-            SaveLog("WarningLogs.txt", message);
-        }
-        public void ErrorLog(string message)
-        {
-            SaveLog("ErrorLogs.txt", message);
-        }
-        public void CriticalLog(string message)
-        {
-            SaveLog("CriticalLogs.txt", message);
-        }
-
-        private void SaveLog(string fileName , string message)
-        {
-            var address = _environment.WebRootPath + @"\Logs\" + fileName;
+            var address = _environment.WebRootPath + @"\Logs\Log_" + DateTime.Now.ToString("yyyy_M_d") + ".txt";
+            message = $"[{logLevel}] _ " + DateTime.Now.ToString("G") + " _ " + context.Request.Path + context.Request.QueryString + " _ Message is : " + message;
 
             if (File.Exists(address))
             {
-                using (var writer = new StreamWriter(address , true))
+                using (var writer = new StreamWriter(address, true))
                     writer.WriteLine(message);
             }
             else

@@ -42,7 +42,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
                 product.Category = await db.ProductCategories.FindAsync(entry.Product.CategoryId);
             }
 
-            if (entry.Images != null)
+            if (entry.Images.Count() != 0)
             {
                 DeleteImages(product.Images.ToList());
                 await AddImages(product, entry.Images);

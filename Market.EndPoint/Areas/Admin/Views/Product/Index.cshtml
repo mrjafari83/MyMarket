@@ -9,11 +9,7 @@
     int back = ViewBag.CurrentRow - 1;
     int forward = ViewBag.CurrentRow + 1;
 
-    List<int> Ids = new List<int>();
-    foreach (var item in Model.Products)
-        Ids.Add(item.Id);
-
-    TempData["Ids"] = Ids;
+    var message = ViewBag.ErrorMessage;
 }
 
 <style>
@@ -99,18 +95,29 @@
         </thead>
 
         <tbody id="productTable">
-            @foreach (var item in Model.Products)
+            @if (Model != null)
+            {
+                @if (Model.Products.Count() != 0)
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.Brand</td>
+                            <td>@item.VisitNumber</td>
+                            <td>
+                                <a style="width:45%;background-color:#d1ac12" class="waves-effect waves-light btn modal-trigger" href="/Admin/Product/Edit/@item.Id">ویرایش</a>
+                                <a style="width:45%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/Product/Delete/@item.Id">حذف</a>
+                            </td>
+                            <td hidden>@item.Id</td>
+                        </tr>
+                    }
+
+            }
+            else
             {
                 <tr>
-                    <td>@item.Name</td>
-                    <td>@item.CategoryName</td>
-                    <td>@item.Brand</td>
-                    <td>@item.VisitNumber</td>
-                    <td>
-                        <a style="width:45%;background-color:#d1ac12" class="waves-effect waves-light btn modal-trigger" href="/Admin/Product/Edit/@item.Id">ویرایش</a>
-                        <a style="width:45%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/Product/Delete/@item.Id">حذف</a>
-                    </td>
-                    <td hidden>@item.Id</td>
+                    <td>موردی یافت نشد.</td>
                 </tr>
             }
         </tbody>
@@ -119,35 +126,38 @@
     <div style="margin-top:2% ; text-align:center">
         <div class="pagination">
             <ul>
-                @if (ViewBag.CurrentRow == 1)
-                {
-                    <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
-                }
-                else
-                {
-                    <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@back&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_right</i></a></li>
-                }
-
-                @for (int i = 1; i <= Model.TotalRows; i++)
-                {
-                    if (i == ViewBag.CurrentRow)
+                @if (Model != null)
+                    @if (ViewBag.CurrentRow == 1)
                     {
-                        <li class="active"><a href="/Admin/Product/Index?currentPage=@i&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy">@i</a></li>
+                        <li class="disabled"><a href=""><i class="material-icons">chevron_right</i></a></li>
                     }
                     else
                     {
-                        <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@i&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy">@i</a></li>
+                        <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@back&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_right</i></a></li>
                     }
-                }
 
-                @if (ViewBag.CurrentRow == Model.TotalRows)
-                {
-                    <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
-                }
-                else
-                {
-                    <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@forward&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_left</i></a></li>
-                }
+                @if (Model != null)
+                    @for (int i = 1; i <= Model.TotalRows; i++)
+                    {
+                        if (i == ViewBag.CurrentRow)
+                        {
+                            <li class="active"><a href="/Admin/Product/Index?currentPage=@i&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy">@i</a></li>
+                        }
+                        else
+                        {
+                            <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@i&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy">@i</a></li>
+                        }
+                    }
+
+                @if (Model != null)
+                    @if (ViewBag.CurrentRow == Model.TotalRows)
+                    {
+                        <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+                    }
+                    else
+                    {
+                        <li class="waves-effect"><a href="/Admin/Product/Index?currentPage=@forward&searchKey=@ViewBag.SearchKey&searchBy=@ViewBag.SearchKey&startPrice=@ViewBag.StartPrice&endPrice=@ViewBag.EndPrice&orderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_left</i></a></li>
+                    }
 
             </ul>
         </div> <!-- /pagination -->
@@ -165,6 +175,12 @@
 @section Scripts{
 <script>
     $(document).ready(function(){
+        debugger;
+        var errorMessage = "@message";
+        ShowAlertByStatusCode(errorMessage);
+
+        //swal("خطا", "خطایی رخ داده است. لطفا مجددا امتحان کنید.", "warning")
+        //   .then((value) => {});
 
         $("#btnSearch").click(function(e){
              var formdata = new FormData();
@@ -218,6 +234,29 @@
                 $("#body").html(result);
             });
         });
+
+        function ShowAlertByStatusCode(statusCode) {
+        if (statusCode == 1) {
+            swal("خطا", "خطایی رخ داده است.", "warning")
+                .then((value) => { });
+        }
+        if (statusCode == 2) {
+            swal("خطا", "سرویس در دسترس نیست.", "warning")
+                .then((value) => { });
+        }
+        if (statusCode == 3) {
+            swal("خطا", "اطلاعات وارد شده معتبر نمیباشد.", "warning")
+                .then((value) => { });
+        }
+        if (statusCode == 4) {
+            swal("خطا", "کوکی های شما در دسترس نمیباشد.", "warning")
+                .then((value) => { });
+        }
+        if (statusCode == 5) {
+            swal("خطا", "فایل مورد نظر یافت نشد.", "warning")
+                .then((value) => { });
+        }
+    }
 
     });
 </script>

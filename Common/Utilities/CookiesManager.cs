@@ -16,7 +16,7 @@ namespace Common.Utilities
 
         public static void AddCookieHttpOnly(HttpContext context, string token, string value)
         {
-            context.Response.Cookies.Append(token, value , new CookieOptions { HttpOnly = true});
+            context.Response.Cookies.Append(token, value , new CookieOptions { HttpOnly = true });
         }
 
         public static string GetCookieValue(HttpContext context , string token)

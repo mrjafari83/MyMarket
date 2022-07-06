@@ -33,8 +33,8 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("/Admin/NotFound")]
-        public IActionResult NotFound()
+        [Route("/Admin/Error")]
+        public IActionResult Error()
         {
             return View();
         }

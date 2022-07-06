@@ -1,6 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Domain.Entities.User
 @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> userManager
+@{
+    bool isAdmin = false;
+    bool isOwner = false;
+    if (SignInManager.IsSignedIn(User))
+    {
+        var user = userManager.FindByNameAsync(User.Identity.Name).Result;
+        if (user != null)
+        {
+            isAdmin = userManager.IsInRoleAsync(user, "Admin").Result;
+            isOwner = userManager.IsInRoleAsync(user, "Owner").Result;
+
+        }
+    }
+}
 
 <!DOCTYPE html>
 <!--[if lt IE 8]>      <html class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
@@ -99,9 +114,18 @@
                                     }
                                     @if (SignInManager.IsSignedIn(User))
                                     {
-                                        <li>
-                                            <a href="/Dashboard" role="button" data-toggle="modal">داشبورد</a>
-                                        </li>
+                                        @if (isAdmin || isOwner)
+                                        {
+                                            <li>
+                                                <a href="/Admin" role="button" data-toggle="modal">پنل ادمین</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a href="/Dashboard" role="button" data-toggle="modal">داشبورد</a>
+                                            </li>
+                                        }
                                         <li>
                                             <a href="/Logout?returnUrl=@returnUrl">خروج</a>
                                         </li>
@@ -348,7 +372,7 @@
                         location.reload();
                     },
                 );
-            }); 
+            });
         });
     </script>
 </body>

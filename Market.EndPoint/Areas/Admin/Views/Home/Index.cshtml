@@ -1,9 +1,8 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
 <div class="row">
     @await Component.InvokeAsync("BestSellingProductsInIndex")
     <div class="col l3">
@@ -48,7 +47,6 @@
         </div>
     </div>
 </div>
-
 @await Component.InvokeAsync("CartPayingsInIndex")
 
 <div class="row">
@@ -58,38 +56,37 @@
 
 @section scripts
 {
-    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="/Admin/assets/libs/sweetalert2/sweet-alert.init.js"></script>
+<script>
+    $(document).ready(function () {
+        //swal("خطا", "خطایی رخ داده است. لطفا مجددا امتحان کنید.", "warning")
+        //    .then((value) => {});
 
-    <script src="~/js/Chart.js"></script>
-    <script>
-        $(document).ready(function () {
-            $.get("/Admin/Cart/GetAllPaysPrice",
+        $.get("/Admin/Cart/GetAllPaysPrice",
+            function (data, textStatus, jqXHR) {
+                $("#AllPaysPrice").text(data + " تومان");
+            },
+        );
+
+        $.get("/Admin/Cart/GetNotSendedPrice",
+            function (data, textStatus, jqXHR) {
+                $("#notSendedPrice").text(data + " تومان");
+            },
+        );
+
+        $.get("/Admin/Cart/GetNotSendedCount",
+            function (data, textStatus, jqXHR) {
+                $("#notSendedCartPayings").text(data + " عدد");
+            },
+        );
+
+        function GetPriceByDate(day) {
+            $.get("/Admin/Cart/GetPriceByDate", { dayAgo: day },
                 function (data, textStatus, jqXHR) {
-                    $("#AllPaysPrice").text(data + " تومان");
+                    return data;
                 },
+                "json"
             );
-
-            $.get("/Admin/Cart/GetNotSendedPrice",
-                function (data, textStatus, jqXHR) {
-                    $("#notSendedPrice").text(data + " تومان");
-                },
-            );
-
-            $.get("/Admin/Cart/GetNotSendedCount",
-                function (data, textStatus, jqXHR) {
-                    $("#notSendedCartPayings").text(data + " عدد");
-                },
-            );
-
-            function GetPriceByDate(day) {
-                $.get("/Admin/Cart/GetPriceByDate", { dayAgo: day },
-                    function (data, textStatus, jqXHR) {
-                        return data;
-                    },
-                    "json"
-                );
-            }
-        });
-    </script>
+        }
+    });
+</script>
 }

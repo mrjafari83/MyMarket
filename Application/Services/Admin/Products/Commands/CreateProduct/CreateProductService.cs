@@ -23,22 +23,23 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
         private readonly IHostingEnvironment _environment;
         private readonly IMapper _mapper;
         public CreateProductService(IDataBaseContext context
-            , IHostingEnvironment environment , IMapper mapper)
+            , IHostingEnvironment environment, IMapper mapper)
         {
             db = context;
             _environment = environment;
-            _mapper = mapper;   
+            _mapper = mapper;
         }
 
-        public async Task<ResultDto<int>> Execute(CreateProductServiceDto entry)
+        public async Task<ResultDto<int>> Execute(CreateProductServiceDto entry, List<IFormFile> images = null)
         {
-            var product = new Product { Name = entry.Name , Brand = entry.Brand,ShortDescription = entry.ShortDescription, Description = entry.Description,CategoryId = entry.CategoryId};
+            var product = new Product { Name = entry.Name, Brand = entry.Brand, ShortDescription = entry.ShortDescription, Description = entry.Description, CategoryId = entry.CategoryId };
 
             await SetColors(product, entry.Colors);
             await SetSizes(product, entry.Sizes);
 
             //set product options in database
-            //db.ProductImages.AddRange(await AddImages(product, entry.Images));
+            if (images != null)
+                db.ProductImages.AddRange(await AddImages(product, images));
             db.ProductKeywords.AddRange(AddKeywords(product, entry.Keywords));
             db.ProductFutures.AddRange(AddFeature(product, entry.Features));
             await SetInventoryAndPrice(product, entry.InventoryAndPrices);
@@ -134,11 +135,11 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             }
         }
 
-        private async Task SetInventoryAndPrice(Product product , List<InventoryAndPriceViewModelCreate> inventoryAndPrices)
+        private async Task SetInventoryAndPrice(Product product, List<InventoryAndPriceViewModelCreate> inventoryAndPrices)
         {
-            if(inventoryAndPrices != null)
+            if (inventoryAndPrices != null)
             {
-                foreach(var item in inventoryAndPrices)
+                foreach (var item in inventoryAndPrices)
                 {
                     var addingItem = _mapper.Map<InventoryAndPriceViewModelCreate, ProductInventory>(item);
                     addingItem.Product = product;

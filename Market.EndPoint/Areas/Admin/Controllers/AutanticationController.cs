@@ -82,6 +82,8 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [AllowAnonymous]
         public IActionResult Login(string ReturnUrl = "")
         {
+            ViewBag.ErrorMessage = CookiesManager.GetCookieValue(HttpContext, "AuthMessage").ToString();
+
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }

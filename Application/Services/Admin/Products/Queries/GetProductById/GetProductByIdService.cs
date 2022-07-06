@@ -21,7 +21,7 @@ namespace Application.Services.Admin.Products.Queries.GetProductById
 
         public async Task<ResultDto<GetProductByIdDto>> Execute(int id)
         {
-            var product = _mapper.Map<GetProductByIdDto>(await db.Products.Include(p => p.Features).Include(p => p.Keywords).Include(p => p.Inventories)
+            var product = _mapper.Map<GetProductByIdDto>(await db.Products.Include(p=> p.Category).Include(p => p.Features).Include(p => p.Keywords).Include(p => p.Inventories)
                 .Include(p => p.Colors).ThenInclude(c => c.Color).Include(p => p.Sizes).ThenInclude(p => p.Size).FirstOrDefaultAsync(p => p.Id == id));
 
             if (product != null)

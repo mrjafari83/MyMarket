@@ -83,7 +83,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
                 return View(userViewModel);
             }
-            return Redirect("/Admin/NotFound");
+            return Redirect("/Admin/Error");
         }
 
         [HttpPost]

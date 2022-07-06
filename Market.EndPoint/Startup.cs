@@ -68,6 +68,7 @@ namespace Market.EndPoint
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddMvc();
+            services.AddMemoryCache();
 
             services.AddAuthentication(option =>
             {

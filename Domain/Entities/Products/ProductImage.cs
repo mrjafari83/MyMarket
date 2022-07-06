@@ -9,7 +9,7 @@ namespace Domain.Entities.Products
     public class ProductImage
     {
         public int Id { get; set; }
-        public string Src { get; set; }
+        public string Src { get; set; } = "/Images/DefaultProduct.PNG";
 
         public virtual Product Product { get; set; }
     }

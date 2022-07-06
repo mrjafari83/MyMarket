@@ -71,7 +71,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             if (category.IsSuccess)
                 return PartialView(category.Data);
             else
-                return Redirect("/Admin/NotFound");
+                return Redirect("/Admin/Error");
         }
 
         [HttpPost]
@@ -93,7 +93,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             if (category.IsSuccess)
                 return PartialView(category.Data);
             else
-                return Redirect("/Admin/NotFound");
+                return Redirect("/Admin/Error");
         }
 
         [HttpPost]
