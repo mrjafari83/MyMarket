@@ -42,7 +42,6 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly ISend _send;
         private readonly IHostingEnvironment _environment;
         private readonly SaveLogInFile _saveLogInFile;
-        private readonly ILogger<ProductController> _logger;
         private readonly IOptionFacade _optionFacade;
         private readonly IConfiguration _configuration;
         private readonly IMemoryCache _memoryCache;
@@ -51,7 +50,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             , IProductCategoryFacad productCategoryFacad
             , ICommonCategorisFacad commonCategorisFacad, IMapper mapper
             , IExcelFacade excelFacade, ISend send
-            , IHostingEnvironment environment, SaveLogInFile saveLogInFile, ILogger<ProductController> logger
+            , IHostingEnvironment environment, SaveLogInFile saveLogInFile
             , IOptionFacade optionFacade, IConfiguration configuration, UserManager<ApplicationUser> userManager, IMemoryCache memoryCache)
         {
             _productFacad = productFacad;
@@ -62,7 +61,6 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _send = send;
             _environment = environment;
             _saveLogInFile = saveLogInFile;
-            _logger = logger;
             _optionFacade = optionFacade;
             _configuration = configuration;
             _userManager = userManager;
@@ -127,7 +125,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                 }
 
                 _saveLogInFile.Log(LogLevel.Error, HttpContext.Response.StatusCode.ToString(), HttpContext);
-                ViewBag.ErrorMessage = 1;
+                ViewBag.ErrorMessage = "خطایی رخ داده است.";
                 return View();
             }
             catch (Exception ex)
@@ -168,14 +166,12 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                     Colors = colors,
                     Sizes = sizes,
                     Features = features,
-                    //Images = Images,
                     InventoryAndPrices = inventoryAndPrice
                 }, Images);
                 return Json(true);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
                 _saveLogInFile.Log(LogLevel.Error, ex.Message, HttpContext);
                 TempData["ErrorStatusCode"] = 500;
                 TempData["ErrorMessage"] = "خطایی رخ داده است.";
@@ -225,7 +221,6 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
                 _saveLogInFile.Log(LogLevel.Error, ex.Message, HttpContext);
                 TempData["ErrorStatusCode"] = 500;
                 TempData["ErrorMessage"] = "خطایی رخ داده است.";
@@ -310,7 +305,6 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
                 _saveLogInFile.Log(LogLevel.Error, ex.Message, HttpContext);
                 TempData["ErrorStatusCode"] = 500;
                 TempData["ErrorMessage"] = "خطایی رخ داده است.";
@@ -348,7 +342,6 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
                 _saveLogInFile.Log(LogLevel.Error, ex.Message, HttpContext);
                 TempData["ErrorStatusCode"] = 500;
                 TempData["ErrorMessage"] = "خطایی رخ داده است.";
