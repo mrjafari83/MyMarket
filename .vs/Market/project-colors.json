@@ -60,7 +60,12 @@
       "ProjectGuid": "ec1e9285-44f3-4c41-a15c-79e041cbea1a",
       "DisplayName": "RabbitMQ_Test",
       "ColorIndex": 10
+    },
+    "3fe8acf0-ff9e-4048-9569-110757218f6f": {
+      "ProjectGuid": "3fe8acf0-ff9e-4048-9569-110757218f6f",
+      "DisplayName": "Market_Integration_Tests",
+      "ColorIndex": 11
     }
   },
-  "NextColorIndex": 11
+  "NextColorIndex": 12
 }

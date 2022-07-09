@@ -26,6 +26,7 @@ using Domain.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq;
+using Application.Interfaces.Context;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -45,8 +46,9 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly IOptionFacade _optionFacade;
         private readonly IConfiguration _configuration;
         private readonly IMemoryCache _memoryCache;
+        IDataBaseContext db;
 
-        public ProductController(IProductFacad productFacad
+        public ProductController(IProductFacad productFacad,IDataBaseContext context
             , IProductCategoryFacad productCategoryFacad
             , ICommonCategorisFacad commonCategorisFacad, IMapper mapper
             , IExcelFacade excelFacade, ISend send
@@ -65,6 +67,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _configuration = configuration;
             _userManager = userManager;
             _memoryCache = memoryCache;
+            db = context;
         }
 
         [HttpGet]
@@ -91,6 +94,11 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
             try
             {
+                var s = await _userManager.CreateAsync(new ApplicationUser
+                {
+                    UserName = "Mohammad",
+                    Email = "Mohammad@gmail.com"
+                }, "Mohammad.1383");
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 HttpClient client = new HttpClient();
                 if (_memoryCache.Get<string>(User.Identity.Name + "_JwtToken") == null)
@@ -130,7 +138,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _saveLogInFile.Log(LogLevel.Error, ex.Message, HttpContext);
+                _saveLogInFile.Log(LogLevel.Error, ex.Message + ex.Data, HttpContext);
                 ViewBag.ErrorMessage = WebErrorHandler.GetStatusCodeError(ex);
                 return View();
             }
