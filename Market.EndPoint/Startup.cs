@@ -31,6 +31,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Common.Utilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace Market.EndPoint
 {
@@ -60,11 +61,6 @@ namespace Market.EndPoint
             optons.UseSqlServer(@"Data Source= .; Initial Catalog= Market_DB; Integrated Security= False;User Id=sa;Password=123;")
             );
 
-            services.AddLogging(options=>
-            {
-                options.AddDebug();
-                options.AddConfiguration(Configuration);
-            });
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddMvc();
