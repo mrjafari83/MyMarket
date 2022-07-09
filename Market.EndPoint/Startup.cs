@@ -96,7 +96,6 @@ namespace Market.EndPoint
 
             services.ConfigureApplicationCookie(option =>
             {
-                option.AccessDeniedPath = "/Admin/Login";
                 option.LoginPath = "/Login";
                 option.Cookie.HttpOnly = true;
             });

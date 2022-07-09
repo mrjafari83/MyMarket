@@ -75,8 +75,8 @@ namespace Market.EndPoint.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = "/")
         {
-            if (signInManager.IsSignedIn(User))
-                return Redirect("/");
+            ViewBag.ErrorMessage = CookiesManager.GetCookieValue(HttpContext, "AuthMessage").ToString();
+            HttpContext.Response.Cookies.Delete("AuthMessage");
 
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -86,30 +86,26 @@ namespace Market.EndPoint.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViwModel user)
         {
-            if (signInManager.IsSignedIn(User))
-                return Redirect("/");
-
             var dbUser = userManager.FindByNameAsync(user.UserName).Result;
             if (dbUser != null)
             {
                 var userRole = userManager.GetRolesAsync(dbUser).Result.FirstOrDefault();
-                if (userRole != null && userRole == RoleNames.Customer)
-                {
-                    int cartId;
-                    cartId = _clientCartFacad.GetUserCart.Execute(user.UserName).Result.Data.CartId;
-                    CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
-                    var result = await signInManager.PasswordSignInAsync(user.UserName, user.Password, user.RememberMe, true);
-                    if (result.IsNotAllowed)
-                    {
-                        ViewBag.LoginError = "نام کاربری یا رمز عبور اشتباهست.";
-                        return ViewComponent("Login");
-                    }
 
-                    if (result.Succeeded)
-                    {
-                        return Json(true);
-                    }
+                int cartId;
+                cartId = _clientCartFacad.GetUserCart.Execute(user.UserName).Result.Data.CartId;
+                CookiesManager.AddCookie(HttpContext, "CartId", cartId.ToString());
+                var result = await signInManager.PasswordSignInAsync(user.UserName, user.Password, user.RememberMe, true);
+                if (result.IsNotAllowed)
+                {
+                    ViewBag.LoginError = "نام کاربری یا رمز عبور اشتباهست.";
+                    return ViewComponent("Login");
                 }
+
+                if (result.Succeeded)
+                {
+                    return Json(true);
+                }
+
             }
 
             return Json(false);
@@ -162,7 +158,7 @@ namespace Market.EndPoint.Controllers
         public async Task<IActionResult> EditUserInfo(EditUserViewModel model)
         {
             var user = userManager.FindByNameAsync(User.Identity.Name).Result;
-            if(user != null)
+            if (user != null)
             {
                 user.Name = model.Name;
                 user.Family = model.Family;
@@ -198,7 +194,7 @@ namespace Market.EndPoint.Controllers
         public async Task<IActionResult> ResetPassword(string currentPassword = "", string newPassword = "")
         {
             var user = userManager.FindByNameAsync(User.Identity.Name).Result;
-            if(user != null)
+            if (user != null)
             {
                 var result = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
 

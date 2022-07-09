@@ -56,6 +56,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Market/images/apple-touch/72.png">
     <link rel="apple-touch-icon-precomposed" href="/Market/images/apple-touch/57.png">
     <link rel="shortcut icon" href="/Market/images/apple-touch/57.png">
+
+    <link href="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body class="">
@@ -127,7 +129,7 @@
                                             </li>
                                         }
                                         <li>
-                                            <a href="/Logout?returnUrl=@returnUrl">خروج</a>
+                                            <a id="btnLogOut">خروج</a>
                                         </li>
                                     }
                                     else
@@ -360,6 +362,9 @@
 
     <script src="~/js/jQuery.Validation.1.11.1/Content/Scripts/jquery.validate.js"></script>
     <script src="~/js/Microsoft.jQuery.Unobtrusive.Validation.3.2.3/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="/Admin/assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="/Admin/assets/libs/sweetalert2/sweet-alert.init.js"></script>
     @RenderSection("scripts", false)
 
     <script>
@@ -372,6 +377,15 @@
                         location.reload();
                     },
                 );
+            });
+
+            $("#btnLogOut").click(function (e) {
+                debugger;
+                swal("هشدار", "آیا از حساب خود خارج میشوید؟" , "warning")
+                .then((value) =>
+                {
+                    window.location.href = "/Logout?returnUrl=@returnUrl";
+                });
             });
         });
     </script>

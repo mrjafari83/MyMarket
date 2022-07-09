@@ -31,7 +31,7 @@ using Application.Interfaces.Context;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,Owner")]
+    //[Authorize(Roles = "Admin,Owner")]
     public class ProductController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -94,11 +94,6 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
             try
             {
-                var s = await _userManager.CreateAsync(new ApplicationUser
-                {
-                    UserName = "Mohammad",
-                    Email = "Mohammad@gmail.com"
-                }, "Mohammad.1383");
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 HttpClient client = new HttpClient();
                 if (_memoryCache.Get<string>(User.Identity.Name + "_JwtToken") == null)
@@ -126,10 +121,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                     var product = JsonConvert.DeserializeObject<ResultGetAllProductsDto>(await json.Content.ReadAsStringAsync());
                     return View(product);
                 }
-                if (httpResult.StatusCode == HttpStatusCode.Unauthorized)
+                if (httpResult.StatusCode == HttpStatusCode.Unauthorized || httpResult.StatusCode == HttpStatusCode.Forbidden)
                 {
                     CookiesManager.AddCookie(HttpContext, "AuthMessage", "شما به بخش محصولات دسترسی ندارید.لطفا با حساب دیگری وارد شوید.");
-                    return Redirect("/Admin/Login");
+                    return Redirect("/Login");
                 }
 
                 _saveLogInFile.Log(LogLevel.Error, HttpContext.Response.StatusCode.ToString(), HttpContext);

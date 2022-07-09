@@ -127,6 +127,12 @@ namespace Persistance.Context
                     Name = RoleNames.Owner,
                     NormalizedName = "OWNER"
                 });
+
+                builder.Entity<ApplicationUser>().HasData(new ApplicationUser
+                {
+                    UserName = "Management",
+                    PasswordHash = "AQAAAAEAACcQAAAAEOeY3MRi9YetlUXcs10LY6ijsvl9KOBXk8hCPhOcHYeEdNHcjCWgoR2awxfbbypTSg=="
+                });
             }
         }
     }

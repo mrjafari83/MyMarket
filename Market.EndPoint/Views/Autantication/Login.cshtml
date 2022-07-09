@@ -93,4 +93,11 @@
             });
         });
     </script>
+        <script>
+        var message = "@ViewBag.ErrorMessage";
+        if(message != ""&& message != undefined && message != null){
+            swal("خطا", message , "warning")
+                .then((value) => { });
+        }
+    </script>
 }
