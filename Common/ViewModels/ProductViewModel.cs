@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +13,5 @@ namespace Common.ViewModels
         public string ShortDescription { get; set; } = "";
         public string Description { get; set; } = "";
         public int CategoryId { get; set; } = 1383;
-        //public List<IFormFile> Images { get; set; } = new List<IFormFile> { };
     }
 }

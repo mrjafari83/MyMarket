@@ -69,10 +69,10 @@
                 <!--  ==========  -->
                 <div class="row popup-products">
                     <div id="isotopeContainer" class="isotope-container isotope" style="position: relative; overflow: hidden; height: 945px;">
-                    @if (productCount == 0)
-            {
-                <h4 dir="rtl" style="text-align:right;margin-right:2%">هیچ محصولی یافت نشد.</h4>
-            }
+                        @if (productCount == 0)
+                        {
+                            <h4 dir="rtl" style="text-align:right;margin-right:2%">هیچ محصولی یافت نشد.</h4>
+                        }
                         @for (int i = 0; i < productCount; i++)
                         {
                             <!--  = Single Product =  -->
@@ -143,3 +143,12 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+<script>
+    if(errorMessage != "" && errorMessage!= undefined && errorMessage != null){
+        swal("خطا", errorMessage, "warning")
+            .then((value) => { });
+    }
+</script>
+}

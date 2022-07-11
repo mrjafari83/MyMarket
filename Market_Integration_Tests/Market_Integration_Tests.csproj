@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\EndPoint.Api\EndPoint.Api.csproj" />
     <ProjectReference Include="..\Market.EndPoint\Market.EndPoint.csproj" />
     <ProjectReference Include="..\RabbitMQ\RabbitMQ.csproj" />

@@ -8,6 +8,7 @@ using Application.Interfaces.FacadPatterns.Client;
 using Application.Services.Common.Comment.Commands.CreateComment;
 using Common.ViewModels;
 using Common.Utilities;
+using Market.EndPoint.Models;
 
 namespace Market.EndPoint.Controllers
 {
@@ -18,15 +19,18 @@ namespace Market.EndPoint.Controllers
         ICommonCategorisFacad _commonCategorisFacad;
         IClientCartFacad _clientCartFacad;
         IClientProductFacad _clientProductFacad;
+        SaveLogInFile _saveLogInFile;
 
         public ProductController(ICommonProductFacad commonProductFacad, ICommonCommentFacad commonCommentFacad
-            , ICommonCategorisFacad commonCategorisFacad, IClientCartFacad clientCartFacad , IClientProductFacad clientProductFacad)
+            , ICommonCategorisFacad commonCategorisFacad, IClientCartFacad clientCartFacad, IClientProductFacad clientProductFacad
+            , SaveLogInFile saveLogInFile)
         {
             _commonProductFacad = commonProductFacad;
             _commonCommentFacad = commonCommentFacad;
             _commonCategorisFacad = commonCategorisFacad;
             _clientCartFacad = clientCartFacad;
             _clientProductFacad = clientProductFacad;
+            _saveLogInFile = saveLogInFile;
         }
 
         [Route("Products")]
@@ -52,7 +56,11 @@ namespace Market.EndPoint.Controllers
         [Route("Product")]
         public async Task<IActionResult> ShowProduct(int id)
         {
-            return View(await _commonProductFacad.GetProductById.Execute(id));
+            var product = await _commonProductFacad.GetProductById.Execute(id);
+            if (product.Data != null)
+                return View(product);
+
+            return NotFound();
         }
 
         public IActionResult CreateComment(CommentViewModel comment)
@@ -81,7 +89,7 @@ namespace Market.EndPoint.Controllers
         }
 
         [HttpPost]
-        public async  Task<IActionResult> GetPriceByColorAndSize(string colorName,string sizeName , int productId)
+        public async Task<IActionResult> GetPriceByColorAndSize(string colorName, string sizeName, int productId)
         {
             var price = await _clientProductFacad.GetPriceByColorAndSize.Execute(productId, colorName, sizeName);
             return Json(price.Data);

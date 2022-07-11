@@ -1,0 +1,14 @@
+[Error] _ 7/11/2022 8:28:29 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/11/2022 8:31:13 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=&OrderBy=2 _ Message is : 200
+[Error] _ 7/11/2022 8:31:32 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=&OrderBy=0 _ Message is : 200
+[Error] _ 7/11/2022 8:31:32 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=&OrderBy=0 _ Message is : 200
+[Error] _ 7/11/2022 8:33:13 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=0&OrderBy=2 _ Message is : Cannot add value because header 'Authorization' does not support multiple values.System.Collections.ListDictionaryInternal
+[Error] _ 7/11/2022 8:34:32 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=0&OrderBy=2 _ Message is : 200
+[Error] _ 7/11/2022 8:37:59 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=&OrderBy=2 _ Message is : 200
+[Error] _ 7/11/2022 8:38:21 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=&OrderBy=2 _ Message is : 200
+[Error] _ 7/11/2022 8:38:45 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=&OrderBy=2 _ Message is : 200
+[Error] _ 7/11/2022 9:08:40 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/11/2022 9:09:15 AM _ /Admin/Product/Index?currentPage=1&SearchKey=&SearchBy=0&StartPrice=&EndPrice=&OrderBy=2 _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/11/2022 9:20:20 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/11/2022 9:21:23 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/11/2022 9:28:00 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal

@@ -66,7 +66,7 @@ namespace EndPoint.Api.Controllers
         ///<response code="400">خطایی رخ داده است.</response>
         [HttpPost]
         [Route("Create")]
-        public async Task<IActionResult> Create([FromBody] CreateProductViewModel model)
+        public async Task<IActionResult> Create([FromBody] ViewModels.Products.CreateProductViewModel model)
         {
             var result = await _productFacad.CreateProductService.Execute(_Mapper.Map<CreateProductServiceDto>(model));
 

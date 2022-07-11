@@ -229,11 +229,11 @@
             submitHandler: function () {
                 debugger;
                 var formdata = new FormData();
-                formdata.append("Name", $("#name").val());
-                formdata.append("Brand", $("#brand").val());
-                formdata.append("Description", $("#description").val());
-                formdata.append("ShortDescription", $("#shortDescription").val());
-                formdata.append("CategoryId", $("#categoryId").find("option:selected").val());
+                formdata.append("Product.Name", $("#name").val());
+                formdata.append("Product.Brand", $("#brand").val());
+                formdata.append("Product.Description", $("#description").val());
+                formdata.append("Product.ShortDescription", $("#shortDescription").val());
+                formdata.append("Product.CategoryId", $("#categoryId").find("option:selected").val());
                 var productImages = document.getElementById("images");
                 if (productImages.files.length > 0) {
                     for (var i = 0; i < productImages.files.length; i++) {
@@ -246,7 +246,7 @@
                     };
                 }).get();
                 $.each(Keywords, function (i, val) {
-                    formdata.append('[' + i + '].KeywordValue', val.KeywordValue);
+                    formdata.append('Keywords[' + i + '].KeywordValue', val.KeywordValue);
                 });
                 var colors = $('#colorTable tr').map(function () {
                     return {
@@ -254,7 +254,7 @@
                     };
                 }).get();
                 $.each(colors, function (i, val) {
-                    formdata.append('[' + i + '].Name', val.Name);
+                    formdata.append('Colors[' + i + '].Name', val.Name);
                 });
                 var sizes = $('#sizeTable tr').map(function () {
                     return {
@@ -262,7 +262,7 @@
                     };
                 }).get();
                 $.each(sizes, function (i, val) {
-                    formdata.append('[' + i + '].SizeValue', val.SizeValue);
+                    formdata.append('Sizes[' + i + '].SizeValue', val.SizeValue);
                 });
                 var features = $('#featureTable tr').map(function () {
                     return {
@@ -271,8 +271,8 @@
                     };
                 }).get();
                 $.each(features, function (i, val) {
-                    formdata.append('[' + i + '].Display', val.Display);
-                    formdata.append('[' + i + '].FeatureValue', val.FeatureValue);
+                    formdata.append('Features[' + i + '].Display', val.Display);
+                    formdata.append('Features[' + i + '].FeatureValue', val.FeatureValue);
                 });
 
                 var inventoryAndPrice = $('#inventoryTable tr').map(function () {
@@ -284,10 +284,10 @@
                     };
                 }).get();
                 $.each(inventoryAndPrice, function (i, val) {
-                    formdata.append('[' + i + '].ColorName', val.ColorName);
-                    formdata.append('[' + i + '].SizeName', val.SizeName);
-                    formdata.append('[' + i + '].Inventory', val.Inventory);
-                    formdata.append('[' + i + '].Price', val.Price);
+                    formdata.append('InventoryAndPrice[' + i + '].ColorName', val.ColorName);
+                    formdata.append('InventoryAndPrice[' + i + '].SizeName', val.SizeName);
+                    formdata.append('InventoryAndPrice[' + i + '].Inventory', val.Inventory);
+                    formdata.append('InventoryAndPrice[' + i + '].Price', val.Price);
                 });
 
                 var colorRowsCount = document.getElementById("colorTable").rows.length;

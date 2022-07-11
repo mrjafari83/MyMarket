@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Common.Utilities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using RabbitMQ.Excel;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ namespace RabbitMQ_Test
             for(var i = 0;i<100; i++)
                 samples.Add(new Sample() { Id = random.Next()});
 
-            IGetExcel get = new GetExcel();
+            IGetExcel get = new GetExcel(new Mock<SaveLogInFile>().Object);
             var actual = get.GetExcelFile<Sample>(samples, "/Excel/", "Sample");
 
             Assert.AreNotEqual(actual, "");

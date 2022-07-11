@@ -1,6 +1,7 @@
 ﻿using Application.FacadPatterns.Admin;
 using Application.Interfaces.Context;
 using Application.Interfaces.FacadPatterns.Admin;
+using Common.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Context;
 using RabbitMQ;
@@ -15,6 +16,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddScoped<IGetExcel, GetExcel>();
         services.AddScoped<IExcelFacade, ExcelFacade>();
         services.AddScoped<IOptionFacade, OptionFacade>();
+        services.AddScoped<SaveLogInFile>();
 
         services.AddDbContext<DataBaseContext>(optons =>
             optons.UseSqlServer(@"Data Source= .; Initial Catalog= Market_DB; Integrated Security= False;User Id=sa;Password=123;")

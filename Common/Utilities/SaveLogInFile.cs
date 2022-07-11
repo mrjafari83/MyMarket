@@ -12,15 +12,17 @@ namespace Common.Utilities
 {
     public class SaveLogInFile
     {
-        private readonly IHostingEnvironment _environment;
-        public SaveLogInFile(IHostingEnvironment environment)
+        private readonly string RootPath;
+        public SaveLogInFile()
         {
-            _environment = environment;
+            this.RootPath = Environment.CurrentDirectory;
         }
 
         public void Log(LogLevel logLevel, string message, HttpContext context)
         {
-            var address = _environment.WebRootPath + @"\Logs\Log_" + DateTime.Now.ToString("yyyy_M_d") + ".txt";
+            var folder = RootPath + @"\Logs";
+            var file = "Log_" + DateTime.Now.ToString("yyyy_M_d") + ".txt";
+            var address = Path.Combine(folder, file);
             message = $"[{logLevel}] _ " + DateTime.Now.ToString("G") + " _ " + context.Request.Path + context.Request.QueryString + " _ Message is : " + message;
 
             if (File.Exists(address))
@@ -30,6 +32,34 @@ namespace Common.Utilities
             }
             else
             {
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+                using (var writer = File.CreateText(address))
+                    writer.WriteLine(message);
+
+            }
+        }
+
+        public void Log(LogLevel logLevel, string message, string errorPath)
+        {
+            var folder = RootPath + @"\Logs";
+            var file = "Log_" + DateTime.Now.ToString("yyyy_M_d") + ".txt";
+            var address = Path.Combine(folder, file);
+            message = $"[{logLevel}] _ " + DateTime.Now.ToString("G") + " _ " + errorPath + " _ Message is : " + message;
+
+            if (File.Exists(address))
+            {
+                using (var writer = new StreamWriter(address, true))
+                    writer.WriteLine(message);
+            }
+            else
+            {
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
                 using (var writer = File.CreateText(address))
                     writer.WriteLine(message);
 

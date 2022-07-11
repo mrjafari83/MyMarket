@@ -22,8 +22,10 @@ namespace Common.Utilities
                     return "کوکی های شما در دسترس نیست.";
                 if (exception is DirectoryNotFoundException || exception is FileNotFoundException)
                     return "فایل مرد نظر یافت نشد.";
-                if (exception is ArgumentException || exception is ArgumentNullException || exception is ArgumentOutOfRangeException || exception is NullReferenceException)
+                if (exception is ArgumentException || exception is ArgumentNullException || exception is ArgumentOutOfRangeException)
                     return "اطلاعات وارد شده معتبر نمی باشد.";
+                if(exception is NullReferenceException)
+                    return " موردی یافت نشد.";
             }
 
             return "خطایی رخ داده است.";

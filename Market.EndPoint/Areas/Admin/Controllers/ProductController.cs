@@ -31,7 +31,7 @@ using Application.Interfaces.Context;
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,Owner")]
+    [Authorize(Roles = "Admin,Owner")]
     public class ProductController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -83,7 +83,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
 
             var address = _configuration["Urls:ApiDomain"] + "/Product?";
             address += "PageNumber=" + currentPage;
-            if (model.SearchKey != "")
+            if (model.SearchKey != "" && model.SearchKey != null)
                 address += "&Search.SearchKey=" + model.SearchKey;
             if (model.StartPrice != 0)
                 address += "&Search.StartPrice=" + model.StartPrice;
@@ -152,25 +152,23 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductViewModel request, List<KeywordViewModel> Keywords
-            , List<ColorViewModelCreate> colors, List<SizeViewModel> sizes, List<FeatureViewModel> features
-            , List<InventoryAndPriceViewModelCreate> inventoryAndPrice, List<IFormFile> Images)
+        public async Task<IActionResult> Create(CreateProductViewModel model)
         {
             try
             {
                 await _productFacad.CreateProductService.Execute(new CreateProductServiceDto
                 {
-                    Name = request.Name,
-                    Brand = request.Brand,
-                    ShortDescription = request.ShortDescription,
-                    Description = request.Description,
-                    CategoryId = request.CategoryId,
-                    Keywords = Keywords,
-                    Colors = colors,
-                    Sizes = sizes,
-                    Features = features,
-                    InventoryAndPrices = inventoryAndPrice
-                }, Images);
+                    Name = model.Product.Name,
+                    Brand = model.Product.Brand,
+                    ShortDescription = model.Product.ShortDescription,
+                    Description = model.Product.Description,
+                    CategoryId = model.Product.CategoryId,
+                    Keywords = model.Keywords,
+                    Colors = model.Colors,
+                    Sizes = model.Sizes,
+                    Features = model.Features,
+                    InventoryAndPrices = model.InventoryAndPrice
+                }, model.Images);
                 return Json(true);
             }
             catch (Exception ex)

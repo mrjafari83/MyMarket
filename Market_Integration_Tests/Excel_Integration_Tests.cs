@@ -28,7 +28,6 @@ namespace Market_Integration_Tests
     public class Excel_Integration_Tests : IClassFixture<TestingWebAppFactory<Startup>>
     {
         private HttpClient _client;
-        private static string connectionString = @"Data Source= .; Initial Catalog= Market_DB; Integrated Security= False;User Id=sa;Password=123;";
 
         public Excel_Integration_Tests(TestingWebAppFactory<Startup> factory)
         {

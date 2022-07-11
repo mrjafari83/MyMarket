@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndPoint.Api", "EndPoint.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ_Test", "RabbitMQ_Test\RabbitMQ_Test.csproj", "{EC1E9285-44F3-4C41-A15C-79E041CBEA1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market_Integration_Tests", "Market_Integration_Tests\Market_Integration_Tests.csproj", "{3FE8ACF0-FF9E-4048-9569-110757218F6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market_Integration_Tests", "Market_Integration_Tests\Market_Integration_Tests.csproj", "{3FE8ACF0-FF9E-4048-9569-110757218F6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

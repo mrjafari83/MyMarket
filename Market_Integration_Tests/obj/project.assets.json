@@ -12667,6 +12667,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Common >= 1.0.0",
       "EndPoint.Api >= 1.0.0",
       "Market.EndPoint >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Testing >= 6.0.6",
@@ -12706,6 +12707,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj": {
+              "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj"
+            },
             "C:\\Users\\Kar1\\Desktop\\MyMarket\\EndPoint.Api\\EndPoint.Api.csproj": {
               "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\EndPoint.Api\\EndPoint.Api.csproj"
             },
