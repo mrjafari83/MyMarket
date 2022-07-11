@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
 using Common.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -56,13 +57,19 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult NewestBlogPage()
         {
-            return Json(_commonBlogPageFacad.GetAllBlogPages.Execute(filter:Enums.PagesFilter.Newest).Result.Data);
+            return Json(_commonBlogPageFacad.GetAllBlogPages.Execute(new BlogPageSearchViewModel
+            {
+                OrderBy = Enums.BlogPagesFilter.Newest
+            }).Result.Data);
         }
 
         [HttpGet]
         public IActionResult MostViewedBlogPage()
         {
-            return Json(_commonBlogPageFacad.GetAllBlogPages.Execute(filter: Enums.PagesFilter.MostViewed).Result.Data);
+            return Json(_commonBlogPageFacad.GetAllBlogPages.Execute(new BlogPageSearchViewModel
+            {
+                OrderBy = Enums.BlogPagesFilter.Newest
+            }).Result.Data);
         }
     }
 }

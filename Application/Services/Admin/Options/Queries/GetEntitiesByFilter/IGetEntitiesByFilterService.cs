@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
 using Common.ViewModels.ExcelViewModels;
+using Application.Services.Common.BlogPage.GetBlogPagesBySearch;
 
 namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
 {
@@ -69,6 +70,16 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         ParentName = c.Parent.Name ?? "ندارد",
                         ChildrenCount = c.Children.Count(),
                     }),
+
+                    Domain.Entities.Option.SearchItemType.BlogPages=> GetBlogPagesBySearch.GetBlogPages(db,JsonConvertor<BlogPageSearchViewModel>.LoadFromJsonString(filter.FilterJson))
+                    .Include(b=> b.Category).Select(b=> new ExcelBlogPagesViewModel
+                    {
+                        Title = b.Title,
+                        ShortDescription = b.ShortDescription,
+                        CategoryName = b.Category.Name,
+                        VisitNumber = b.Visits.Count(),
+                        CreateDate = b.CreateDate.ToShamsi()
+                    })
                 };
 
                 return new ResultDto<IEnumerable<object>>
@@ -115,33 +126,33 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
 
             switch (filters.OrderBy)
             {
-                case Enums.PagesFilter.LessViewed:
+                case Enums.ProductsFilter.LessViewed:
                     {
                         products = products.OrderBy(p => p.Visits.Count());
                         break;
                     }
-                case Enums.PagesFilter.MostViewed:
+                case Enums.ProductsFilter.MostViewed:
                     {
                         products = products.OrderByDescending(p => p.Visits.Count());
                         break;
                     }
-                case Enums.PagesFilter.Newest:
+                case Enums.ProductsFilter.Newest:
                     {
                         products = products.OrderByDescending(p => p.CreateDate);
                         break;
                     }
-                case Enums.PagesFilter.Oldest:
+                case Enums.ProductsFilter.Oldest:
                     {
                         products = products.OrderBy(p => p.CreateDate);
                         break;
                     }
-                case Enums.PagesFilter.MostSelled:
+                case Enums.ProductsFilter.MostSelled:
                     {
                         products = products.OrderByDescending(p => p.ProductInCarts.Where(p => !p.IsShow)
                         .Sum(c => c.Count * c.ProductInventoryAndPrice.Price));
                         break;
                     }
-                case Enums.PagesFilter.LessSelled:
+                case Enums.ProductsFilter.LessSelled:
                     {
                         products = products.OrderBy(p => p.ProductInCarts.Where(p => !p.IsShow)
                         .Sum(c => c.Count * c.ProductInventoryAndPrice.Price));

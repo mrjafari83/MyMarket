@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
+using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.ViewComponents
 {
@@ -17,7 +18,7 @@ namespace Market.EndPoint.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            return View("LastBlogPagesInFotter" , _commonBlogPageFacad.GetAllBlogPages.Execute(Common.Enums.Enums.PagesFilter.Newest ,1 , 2).Result.Data);
+            return View("LastBlogPagesInFotter" , _commonBlogPageFacad.GetAllBlogPages.Execute(new BlogPageSearchViewModel { OrderBy = Common.Enums.Enums.BlogPagesFilter.Newest} ,1 , 2).Result.Data);
         }
     }
 }

@@ -73,7 +73,7 @@
                 </td>
                 <td>
                     <label for="orderBy">مرتب سازی بر اساس : </label>
-                    <select id="orderBy" asp-items="Html.GetEnumSelectList<Enums.PagesFilter>().OrderBy(p=> p.Value != ViewBag.OrderBy.ToString())"></select>
+                    <select id="orderBy" asp-items="Html.GetEnumSelectList<Enums.ProductsFilter>().OrderBy(p=> p.Value != ViewBag.OrderBy.ToString())"></select>
                 </td>
             </tr>
             <tr>

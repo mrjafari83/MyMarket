@@ -15,7 +15,7 @@ namespace Common.Enums
             BlogPage
         }
 
-        public enum PagesFilter
+        public enum ProductsFilter
         {
             [Display(Name ="جدیدترین")]
             Newest = 0,
@@ -29,6 +29,18 @@ namespace Common.Enums
             LessViewed = 4,
             [Display(Name = "کمترین خرید")]
             LessSelled = 5
+        }
+
+        public enum BlogPagesFilter
+        {
+            [Display(Name = "جدیدترین")]
+            Newest = 0,
+            [Display(Name = "قدیمی ترین")]
+            Oldest = 1,
+            [Display(Name = "بیشترین بازدید")]
+            MostViewed = 2,
+            [Display(Name = "کمترین بازدید")]
+            LessViewed = 3,
         }
 
         public enum CategoriesFilter

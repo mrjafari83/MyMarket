@@ -7,6 +7,7 @@ using Application.Interfaces.FacadPatterns.Client;
 using Application.Interfaces.FacadPatterns.Common;
 using Common.ViewModels;
 using Application.Services.Common.Comment.Commands.CreateComment;
+using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Controllers
 {
@@ -36,7 +37,10 @@ namespace Market.EndPoint.Controllers
             else
                 ViewBag.HeaderTitle = _commonCategorisFacad.GetBlogCategoryById.Execute(categoryId).Data.Name;
 
-            return View(await _commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber: currentPage, categoryId: categoryId));
+            return View(await _commonBlogPageFacad.GetAllBlogPages.Execute(new BlogPageSearchViewModel
+            {
+                CategoryId = categoryId
+            }, currentPage));
         }
 
         [Route("Blog")]
@@ -67,7 +71,10 @@ namespace Market.EndPoint.Controllers
             ViewBag.CurrentPage = currentPage;
             ViewBag.SearchKey = searchKey;
             ViewBag.PageTitle = "جستوجو برای " + searchKey;
-            return View(_commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber:currentPage , searchKey:searchKey).Result.Data);
+            return View(_commonBlogPageFacad.GetAllBlogPages.Execute(new BlogPageSearchViewModel
+            {
+                SearchKey = searchKey,
+            },currentPage).Result.Data);
         }
     }
 }

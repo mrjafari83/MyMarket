@@ -23,5 +23,6 @@ namespace Domain.Entities.Option
         Product = 0,
         BlogCategory = 1,
         ProductCategory = 2,
+        BlogPages = 3,
     }
 }

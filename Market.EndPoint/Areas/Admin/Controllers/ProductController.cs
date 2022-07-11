@@ -269,13 +269,13 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             {
                 var orderBy = TempData["OrderBy"] switch
                 {
-                    0 => Enums.PagesFilter.Newest,
-                    1 => Enums.PagesFilter.Oldest,
-                    2 => Enums.PagesFilter.MostViewed,
-                    3 => Enums.PagesFilter.MostSelled,
-                    4 => Enums.PagesFilter.LessViewed,
-                    5 => Enums.PagesFilter.LessSelled,
-                    _ => Enums.PagesFilter.Newest,
+                    0 => Enums.ProductsFilter.Newest,
+                    1 => Enums.ProductsFilter.Oldest,
+                    2 => Enums.ProductsFilter.MostViewed,
+                    3 => Enums.ProductsFilter.MostSelled,
+                    4 => Enums.ProductsFilter.LessViewed,
+                    5 => Enums.ProductsFilter.LessSelled,
+                    _ => Enums.ProductsFilter.Newest,
                 };
 
                 var searchBy = TempData["SearchBy"] switch
