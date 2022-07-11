@@ -4,10 +4,12 @@ using Common.Dto;
 using Common.Enums;
 using Application.Interfaces.Context;
 using Application.Services.Common.Category.Queries.GetChildrenOfCategory;
+using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
+using Common.ViewModels.SearchViewModels;
 
 namespace Application.Services.Common.Category.Queries.GetAllCategories
 {
-    public class GetAllBlogCategoriesService : IGetAllCategoriesService
+    public class GetAllBlogCategoriesService
     {
         private readonly IDataBaseContext db;
         private readonly GetChildrenOfBlogPageCategoryService getChildren;
@@ -18,9 +20,9 @@ namespace Application.Services.Common.Category.Queries.GetAllCategories
             getChildren = getChildrenOfBlogPageCategoryService;
         }
 
-        public ResultDto<List<GetAllCategoriesDto>> Execute(bool withChildren, Enums.CategoriesFilter filter, int id = 0)
+        public ResultDto<List<GetAllCategoriesDto>> Execute(BlogCategoryViewModel searchModel , bool withChildren, Enums.CategoriesFilter filter,bool justParent = false , int id = 0)
         {
-            var categories = db.BlogPageCategories.Select(c => new GetAllCategoriesDto
+            var categories = GetBlogCategoryBySearch.GetCategories(db,searchModel).Select(c => new GetAllCategoriesDto
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -68,6 +70,9 @@ namespace Application.Services.Common.Category.Queries.GetAllCategories
                         }
                 }
             }
+
+            if (justParent)
+                categories = categories.Where(c => c.IsParent);
 
             if (categories != null)
                 return new ResultDto<List<GetAllCategoriesDto>>

@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq;
 using Application.Interfaces.Context;
+using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -48,7 +49,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly IMemoryCache _memoryCache;
         IDataBaseContext db;
 
-        public ProductController(IProductFacad productFacad,IDataBaseContext context
+        public ProductController(IProductFacad productFacad, IDataBaseContext context
             , IProductCategoryFacad productCategoryFacad
             , ICommonCategorisFacad commonCategorisFacad, IMapper mapper
             , IExcelFacade excelFacade, ISend send
@@ -143,7 +144,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.categories = new SelectList(
-                _commonCategorisFacad.GetAllProductCategories.Execute(false, Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllProductCategories.Execute(new ProductCategoryViewModel(), false, Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
                 );
@@ -185,7 +186,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             var product = await _productFacad.GetProductByIdService.Execute(id);
             ViewBag.categories = new SelectList(
-           _commonCategorisFacad.GetAllProductCategories.Execute(false, Enums.CategoriesFilter.ForPagesList).Data.OrderBy(c => c.Name != product.Data.CategoryName)
+           _commonCategorisFacad.GetAllProductCategories.Execute(new ProductCategoryViewModel(), false, Enums.CategoriesFilter.ForPagesList).Data.OrderBy(c => c.Name != product.Data.CategoryName)
            , "Id"
            , "Name"
            );
@@ -300,7 +301,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                 var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
                 int excelId = excelKey.Data;
 
-                _send.SendToCreateExcel(excelId, searchId);
+                _send.SendToCreateExcel(excelId, searchId,"Product");
 
                 return Redirect("/Admin/Product");
             }

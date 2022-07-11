@@ -6,6 +6,7 @@ using Common.Enums;
 using Application.Services.Common.Category.Queries.GetAllCategories;
 using Application.Interfaces.FacadPatterns.Common;
 using Microsoft.AspNetCore.Mvc;
+using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.ViewComponents
 {
@@ -26,12 +27,12 @@ namespace Market.EndPoint.ViewComponents
             {
                 case Enums.CategoryType.Product:
                     {
-                        categories = _commonCategorisFacad.GetAllProductCategories.Execute(true, Enums.CategoriesFilter.Menu).Data;
+                        categories = _commonCategorisFacad.GetAllProductCategories.Execute(new ProductCategoryViewModel() ,true, Enums.CategoriesFilter.Menu,false).Data;
                         break;
                     }
                 case Enums.CategoryType.BlogPage:
                     {
-                        categories = _commonCategorisFacad.GetAllBlogCategories.Execute(true, Enums.CategoriesFilter.Menu).Data;
+                        categories = _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel() ,true, Enums.CategoriesFilter.Menu,false).Data;
                         break;
                     }
             }

@@ -13,6 +13,7 @@ using Application.Services.Admin.BlogPages.Commands.EditBlogPage;
 using Microsoft.AspNetCore.Hosting;
 using Common.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -49,7 +50,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Categories = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel() ,false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
                 );
@@ -80,7 +81,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Categories = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(),false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
                 );

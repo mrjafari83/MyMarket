@@ -20,7 +20,7 @@ namespace Application.FacadPatterns.Common
         }
 
         private GetAllProductCategoriesService _getAllProductCategoriesService;
-        public IGetAllCategoriesService GetAllProductCategories
+        public GetAllProductCategoriesService GetAllProductCategories
         {
             get
             {
@@ -31,7 +31,7 @@ namespace Application.FacadPatterns.Common
         }
 
         private GetAllBlogCategoriesService _getAllBlogCategoriesService;
-        public IGetAllCategoriesService GetAllBlogCategories
+        public GetAllBlogCategoriesService GetAllBlogCategories
         {
             get
             {

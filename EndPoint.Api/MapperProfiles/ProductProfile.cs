@@ -9,7 +9,7 @@ namespace EndPoint.Api.MapperProfile
         public ProductProfile()
         {
             CreateMap<CreateProductViewModel, CreateProductServiceDto>().ReverseMap();
-            CreateMap<Common.ViewModels.ProducsSearchViewModel, SearchViewModel>().ReverseMap();
+            CreateMap<Common.ViewModels.SearchViewModels.ProducsSearchViewModel, SearchViewModel>().ReverseMap();
         }
     }
 }

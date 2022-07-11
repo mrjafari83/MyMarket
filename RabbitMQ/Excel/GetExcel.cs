@@ -21,7 +21,7 @@ namespace RabbitMQ.Excel
             _saveLogFile = saveLogInFile;
         }
 
-        public string GetExcelFile<Type>(List<Type> source, string address, string sheetName)
+        public string GetExcelFile<Type>(List<Type> source, string address,string prefixFileName)
         {
             try
             {
@@ -31,9 +31,9 @@ namespace RabbitMQ.Excel
 
                     using (var excel = new ExcelPackage())
                     {
-                        excel.Workbook.Worksheets.Add(sheetName);
+                        excel.Workbook.Worksheets.Add(prefixFileName);
 
-                        var excelWorkSheet = excel.Workbook.Worksheets[sheetName];
+                        var excelWorkSheet = excel.Workbook.Worksheets[prefixFileName];
                         excelWorkSheet.View.RightToLeft = true;
 
                         List<string[]> data = new List<string[]>();
@@ -108,7 +108,7 @@ namespace RabbitMQ.Excel
                         string folderAddress = address + $@"/Excels/";
                         if (!Directory.Exists(folderAddress))
                             Directory.CreateDirectory(folderAddress);
-                        string fileName = "products-" + DateTime.Now.ToString("yyyy-M-d-H-m-ss") + ".xlsx";
+                        string fileName = $"{prefixFileName}-" + DateTime.Now.ToString("yyyy-M-d-H-m-ss") + ".xlsx";
 
                         FileInfo excelFile = new FileInfo(folderAddress + fileName);
                         excel.SaveAs(excelFile);

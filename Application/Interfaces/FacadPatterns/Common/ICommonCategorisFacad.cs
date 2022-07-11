@@ -11,8 +11,8 @@ namespace Application.Interfaces.FacadPatterns.Common
 {
     public interface ICommonCategorisFacad
     {
-        IGetAllCategoriesService GetAllProductCategories { get; }
-        IGetAllCategoriesService GetAllBlogCategories { get; }
+        GetAllProductCategoriesService GetAllProductCategories { get; }
+        GetAllBlogCategoriesService GetAllBlogCategories { get; }
         IGetChildrenOfCategoryService GetChildrenOfProductCategory { get; }
         IGetChildrenOfCategoryService GetChildrenOfBlogCategory { get; }
         IGetCategoryByIdService GetProductCategoryById { get; }

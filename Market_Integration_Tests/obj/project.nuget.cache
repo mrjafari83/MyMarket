@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8diE1a7bDv1sH/4qtjKRoJbfmx9M/IHBxf+1/TRwc97t3qzawOa1c7/eoRo0flkzVaQZOdzwBhJ6JlWkgFJeLw==",
+  "dgSpecHash": "Wx7C+H0QetT7liMpqlH4lGcdJSHMJfgHlZAd51wUdZJk5jMtdOOWdRSUo9wXkpMnLr7B5zpl+haSqNLe/HutDg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market_Integration_Tests\\Market_Integration_Tests.csproj",
   "expectedPackageFiles": [
@@ -174,11 +174,11 @@
     "C:\\Users\\Kar1\\.nuget\\packages\\serilog.sinks.file\\3.2.0\\serilog.sinks.file.3.2.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\serilog.sinks.rollingfile\\3.3.0\\serilog.sinks.rollingfile.3.3.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\serilog.sinks.rollingfile.extension\\2.0.2\\serilog.sinks.rollingfile.extension.2.0.2.nupkg.sha512",
-    "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore\\6.3.0\\swashbuckle.aspnetcore.6.3.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.newtonsoft\\6.3.1\\swashbuckle.aspnetcore.newtonsoft.6.3.1.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.3.1\\swashbuckle.aspnetcore.swagger.6.3.1.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.3.1\\swashbuckle.aspnetcore.swaggergen.6.3.1.nupkg.sha512",
-    "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.3.0\\swashbuckle.aspnetcore.swaggerui.6.3.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\sweetalert\\1.0.0\\sweetalert.1.0.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

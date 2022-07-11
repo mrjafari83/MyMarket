@@ -1,6 +1,7 @@
 ﻿@using Common.Enums;
 @using Application.Services.Common.Category.Queries.GetAllCategories
 @model List<GetAllCategoriesDto>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -18,10 +19,33 @@
             <th>
                 <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" id="btnCreateNewCategory">افزودن</a>
             </th>
+            <th>
+                <a class="waves-effect waves-light btn modal-trigger green" id="btnApplyingToCreateExcel">درخواست فایل اکسل</a>
+            </th>
+        </tr>
+        <form id="searchForm" method="get" action="/Admin/Product/Index">
+        <tr>
+            <td>
+                <label for="searchKey">جستوجو کنید : </label>
+                <input type="text" id="searchKey" value="@ViewBag.SearchKey" />
+            </td>
+            <td>
+                <label for="parentId">بر اساس دسته بندی والد : </label>
+                <select id="parentId" asp-items="@ViewBag.CategoriesList">
+                    <option value="0" selected>همه</option>
+                </select>
+            </td>
         </tr>
         <tr>
-            <th>نام دسته بندی</th>
-            <th>زیر مجموعه ها</th>
+            <td></td>
+            <td>
+                <a class="waves-effect waves-light btn modal-trigger blue" id="btnSearch">جستوجو</a>
+            </td>
+        </tr>
+        </form>
+        <tr>
+            <th style="width:50%" >نام دسته بندی</th>
+            <th style="width:50%" >زیر مجموعه ها</th>
             <th></th>
         </tr>
     </thead>
@@ -29,21 +53,24 @@
     <tbody>
         @foreach (var item in Model)
         {
-            if (item.IsParent && item.ParentId == 0)
+            if ((item.IsParent && item.ParentId == 0) || (int)ViewBag.ParentId != 0)
             {
-                if(item.Name == "بدون دسته بندی")
+                if (item.Name == "بدون دسته بندی")
                 {
                     <tr>
                         <td>@item.Name</td>
                     </tr>
                 }
-            else if (item.Children.Count != 0)
-            {
+                else if (item.Children.Count != 0)
+                {
                     <tr>
                         <td style="width:33%">@item.Name</td>
                         <td style="width:33%">
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="GetChildren(@item.Id)">زیر مجموعه ها</a>
-                            <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
+                            @if ((int)ViewBag.ParentId == 0)
+                            {
+                                <a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="GetChildren(@item.Id)">زیر مجموعه ها</a>
+                                <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
+                            }
                             <a class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/ProductCategories/Edit/@item.Id">ویرایش</a>
                             <a class="waves-effect waves-light btn modal-trigger red" href="#modal1" onclick="Delete(@item.Id)">حذف</a>
                         </td>
@@ -54,7 +81,10 @@
                     <tr>
                         <td style="width:33%">@item.Name</td>
                         <td style="width:33%">
+                            @if ((int)ViewBag.ParentId == 0)
+                            {
                             <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
+                            }
                             <a class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/ProductCategories/Edit/@item.Id">ویرایش</a>
                             <a class="waves-effect waves-light btn modal-trigger red" href="#modal1" onclick="Delete(@item.Id)">حذف</a>
                         </td>
@@ -75,48 +105,81 @@
 
 @section scripts
 {
-    <script>
-        $("#btnCreateNewCategory").click(function () {
+<script>
+    $("#btnCreateNewCategory").click(function () {
 
-            $.get("/Admin/ProductCategories/Create/0", function (result) {
+        $.get("/Admin/ProductCategories/Create/0", function (result) {
 
-                $("#title").html("افزودن  گروه جدید");
-                $("#body").html(result);
-            });
-
+            $("#title").html("افزودن  گروه جدید");
+            $("#body").html(result);
         });
 
-        function GetChildren(id) {
+    });
 
-            $.get("/Admin/ProductCategories/GetChildren/" + id, function (result) {
+    function GetChildren(id) {
 
-                $("#title").html("زیر مجموعه ها");
-                $("#body").html(result);
+        $.get("/Admin/ProductCategories/GetChildren/" + id, function (result) {
+
+            $("#title").html("زیر مجموعه ها");
+            $("#body").html(result);
+        });
+
+    };
+
+    function CreateChild(id) {
+
+        $.get("/Admin/ProductCategories/Create/" + id, function (result) {
+
+            $("#title").html("افزودن زیر مجموعه");
+            $("#body").html(result);
+        });
+
+    };
+
+    function Delete(id) {
+
+        $.get("/Admin/ProductCategories/Delete/" + id, function (result) {
+
+            $("#title").html("حذف");
+            $("#body").html(result);
+        });
+
+    };
+
+                $("#btnApplyingToCreateExcel").click(function(e){
+                swal("خطا", "آیا از درخواست فایل اکسل با فیلترهای وارد شده مطمئن هستید؟", "warning")
+                    .then((value) =>
+                    {
+                        debugger;
+                        var formdata = new FormData();
+
+                        formdata.append("SearchKey",$("#searchKey").val());
+                        formdata.append("ParentId",$("#parentId").val());
+
+                        $.ajax({
+                            type: "POST",
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            enctype: "multipart/form-data",
+                            url: "/Admin/ProductCategories/CreateExcelConfirmed",
+                            data: formdata,
+                            success: function (response) {
+                        }
+                   });
+                });
             });
 
-        };
+             $("#btnSearch").click(function(e){
+             var formdata = new FormData();
 
-        function CreateChild(id) {
+             var searchKey = $("#searchKey").val();
+             var parentId = $("#parentId").val();
 
-            $.get("/Admin/ProductCategories/Create/" + id, function (result) {
+             var address = "/Admin/ProductCategories/Index?SearchKey="+ searchKey+"&ParentId=" +parentId;
 
-                $("#title").html("افزودن زیر مجموعه");
-                $("#body").html(result);
-            });
-
-        };
-
-        function Delete(id) {
-
-            $.get("/Admin/ProductCategories/Delete/" + id, function (result) {
-
-                $("#title").html("حذف");
-                $("#body").html(result);
-            });
-
-        };
-
-
-    </script>
+             location.href = address;
+        });
+</script>
 }
 

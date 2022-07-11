@@ -57,9 +57,10 @@ namespace RabbitMQ
                     excelId = Int32.Parse(messages[0]);
                     int searchId = Int32.Parse(messages[1]);
                     string address = messages[2];
+                    string prefixFileName = messages[3];
                     updateStatus(excelId, Enums.Status.ReciveFromQueue);
 
-                    getProductDetailsExcel(excelId,searchId,address);
+                    getExcel(excelId,searchId,address,prefixFileName);
                     updateStatus(excelId, Enums.Status.ExcelCreated);
 
                     _channel.BasicAck(args.DeliveryTag, false);
@@ -73,15 +74,15 @@ namespace RabbitMQ
             }
         }
 
-        private void getProductDetailsExcel(int excelId , int searachId,string address)
+        private void getExcel(int excelId , int searachId,string address,string prefixFileName)
         {
             using(var scope = Services.CreateScope())
             {
                 var worker = scope.ServiceProvider.GetRequiredService<IGetExcel>();
                 var excelFacade = scope.ServiceProvider.GetRequiredService<IExcelFacade>();
-                var products = scope.ServiceProvider.GetRequiredService<IOptionFacade>();
+                var optionFacad = scope.ServiceProvider.GetRequiredService<IOptionFacade>();
 
-                var fileName = worker.GetExcelFile<object>(products.GetEntitiesByFilter.Execute(searachId).Data.ToList(), address, "محصولات");
+                var fileName = worker.GetExcelFile<object>(optionFacad.GetEntitiesByFilter.Execute(searachId).Data.ToList(), address, prefixFileName);
                 excelFacade.SetFileName.SetFileName(fileName,excelId);
             }
         }

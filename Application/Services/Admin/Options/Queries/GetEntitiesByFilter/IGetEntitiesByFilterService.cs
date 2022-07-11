@@ -4,6 +4,7 @@ using Common.Dto;
 using Common.Enums;
 using Common.Utilities;
 using Common.ViewModels;
+using Common.ViewModels.SearchViewModels;
 using Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
+using Common.ViewModels.ExcelViewModels;
 
 namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
 {
@@ -47,7 +50,25 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         CategoryName = p.Category.Name,
                         VisitNumber = p.Visits.Count(),
                         SellsCount = p.ProductInCarts.Where(p => !p.IsShow).Count()
-                    }).AsNoTracking().ToList()
+                    }).AsNoTracking().ToList(),
+
+                    //Blog Category
+                    Domain.Entities.Option.SearchItemType.BlogCategory => GetBlogCategoryBySearch.GetCategories(db,JsonConvertor<BlogCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
+                    .Select(c=> new ExcelCategoryViewModel
+                    {
+                        Name=c.Name,
+                        ParentName = c.Parent.Name ?? "ندارد",
+                        ChildrenCount = c.Children.Count(),
+                    }),
+
+                    //Product Category
+                    Domain.Entities.Option.SearchItemType.ProductCategory => GetProductCategoryBySearch.GetCategories(db,JsonConvertor<ProductCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
+                    .Select(c => new ExcelCategoryViewModel
+                    {
+                        Name = c.Name,
+                        ParentName = c.Parent.Name ?? "ندارد",
+                        ChildrenCount = c.Children.Count(),
+                    }),
                 };
 
                 return new ResultDto<IEnumerable<object>>

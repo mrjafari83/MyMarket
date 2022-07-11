@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Common.ViewModels;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
 using Microsoft.Extensions.Logging;
+using Common.ViewModels.SearchViewModels;
 
 namespace Application.Services.Admin.Products.Queries.GetAllProducts
 {
