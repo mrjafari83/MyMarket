@@ -78,5 +78,17 @@ namespace Common.Enums
             [Display(Name = "مدیریت")]
             Owner = 2
         }
+
+        public enum MesssagesFilter
+        {
+            [Display(Name = "نام")]
+            Name = 0,
+            [Display(Name = "ایمیل")]
+            Email = 1,
+            [Display(Name = "وبسایت")]
+            Website = 2,
+            [Display(Name = "متن پیام")]
+            Text = 3
+        }
     }
 }

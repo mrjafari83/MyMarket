@@ -127,6 +127,7 @@
         swal("خطا", "آیا از درخواست فایل اکسل با فیلترهای وارد شده مطمئن هستید؟", "warning")
             .then((value) =>
             {
+                if(value.value == true){
                 var formdata = new FormData();
 
                 formdata.append("SearchKey",$("#searchKey").val());
@@ -143,9 +144,10 @@
                     data: formdata,
                     success: function (response) {
                 }
-           });
+                });
+                }
+            });
         });
-    });
 
      $("#btnSearch").click(function(e){
      var formdata = new FormData();

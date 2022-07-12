@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
 using Common.ViewModels.ExcelViewModels;
 using Application.Services.Common.BlogPage.GetBlogPagesBySearch;
+using Application.Services.Admin.Message.Queries.GetMessagesBySearch;
 
 namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
 {
@@ -79,6 +80,15 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         CategoryName = b.Category.Name,
                         VisitNumber = b.Visits.Count(),
                         CreateDate = b.CreateDate.ToShamsi()
+                    }),
+
+                    Domain.Entities.Option.SearchItemType.Message=>GetMessagesBySearch.GetMessages(db,JsonConvertor<MessageSearchViewModel>.LoadFromJsonString(filter?.FilterJson))
+                    .Select(m=> new ExcelMessageViewModel
+                    {
+                        Name =m.Name,
+                        Email = m.Email,
+                        Website = m.Website,
+                        Text = m.Message
                     })
                 };
 

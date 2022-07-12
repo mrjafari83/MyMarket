@@ -384,7 +384,9 @@
                 swal("هشدار", "آیا از حساب خود خارج میشوید؟" , "warning")
                 .then((value) =>
                 {
-                    window.location.href = "/Logout?returnUrl=@returnUrl";
+                    if(value == true){
+                        window.location.href = "/Logout?returnUrl=@returnUrl";
+                    }
                 });
             });
         });

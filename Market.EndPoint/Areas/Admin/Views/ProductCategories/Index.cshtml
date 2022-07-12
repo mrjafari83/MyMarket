@@ -44,8 +44,8 @@
         </tr>
         </form>
         <tr>
-            <th style="width:50%" >نام دسته بندی</th>
-            <th style="width:50%" >زیر مجموعه ها</th>
+            <th style="width:50%">نام دسته بندی</th>
+            <th style="width:50%">زیر مجموعه ها</th>
             <th></th>
         </tr>
     </thead>
@@ -83,7 +83,7 @@
                         <td style="width:33%">
                             @if ((int)ViewBag.ParentId == 0)
                             {
-                            <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
+                                <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" onclick="CreateChild(@item.Id)">افزودن</a>
                             }
                             <a class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/ProductCategories/Edit/@item.Id">ویرایش</a>
                             <a class="waves-effect waves-light btn modal-trigger red" href="#modal1" onclick="Delete(@item.Id)">حذف</a>
@@ -150,7 +150,7 @@
                 swal("خطا", "آیا از درخواست فایل اکسل با فیلترهای وارد شده مطمئن هستید؟", "warning")
                     .then((value) =>
                     {
-                        debugger;
+                        if(value.value == true){
                         var formdata = new FormData();
 
                         formdata.append("SearchKey",$("#searchKey").val());
@@ -166,9 +166,10 @@
                             data: formdata,
                             success: function (response) {
                         }
-                   });
+                        });
+                        }
+                    });
                 });
-            });
 
              $("#btnSearch").click(function(e){
              var formdata = new FormData();

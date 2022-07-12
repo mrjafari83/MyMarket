@@ -12,7 +12,6 @@ using Application.Services.Admin.Categories.Commands.EditCategory;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Common.ViewModels.SearchViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Application.Interfaces.FacadPatterns.Admin;
 using Common.Utilities;
 using Microsoft.Extensions.Logging;
 using Market.EndPoint.Utilities.RabbitMQ;
