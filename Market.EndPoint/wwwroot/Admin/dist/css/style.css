@@ -2024,7 +2024,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: "Nunito Sans", sans-serif; }
+  font-family: sans-serif; }
 
 ul:not(.browser-default) {
   padding-left: 0;
@@ -3299,7 +3299,7 @@ a {
 
 html {
   line-height: 1.5;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: sans-serif;
   font-weight: normal;
   color: rgba(0, 0, 0, 0.87); }
   @media only screen and (min-width: 0) {
@@ -9362,7 +9362,7 @@ html {
 
 body {
   background: #eef5f9;
-  font-family: "Nunito Sans", sans-serif; }
+  font-family: sans-serif; }
 
 h1, h2, h3, h4, h5, h6 {
   color: #5b616e; }

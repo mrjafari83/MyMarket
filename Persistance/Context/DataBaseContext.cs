@@ -89,6 +89,7 @@ namespace Persistance.Context
                 builder.Entity<Cart>().HasQueryFilter(c => !c.IsRemoved);
                 builder.Entity<ProductInCart>().HasQueryFilter(pc => !pc.IsRemoved);
                 builder.Entity<SearchFilter>().HasQueryFilter(e => !e.IsRemoved);
+                builder.Entity<ExcelStatus>().HasQueryFilter(e => !e.IsRemoved);
             }
 
             void SeedData()

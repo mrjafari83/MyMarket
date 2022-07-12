@@ -155,6 +155,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Kar1/Desktop/MyMarket/Market.EndPoint/Areas/Admin/Views/Report/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUmVwb3J0XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Kar1/Desktop/MyMarket/Market.EndPoint/Areas/Admin/Views/Shared/Components/BestSellingProductsInIndex/BestSellingProductsInIndex.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcQmVzdFNlbGxpbmdQcm9kdWN0c0luSW5kZXhcQmVzdFNlbGxpbmdQcm9kdWN0c0luSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

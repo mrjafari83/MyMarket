@@ -344,7 +344,6 @@
                     formdata.append('[' + i + '].ProductId', val.ProductId);
                 });
 
-                debugger;
                 var colorRowsCount = document.getElementById("colorTable").rows.length;
                 var sizeRowsCount = document.getElementById("sizeTable").rows.length;;
                 var inventoryAndPriceCount = inventoryAndPrice.length;
@@ -421,7 +420,6 @@
 
         //کنترل جدول ویژگی ها برای افزودن و حذف نمودن خط به جدول
         $("#btnCreateFeature").click(function (e) {
-            debugger;
             var table = document.getElementById("featureTable");
             var display = document.getElementById("featureDisplay").value;
             var value = document.getElementById("featureValue").value;
@@ -442,7 +440,6 @@
         $("#btnCreateColorByList").click(function (e) {
             var colors = document.getElementById("ColorsList").options;
             var table = document.getElementById("colorTable");
-            debugger;
             for (var i = 0; i < colors.length; i++) {
                 if (colors[i].selected && !colors[i].disabled) {
                     CreateRow(table, [colors[i].value], true);
@@ -454,7 +451,6 @@
         $("#btnCreateSizeByList").click(function (e) {
             var sizes = document.getElementById("SizesList").options;
             var table = document.getElementById("sizeTable");
-            debugger;
             for (var i = 0; i < sizes.length; i++) {
                 if (sizes[i].selected && !sizes[i].disabled) {
                     CreateRow(table, [sizes[i].value], true);
@@ -464,7 +460,6 @@
 
         //متد افزودن خط
         function CreateRow(table, values, withDeleteKey) {
-            debugger;
             var newRow = "<tr>";
             for (var i = 0; i < values.length; i++) {
                 newRow += "<td>" + values[i] + "</td>";
@@ -483,7 +478,6 @@
         });
 
          $("#btnSetInventoryTable").click(function (e) {
-             debugger;
              var sizeRows = document.getElementById("sizeTable").rows;
              var colorRows = document.getElementById("colorTable").rows;
              var sizes = [];

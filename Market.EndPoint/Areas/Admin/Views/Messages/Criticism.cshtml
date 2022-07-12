@@ -9,6 +9,12 @@
     int forward = ViewBag.CurrentRow + 1;
 }
 
+<style>
+    td,th{
+        text-align:right;
+    }
+</style>
+
 <table>
     <tr>
         <th>
@@ -100,7 +106,6 @@
        swal("خطا", "آیا از درخواست فایل اکسل با فیلترهای وارد شده مطمئن هستید؟", "warning")
            .then((value) =>
            {
-               debugger;
                if(value.value == true){
                var formdata = new FormData();
 

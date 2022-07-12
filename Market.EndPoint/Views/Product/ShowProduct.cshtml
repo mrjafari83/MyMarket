@@ -287,7 +287,6 @@
                     data: data,
                     success: function (response) {
                         $("#price").text(response.price);
-                        debugger;
                         if(response.inventory === 0){
                             var button = document.getElementById("AddToCart");
                             button.setAttribute("hidden" , "true");

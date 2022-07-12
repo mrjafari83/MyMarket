@@ -593,9 +593,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "EPPlus": {
+            "EPPlus.Core": {
               "target": "Package",
-              "version": "[6.0.5, )"
+              "version": "[1.5.4, )"
             },
             "Microsoft.AspNetCore.Mvc.Testing": {
               "target": "Package",

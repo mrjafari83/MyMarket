@@ -75,6 +75,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         ChildrenCount = c.Children.Count(),
                     }),
 
+                    //Blog Pages
                     Domain.Entities.Option.SearchItemType.BlogPages=> GetBlogPagesBySearch.GetBlogPages(db,JsonConvertor<BlogPageSearchViewModel>.LoadFromJsonString(filter.FilterJson))
                     .Include(b=> b.Category).Select(b=> new ExcelBlogPagesViewModel
                     {
@@ -85,6 +86,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         CreateDate = b.CreateDate.ToShamsi()
                     }),
 
+                    //Messages
                     Domain.Entities.Option.SearchItemType.Message=>GetMessagesBySearch.GetMessages(db,JsonConvertor<MessageSearchViewModel>.LoadFromJsonString(filter?.FilterJson))
                     .Select(m=> new ExcelMessageViewModel
                     {
@@ -94,6 +96,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         Text = m.Message
                     }),
 
+                    //Users
                     Domain.Entities.Option.SearchItemType.User => _getUserBySearch.GetUSers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
                     .Select(u=> new ExcelUserViewModel
                     {

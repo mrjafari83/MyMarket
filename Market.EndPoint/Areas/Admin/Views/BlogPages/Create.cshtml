@@ -95,7 +95,6 @@
             });
 
             function CreateRow(table, values, withDeleteKey) {
-                debugger;
                 var newRow = "<tr>";
                 for (var i = 0; i < values.length; i++) {
                     newRow += "<td>" + values[i] + "</td>";
@@ -160,8 +159,6 @@
                 }
             },
             submitHandler: function () {
-                debugger;
-
                 var formdata = new FormData();
                 formdata.append("Title", $("#title").val());
                 formdata.append("ShortDescription", $("#shortDescription").val());

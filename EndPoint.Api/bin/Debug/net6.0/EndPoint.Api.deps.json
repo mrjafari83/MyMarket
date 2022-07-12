@@ -186,7 +186,7 @@
           "System.Collections.Concurrent.Reference": "6.0.0.0",
           "System.Collections.Reference": "6.0.0.0",
           "System.Collections.Immutable.Reference": "6.0.0.0",
-          "System.Collections.NonGeneric": "6.0.0.0",
+          "System.Collections.NonGeneric.Reference": "6.0.0.0",
           "System.Collections.Specialized": "6.0.0.0",
           "System.ComponentModel.Annotations": "6.0.0.0",
           "System.ComponentModel.DataAnnotations": "4.0.0.0",
@@ -197,7 +197,7 @@
           "System.Configuration": "4.0.0.0",
           "System.Console.Reference": "6.0.0.0",
           "System.Core": "4.0.0.0",
-          "System.Data.Common": "6.0.0.0",
+          "System.Data.Common.Reference": "6.0.0.0",
           "System.Data.DataSetExtensions": "4.0.0.0",
           "System.Data": "4.0.0.0",
           "System.Diagnostics.Contracts": "6.0.0.0",
@@ -289,7 +289,7 @@
           "System.Runtime.Serialization.Primitives": "6.0.0.0",
           "System.Runtime.Serialization.Xml": "6.0.0.0",
           "System.Security.AccessControl.Reference": "6.0.0.0",
-          "System.Security.Claims": "6.0.0.0",
+          "System.Security.Claims.Reference": "6.0.0.0",
           "System.Security.Cryptography.Algorithms.Reference": "6.0.0.0",
           "System.Security.Cryptography.Cng.Reference": "6.0.0.0",
           "System.Security.Cryptography.Csp.Reference": "6.0.0.0",
@@ -299,7 +299,7 @@
           "System.Security.Cryptography.X509Certificates.Reference": "6.0.0.0",
           "System.Security.Cryptography.Xml.Reference": "6.0.0.0",
           "System.Security": "4.0.0.0",
-          "System.Security.Principal": "6.0.0.0",
+          "System.Security.Principal.Reference": "6.0.0.0",
           "System.Security.Principal.Windows.Reference": "6.0.0.0",
           "System.Security.SecureString": "6.0.0.0",
           "System.ServiceModel.Web": "4.0.0.0",
@@ -317,8 +317,8 @@
           "System.Threading.Tasks.Reference": "6.0.0.0",
           "System.Threading.Tasks.Extensions.Reference": "6.0.0.0",
           "System.Threading.Tasks.Parallel": "6.0.0.0",
-          "System.Threading.Thread": "6.0.0.0",
-          "System.Threading.ThreadPool": "6.0.0.0",
+          "System.Threading.Thread.Reference": "6.0.0.0",
+          "System.Threading.ThreadPool.Reference": "6.0.0.0",
           "System.Threading.Timer.Reference": "6.0.0.0",
           "System.Transactions": "4.0.0.0",
           "System.Transactions.Local": "6.0.0.0",
@@ -331,9 +331,9 @@
           "System.Xml.ReaderWriter.Reference": "6.0.0.0",
           "System.Xml.Serialization": "4.0.0.0",
           "System.Xml.XDocument.Reference": "6.0.0.0",
-          "System.Xml.XmlDocument": "6.0.0.0",
+          "System.Xml.XmlDocument.Reference": "6.0.0.0",
           "System.Xml.XmlSerializer": "6.0.0.0",
-          "System.Xml.XPath": "6.0.0.0",
+          "System.Xml.XPath.Reference": "6.0.0.0",
           "System.Xml.XPath.XDocument": "6.0.0.0",
           "WindowsBase": "4.0.0.0"
         },
@@ -406,6 +406,32 @@
         },
         "compile": {
           "lib/net6.0/EPPlus.dll": {}
+        }
+      },
+      "EPPlus.Core/1.5.4": {
+        "dependencies": {
+          "System.Collections.NonGeneric": "4.3.0",
+          "System.Data.Common": "4.3.0",
+          "System.Data.SqlClient": "4.8.3",
+          "System.Drawing.Common": "6.0.0",
+          "System.Reflection": "4.3.0",
+          "System.Security.Claims": "4.3.0",
+          "System.Security.Cryptography.Pkcs": "5.0.0",
+          "System.Security.Cryptography.X509Certificates": "4.3.0",
+          "System.Text.Encoding.CodePages": "5.0.0",
+          "System.Threading.Thread": "4.3.0",
+          "System.Threading.ThreadPool": "4.3.0",
+          "System.Xml.XPath.XmlDocument": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/EPPlus.Core.dll": {
+            "assemblyVersion": "1.5.4.0",
+            "fileVersion": "1.5.4.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/EPPlus.Core.dll": {}
         }
       },
       "EPPlus.Interfaces/6.0.0": {
@@ -2819,6 +2845,16 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
+      "System.Collections.NonGeneric/4.3.0": {
+        "dependencies": {
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0"
+        }
+      },
       "System.Composition/1.0.31": {
         "dependencies": {
           "System.Composition.AttributedModel": "1.0.31",
@@ -2964,6 +3000,18 @@
           "System.IO": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Text.Encoding": "4.3.0"
+        }
+      },
+      "System.Data.Common/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading.Tasks": "4.3.0"
         }
       },
       "System.Data.SqlClient/4.8.3": {
@@ -3371,6 +3419,17 @@
         }
       },
       "System.Security.AccessControl/6.0.0": {},
+      "System.Security.Claims/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Security.Principal": "4.3.0"
+        }
+      },
       "System.Security.Cryptography.Algorithms/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
@@ -3533,6 +3592,11 @@
           "lib/net6.0/System.Security.Permissions.dll": {}
         }
       },
+      "System.Security.Principal/4.3.0": {
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        }
+      },
       "System.Security.Principal.Windows/4.7.0": {},
       "System.Text.Encoding/4.3.0": {
         "dependencies": {
@@ -3586,6 +3650,17 @@
       },
       "System.Threading.Tasks.Dataflow/4.9.0": {},
       "System.Threading.Tasks.Extensions/4.5.4": {},
+      "System.Threading.Thread/4.3.0": {
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        }
+      },
+      "System.Threading.ThreadPool/4.3.0": {
+        "dependencies": {
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Handles": "4.3.0"
+        }
+      },
       "System.Threading.Timer/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
@@ -3648,6 +3723,56 @@
           "System.Text.Encoding": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
+        }
+      },
+      "System.Xml.XmlDocument/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0"
+        }
+      },
+      "System.Xml.XPath/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0"
+        }
+      },
+      "System.Xml.XPath.XmlDocument/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0",
+          "System.Xml.XPath": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.6.24705.1"
+          }
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
       "Application/1.0.0": {
@@ -3740,7 +3865,7 @@
       "RabbitMQ/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
-          "EPPlus": "6.0.5",
+          "EPPlus.Core": "1.5.4",
           "Microsoft.AspNetCore.Mvc.Testing": "6.0.6",
           "Microsoft.Extensions.Hosting": "6.0.1",
           "Persistance": "1.0.0",
@@ -4581,7 +4706,7 @@
         },
         "compileOnly": true
       },
-      "System.Collections.NonGeneric/6.0.0.0": {
+      "System.Collections.NonGeneric.Reference/6.0.0.0": {
         "compile": {
           "System.Collections.NonGeneric.dll": {}
         },
@@ -4647,7 +4772,7 @@
         },
         "compileOnly": true
       },
-      "System.Data.Common/6.0.0.0": {
+      "System.Data.Common.Reference/6.0.0.0": {
         "compile": {
           "System.Data.Common.dll": {}
         },
@@ -5199,7 +5324,7 @@
         },
         "compileOnly": true
       },
-      "System.Security.Claims/6.0.0.0": {
+      "System.Security.Claims.Reference/6.0.0.0": {
         "compile": {
           "System.Security.Claims.dll": {}
         },
@@ -5259,7 +5384,7 @@
         },
         "compileOnly": true
       },
-      "System.Security.Principal/6.0.0.0": {
+      "System.Security.Principal.Reference/6.0.0.0": {
         "compile": {
           "System.Security.Principal.dll": {}
         },
@@ -5367,13 +5492,13 @@
         },
         "compileOnly": true
       },
-      "System.Threading.Thread/6.0.0.0": {
+      "System.Threading.Thread.Reference/6.0.0.0": {
         "compile": {
           "System.Threading.Thread.dll": {}
         },
         "compileOnly": true
       },
-      "System.Threading.ThreadPool/6.0.0.0": {
+      "System.Threading.ThreadPool.Reference/6.0.0.0": {
         "compile": {
           "System.Threading.ThreadPool.dll": {}
         },
@@ -5451,7 +5576,7 @@
         },
         "compileOnly": true
       },
-      "System.Xml.XmlDocument/6.0.0.0": {
+      "System.Xml.XmlDocument.Reference/6.0.0.0": {
         "compile": {
           "System.Xml.XmlDocument.dll": {}
         },
@@ -5463,7 +5588,7 @@
         },
         "compileOnly": true
       },
-      "System.Xml.XPath/6.0.0.0": {
+      "System.Xml.XPath.Reference/6.0.0.0": {
         "compile": {
           "System.Xml.XPath.dll": {}
         },
@@ -5516,6 +5641,13 @@
       "sha512": "sha512-q6hZICsuIi/j5+1e5NxUl05R4T0eAg7BSE4JZVz9WxONpNLZz58uYx3Q88iR00LSXq9VgPhQfQ7B8q55+V76wA==",
       "path": "epplus/6.0.5",
       "hashPath": "epplus.6.0.5.nupkg.sha512"
+    },
+    "EPPlus.Core/1.5.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QGa4Qxm+9ND+tlgsa9bWWQrBZ096shez5DDhkUE5OsPqdQIO8kfMq2dAOBkOE1JrB0ZSFeIIspBoIsb9kCx3iA==",
+      "path": "epplus.core/1.5.4",
+      "hashPath": "epplus.core.1.5.4.nupkg.sha512"
     },
     "EPPlus.Interfaces/6.0.0": {
       "type": "package",
@@ -6721,6 +6853,13 @@
       "path": "system.collections.immutable/6.0.0",
       "hashPath": "system.collections.immutable.6.0.0.nupkg.sha512"
     },
+    "System.Collections.NonGeneric/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-prtjIEMhGUnQq6RnPEYLpFt8AtLbp9yq2zxOSrY7KJJZrw25Fi97IzBqY7iqssbM61Ek5b8f3MG/sG1N2sN5KA==",
+      "path": "system.collections.nongeneric/4.3.0",
+      "hashPath": "system.collections.nongeneric.4.3.0.nupkg.sha512"
+    },
     "System.Composition/1.0.31": {
       "type": "package",
       "serviceable": true,
@@ -6776,6 +6915,13 @@
       "sha512": "sha512-DHDrIxiqk1h03m6khKWV2X8p/uvN79rgSqpilL6uzpmSfxfU5ng8VcPtW4qsDsQDHiTv6IPV9TmD5M/vElPNLg==",
       "path": "system.console/4.3.0",
       "hashPath": "system.console.4.3.0.nupkg.sha512"
+    },
+    "System.Data.Common/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lm6E3T5u7BOuEH0u18JpbJHxBfOJPuCyl4Kg1RH10ktYLp5uEEE1xKrHW56/We4SnZpGAuCc9N0MJpSDhTHZGQ==",
+      "path": "system.data.common/4.3.0",
+      "hashPath": "system.data.common.4.3.0.nupkg.sha512"
     },
     "System.Data.SqlClient/4.8.3": {
       "type": "package",
@@ -7085,6 +7231,13 @@
       "path": "system.security.accesscontrol/6.0.0",
       "hashPath": "system.security.accesscontrol.6.0.0.nupkg.sha512"
     },
+    "System.Security.Claims/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-P/+BR/2lnc4PNDHt/TPBAWHVMLMRHsyYZbU1NphW4HIWzCggz8mJbTQQ3MKljFE7LS3WagmVFuBgoLcFzYXlkA==",
+      "path": "system.security.claims/4.3.0",
+      "hashPath": "system.security.claims.4.3.0.nupkg.sha512"
+    },
     "System.Security.Cryptography.Algorithms/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -7161,6 +7314,13 @@
       "sha512": "sha512-T/uuc7AklkDoxmcJ7LGkyX1CcSviZuLCa4jg3PekfJ7SU0niF0IVTXwUiNVP9DSpzou2PpxJ+eNY2IfDM90ZCg==",
       "path": "system.security.permissions/6.0.0",
       "hashPath": "system.security.permissions.6.0.0.nupkg.sha512"
+    },
+    "System.Security.Principal/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-I1tkfQlAoMM2URscUtpcRo/hX0jinXx6a/KUtEQoz3owaYwl3qwsO8cbzYVVnjxrzxjHo3nJC+62uolgeGIS9A==",
+      "path": "system.security.principal/4.3.0",
+      "hashPath": "system.security.principal.4.3.0.nupkg.sha512"
     },
     "System.Security.Principal.Windows/4.7.0": {
       "type": "package",
@@ -7246,6 +7406,20 @@
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
     },
+    "System.Threading.Thread/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OHmbT+Zz065NKII/ZHcH9XO1dEuLGI1L2k7uYss+9C1jLxTC9kTZZuzUOyXHayRk+dft9CiDf3I/QZ0t8JKyBQ==",
+      "path": "system.threading.thread/4.3.0",
+      "hashPath": "system.threading.thread.4.3.0.nupkg.sha512"
+    },
+    "System.Threading.ThreadPool/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-k/+g4b7vjdd4aix83sTgC9VG6oXYKAktSfNIJUNGxPEj7ryEOfzHHhfnmsZvjxawwcD9HyWXKCXmPjX8U4zeSw==",
+      "path": "system.threading.threadpool/4.3.0",
+      "hashPath": "system.threading.threadpool.4.3.0.nupkg.sha512"
+    },
     "System.Threading.Timer/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -7273,6 +7447,27 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
+    },
+    "System.Xml.XmlDocument/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
+      "path": "system.xml.xmldocument/4.3.0",
+      "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "System.Xml.XPath/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v1JQ5SETnQusqmS3RwStF7vwQ3L02imIzl++sewmt23VGygix04pEH+FCj1yWb+z4GDzKiljr1W7Wfvrx0YwgA==",
+      "path": "system.xml.xpath/4.3.0",
+      "hashPath": "system.xml.xpath.4.3.0.nupkg.sha512"
+    },
+    "System.Xml.XPath.XmlDocument/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A/uxsWi/Ifzkmd4ArTLISMbfFs6XpRPsXZonrIqyTY70xi8t+mDtvSM5Os0RqyRDobjMBwIDHDL4NOIbkDwf7A==",
+      "path": "system.xml.xpath.xmldocument/4.3.0",
+      "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
     },
     "Application/1.0.0": {
       "type": "project",
@@ -7994,7 +8189,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Collections.NonGeneric/6.0.0.0": {
+    "System.Collections.NonGeneric.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -8049,7 +8244,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Data.Common/6.0.0.0": {
+    "System.Data.Common.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -8509,7 +8704,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Security.Claims/6.0.0.0": {
+    "System.Security.Claims.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -8559,7 +8754,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Security.Principal/6.0.0.0": {
+    "System.Security.Principal.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -8649,12 +8844,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Threading.Thread/6.0.0.0": {
+    "System.Threading.Thread.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
     },
-    "System.Threading.ThreadPool/6.0.0.0": {
+    "System.Threading.ThreadPool.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -8719,7 +8914,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Xml.XmlDocument/6.0.0.0": {
+    "System.Xml.XmlDocument.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -8729,7 +8924,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Xml.XPath/6.0.0.0": {
+    "System.Xml.XPath.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

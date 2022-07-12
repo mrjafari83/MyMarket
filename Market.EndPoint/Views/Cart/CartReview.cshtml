@@ -259,7 +259,6 @@
             $("input").change(function (e) {
                 var value = $(this).val();
                 var id = this.getAttribute("productInCartId");
-                debugger;
                 $.post("/EditCount", { count: value, productInCartId: id },
                     function (data, textStatus, jqXHR) {
                         location.reload();
@@ -268,7 +267,6 @@
             });
 
             $("#btnNext").click(function (e) {
-                debugger;
                 var productNames = [];
                 for (var i = 0; i < @Model.Products.Count() ; i++) {
                     var productName = document.getElementById("count-" + i).getAttribute("productName");

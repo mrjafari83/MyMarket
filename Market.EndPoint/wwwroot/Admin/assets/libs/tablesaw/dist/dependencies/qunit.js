@@ -4853,7 +4853,7 @@
   		lineArray = []; // E.g. lineArray[4] === 'Hello\n'
   		lineHash = {}; // E.g. lineHash['Hello\n'] === 4
 
-  		// '\x00' is a valid character, but various debuggers don't like it.
+  		// '\x00' is a valid character, but various  s don't like it.
   		// So we'll insert a junk entry to avoid generating a null character.
   		lineArray[0] = "";
 

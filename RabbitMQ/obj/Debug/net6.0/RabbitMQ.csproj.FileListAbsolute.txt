@@ -1,9 +1,3 @@
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.csproj.AssemblyReference.cache
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\MvcTestingAppManifest.json
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.AssemblyInfoInputs.cache
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.AssemblyInfo.cs
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.csproj.CoreCompileInputs.cache
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\appsettings.json
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\MvcTestingAppManifest.json
@@ -305,9 +299,6 @@ C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\EntityFramework.SqlServer.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\EntityFramework.dll
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\EPPlus.dll
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\EPPlus.Interfaces.dll
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\EPPlus.System.Drawing.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\System.Web.Mvc.dll
@@ -339,7 +330,6 @@ C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.IdentityModel
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
-C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Newtonsoft.Json.dll
@@ -378,8 +368,16 @@ C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Application.pdb
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Persistance.pdb
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Common.pdb
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\Domain.pdb
+C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.csproj.AssemblyReference.cache
+C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\MvcTestingAppManifest.json
+C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.AssemblyInfoInputs.cache
+C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.AssemblyInfo.cs
+C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.csproj.CoreCompileInputs.cache
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.csproj.CopyComplete
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\ref\RabbitMQ.dll
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.pdb
 C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\obj\Debug\net6.0\RabbitMQ.genruntimeconfig.cache
+C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\EPPlus.Core.dll
+C:\Users\Kar1\Desktop\MyMarket\RabbitMQ\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll

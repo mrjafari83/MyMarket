@@ -227,7 +227,6 @@
                 }
             },
             submitHandler: function () {
-                debugger;
                 var formdata = new FormData();
                 formdata.append("Product.Name", $("#name").val());
                 formdata.append("Product.Brand", $("#brand").val());
@@ -369,7 +368,6 @@
         $("#btnCreateColorByList").click(function (e) {
             var colors = document.getElementById("ColorsList").options;
             var table = document.getElementById("colorTable");
-            debugger;
             for (var i = 0; i < colors.length; i++) {
                 if (colors[i].selected && !colors[i].disabled) {
                     CreateRow(table, [colors[i].value], true);
@@ -380,7 +378,6 @@
         $("#btnCreateSizeByList").click(function (e) {
             var sizes = document.getElementById("SizesList").options;
             var table = document.getElementById("sizeTable");
-            debugger;
             for (var i = 0; i < sizes.length; i++) {
                 if (sizes[i].selected && !sizes[i].disabled) {
                     CreateRow(table, [sizes[i].value], true);
@@ -389,7 +386,6 @@
         });
 
          $("#btnSetInventoryTable").click(function (e) {
-             debugger;
              var sizeRows = document.getElementById("sizeTable").rows;
              var colorRows = document.getElementById("colorTable").rows;
              var sizes = [];
