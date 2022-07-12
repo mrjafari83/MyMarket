@@ -23,7 +23,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Common.Utilities;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
+using Application.Services.Admin.User.Queries.GetUsersBySearch;
+using RabbitMQ.Repositories.User.GetUsersBySearch;
 
 namespace Market.EndPoint
 {
@@ -148,6 +149,7 @@ namespace Market.EndPoint
             services.AddScoped<IOptionFacade, OptionFacade>();
             services.AddScoped<IExcelFacade, ExcelFacade>();
             services.AddScoped<ICommentFacad, CommentFacad>();
+            services.AddScoped<IGetUserBySearch, GetUserBySearch>();
         }
 
         private void ClientInjections(IServiceCollection services)

@@ -2,9 +2,12 @@
 using Common.Enums;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
 using System.Text;
 using RabbitMQ.Excel;
+using Domain.Entities.User;
+using Microsoft.AspNetCore.Identity;
+using Common.ViewModels.SearchViewModels;
+using Common.Classes;
 
 namespace RabbitMQ
 {
@@ -40,7 +43,6 @@ namespace RabbitMQ
         public void ReciveCreateExcel()
         {
             int excelId = 0;
-
             try
             {
                 _channel.QueueDeclare("ExcelCreate", true, false, false, null);

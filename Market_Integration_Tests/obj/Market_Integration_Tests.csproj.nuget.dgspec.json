@@ -269,6 +269,9 @@
               "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj": {
                 "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common\\Common.csproj"
               },
+              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj": {
+                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market.EndPoint\\Market.EndPoint.csproj"
+              },
               "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj": {
                 "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj"
               }
@@ -321,7 +324,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.3.0, )"
             },
             "Swashbuckle.AspNetCore.Newtonsoft": {
               "target": "Package",
@@ -382,6 +385,9 @@
               },
               "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj": {
                 "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj"
+              },
+              "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj": {
+                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj"
               }
             }
           }
@@ -690,6 +696,10 @@
               "target": "Package",
               "version": "[6.0.5, )"
             },
+            "Microsoft.AspNetCore.Mvc.Testing": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
               "version": "[6.0.1, )"
@@ -710,6 +720,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

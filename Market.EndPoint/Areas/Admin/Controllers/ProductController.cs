@@ -251,48 +251,17 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateExcel(ProducsSearchViewModel model)
-        {
-            TempData["SearchKey"] = model.SearchKey;
-            TempData["StartPrice"] = model.StartPrice;
-            TempData["EndPrice"] = model.EndPrice;
-            TempData["OrderBy"] = (int)model.OrderBy;
-            TempData["SearchBy"] = (int)model.SearchBy;
-
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> CreateExcelConfirmed()
+        public async Task<IActionResult> CreateExcelConfirmed(ProducsSearchViewModel searchModel)
         {
             try
             {
-                var orderBy = TempData["OrderBy"] switch
-                {
-                    0 => Enums.ProductsFilter.Newest,
-                    1 => Enums.ProductsFilter.Oldest,
-                    2 => Enums.ProductsFilter.MostViewed,
-                    3 => Enums.ProductsFilter.MostSelled,
-                    4 => Enums.ProductsFilter.LessViewed,
-                    5 => Enums.ProductsFilter.LessSelled,
-                    _ => Enums.ProductsFilter.Newest,
-                };
-
-                var searchBy = TempData["SearchBy"] switch
-                {
-                    0 => Enums.PageFilterCategory.Name,
-                    1 => Enums.PageFilterCategory.Brand,
-                    2 => Enums.PageFilterCategory.CategoryName,
-                    _ => Enums.PageFilterCategory.Name
-                };
-
                 var model = new ProducsSearchViewModel
                 {
-                    SearchKey = TempData["SearchKey"] == null ? "" : TempData["SearchKey"].ToString(),
-                    StartPrice = TempData["StartPrice"] == null ? 0 : (int)TempData["StartPrice"],
-                    EndPrice = TempData["EndPrice"] == null ? 0 : (int)TempData["EndPrice"],
-                    OrderBy = orderBy,
-                    SearchBy = searchBy
+                    SearchKey = searchModel.SearchKey,
+                    StartPrice = searchModel.StartPrice,
+                    EndPrice = searchModel.EndPrice,
+                    OrderBy = searchModel.OrderBy,
+                    SearchBy = searchModel.SearchBy
                 };
 
                 var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.Product);

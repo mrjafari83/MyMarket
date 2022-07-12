@@ -217,11 +217,9 @@
                             contentType: false,
                             cache: false,
                             enctype: "multipart/form-data",
-                            url: "/Admin/Product/CreateExcel",
+                            url: "/Admin/Product/CreateExcelConfirmed",
                             data: formdata,
                             success: function (response) {
-                                $("#title").html("درخواست فایل اکسل");
-                                $("#body").html(response);
                             }
                         });
                    }

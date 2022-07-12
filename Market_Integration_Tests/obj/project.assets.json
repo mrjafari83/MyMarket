@@ -4376,6 +4376,7 @@
           "Application": "1.0.0",
           "Common": "1.0.0",
           "JWT": "9.0.3",
+          "Market.EndPoint": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.6",
           "Microsoft.EntityFrameworkCore": "6.0.6",
           "Persistance": "1.0.0",
@@ -4383,7 +4384,7 @@
           "Serilog.Extensions.Logging": "3.1.0",
           "Serilog.Sinks.RollingFile": "3.3.0",
           "Serilog.Sinks.RollingFile.Extension": "2.0.2",
-          "Swashbuckle.AspNetCore": "6.2.3",
+          "Swashbuckle.AspNetCore": "6.3.0",
           "Swashbuckle.AspNetCore.Newtonsoft": "6.3.1"
         },
         "compile": {
@@ -4409,6 +4410,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.6",
           "Newtonsoft.Json": "13.0.1",
           "Persistance": "1.0.0",
+          "RabbitMQ": "1.0.0",
           "RabbitMQ.Client": "6.4.0",
           "Swashbuckle.AspNetCore": "6.3.0",
           "SweetAlert": "1.0.0"
@@ -4448,6 +4450,7 @@
         "dependencies": {
           "Application": "1.0.0",
           "EPPlus": "6.0.5",
+          "Microsoft.AspNetCore.Mvc.Testing": "6.0.6",
           "Microsoft.Extensions.Hosting": "6.0.1",
           "Persistance": "1.0.0",
           "RabbitMQ.Client": "6.4.0"
@@ -4457,7 +4460,10 @@
         },
         "runtime": {
           "bin/placeholder/RabbitMQ.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },

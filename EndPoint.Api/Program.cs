@@ -21,6 +21,8 @@ using Application.Mapper;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Logging;
+using Application.Services.Admin.User.Queries.GetUsersBySearch;
+using RabbitMQ.Repositories.User.GetUsersBySearch;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,7 @@ builder.Services.AddDbContext<DataBaseContext>(optons =>
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IProductFacad, ProductFacad>();
 builder.Services.AddScoped<IClientCartFacad, ClientCartFacad>();
+builder.Services.AddScoped<IGetUserBySearch, GetUserBySearch>();
 MapperConfig(builder.Services);
 
 builder.Services.AddCors(options =>

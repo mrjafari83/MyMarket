@@ -1,5 +1,7 @@
 ﻿@using Common.ViewModels
 @model List<UserViewModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Common.Enums
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -8,8 +10,34 @@
 <table>
     <thead>
         <tr>
-            <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" id="btnCreateUser">افزودن</a>
+            <th>
+                <a class="waves-effect waves-light btn modal-trigger green" href="#modal1" id="btnCreateUser">افزودن</a>
+            </th>
+            <th>
+                <a class="waves-effect waves-light btn modal-trigger green" id="btnApplyingToCreateExcel">درخواست فایل اکسل</a>
+            </th>
         </tr>
+        <form id="searchForm">
+        <tr>
+            <td>
+                <label for="searchKey">جستوجو کنید : </label>
+                <input type="text" id="searchKey" value="@ViewBag.SearchKey" />
+            </td>
+            <td>
+                <label for="searchBy">بر اساس : </label>
+                <select id="searchBy" asp-items="Html.GetEnumSelectList<Enums.UserSearchFilter>().OrderBy(p=> p.Value != ViewBag.SearchBy.ToString())">
+                </select>
+            </td>
+            <td>
+                <label for="userRole">بر اساس مقام : </label>
+                <select id="userRole" asp-items="Html.GetEnumSelectList<Enums.RolesWithAll>().OrderBy(p=> p.Value != ViewBag.UserRole.ToString())">
+                </select>
+            </td>
+            <td>
+                <a class="waves-effect waves-light btn modal-trigger blue" id="btnSearch">جستوجو</a>
+            </td>
+        </tr>
+        </form>
         <tr>
             <th>نام کاربری</th>
             <th>ایمیل</th>
@@ -18,33 +46,42 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model.Count != 0)
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    @switch (item.RoleName)
+                    {
+                        case "Owner":
+                            {
+                                <td>مدیریت</td>
+                                break;
+                            }
+                        case "Admin":
+                            {
+                                <td>ادمین</td>
+                                break;
+                            }
+                        default:
+                            {
+                                <td>مشتری</td>
+                                break;
+                            }
+                    }
+                    <td>
+                        <a class="waves-effect waves-light btn modal-trigger blue btnAddRole" href="#modal1" userName="@item.UserName">ویرایش مقام</a>
+                        <a class="waves-effect waves-light btn modal-trigger blue btnGetUserCartPayings" href="#modal1" userName="@item.UserName">سبد های خرید</a>
+                        <a class="waves-effect waves-light btn modal-trigger red btnDelete" href="#modal1" userName="@item.UserName">حذف</a>
+                    </td>
+                </tr>
+            }
+        else
         {
             <tr>
-                <td>@item.UserName</td>
-                <td>@item.Email</td>
-                @switch (item.RoleName)
-                {
-                    case "Owner":
-                        {
-                            <td>مدیریت</td>
-                            break;
-                        }
-                    case "Admin":
-                        {
-                            <td>ادمین</td>
-                            break;
-                        }
-                    default:
-                        {
-                            <td>مشتری</td>
-                            break;
-                        }
-                }
                 <td>
-                    <a class="waves-effect waves-light btn modal-trigger blue btnAddRole" href="#modal1" userName="@item.UserName">ویرایش مقام</a>
-                    <a class="waves-effect waves-light btn modal-trigger blue btnGetUserCartPayings" href="#modal1" userName="@item.UserName">سبد های خرید</a>
-                    <a class="waves-effect waves-light btn modal-trigger red btnDelete" href="#modal1" userName="@item.UserName">حذف</a>
+                    موردی یافت نشد.
                 </td>
             </tr>
         }
@@ -61,42 +98,80 @@
 
 @section scripts
             {
-    <script>
-        $("#btnCreateUser").click(function () {
+<script>
+    $("#btnCreateUser").click(function () {
 
-            $.get("/Admin/Users/Create", function (result) {
+        $.get("/Admin/Users/Create", function (result) {
 
-                $("#title").html("افزودن  کاربر جدید");
-                $("#body").html(result);
-            });
-
+            $("#title").html("افزودن  کاربر جدید");
+            $("#body").html(result);
         });
 
-        $(".btnDelete").click(function (e) {
-            var userName = this.getAttribute("userName");
-            $.get("/Admin/Users/Delete?userName=" + userName, function (result) {
+    });
 
-                $("#title").html("حذف  کاربر ");
-                $("#body").html(result);
-            });
+    $(".btnDelete").click(function (e) {
+        var userName = this.getAttribute("userName");
+        $.get("/Admin/Users/Delete?userName=" + userName, function (result) {
+
+            $("#title").html("حذف  کاربر ");
+            $("#body").html(result);
+        });
+    });
+
+    $(".btnAddRole").click(function (e) {
+        var userName = this.getAttribute("userName");
+        $.get("/Admin/Users/EditUserRoles?userName=" + userName, function (result) {
+
+            $("#title").html("تغییر مقام کاربر");
+            $("#body").html(result);
+        });
+    });
+
+    $(".btnGetUserCartPayings").click(function (e) {
+        var userName = this.getAttribute("userName");
+        $.get("/Admin/Users/GetUserCartPayings?userName=" + userName, function (result) {
+
+            $("#title").html("سبد خرید های کاربر");
+            $("#body").html(result);
+        });
+    });
+
+            $("#btnApplyingToCreateExcel").click(function(e){
+              swal("خطا", "آیا از درخواست فایل اکسل با فیلترهای وارد شده مطمئن هستید؟", "warning")
+                    .then((value) =>
+                    {
+                        if(value.value == true){
+                        var formdata = new FormData();
+
+                        formdata.append("SearchKey",$("#searchKey").val());
+                        formdata.append("SearchBy",$("#searchBy").val());
+                        formdata.append("UserRole",$("#userRole").val());
+
+                        $.ajax({
+                            type: "POST",
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            enctype: "multipart/form-data",
+                            url: "/Admin/Users/CreateExcelConfirmed",
+                            data: formdata,
+                            success: function (response) {
+                            }
+                        });
+                   }
+             });
         });
 
-        $(".btnAddRole").click(function (e) {
-            var userName = this.getAttribute("userName");
-            $.get("/Admin/Users/EditUserRoles?userName=" + userName, function (result) {
+             $("#btnSearch").click(function(e){
+             var formdata = new FormData();
 
-                $("#title").html("تغییر مقام کاربر");
-                $("#body").html(result);
-            });
-        });
+             var searchKey = $("#searchKey").val();
+             var searchBy = $("#searchBy").val();
+             var userRole = $("#userRole").val();
 
-        $(".btnGetUserCartPayings").click(function (e) {
-            var userName = this.getAttribute("userName");
-            $.get("/Admin/Users/GetUserCartPayings?userName=" + userName, function (result) {
+             var address = "/Admin/Users/Index?SearchKey="+ searchKey+"&SearchBy=" +searchBy+"&UserRole="+userRole;
 
-                $("#title").html("سبد خرید های کاربر");
-                $("#body").html(result);
-            });
-        });
-    </script>
+             location.href = address;
+             });
+</script>
 }

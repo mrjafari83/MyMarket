@@ -17,6 +17,7 @@ using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
 using Common.ViewModels.ExcelViewModels;
 using Application.Services.Common.BlogPage.GetBlogPagesBySearch;
 using Application.Services.Admin.Message.Queries.GetMessagesBySearch;
+using Application.Services.Admin.User.Queries.GetUsersBySearch;
 
 namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
 {
@@ -29,11 +30,13 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
     public class GetEntitiesByFilterService : IGetEntitiesByFilterService
     {
         private readonly IDataBaseContext db;
-        private readonly ILogger<GetEntitiesByFilterService> _logger;
-        public GetEntitiesByFilterService(IDataBaseContext context, ILogger<GetEntitiesByFilterService> logger)
+        private readonly SaveLogInFile _saveLogInFile;
+        private readonly IGetUserBySearch _getUserBySearch;
+        public GetEntitiesByFilterService(IDataBaseContext context, SaveLogInFile saveLogInFile, IGetUserBySearch getUserBySearch)
         {
             db = context;
-            _logger = logger;
+            _saveLogInFile = saveLogInFile;
+            _getUserBySearch = getUserBySearch;
         }
 
         public ResultDto<IEnumerable<object>> Execute(int filterId)
@@ -89,6 +92,16 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         Email = m.Email,
                         Website = m.Website,
                         Text = m.Message
+                    }),
+
+                    Domain.Entities.Option.SearchItemType.User => _getUserBySearch.GetUSers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
+                    .Select(u=> new ExcelUserViewModel
+                    {
+                        UserName = u.UserName ?? "ندارد",
+                        Email = u.Email ?? "ندارد",
+                        Name = u.Name ?? "ندارد",
+                        Family = u.Family ?? "ندارد",
+                        PhoneNumber = u.PhoneNumber ?? "ندارد",
                     })
                 };
 
@@ -100,7 +113,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _saveLogInFile.Log(LogLevel.Error, ex.Message, "Get Entities By search in Application");
                 return new ResultDto<IEnumerable<object>>
                 {
                     Data = new List<object>(),

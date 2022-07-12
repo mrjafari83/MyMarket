@@ -1,15 +1,6 @@
-﻿using Application.Interfaces.FacadPatterns.Admin;
-using Microsoft.AspNetCore.Hosting;
-using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Drawing;
+﻿using OfficeOpenXml;
 using System.ComponentModel.DataAnnotations;
 using Common.Utilities;
-using Microsoft.AspNetCore.Http;
 
 namespace RabbitMQ.Excel
 {
@@ -21,7 +12,7 @@ namespace RabbitMQ.Excel
             _saveLogFile = saveLogInFile;
         }
 
-        public string GetExcelFile<Type>(List<Type> source, string address,string prefixFileName)
+        public string GetExcelFile<Type>(List<Type> source, string address, string prefixFileName)
         {
             try
             {
@@ -47,7 +38,10 @@ namespace RabbitMQ.Excel
                             for (int i = 0; i < colmnCount; i++)
                             {
                                 var attr = properties[i].GetCustomAttributes(typeof(DisplayAttribute), false).Cast<DisplayAttribute>().FirstOrDefault();
-                                header[i] = attr.Name ?? properties[i].Name;
+                                if (attr != null)
+                                    header[i] = attr.Name;
+                                else
+                                    header[i] = properties[i].Name;
                             }
                             data.Add(header);
                         }
@@ -61,7 +55,8 @@ namespace RabbitMQ.Excel
                                 if (item != null)
                                     for (int i = 0; i < colmnCount; i++)
                                     {
-                                        row[i] = prperties[i].GetValue(item).ToString();
+                                        if (prperties[i].GetValue(item) != null)
+                                            row[i] = prperties[i].GetValue(item).ToString();
                                     }
                                 data.Add(row);
                             }
@@ -120,7 +115,7 @@ namespace RabbitMQ.Excel
             }
             catch (Exception ex)
             {
-                _saveLogFile.Log(LogLevel.Error, ex.Message , "Get Excel File 'Rabbit MQ'");
+                _saveLogFile.Log(LogLevel.Error, ex.Message, "Get Excel File 'Rabbit MQ'");
                 return "";
             }
         }

@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EndPoint.Api</name>
+    </assembly>
+    <members>
+        <member name="M:EndPoint.Api.Controllers.AuthanticationController.Login(EndPoint.Api.ViewModels.LoginViewModel)">
+            <summary>ورود به سایت</summary>
+             <response code="200">موفق</response>
+             <response code="401">لطفا وارد سایت شوید.</response>
+             <response code="400">خطایی رخ داده است.</response>
+        </member>
+        <member name="M:EndPoint.Api.Controllers.AuthanticationController.Register(EndPoint.Api.ViewModels.RegisterViewModel)">
+            <summary>ثبت نام در سایت</summary>
+             <response code="200">موفق</response>
+             <response code="400">خطایی رخ داده است.</response>
+        </member>
+        <member name="M:EndPoint.Api.Controllers.AuthanticationController.ChangeRole(EndPoint.Api.ViewModels.ChangeRoleViewModel)">
+            <summary>تغییر مقام کاربران</summary>
+             <response code="200">موفق</response>
+             <response code="401">لطفا وارد سایت شوید</response>
+             <response code="400">خطایی رخ داده است.</response>
+        </member>
+        <member name="M:EndPoint.Api.Controllers.AuthanticationController.GetUserDetail">
+            <summary>دریافت اطلاعات کاربر فعلی </summary>
+            <response code="200">موفق</response>
+            <response code="401">لطفا وارد سایت شوید</response>
+            <response code="400">خطایی رخ داده است.</response>
+        </member>
+        <member name="M:EndPoint.Api.Controllers.ProductController.GetAll(EndPoint.Api.ViewModels.Products.CompleteSearchViewModel)">
+            <summary>دریافت همه محصولات</summary>
+            <response code="200">موفق</response>
+            <response code="401">لطفا وارد سایت شوید</response>
+        </member>
+        <member name="M:EndPoint.Api.Controllers.ProductController.GetById(System.Int32)">
+            <summary>دریافت یک محصول با استفاده از آیدی آن</summary>
+            <response code="200">موفق</response>
+            <response code="401">لطفا وارد سایت شوید</response>
+            <response code="404">محصولی یافت نشد</response>
+        </member>
+        <member name="M:EndPoint.Api.Controllers.ProductController.Create(EndPoint.Api.ViewModels.Products.CreateProductViewModel)">
+            <summary>افزودن محصول جدید</summary>
+            <response code="200">موفق</response>
+            <response code="401">لطفا وارد سایت شوید</response>
+            <response code="400">خطایی رخ داده است.</response>
+        </member>
+        <member name="M:EndPoint.Api.Controllers.ProductController.Delete(System.Int32)">
+            <summary>حذف محصول بر حسب آیدی آن</summary>
+            <response code="200">موفق</response>
+            <response code="401">لطفا وارد سایت شوید</response>
+            <response code="404">محصولی یافت نشد.</response>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.ChangeRoleViewModel.UserName">
+            <summary>نام کاربری</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.ChangeRoleViewModel.Role">
+            <summary>انتخاب مقام جدید</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.LoginViewModel.UserName">
+            <summary>نام کاربری</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.LoginViewModel.Password">
+            <summary>کلمه عبور</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CompleteSearchViewModel.PageNumber">
+            <summary>شماره صفحه</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CompleteSearchViewModel.PageSize">
+            <summary>تعداد صفحه</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.Name">
+            <summary>نام محصول</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.Brand">
+            <summary>برند محصول</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.ShortDescription">
+            <summary>توضیحات مختصر</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.Description">
+            <summary>توضیحات</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.CategoryId">
+            <summary>دسته بندی</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.Keywords">
+            <summary>کلمات کلیدی</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.Colors">
+            <summary>رنگ ها</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.Sizes">
+            <summary>سایزها</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.Features">
+            <summary>ویژگی های محصول</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.CreateProductViewModel.InventoryAndPrices">
+            <summary>موجودی و قیمت محصولات.توجه : این بخش باید بر اساس ترکیب رنگ ها و سایز ها پر شود!</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.SearchViewModel.SearchKey">
+            <summary>جستوجو کنید...</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.SearchViewModel.StartPrice">
+            <summary>از قیمت : </summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.SearchViewModel.EndPrice">
+            <summary>تا قیمت : </summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.SearchViewModel.OrderBy">
+            <summary>مرتب سازی بر اساس : </summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.Products.SearchViewModel.SearchBy">
+            <summary>جستوجو بر اساس : </summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.RegisterViewModel.Name">
+            <summary>نام</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.RegisterViewModel.Family">
+            <summary>نام خانوادگی</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.RegisterViewModel.Email">
+            <summary>ایمیل</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.RegisterViewModel.PhoneNumber">
+            <summary>شماره تلفن همراه</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.RegisterViewModel.UserName">
+            <summary>نام کاربری</summary>
+        </member>
+        <member name="P:EndPoint.Api.ViewModels.RegisterViewModel.Password">
+            <summary>کلمه عبور</summary>
+        </member>
+    </members>
+</doc>

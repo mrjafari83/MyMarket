@@ -17,14 +17,14 @@ namespace Common.Enums
 
         public enum ProductsFilter
         {
-            [Display(Name ="جدیدترین")]
+            [Display(Name = "جدیدترین")]
             Newest = 0,
             [Display(Name = "قدیمی ترین")]
             Oldest = 1,
             [Display(Name = "بیشترین بازدید")]
-            MostViewed =2 ,
+            MostViewed = 2,
             [Display(Name = "بیشترین فروش")]
-            MostSelled =3,
+            MostSelled = 3,
             [Display(Name = "کمترین بازدید")]
             LessViewed = 4,
             [Display(Name = "کمترین خرید")]
@@ -51,7 +51,8 @@ namespace Common.Enums
             Menu
         }
 
-        public enum PageFilterCategory{
+        public enum PageFilterCategory
+        {
             [Display(Name = "نام")]
             Name = 0,
             [Display(Name = "برند")]
@@ -79,6 +80,18 @@ namespace Common.Enums
             Owner = 2
         }
 
+        public enum RolesWithAll
+        {
+            [Display(Name = "همه")]
+            All = 0,
+            [Display(Name = "مشتری")]
+            Customer = 1,
+            [Display(Name = "ادمین")]
+            Admin = 2,
+            [Display(Name = "مدیریت")]
+            Owner = 3,
+        }
+
         public enum MesssagesFilter
         {
             [Display(Name = "نام")]
@@ -89,6 +102,21 @@ namespace Common.Enums
             Website = 2,
             [Display(Name = "متن پیام")]
             Text = 3
+        }
+
+        public enum UserSearchFilter
+        {
+            [Display(Name = "نام")]
+            Name = 0,
+
+            [Display(Name = "نام خانوادگی")]
+            Family = 1,
+
+            [Display(Name = "ایمیل")]
+            Email = 2,
+
+            [Display(Name = "نام کاربری")]
+            UserName = 3,
         }
     }
 }
