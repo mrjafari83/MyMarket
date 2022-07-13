@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "8diE1a7bDv1sH/4qtjKRoJbfmx9M/IHBxf+1/TRwc97t3qzawOa1c7/eoRo0flkzVaQZOdzwBhJ6JlWkgFJeLw==",
-  "success": true,
+  "dgSpecHash": "JtfXNmzFV9l/GFE/nDRw5cIiSmk9T6xbbnF0+v937Md45xjbVx6FMy4Jeuy0wLWRdeYEJuOeJ2LrRMktcDYXjg==",
+  "success": false,
   "projectFilePath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market_Integration_Tests\\Market_Integration_Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kar1\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
@@ -262,6 +262,15 @@
     "C:\\Users\\Kar1\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.5\\xunit.runner.visualstudio.2.4.5.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to find project information for 'C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
+      "libraryId": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

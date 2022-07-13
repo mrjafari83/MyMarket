@@ -4440,23 +4440,6 @@
         "runtime": {
           "bin/placeholder/Persistance.dll": {}
         }
-      },
-      "RabbitMQ/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Application": "1.0.0",
-          "EPPlus": "6.0.5",
-          "Microsoft.Extensions.Hosting": "6.0.1",
-          "Persistance": "1.0.0",
-          "RabbitMQ.Client": "6.4.0"
-        },
-        "compile": {
-          "bin/placeholder/RabbitMQ.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/RabbitMQ.dll": {}
-        }
       }
     }
   },
@@ -12658,15 +12641,11 @@
       "type": "project",
       "path": "../Persistance/Persistance.csproj",
       "msbuildProject": "../Persistance/Persistance.csproj"
-    },
-    "RabbitMQ/1.0.0": {
-      "type": "project",
-      "path": "../RabbitMQ/RabbitMQ.csproj",
-      "msbuildProject": "../RabbitMQ/RabbitMQ.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj",
       "Common >= 1.0.0",
       "EndPoint.Api >= 1.0.0",
       "Market.EndPoint >= 1.0.0",
@@ -12675,7 +12654,6 @@
       "Microsoft.NET.Test.Sdk >= 17.2.0",
       "Moq >= 4.18.1",
       "NUnit >= 3.13.3",
-      "RabbitMQ >= 1.0.0",
       "xunit >= 2.4.1",
       "xunit.runner.visualstudio >= 2.4.5"
     ]
@@ -12783,6 +12761,15 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to find project information for 'C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
+      "libraryId": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
