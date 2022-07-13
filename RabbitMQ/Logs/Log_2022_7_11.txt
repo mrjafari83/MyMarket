@@ -1,2 +1,4 @@
 [Error] _ 7/11/2022 9:47:54 AM _ Get Excel File 'Rabbit MQ' _ Message is : Exception of type 'System.Exception' was thrown.
 [Error] _ 7/11/2022 9:47:54 AM _ Get Excel File 'Rabbit MQ' _ Message is : Exception of type 'System.Exception' was thrown.
+[Error] _ 7/11/2022 4:47:37 PM _ Get Excel File 'Rabbit MQ' _ Message is : Sequence contains no elements
+[Error] _ 7/11/2022 4:47:37 PM _ Get Excel File 'Rabbit MQ' _ Message is : Sequence contains no elements

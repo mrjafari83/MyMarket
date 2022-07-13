@@ -1,6 +1,8 @@
 ﻿@using Application.Services.Common.BlogPage.Queries.GetAllBlogPages
 @using Common.Dto
+@using Common.Enums
 @model ResultDto<GetAllBlogPagesResult>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -16,11 +18,43 @@
 </style>
 
 <div class="row">
+    <table>
+        <form id="searchForm" method="get" action="/Admin/Product/Index">
+        <tr>
+            <td>
+                <label for="searchKey">جستوجو کنید : </label>
+                <input type="text" id="searchKey" value="@ViewBag.SearchKey" />
+            </td>
+            <td>
+                <label for="categoryId">انتخاب بر اساس دسته بندی : </label>
+                <select id="categoryId" asp-items="@ViewBag.Categories">
+                    <option value="0" selected>همه</option>
+                </select>
+            </td>
+            <td>
+                <label for="orderBy">مرتب سازی بر اساس : </label>
+                <select id="orderBy" asp-items="@Html.GetEnumSelectList<Enums.BlogPagesFilter>().OrderBy(p=> p.Value != ViewBag.OrderBy.ToString())">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <a class="waves-effect waves-light btn modal-trigger blue" id="btnSearch">جستوجو</a>
+            </td>
+        </tr>
+        </form>
+    </table>
+
     <table dir="rtl" style="text-align : right">
         <thead>
             <tr>
                 <th>
                     <a class="waves-effect waves-light btn modal-trigger green" href="/Admin/BlogPages/Create">افزودن</a>
+                </th>
+                <th>
+                    <a class="waves-effect waves-light btn modal-trigger green" id="btnApplyingToCreateExcel">درخواست فایل اکسل</a>
                 </th>
             </tr>
             <tr>
@@ -41,9 +75,9 @@
                 <td>@item.CreateDate</td>
                 <td>@item.VisitNumber</td>
                 <td>
-                    <a style="width:50%" class="waves-effect waves-light btn modal-trigger blue" href="/Admin/BlogPages/DetailInBaseLayout/@item.Id">مشاهده در قالب اصلی</a>
-                    <a style="width:25%" class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/BlogPages/Edit/@item.Id">ویرایش</a>
-                    <a style="width:25%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/BlogPages/Delete/@item.Id">حذف</a>
+                    <a style="width:100%" class="waves-effect waves-light btn modal-trigger blue" href="/Admin/BlogPages/DetailInBaseLayout/@item.Id">مشاهده در قالب اصلی</a>
+                    <a style="width:100%" class="waves-effect waves-light btn modal-trigger yellow" href="/Admin/BlogPages/Edit/@item.Id">ویرایش</a>
+                    <a style="width:100%" class="waves-effect waves-light btn modal-trigger red" href="/Admin/BlogPages/Delete/@item.Id">حذف</a>
                 </td>
             </tr>
         }
@@ -59,18 +93,18 @@
             }
             else
             {
-                <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
+                <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@back&SearchKey=@ViewBag.SearchKey&CategoryId=@ViewBag.CategoryId&OrderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_right</i></a></li>
             }
 
             @for (int i = 1; i <= Model.Data.TotalRows; i++)
             {
                 if (i == ViewBag.CurrentRow)
                 {
-                    <li class="active"><a href="/Admin/BlogPages/Index?currentPage=@i">@i</a></li>
+                    <li class="active"><a href="/Admin/BlogPages/Index?currentPage=@i&SearchKey=@ViewBag.SearchKey&CategoryId=@ViewBag.CategoryId&OrderBy=@ViewBag.OrderBy">@i</a></li>
                 }
                 else
                 {
-                    <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@i">@i</a></li>
+                    <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@i&SearchKey=@ViewBag.SearchKey&CategoryId=@ViewBag.CategoryId&OrderBy=@ViewBag.OrderBy">@i</a></li>
                 }
             }
 
@@ -80,9 +114,51 @@
             }
             else
             {
-                <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@forward"><i class="material-icons">chevron_left</i></a></li>
+                <li class="waves-effect"><a href="/Admin/BlogPages/Index?currentPage=@forward&SearchKey=@ViewBag.SearchKey&CategoryId=@ViewBag.CategoryId&OrderBy=@ViewBag.OrderBy"><i class="material-icons">chevron_left</i></a></li>
             }
 
         </ul>
     </div>
 </div>
+
+@section scripts{
+<script>
+        $("#btnApplyingToCreateExcel").click(function(e){
+        swal("خطا", "آیا از درخواست فایل اکسل با فیلترهای وارد شده مطمئن هستید؟", "warning")
+            .then((value) =>
+            {
+                if(value.value == true){
+                var formdata = new FormData();
+
+                formdata.append("SearchKey",$("#searchKey").val());
+                formdata.append("CategoryId",$("#categoryId").val());
+                formdata.append("OrderBy",$("#orderBy").val());
+
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    url: "/Admin/BlogPages/CreateExcelConfirmed",
+                    data: formdata,
+                    success: function (response) {
+                }
+                });
+                }
+            });
+        });
+
+     $("#btnSearch").click(function(e){
+     var formdata = new FormData();
+
+     var searchKey = $("#searchKey").val();
+     var categoryId = $("#categoryId").val();
+     var orderBy = $("#orderBy").val();
+
+     var address = "/Admin/BlogPages/Index?SearchKey="+ searchKey+"&categoryId="+categoryId+"&orderBy="+orderBy;
+
+     location.href = address;
+     });
+</script>
+}

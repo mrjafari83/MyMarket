@@ -103,7 +103,6 @@
         $(document).ready(function () {
 
             function GetProductsInCart(cartId) {
-                debugger;
                 $.get("/GetCartPayingProducts", { id: cartId },
                     function (data, textStatus, jqXHR) {
                         $(".modal-body").html(data);

@@ -58,7 +58,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("BlogPages");
+                    b.ToTable("BlogPages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.BlogPages.BlogPagesVisit", b =>
@@ -81,7 +81,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("BrowserId");
 
-                    b.ToTable("BlogPagesVisits");
+                    b.ToTable("BlogPagesVisits", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Cart.Cart", b =>
@@ -103,7 +103,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Cart.CartPayingInfo", b =>
@@ -154,7 +154,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("CartPayings");
+                    b.ToTable("CartPayings", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Cart.ProductInCart", b =>
@@ -205,7 +205,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ProductInventoryAndPriceId");
 
-                    b.ToTable("ProductsInCart");
+                    b.ToTable("ProductsInCart", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Categories.Category<Domain.Entities.BlogPages.BlogPage>", b =>
@@ -235,7 +235,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("BlogPageCategories");
+                    b.ToTable("BlogPageCategories", (string)null);
 
                     b.HasData(
                         new
@@ -274,7 +274,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategories", (string)null);
 
                     b.HasData(
                         new
@@ -330,7 +330,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("BlogPageComments");
+                    b.ToTable("BlogPageComments", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Comments.Comment<Domain.Entities.Products.Product>", b =>
@@ -377,7 +377,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("ProductComments");
+                    b.ToTable("ProductComments", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Common.Keyword<Domain.Entities.BlogPages.BlogPage>", b =>
@@ -404,7 +404,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("BlogKeywords");
+                    b.ToTable("BlogKeywords", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Common.Keyword<Domain.Entities.Products.Product>", b =>
@@ -431,7 +431,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("ProductKeywords");
+                    b.ToTable("ProductKeywords", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Message.CriticismMessage", b =>
@@ -456,7 +456,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CriticismMessages");
+                    b.ToTable("CriticismMessages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.NewsBulletin.Email", b =>
@@ -472,7 +472,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Emails");
+                    b.ToTable("Emails", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.NewsBulletin.News", b =>
@@ -491,7 +491,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("News");
+                    b.ToTable("News", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Option.ExcelStatus", b =>
@@ -521,7 +521,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("SearchFilterId");
 
-                    b.ToTable("ExcelStatuses");
+                    b.ToTable("ExcelStatuses", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Option.SearchFilter", b =>
@@ -546,7 +546,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SearchFilter");
+                    b.ToTable("SearchFilter", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Option.Slider", b =>
@@ -571,7 +571,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sliders");
+                    b.ToTable("Sliders", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.Product", b =>
@@ -611,7 +611,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.ProductColor", b =>
@@ -633,7 +633,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductColors");
+                    b.ToTable("ProductColors", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.ProductFeature", b =>
@@ -663,7 +663,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductFutures");
+                    b.ToTable("ProductFutures", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.ProductImage", b =>
@@ -684,7 +684,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.ProductInventory", b =>
@@ -714,7 +714,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductInventories");
+                    b.ToTable("ProductInventories", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.ProductSize", b =>
@@ -736,7 +736,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductSizes");
+                    b.ToTable("ProductSizes", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.Relations.ColorInProduct", b =>
@@ -765,7 +765,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ColorsInProducts");
+                    b.ToTable("ColorsInProducts", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.Relations.ProductsVisit", b =>
@@ -788,7 +788,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductsVisits");
+                    b.ToTable("ProductsVisits", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Products.Relations.SizeInProduct", b =>
@@ -817,7 +817,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("SizeId");
 
-                    b.ToTable("SizesInProducts");
+                    b.ToTable("SizesInProducts", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.User.ApplicationRole", b =>
@@ -850,21 +850,21 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = "Customer",
-                            ConcurrencyStamp = "0e641184-6fa8-4d0c-873e-45c8b6c911fb",
+                            ConcurrencyStamp = "57d3333d-51bf-4aa6-86bb-784c563f8f30",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "Admin",
-                            ConcurrencyStamp = "03cb33b7-3127-4200-ba5d-e2789b75238e",
+                            ConcurrencyStamp = "7f05f455-cec3-414e-b27e-df10b094328f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "Owner",
-                            ConcurrencyStamp = "c553d5d5-87f9-4e98-82cc-abd2ca30c9e0",
+                            ConcurrencyStamp = "59842727-6311-4ebe-a0d6-5ae63795f95d",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -946,14 +946,15 @@ namespace Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "07f71df4-68f8-4a4f-86da-875e9aacf7c7",
+                            Id = "32febe0e-5fde-4deb-ab41-d8c056347cfa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7fff2107-c92b-4664-9117-5295aabe494b",
+                            ConcurrencyStamp = "b7c6eee0-bd15-4f51-bdc5-aa93292855d4",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEOeY3MRi9YetlUXcs10LY6ijsvl9KOBXk8hCPhOcHYeEdNHcjCWgoR2awxfbbypTSg==",
                             PhoneNumberConfirmed = false,
                             ProfileImageSrc = "/Images/DefaultUser.jpg",
-                            SecurityStamp = "10ed54dd-a87a-4807-9d34-e4a73bdc1279",
+                            SecurityStamp = "3c3873cc-4ee3-49a4-8eac-b8160434b98b",
                             TwoFactorEnabled = false,
                             UserName = "Management"
                         });
@@ -972,7 +973,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Browsers");
+                    b.ToTable("Browsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -9,25 +9,13 @@ namespace Common.ViewModels.SearchViewModels
 {
     public class ProductCategoryViewModel
     {
-        [Display(Name = "نام دسته بندی")]
-        public string CategoryName { get; set; } = "";
-
-        [Display(Name = "نام دسته بندی والد")]
-        public string ParentName { get; set; } = "ندارد";
-
-        [Display(Name ="تعداد زیر مجموعه ها")]
-        public int ChildrenCount { get; set; } = 0;
+        public string SearchKey { get; set; } = "";
+        public int ParentId { get; set; } = 0;
     }
 
     public class BlogCategoryViewModel
     {
-        [Display(Name = "نام دسته بندی")]
-        public string CategoryName { get; set; } = "";
-
-        [Display(Name = "نام دسته بندی والد")]
-        public string ParentName { get; set; } = "ندارد";
-
-        [Display(Name = "تعداد زیر مجموعه ها")]
-        public int ChildrenCount { get; set; } = 0;
+        public string SearchKey { get; set; } = "";
+        public int ParentId { get; set; } = 0;
     }
 }

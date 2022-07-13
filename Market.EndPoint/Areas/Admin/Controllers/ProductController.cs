@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq;
 using Application.Interfaces.Context;
+using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -48,7 +49,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly IMemoryCache _memoryCache;
         IDataBaseContext db;
 
-        public ProductController(IProductFacad productFacad,IDataBaseContext context
+        public ProductController(IProductFacad productFacad, IDataBaseContext context
             , IProductCategoryFacad productCategoryFacad
             , ICommonCategorisFacad commonCategorisFacad, IMapper mapper
             , IExcelFacade excelFacade, ISend send
@@ -143,7 +144,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.categories = new SelectList(
-                _commonCategorisFacad.GetAllProductCategories.Execute(false, Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllProductCategories.Execute(new ProductCategoryViewModel(), false, Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
                 );
@@ -185,7 +186,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             var product = await _productFacad.GetProductByIdService.Execute(id);
             ViewBag.categories = new SelectList(
-           _commonCategorisFacad.GetAllProductCategories.Execute(false, Enums.CategoriesFilter.ForPagesList).Data.OrderBy(c => c.Name != product.Data.CategoryName)
+           _commonCategorisFacad.GetAllProductCategories.Execute(new ProductCategoryViewModel(), false, Enums.CategoriesFilter.ForPagesList).Data.OrderBy(c => c.Name != product.Data.CategoryName)
            , "Id"
            , "Name"
            );
@@ -250,48 +251,17 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateExcel(ProducsSearchViewModel model)
-        {
-            TempData["SearchKey"] = model.SearchKey;
-            TempData["StartPrice"] = model.StartPrice;
-            TempData["EndPrice"] = model.EndPrice;
-            TempData["OrderBy"] = (int)model.OrderBy;
-            TempData["SearchBy"] = (int)model.SearchBy;
-
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> CreateExcelConfirmed()
+        public async Task<IActionResult> CreateExcelConfirmed(ProducsSearchViewModel searchModel)
         {
             try
             {
-                var orderBy = TempData["OrderBy"] switch
-                {
-                    0 => Enums.PagesFilter.Newest,
-                    1 => Enums.PagesFilter.Oldest,
-                    2 => Enums.PagesFilter.MostViewed,
-                    3 => Enums.PagesFilter.MostSelled,
-                    4 => Enums.PagesFilter.LessViewed,
-                    5 => Enums.PagesFilter.LessSelled,
-                    _ => Enums.PagesFilter.Newest,
-                };
-
-                var searchBy = TempData["SearchBy"] switch
-                {
-                    0 => Enums.PageFilterCategory.Name,
-                    1 => Enums.PageFilterCategory.Brand,
-                    2 => Enums.PageFilterCategory.CategoryName,
-                    _ => Enums.PageFilterCategory.Name
-                };
-
                 var model = new ProducsSearchViewModel
                 {
-                    SearchKey = TempData["SearchKey"] == null ? "" : TempData["SearchKey"].ToString(),
-                    StartPrice = TempData["StartPrice"] == null ? 0 : (int)TempData["StartPrice"],
-                    EndPrice = TempData["EndPrice"] == null ? 0 : (int)TempData["EndPrice"],
-                    OrderBy = orderBy,
-                    SearchBy = searchBy
+                    SearchKey = searchModel.SearchKey,
+                    StartPrice = searchModel.StartPrice,
+                    EndPrice = searchModel.EndPrice,
+                    OrderBy = searchModel.OrderBy,
+                    SearchBy = searchModel.SearchBy
                 };
 
                 var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.Product);
@@ -300,7 +270,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                 var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
                 int excelId = excelKey.Data;
 
-                _send.SendToCreateExcel(excelId, searchId);
+                _send.SendToCreateExcel(excelId, searchId,"Product");
 
                 return Redirect("/Admin/Product");
             }

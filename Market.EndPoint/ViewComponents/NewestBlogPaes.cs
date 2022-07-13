@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
 using Common.Enums;
+using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.ViewComponents
 {
@@ -18,7 +19,7 @@ namespace Market.EndPoint.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            return View(viewName: "NewestBlogPaes" , _commonBlogPageFacad.GetAllBlogPages.Execute(Enums.PagesFilter.Newest , 1 , 6).Result.Data);
+            return View(viewName: "NewestBlogPaes" , _commonBlogPageFacad.GetAllBlogPages.Execute(new BlogPageSearchViewModel { OrderBy = Enums.BlogPagesFilter.Newest} , 1 , 6).Result.Data);
         }
     }
 }

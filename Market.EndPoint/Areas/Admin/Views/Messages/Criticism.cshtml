@@ -1,5 +1,7 @@
 ﻿@using Application.Services.Admin.Message.Queries.GetAllCriticismMessages
 @model GetAllCriticsmMessagesDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Common.Enums
 @{
     ViewData["Title"] = "Criticism";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -8,10 +10,36 @@
 }
 
 <style>
-    td, td {
-        width: auto;
+    td,th{
+        text-align:right;
     }
 </style>
+
+<table>
+    <tr>
+        <th>
+            <a class="waves-effect waves-light btn modal-trigger green" id="btnApplyingToCreateExcel">درخواست فایل اکسل</a>
+        </th>
+    </tr>
+    <form id="searchForm" method="get">
+    <tr>
+        <td>
+            <label for="searchKey">جستوجو کنید : </label>
+            <input type="text" id="searchKey" value="@ViewBag.SearchKey" />
+        </td>
+        <td>
+            <label for="searchBy">بر اساس : </label>
+            <select id="searchBy" asp-items="Html.GetEnumSelectList<Enums.MesssagesFilter>().OrderBy(p=> p.Value != ViewBag.SearchBy.ToString())"></select>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <a class="waves-effect waves-light btn modal-trigger blue" id="btnSearch">جستوجو</a>
+        </td>
+    </tr>
+    </form>
+</table>
 
 <table>
     <thead>
@@ -45,18 +73,18 @@
         }
         else
         {
-            <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@back"><i class="material-icons">chevron_right</i></a></li>
+            <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@back&SearchKey=@ViewBag.SearchKey&SearchBy=@ViewBag.SearchBy"><i class="material-icons">chevron_right</i></a></li>
         }
 
         @for (int i = 1; i <= Model.TotalRows; i++)
         {
             if (i == ViewBag.CurrentRow)
             {
-                <li class="active"><a href="/Admin/Messages/Criticism?currentPage=@i">@i</a></li>
+                <li class="active"><a href="/Admin/Messages/Criticism?currentPage=@i&SearchKey=@ViewBag.SearchKey&SearchBy=@ViewBag.SearchBy">@i</a></li>
             }
             else
             {
-                <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@i">@i</a></li>
+                <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@i&SearchKey=@ViewBag.SearchKey&SearchBy=@ViewBag.SearchBy">@i</a></li>
             }
         }
 
@@ -66,9 +94,48 @@
         }
         else
         {
-            <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@forward"><i class="material-icons">chevron_left</i></a></li>
+            <li class="waves-effect"><a href="/Admin/Messages/Criticism?currentPage=@forward&SearchKey=@ViewBag.SearchKey&SearchBy=@ViewBag.SearchBy"><i class="material-icons">chevron_left</i></a></li>
         }
 
     </ul>
 </div>
 
+@section scripts{
+<script>
+           $("#btnApplyingToCreateExcel").click(function(e){
+       swal("خطا", "آیا از درخواست فایل اکسل با فیلترهای وارد شده مطمئن هستید؟", "warning")
+           .then((value) =>
+           {
+               if(value.value == true){
+               var formdata = new FormData();
+
+               formdata.append("SearchKey",$("#searchKey").val());
+               formdata.append("MesssagesFilter",$("#searchBy").val());
+
+               $.ajax({
+                   type: "POST",
+                   processData: false,
+                   contentType: false,
+                   cache: false,
+                   enctype: "multipart/form-data",
+                   url: "/Admin/Messages/CreateExcelConfirmed",
+                   data: formdata,
+                   success: function (response) {
+               }
+               });
+               }
+           });
+       });
+
+    $("#btnSearch").click(function(e){
+    var formdata = new FormData();
+
+    var searchKey = $("#searchKey").val();
+    var searchBy = $("#searchBy").val();
+
+    var address = "/Admin/Messages/Criticism?SearchKey="+ searchKey+"&SearchBy=" +searchBy;
+
+    location.href = address;
+    });
+</script>
+}

@@ -14,7 +14,7 @@ namespace Common.ViewModels.SearchViewModels
         public int StartPrice { get; set; } = 0;
         public int EndPrice { get; set; } = 0;
         [JsonConverter(typeof(StringEnumConverter))]
-        public Enums.Enums.PagesFilter OrderBy { get; set; } = Enums.Enums.PagesFilter.Newest;
+        public Enums.Enums.ProductsFilter OrderBy { get; set; } = Enums.Enums.ProductsFilter.Newest;
         [JsonConverter(typeof(StringEnumConverter))]
         public Enums.Enums.PageFilterCategory SearchBy { get; set; } = Enums.Enums.PageFilterCategory.Name;
     }

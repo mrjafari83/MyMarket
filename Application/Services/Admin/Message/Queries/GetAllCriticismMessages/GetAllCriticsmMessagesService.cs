@@ -5,6 +5,7 @@ using Common.Utilities;
 using Application.Interfaces.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Common.ViewModels.SearchViewModels;
 
 namespace Application.Services.Admin.Message.Queries.GetAllCriticismMessages
 {
@@ -16,10 +17,10 @@ namespace Application.Services.Admin.Message.Queries.GetAllCriticismMessages
             db = context;
         }
 
-        public async Task<ResultDto<GetAllCriticsmMessagesDto>> Execute(int pageNumber = 1, int pageSize = 10)
+        public async Task<ResultDto<GetAllCriticsmMessagesDto>> Execute(MessageSearchViewModel searchModel , int pageNumber = 1, int pageSize = 10)
         {
             int totalRows = 0;
-            var messages = await db.CriticismMessages.Select(m => new CriticismMessageViewModel
+            var messages = await GetMessagesBySearch.GetMessagesBySearch.GetMessages(db,searchModel).Select(m => new CriticismMessageViewModel
             {
                 Name = m.Name,
                 Email = m.Email,

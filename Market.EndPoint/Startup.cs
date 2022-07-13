@@ -23,7 +23,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Common.Utilities;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
+using Market.EndPoint.Repositories.User;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
 
 namespace Market.EndPoint
 {
@@ -170,6 +172,8 @@ namespace Market.EndPoint
 
         private void InjectionUtilities(IServiceCollection services)
         {
+            services.AddScoped<IGetUserByFilter, GetUsersByFilter>();
+
             services.AddScoped<IMessageSender, GmailSender>();
             services.AddScoped<SaveLogInFile>();
         }

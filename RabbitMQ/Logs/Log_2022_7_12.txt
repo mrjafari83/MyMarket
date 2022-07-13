@@ -1,0 +1,9 @@
+[Error] _ 7/12/2022 11:36:11 AM _ Get Excel File 'Rabbit MQ' _ Message is : Sequence contains no elements
+[Error] _ 7/12/2022 11:36:11 AM _ Get Excel File 'Rabbit MQ' _ Message is : Sequence contains no elements
+[Error] _ 7/12/2022 11:36:11 AM _ Get Excel File 'Rabbit MQ' _ Message is : Sequence contains no elements
+[Error] _ 7/12/2022 11:48:32 AM _ Get Excel File 'Rabbit MQ' _ Message is : Sequence contains no elements
+[Error] _ 7/12/2022 11:48:32 AM _ Get Excel File 'Rabbit MQ' _ Message is : Sequence contains no elements
+[Error] _ 7/12/2022 11:48:32 AM _ Get Entities By search in Application _ Message is : Non-exhaustive switch expression failed to match its input.
+Unmatched value was User.
+[Error] _ 7/12/2022 11:48:32 AM _ Get Excel File 'Rabbit MQ' _ Message is : Sequence contains no elements
+[Error] _ 7/12/2022 12:44:43 PM _ Get Excel File 'Rabbit MQ' _ Message is : Object reference not set to an instance of an object.

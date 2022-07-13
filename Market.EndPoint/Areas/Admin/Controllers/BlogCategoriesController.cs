@@ -10,8 +10,11 @@ using Application.Interfaces.FacadPatterns.Common;
 using Application.Services.Admin.Categories.Commands.CreateCategory;
 using Application.Services.Admin.Categories.Commands.EditCategory;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Common.Dto;
+using Common.ViewModels.SearchViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Common.Utilities;
+using Microsoft.Extensions.Logging;
+using Market.EndPoint.Utilities.RabbitMQ;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -21,18 +24,35 @@ namespace Market.EndPoint.Areas.Admin.Controllers
     {
         private IBlogPageCategoryFacad _blogPageCategoryFacad;
         private readonly ICommonCategorisFacad _commonCategorisFacad;
+        private readonly SaveLogInFile _saveLogInFile;
+        private readonly IExcelFacade _excelFacade;
+        private readonly IOptionFacade _optionFacade;
+        private readonly ISend _send;
         public BlogCategoriesController(IBlogPageCategoryFacad productCategoriesFacad
-            ,ICommonCategorisFacad commonCategorisFacad)
+            , ICommonCategorisFacad commonCategorisFacad, IExcelFacade excelFacade, SaveLogInFile saveLogInFile
+            , IOptionFacade optionFacade, ISend send)
         {
             _blogPageCategoryFacad = productCategoriesFacad;
             _commonCategorisFacad = commonCategorisFacad;
+            _saveLogInFile = saveLogInFile;
+            _excelFacade = excelFacade;
+            _optionFacade = optionFacade;
+            _send = send;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(BlogCategoryViewModel model)
         {
+            ViewBag.ParentId = model.ParentId;
+            ViewBag.SearchKey = model.SearchKey;
+
+            ViewBag.CategoriesList = new SelectList(
+                _commonCategorisFacad.GetAllBlogCategories.Execute(model, false, Common.Enums.Enums.CategoriesFilter.Non).Data
+                , "Id"
+                , "Name");
+
             var data = _commonCategorisFacad.GetAllBlogCategories
-                .Execute(true, Common.Enums.Enums.CategoriesFilter.Non);
+                .Execute(model, true, Common.Enums.Enums.CategoriesFilter.Non);
             if (data.IsSuccess)
                 return View(data.Data);
 
@@ -48,7 +68,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string name , int parentId)
+        public IActionResult Create(string name, int parentId)
         {
             if (name != null)
             {
@@ -70,7 +90,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.CategoriesList = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(false , Common.Enums.Enums.CategoriesFilter.ForCategoriesList , id).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false, Common.Enums.Enums.CategoriesFilter.ForCategoriesList,false , id).Data
                 , "Id"
                 , "Name");
 
@@ -119,6 +139,30 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult GetChildren(int id)
         {
             return PartialView(_commonCategorisFacad.GetChildrenOfBlogCategory.Execute(id).Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateExcelConfirmed(BlogCategoryViewModel model)
+        {
+            try
+            {
+                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.BlogCategory);
+                var searchId = searchFilter.Data;
+
+                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
+                int excelId = excelKey.Data;
+
+                _send.SendToCreateExcel(excelId, searchId,"BlogCategories");
+
+                return Redirect("/Admin/Product");
+            }
+            catch (Exception ex)
+            {
+                _saveLogInFile.Log(LogLevel.Error, ex.Message, HttpContext);
+                TempData["ErrorStatusCode"] = 500;
+                TempData["ErrorMessage"] = "خطایی رخ داده است.";
+                return View("Error");
+            }
         }
     }
 }

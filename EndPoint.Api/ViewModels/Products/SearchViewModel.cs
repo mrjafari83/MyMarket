@@ -17,7 +17,7 @@ namespace EndPoint.Api.ViewModels.Products
 
         ///<summary>مرتب سازی بر اساس : </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public Enums.PagesFilter OrderBy { get; set; } = Enums.PagesFilter.Newest;
+        public Enums.ProductsFilter OrderBy { get; set; } = Enums.ProductsFilter.Newest;
 
         ///<summary>جستوجو بر اساس : </summary>
         [JsonConverter(typeof(StringEnumConverter))]

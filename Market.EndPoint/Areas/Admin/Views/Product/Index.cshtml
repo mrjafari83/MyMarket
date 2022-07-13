@@ -29,7 +29,7 @@
                     <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="/Admin/Product/Create">افزودن</a>
                 </th>
                 <th>
-                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="#modal1" id="btnApplyingToCreateExcel">درخواست فایل اکسل</a>
+                    <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" id="btnApplyingToCreateExcel">درخواست فایل اکسل</a>
                 </th>
                 <th>
                     <a class="waves-effect waves-light btn modal-trigger green" style="width:95%" href="/Admin/Product/GetExcels">فایل های اکسل</a>
@@ -73,7 +73,7 @@
                 </td>
                 <td>
                     <label for="orderBy">مرتب سازی بر اساس : </label>
-                    <select id="orderBy" asp-items="Html.GetEnumSelectList<Enums.PagesFilter>().OrderBy(p=> p.Value != ViewBag.OrderBy.ToString())"></select>
+                    <select id="orderBy" asp-items="Html.GetEnumSelectList<Enums.ProductsFilter>().OrderBy(p=> p.Value != ViewBag.OrderBy.ToString())"></select>
                 </td>
             </tr>
             <tr>
@@ -175,7 +175,6 @@
 @section Scripts{
 <script>
     $(document).ready(function(){
-        debugger;
         var errorMessage = "@message";
         if(errorMessage != "" && errorMessage!= undefined && errorMessage != null){
             swal("خطا", errorMessage, "warning")
@@ -199,33 +198,31 @@
         });
 
         $("#btnApplyingToCreateExcel").click(function(e){
+              swal("خطا", "آیا از درخواست فایل اکسل با فیلترهای وارد شده مطمئن هستید؟", "warning")
+                    .then((value) =>
+                    {
+                        if(value.value == true){
+                        var formdata = new FormData();
 
-            //$.get("/Admin/Product/CreateExcel", function (result) {
-            //    $("#title").html("درخواست فایل اکسل");
-            //    $("#body").html(result);
-            //});
+                        formdata.append("SearchKey",$("#searchKey").val());
+                        formdata.append("SearchBy",$("#searchBy").val());
+                        formdata.append("StartPrice",$("#startPrice").val());
+                        formdata.append("EndPrice",$("#endPrice").val());
+                        formdata.append("OrderBy",$("#orderBy").val());
 
-             var formdata = new FormData();
-
-             formdata.append("SearchKey",$("#searchKey").val());
-             formdata.append("SearchBy",$("#searchBy").val());
-             formdata.append("StartPrice",$("#startPrice").val());
-             formdata.append("EndPrice",$("#endPrice").val());
-             formdata.append("OrderBy",$("#orderBy").val());
-
-             $.ajax({
-                    type: "POST",
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    enctype: "multipart/form-data",
-                    url: "/Admin/Product/CreateExcel",
-                    data: formdata,
-                    success: function (response) {
-                        $("#title").html("درخواست فایل اکسل");
-                        $("#body").html(response);
-                    }
-                });
+                        $.ajax({
+                            type: "POST",
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            enctype: "multipart/form-data",
+                            url: "/Admin/Product/CreateExcelConfirmed",
+                            data: formdata,
+                            success: function (response) {
+                            }
+                        });
+                   }
+             });
         });
 
         $("#btnGetExcel").click(function () {

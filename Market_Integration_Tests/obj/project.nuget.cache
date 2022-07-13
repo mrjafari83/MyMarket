@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "JtfXNmzFV9l/GFE/nDRw5cIiSmk9T6xbbnF0+v937Md45xjbVx6FMy4Jeuy0wLWRdeYEJuOeJ2LrRMktcDYXjg==",
-  "success": false,
+  "dgSpecHash": "KFr1mtYmO2FCMDKuTHfzFft3yYMpTdrHz+paflbmD/F1AoJWkq04WfE4w4vba2IrlNrGxubd+1mPZ+krv2D7pQ==",
+  "success": true,
   "projectFilePath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market_Integration_Tests\\Market_Integration_Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kar1\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
@@ -174,11 +174,11 @@
     "C:\\Users\\Kar1\\.nuget\\packages\\serilog.sinks.file\\3.2.0\\serilog.sinks.file.3.2.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\serilog.sinks.rollingfile\\3.3.0\\serilog.sinks.rollingfile.3.3.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\serilog.sinks.rollingfile.extension\\2.0.2\\serilog.sinks.rollingfile.extension.2.0.2.nupkg.sha512",
-    "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore\\6.3.0\\swashbuckle.aspnetcore.6.3.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.newtonsoft\\6.3.1\\swashbuckle.aspnetcore.newtonsoft.6.3.1.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.3.1\\swashbuckle.aspnetcore.swagger.6.3.1.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.3.1\\swashbuckle.aspnetcore.swaggergen.6.3.1.nupkg.sha512",
-    "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "C:\\Users\\Kar1\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.3.0\\swashbuckle.aspnetcore.swaggerui.6.3.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\sweetalert\\1.0.0\\sweetalert.1.0.0.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Kar1\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
@@ -262,15 +262,6 @@
     "C:\\Users\\Kar1\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.5\\xunit.runner.visualstudio.2.4.5.nupkg.sha512"
   ],
   "logs": [
-    {
-      "code": "NU1105",
-      "level": "Error",
-      "message": "Unable to find project information for 'C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
-      "libraryId": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
     {
       "code": "NU1701",
       "level": "Warning",

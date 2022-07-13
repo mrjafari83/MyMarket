@@ -1,15 +1,6 @@
-﻿using Application.Interfaces.FacadPatterns.Admin;
-using Microsoft.AspNetCore.Hosting;
-using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Drawing;
+﻿using OfficeOpenXml;
 using System.ComponentModel.DataAnnotations;
 using Common.Utilities;
-using Microsoft.AspNetCore.Http;
 
 namespace RabbitMQ.Excel
 {
@@ -21,19 +12,17 @@ namespace RabbitMQ.Excel
             _saveLogFile = saveLogInFile;
         }
 
-        public string GetExcelFile<Type>(List<Type> source, string address, string sheetName)
+        public string GetExcelFile<Type>(List<Type> source, string address, string prefixFileName)
         {
             try
             {
                 if (source != null)
                 {
-                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
                     using (var excel = new ExcelPackage())
                     {
-                        excel.Workbook.Worksheets.Add(sheetName);
+                        excel.Workbook.Worksheets.Add(prefixFileName);
 
-                        var excelWorkSheet = excel.Workbook.Worksheets[sheetName];
+                        var excelWorkSheet = excel.Workbook.Worksheets[prefixFileName];
                         excelWorkSheet.View.RightToLeft = true;
 
                         List<string[]> data = new List<string[]>();
@@ -47,7 +36,10 @@ namespace RabbitMQ.Excel
                             for (int i = 0; i < colmnCount; i++)
                             {
                                 var attr = properties[i].GetCustomAttributes(typeof(DisplayAttribute), false).Cast<DisplayAttribute>().FirstOrDefault();
-                                header[i] = attr.Name ?? properties[i].Name;
+                                if (attr != null)
+                                    header[i] = attr.Name;
+                                else
+                                    header[i] = properties[i].Name;
                             }
                             data.Add(header);
                         }
@@ -61,7 +53,8 @@ namespace RabbitMQ.Excel
                                 if (item != null)
                                     for (int i = 0; i < colmnCount; i++)
                                     {
-                                        row[i] = prperties[i].GetValue(item).ToString();
+                                        if (prperties[i].GetValue(item) != null)
+                                            row[i] = prperties[i].GetValue(item).ToString();
                                     }
                                 data.Add(row);
                             }
@@ -73,9 +66,10 @@ namespace RabbitMQ.Excel
                                 for (int j = 1; j <= data.FirstOrDefault().Length; j++)
                                 {
                                     ExcelRange range = excelWorkSheet.Cells[i, j];
-                                    range.Style.Font.SetFromFont("B Narm", 15);
                                     range.Style.Font.Bold = true;
-                                    range.Style.Font.Color.SetColor(1, 7, 16, 177);
+                                    range.Style.Font.Size = 15;
+                                    range.Style.Font.SetFromFont(new System.Drawing.Font("B Narm", 15));
+                                    range.Style.Font.Color.SetColor(System.Drawing.Color.FromArgb(1, 7, 16, 177));
                                     range.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
                                     range.Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
                                     range.Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
@@ -89,8 +83,7 @@ namespace RabbitMQ.Excel
                                 for (int j = 1; j <= data.FirstOrDefault().Length; j++)
                                 {
                                     ExcelRange range = excelWorkSheet.Cells[i, j];
-                                    range.Style.Font.SetFromFont("B Narm", 12, false);
-                                    range.Style.Font.Color.SetColor(1, 0, 0, 0);
+                                    range.Style.Font.Color.SetColor(System.Drawing.Color.FromArgb(1, 0, 0, 0));
                                     range.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
                                     range.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
                                     range.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
@@ -101,14 +94,28 @@ namespace RabbitMQ.Excel
                             }
                         }
 
-                        for (int j = 1; j <= colmnCount; j++)
-                            excelWorkSheet.Column(j).AutoFit(20.00, 50.00);
+                        //for (int i = 1; i <= data.FirstOrDefault().Length; i++)
+                        //{
+                        //    double width = 0.0;
+                        //    for (int j = 1; j < data.Count(); j++)
+                        //    {
+                        //        ExcelRange range = excelWorkSheet.Cells[j, i];
+                        //        if (range.Value != null)
+                        //            if (range.Value.ToString().Length > width)
+                        //                width = range.Value.ToString().Length;
+                        //    }
+                        //    excelWorkSheet.Column(i).Width = width;
+                        //} 
 
                         excelWorkSheet.Cells[1, 1].LoadFromArrays(data);
+                        for (int j = 1; j <= colmnCount; j++)
+                        {
+                            excelWorkSheet.Column(j).AutoFit(20.0, 50.0);
+                        }
                         string folderAddress = address + $@"/Excels/";
                         if (!Directory.Exists(folderAddress))
                             Directory.CreateDirectory(folderAddress);
-                        string fileName = "products-" + DateTime.Now.ToString("yyyy-M-d-H-m-ss") + ".xlsx";
+                        string fileName = $"{prefixFileName}-" + DateTime.Now.ToString("yyyy-M-d-H-m-ss") + ".xlsx";
 
                         FileInfo excelFile = new FileInfo(folderAddress + fileName);
                         excel.SaveAs(excelFile);
@@ -120,7 +127,7 @@ namespace RabbitMQ.Excel
             }
             catch (Exception ex)
             {
-                _saveLogFile.Log(LogLevel.Error, ex.Message , "Get Excel File 'Rabbit MQ'");
+                _saveLogFile.Log(LogLevel.Error, ex.Message, "Get Excel File 'Rabbit MQ'");
                 return "";
             }
         }

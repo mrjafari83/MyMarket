@@ -1,0 +1,11 @@
+[Error] _ 7/12/2022 8:44:49 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 10:16:53 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 10:58:45 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 10:59:44 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 10:59:58 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 11:44:56 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 11:45:44 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 11:45:48 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 11:46:08 AM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 2:40:17 PM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal
+[Error] _ 7/12/2022 2:53:01 PM _ /Admin/Product _ Message is : No connection could be made because the target machine actively refused it. (localhost:7120)System.Collections.ListDictionaryInternal

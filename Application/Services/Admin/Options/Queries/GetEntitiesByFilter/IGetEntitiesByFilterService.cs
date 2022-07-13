@@ -4,6 +4,7 @@ using Common.Dto;
 using Common.Enums;
 using Common.Utilities;
 using Common.ViewModels;
+using Common.ViewModels.SearchViewModels;
 using Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
+using Common.ViewModels.ExcelViewModels;
+using Application.Services.Common.BlogPage.GetBlogPagesBySearch;
+using Application.Services.Admin.Message.Queries.GetMessagesBySearch;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
 
 namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
 {
@@ -24,11 +30,13 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
     public class GetEntitiesByFilterService : IGetEntitiesByFilterService
     {
         private readonly IDataBaseContext db;
-        private readonly ILogger<GetEntitiesByFilterService> _logger;
-        public GetEntitiesByFilterService(IDataBaseContext context, ILogger<GetEntitiesByFilterService> logger)
+        private readonly SaveLogInFile _saveLogInFile;
+        private readonly IGetUserByFilter _getUserByFilter;
+        public GetEntitiesByFilterService(IDataBaseContext context, SaveLogInFile saveLogInFile, IGetUserByFilter getUserBySearch)
         {
             db = context;
-            _logger = logger;
+            _saveLogInFile = saveLogInFile;
+            _getUserByFilter = getUserBySearch;
         }
 
         public ResultDto<IEnumerable<object>> Execute(int filterId)
@@ -47,7 +55,57 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         CategoryName = p.Category.Name,
                         VisitNumber = p.Visits.Count(),
                         SellsCount = p.ProductInCarts.Where(p => !p.IsShow).Count()
-                    }).AsNoTracking().ToList()
+                    }).AsNoTracking().ToList(),
+
+                    //Blog Category
+                    Domain.Entities.Option.SearchItemType.BlogCategory => GetBlogCategoryBySearch.GetCategories(db,JsonConvertor<BlogCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
+                    .Select(c=> new ExcelCategoryViewModel
+                    {
+                        Name=c.Name,
+                        ParentName = c.Parent.Name ?? "ندارد",
+                        ChildrenCount = c.Children.Count(),
+                    }),
+
+                    //Product Category
+                    Domain.Entities.Option.SearchItemType.ProductCategory => GetProductCategoryBySearch.GetCategories(db,JsonConvertor<ProductCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
+                    .Select(c => new ExcelCategoryViewModel
+                    {
+                        Name = c.Name,
+                        ParentName = c.Parent.Name ?? "ندارد",
+                        ChildrenCount = c.Children.Count(),
+                    }),
+
+                    //Blog Pages
+                    Domain.Entities.Option.SearchItemType.BlogPages=> GetBlogPagesBySearch.GetBlogPages(db,JsonConvertor<BlogPageSearchViewModel>.LoadFromJsonString(filter.FilterJson))
+                    .Include(b=> b.Category).Select(b=> new ExcelBlogPagesViewModel
+                    {
+                        Title = b.Title,
+                        ShortDescription = b.ShortDescription,
+                        CategoryName = b.Category.Name,
+                        VisitNumber = b.Visits.Count(),
+                        CreateDate = b.CreateDate.ToShamsi()
+                    }),
+
+                    //Messages
+                    Domain.Entities.Option.SearchItemType.Message=>GetMessagesBySearch.GetMessages(db,JsonConvertor<MessageSearchViewModel>.LoadFromJsonString(filter?.FilterJson))
+                    .Select(m=> new ExcelMessageViewModel
+                    {
+                        Name =m.Name,
+                        Email = m.Email,
+                        Website = m.Website,
+                        Text = m.Message
+                    }),
+
+                    //Users
+                    Domain.Entities.Option.SearchItemType.User => _getUserByFilter.GetUsers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
+                    .Select(u=> new ExcelUserViewModel
+                    {
+                        UserName = u.UserName ?? "ندارد",
+                        Email = u.Email ?? "ندارد",
+                        Name = u.Name ?? "ندارد",
+                        Family = u.Family ?? "ندارد",
+                        PhoneNumber = u.PhoneNumber ?? "ندارد",
+                    })
                 };
 
                 return new ResultDto<IEnumerable<object>>
@@ -58,7 +116,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _saveLogInFile.Log(LogLevel.Error, ex.Message, "Get Entities By search in Application");
                 return new ResultDto<IEnumerable<object>>
                 {
                     Data = new List<object>(),
@@ -94,33 +152,33 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
 
             switch (filters.OrderBy)
             {
-                case Enums.PagesFilter.LessViewed:
+                case Enums.ProductsFilter.LessViewed:
                     {
                         products = products.OrderBy(p => p.Visits.Count());
                         break;
                     }
-                case Enums.PagesFilter.MostViewed:
+                case Enums.ProductsFilter.MostViewed:
                     {
                         products = products.OrderByDescending(p => p.Visits.Count());
                         break;
                     }
-                case Enums.PagesFilter.Newest:
+                case Enums.ProductsFilter.Newest:
                     {
                         products = products.OrderByDescending(p => p.CreateDate);
                         break;
                     }
-                case Enums.PagesFilter.Oldest:
+                case Enums.ProductsFilter.Oldest:
                     {
                         products = products.OrderBy(p => p.CreateDate);
                         break;
                     }
-                case Enums.PagesFilter.MostSelled:
+                case Enums.ProductsFilter.MostSelled:
                     {
                         products = products.OrderByDescending(p => p.ProductInCarts.Where(p => !p.IsShow)
                         .Sum(c => c.Count * c.ProductInventoryAndPrice.Price));
                         break;
                     }
-                case Enums.PagesFilter.LessSelled:
+                case Enums.ProductsFilter.LessSelled:
                     {
                         products = products.OrderBy(p => p.ProductInCarts.Where(p => !p.IsShow)
                         .Sum(c => c.Count * c.ProductInventoryAndPrice.Price));

@@ -21,5 +21,10 @@ namespace Domain.Entities.Option
     public enum SearchItemType
     {
         Product = 0,
+        BlogCategory = 1,
+        ProductCategory = 2,
+        BlogPages = 3,
+        Message = 4,
+        User = 5,
     }
 }

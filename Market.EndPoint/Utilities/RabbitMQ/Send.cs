@@ -10,7 +10,7 @@ namespace Market.EndPoint.Utilities.RabbitMQ
 {
     public interface ISend
     {
-        void SendToCreateExcel(int excelId, int searchId);
+        void SendToCreateExcel(int excelId, int searchId, string prefixFileName);
     }
 
     public class Send : ISend
@@ -32,14 +32,14 @@ namespace Market.EndPoint.Utilities.RabbitMQ
             _channel.ExchangeDeclare("Excel.ex", "direct", true, false, null);
         }
 
-        public void SendToCreateExcel(int excelId, int searchId)
+        public void SendToCreateExcel(int excelId, int searchId,string prefixFileName)
         {
             try
             {
                 _channel.QueueDeclare("ExcelCreate", true, false, false, null);
                 _channel.QueueBind("ExcelCreate", "Excel.ex", "create", null);
 
-                var message = excelId.ToString() + "_" + searchId.ToString() + "_" + _environment.WebRootPath;
+                var message = excelId.ToString() + "_" + searchId.ToString() + "_" + _environment.WebRootPath +"_"+prefixFileName;
 
                 var body = Encoding.UTF8.GetBytes(message);
                 var properties = _channel.CreateBasicProperties();

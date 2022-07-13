@@ -13,6 +13,9 @@ using Application.Services.Admin.BlogPages.Commands.EditBlogPage;
 using Microsoft.AspNetCore.Hosting;
 using Common.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Common.ViewModels.SearchViewModels;
+using Market.EndPoint.Utilities.RabbitMQ;
+using Microsoft.Extensions.Logging;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -25,31 +28,50 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly ICommonBlogPageFacad _commonBlogPageFacad;
         private readonly IHostingEnvironment _environment;
         private readonly ICommonCategorisFacad _commonCategorisFacad;
+        private readonly SaveLogInFile _saveLogInFile;
+        private readonly IExcelFacade _excelFacade;
+        private readonly IOptionFacade _optionFacade;
+        private readonly ISend _send;
         public BlogPagesController(IBlogPageFacad blogPageFacad
             , IBlogPageCategoryFacad blogPageCategoryFacad
             , IHostingEnvironment environment
             , ICommonBlogPageFacad commonBlogPageFacad
-            , ICommonCategorisFacad commonCategorisFacad)
+            , ICommonCategorisFacad commonCategorisFacad, IExcelFacade excelFacade, SaveLogInFile saveLogInFile
+            , IOptionFacade optionFacade, ISend send)
         {
             _blogPageFacad = blogPageFacad;
             _blogPageCategoryFacad = blogPageCategoryFacad;
             _environment = environment;
             _commonBlogPageFacad = commonBlogPageFacad;
             _commonCategorisFacad = commonCategorisFacad;
+            _saveLogInFile = saveLogInFile;
+            _excelFacade = excelFacade;
+            _optionFacade = optionFacade;
+            _send = send;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int currentPage = 1)
+        public async Task<IActionResult> Index(BlogPageSearchViewModel searchModel, int currentPage = 1)
         {
+            ViewBag.Categories = new SelectList(
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
+                , "Id"
+                , "Name"
+            );
+
             ViewBag.CurrentRow = currentPage;
-            return View(await _commonBlogPageFacad.GetAllBlogPages.Execute(pageNumber: currentPage));
+            ViewBag.SearchKey = searchModel.SearchKey;
+            ViewBag.CategoryId = searchModel.CategoryId;
+            ViewBag.OrderBy = (int)searchModel.OrderBy;
+
+            return View(await _commonBlogPageFacad.GetAllBlogPages.Execute(searchModel, currentPage));
         }
 
         [HttpGet]
         public IActionResult Create()
         {
             ViewBag.Categories = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
                 );
@@ -80,7 +102,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Categories = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
                 );
@@ -132,6 +154,30 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             await _blogPageFacad.DeleteBlogPageService.Execute(id);
 
             return Redirect("/Admin/BlogPages");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateExcelConfirmed(BlogPageSearchViewModel model)
+        {
+            try
+            {
+                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.BlogPages);
+                var searchId = searchFilter.Data;
+
+                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
+                int excelId = excelKey.Data;
+
+                _send.SendToCreateExcel(excelId, searchId, "BlogPages");
+
+                return Redirect("/Admin/BlogPages");
+            }
+            catch (Exception ex)
+            {
+                _saveLogInFile.Log(LogLevel.Error, ex.Message, HttpContext);
+                TempData["ErrorStatusCode"] = 500;
+                TempData["ErrorMessage"] = "خطایی رخ داده است.";
+                return View("Error");
+            }
         }
     }
 }

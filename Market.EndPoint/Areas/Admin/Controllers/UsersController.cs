@@ -9,6 +9,12 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Domain.Entities.User;
 using Microsoft.AspNetCore.Authorization;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
+using Common.ViewModels.SearchViewModels;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Common.Utilities;
+using Market.EndPoint.Utilities.RabbitMQ;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -20,18 +26,34 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ICartPayingFacad _cartPayingFacad;
         private readonly ICommonCartFacad _commonCartFacad;
+        private readonly IGetUserByFilter _getUserByFilter;
+        private readonly SaveLogInFile _saveLogInFile;
+        private readonly IExcelFacade _excelFacade;
+        private readonly IOptionFacade _optionFacade;
+        private readonly ISend _send;
         public UsersController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager
-            , ICartPayingFacad cartPayingFacad, ICommonCartFacad commonCartFacad)
+            , ICartPayingFacad cartPayingFacad, ICommonCartFacad commonCartFacad,IGetUserByFilter getUserByFilter
+            , ICommonCategorisFacad commonCategorisFacad, IExcelFacade excelFacade, SaveLogInFile saveLogInFile
+            , IOptionFacade optionFacade, ISend send)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _cartPayingFacad = cartPayingFacad;
             _commonCartFacad = commonCartFacad;
+            _getUserByFilter = getUserByFilter;
+            _saveLogInFile = saveLogInFile;
+            _excelFacade = excelFacade;
+            _optionFacade = optionFacade;
+            _send = send;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(UserSearchVIewModel searchModel)
         {
-            var users = _userManager.Users.Select(u => new UserViewModel
+            ViewBag.SearchKey = searchModel.SearchKey;
+            ViewBag.UserRole = (int)searchModel.UserRole;
+            ViewBag.SearchBy = (int)searchModel.SearchBy;
+
+            var users = _getUserByFilter.GetUsers(searchModel).Select(u => new UserViewModel
             {
                 Id = u.Id,
                 UserName = u.UserName,
@@ -141,6 +163,30 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             var cart = await _commonCartFacad.GetUserCartPayings.Execute(userName);
             return View(cart.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateExcelConfirmed(UserSearchVIewModel model)
+        {
+            try
+            {
+                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.User);
+                var searchId = searchFilter.Data;
+
+                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
+                int excelId = excelKey.Data;
+
+                _send.SendToCreateExcel(excelId, searchId, "Users");
+
+                return Redirect("/Admin/Users");
+            }
+            catch (Exception ex)
+            {
+                _saveLogInFile.Log(LogLevel.Error, ex.Message, HttpContext);
+                TempData["ErrorStatusCode"] = 500;
+                TempData["ErrorMessage"] = "خطایی رخ داده است.";
+                return View("Error");
+            }
         }
     }
 }

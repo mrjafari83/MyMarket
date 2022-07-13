@@ -8,22 +8,27 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
 using Application.Services.Admin.Options.Commands.CreateSearchFilter;
 using Microsoft.Extensions.Logging;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
+using Common.Utilities;
 
 namespace Application.FacadPatterns.Admin
 {
     public class OptionFacade : IOptionFacade
     {
         private readonly IDataBaseContext db;
-        private readonly ILogger<GetEntitiesByFilterService> _getEntitiesByFilterServiceLogger;
-        public OptionFacade(IDataBaseContext context)
+        private readonly SaveLogInFile _saveLogFile;
+        private readonly IGetUserByFilter _getUserBySearch;
+        public OptionFacade(IDataBaseContext context, SaveLogInFile saveLogInFile, IGetUserByFilter getUserBySearch)
         {
             db = context;
+            _saveLogFile = saveLogInFile;
+            _getUserBySearch = getUserBySearch;
         }
 
         private GetEntitiesByFilterService _getEntitiesByFilterService;
         public IGetEntitiesByFilterService GetEntitiesByFilter 
         {
-            get => _getEntitiesByFilterService ?? new GetEntitiesByFilterService(db, _getEntitiesByFilterServiceLogger);
+            get => _getEntitiesByFilterService ?? new GetEntitiesByFilterService(db,_saveLogFile,_getUserBySearch);
         }
 
         private CreateSearchFilterService _createSearchFilterService;

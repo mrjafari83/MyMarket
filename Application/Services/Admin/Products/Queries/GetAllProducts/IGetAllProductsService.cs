@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Common.Dto;
 using Common.Enums;
 using Common.ViewModels;
+using Common.ViewModels.SearchViewModels;
 
 namespace Application.Services.Admin.Products.Queries.GetAllProducts
 {
