@@ -1,0 +1,7 @@
+{
+  "Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application",
+  "Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common",
+  "Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Domain",
+  "Persistance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance",
+  "RabbitMQ, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ"
+}

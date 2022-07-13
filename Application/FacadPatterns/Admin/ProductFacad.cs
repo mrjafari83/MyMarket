@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Hosting;
 using AutoMapper;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
 using Microsoft.Extensions.Logging;
-using Application.Services.Admin.User.Queries.GetUsersBySearch;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
 using Common.Utilities;
 
 namespace Application.FacadPatterns.Admin
@@ -26,16 +26,16 @@ namespace Application.FacadPatterns.Admin
         private readonly IHostingEnvironment _environment;
         private readonly IMapper _mapper;
         private readonly SaveLogInFile _saveLogInFile;
-        private readonly IGetUserBySearch _getUserBySearch;
+        private readonly IGetUserByFilter _getUserByFilter;
         public ProductFacad(IDataBaseContext context
             , IHostingEnvironment environment , IMapper mapper
-            ,SaveLogInFile saveLogInFile,IGetUserBySearch getUserBySearch)
+            ,SaveLogInFile saveLogInFile,IGetUserByFilter getUserByFilter)
         {
             db = context;
             _environment = environment;
             _mapper = mapper;
             _saveLogInFile = saveLogInFile;
-            _getUserBySearch = getUserBySearch;
+            _getUserByFilter = getUserByFilter;
         }
 
         private GetAllProductsService _getAllProductsService;
@@ -43,7 +43,7 @@ namespace Application.FacadPatterns.Admin
         {
             get
             {
-                return _getAllProductsService == null ? new GetAllProductsService(db,_mapper , _saveLogInFile,_getUserBySearch) : _getAllProductsService;
+                return _getAllProductsService == null ? new GetAllProductsService(db,_mapper , _saveLogInFile,_getUserByFilter) : _getAllProductsService;
             }
         }
 

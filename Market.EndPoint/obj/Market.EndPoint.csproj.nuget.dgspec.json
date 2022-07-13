@@ -271,9 +271,6 @@
               },
               "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj": {
                 "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj"
-              },
-              "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj": {
-                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj"
               }
             }
           }
@@ -428,88 +425,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.106\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj",
-        "projectName": "RabbitMQ",
-        "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\RabbitMQ.csproj",
-        "packagesPath": "C:\\Users\\Kar1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\RabbitMQ\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\Kar1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application\\Application.csproj"
-              },
-              "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj": {
-                "projectPath": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance\\Persistance.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "EPPlus.Core": {
-              "target": "Package",
-              "version": "[1.5.4, )"
-            },
-            "Microsoft.AspNetCore.Mvc.Testing": {
-              "target": "Package",
-              "version": "[6.0.6, )"
-            },
-            "Microsoft.Extensions.Hosting": {
-              "target": "Package",
-              "version": "[6.0.1, )"
-            },
-            "RabbitMQ.Client": {
-              "target": "Package",
-              "version": "[6.4.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

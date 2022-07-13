@@ -12,7 +12,7 @@ using Common.ViewModels;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
 using Microsoft.Extensions.Logging;
 using Common.ViewModels.SearchViewModels;
-using Application.Services.Admin.User.Queries.GetUsersBySearch;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
 
 namespace Application.Services.Admin.Products.Queries.GetAllProducts
 {
@@ -21,7 +21,7 @@ namespace Application.Services.Admin.Products.Queries.GetAllProducts
         private readonly IMapper _mapper;
         private readonly IGetEntitiesByFilterService _getEntitiesByfilterService;
         public GetAllProductsService(IDataBaseContext context, IMapper mapper
-            , SaveLogInFile saveLogInFile, IGetUserBySearch getUserBySearch)
+            , SaveLogInFile saveLogInFile, IGetUserByFilter getUserBySearch)
         {
             _mapper = mapper;
             _getEntitiesByfilterService = new GetEntitiesByFilterService(context, saveLogInFile, getUserBySearch);

@@ -17,7 +17,7 @@ using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
 using Common.ViewModels.ExcelViewModels;
 using Application.Services.Common.BlogPage.GetBlogPagesBySearch;
 using Application.Services.Admin.Message.Queries.GetMessagesBySearch;
-using Application.Services.Admin.User.Queries.GetUsersBySearch;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
 
 namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
 {
@@ -31,12 +31,12 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
     {
         private readonly IDataBaseContext db;
         private readonly SaveLogInFile _saveLogInFile;
-        private readonly IGetUserBySearch _getUserBySearch;
-        public GetEntitiesByFilterService(IDataBaseContext context, SaveLogInFile saveLogInFile, IGetUserBySearch getUserBySearch)
+        private readonly IGetUserByFilter _getUserByFilter;
+        public GetEntitiesByFilterService(IDataBaseContext context, SaveLogInFile saveLogInFile, IGetUserByFilter getUserBySearch)
         {
             db = context;
             _saveLogInFile = saveLogInFile;
-            _getUserBySearch = getUserBySearch;
+            _getUserByFilter = getUserBySearch;
         }
 
         public ResultDto<IEnumerable<object>> Execute(int filterId)
@@ -97,7 +97,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                     }),
 
                     //Users
-                    Domain.Entities.Option.SearchItemType.User => _getUserBySearch.GetUSers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
+                    Domain.Entities.Option.SearchItemType.User => _getUserByFilter.GetUsers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
                     .Select(u=> new ExcelUserViewModel
                     {
                         UserName = u.UserName ?? "ندارد",

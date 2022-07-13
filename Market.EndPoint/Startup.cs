@@ -23,8 +23,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Common.Utilities;
 using Microsoft.Extensions.Logging;
-using Application.Services.Admin.User.Queries.GetUsersBySearch;
-using RabbitMQ.Repositories.User.GetUsersBySearch;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
+using Market.EndPoint.Repositories.User;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
 
 namespace Market.EndPoint
 {
@@ -149,7 +150,6 @@ namespace Market.EndPoint
             services.AddScoped<IOptionFacade, OptionFacade>();
             services.AddScoped<IExcelFacade, ExcelFacade>();
             services.AddScoped<ICommentFacad, CommentFacad>();
-            services.AddScoped<IGetUserBySearch, GetUserBySearch>();
         }
 
         private void ClientInjections(IServiceCollection services)
@@ -172,6 +172,8 @@ namespace Market.EndPoint
 
         private void InjectionUtilities(IServiceCollection services)
         {
+            services.AddScoped<IGetUserByFilter, GetUsersByFilter>();
+
             services.AddScoped<IMessageSender, GmailSender>();
             services.AddScoped<SaveLogInFile>();
         }

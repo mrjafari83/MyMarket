@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Admin\Keyword\Queries\**" />
+    <Compile Remove="Services\Admin\Slider\Queries\**" />
+    <EmbeddedResource Remove="Services\Admin\Keyword\Queries\**" />
+    <EmbeddedResource Remove="Services\Admin\Slider\Queries\**" />
+    <None Remove="Services\Admin\Keyword\Queries\**" />
+    <None Remove="Services\Admin\Slider\Queries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
@@ -18,8 +27,6 @@
 
   <ItemGroup>
     <Folder Include="Services\Admin\Comment\Commands\" />
-    <Folder Include="Services\Admin\Keyword\Queries\" />
-    <Folder Include="Services\Admin\Slider\Queries\" />
   </ItemGroup>
 
 </Project>

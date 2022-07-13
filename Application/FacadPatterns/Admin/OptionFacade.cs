@@ -8,7 +8,7 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
 using Application.Services.Admin.Options.Commands.CreateSearchFilter;
 using Microsoft.Extensions.Logging;
-using Application.Services.Admin.User.Queries.GetUsersBySearch;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
 using Common.Utilities;
 
 namespace Application.FacadPatterns.Admin
@@ -17,8 +17,8 @@ namespace Application.FacadPatterns.Admin
     {
         private readonly IDataBaseContext db;
         private readonly SaveLogInFile _saveLogFile;
-        private readonly IGetUserBySearch _getUserBySearch;
-        public OptionFacade(IDataBaseContext context, SaveLogInFile saveLogInFile, IGetUserBySearch getUserBySearch)
+        private readonly IGetUserByFilter _getUserBySearch;
+        public OptionFacade(IDataBaseContext context, SaveLogInFile saveLogInFile, IGetUserByFilter getUserBySearch)
         {
             db = context;
             _saveLogFile = saveLogInFile;

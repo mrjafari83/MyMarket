@@ -9,7 +9,7 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Domain.Entities.User;
 using Microsoft.AspNetCore.Authorization;
-using Application.Services.Admin.User.Queries.GetUsersBySearch;
+using Application.Services.Admin.User.Queries.GetUsersByFilter;
 using Common.ViewModels.SearchViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -26,13 +26,13 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ICartPayingFacad _cartPayingFacad;
         private readonly ICommonCartFacad _commonCartFacad;
-        private readonly IGetUserBySearch _getUserBySearch;
+        private readonly IGetUserByFilter _getUserByFilter;
         private readonly SaveLogInFile _saveLogInFile;
         private readonly IExcelFacade _excelFacade;
         private readonly IOptionFacade _optionFacade;
         private readonly ISend _send;
         public UsersController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager
-            , ICartPayingFacad cartPayingFacad, ICommonCartFacad commonCartFacad,IGetUserBySearch getUserBySearch
+            , ICartPayingFacad cartPayingFacad, ICommonCartFacad commonCartFacad,IGetUserByFilter getUserByFilter
             , ICommonCategorisFacad commonCategorisFacad, IExcelFacade excelFacade, SaveLogInFile saveLogInFile
             , IOptionFacade optionFacade, ISend send)
         {
@@ -40,7 +40,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             _roleManager = roleManager;
             _cartPayingFacad = cartPayingFacad;
             _commonCartFacad = commonCartFacad;
-            _getUserBySearch = getUserBySearch;
+            _getUserByFilter = getUserByFilter;
             _saveLogInFile = saveLogInFile;
             _excelFacade = excelFacade;
             _optionFacade = optionFacade;
@@ -53,7 +53,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             ViewBag.UserRole = (int)searchModel.UserRole;
             ViewBag.SearchBy = (int)searchModel.SearchBy;
 
-            var users = _getUserBySearch.GetUSers(searchModel).Select(u => new UserViewModel
+            var users = _getUserByFilter.GetUsers(searchModel).Select(u => new UserViewModel
             {
                 Id = u.Id,
                 UserName = u.UserName,
