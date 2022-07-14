@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Common.Dto;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System.Collections.Generic;

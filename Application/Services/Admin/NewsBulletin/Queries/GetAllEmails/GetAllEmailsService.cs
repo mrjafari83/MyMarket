@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.Dto;
 using Common.Utilities;
-using Application.Interfaces.Context;
+using Persistance.Context;
 
 namespace Application.Services.Admin.NewsBulletin.Queries.GetAllEmails
 {

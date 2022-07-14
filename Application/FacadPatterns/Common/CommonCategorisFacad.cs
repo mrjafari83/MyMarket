@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Application.Services.Common.Category.Queries.GetAllCategories;
 using Application.Services.Common.Category.Queries.GetChildrenOfCategory;
 using Application.Services.Common.Category.Queries.GetCategoryById;

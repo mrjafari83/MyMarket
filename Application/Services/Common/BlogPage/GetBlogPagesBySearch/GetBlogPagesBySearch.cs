@@ -1,4 +1,4 @@
-﻿using Application.Interfaces.Context;
+﻿using Persistance.Context;
 using Common.Enums;
 using Common.ViewModels.SearchViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,7 @@ namespace Application.Services.Common.BlogPage.GetBlogPagesBySearch
 {
     public class GetBlogPagesBySearch
     {
-        public static IQueryable<Domain.Entities.BlogPages.BlogPage> GetBlogPages(IDataBaseContext db , BlogPageSearchViewModel searchModel)
+        public static IQueryable<Persistance.Entities.BlogPages.BlogPage> GetBlogPages(IDataBaseContext db , BlogPageSearchViewModel searchModel)
         {
             var data = db.BlogPages.Include(b=> b.Category).AsQueryable();
 

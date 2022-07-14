@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Domain.Entities.Categories;
+using Persistance.Entities.Categories;
 
 namespace Application.Services.Admin.Categories.Queries.GetCategoryById
 {

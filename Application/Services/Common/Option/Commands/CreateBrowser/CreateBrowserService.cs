@@ -1,5 +1,5 @@
 ﻿using System;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Common.Dto;
 
 namespace Application.Services.Common.Option.Commands.CreateBrowser
@@ -14,7 +14,7 @@ namespace Application.Services.Common.Option.Commands.CreateBrowser
 
         public ResultDto<string> Execute()
         {
-            var code = db.Browsers.Add(new Domain.Entities.User.Browser
+            var code = db.Browsers.Add(new Persistance.Entities.User.Browser
             {
                 BrowserCode = Guid.NewGuid().ToString()
             }).Entity.BrowserCode;

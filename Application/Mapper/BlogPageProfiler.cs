@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entities.BlogPages;
+using Persistance.Entities.BlogPages;
 using Application.Services.Admin.BlogPages.Commands.CreateBlogPage;
 using Application.Services.Admin.BlogPages.Commands.EditBlogPage;
 using Application.Services.Admin.BlogPages.Queries.GetBlogPageById;
 using Application.Services.Common.BlogPage.Queries.GetAllBlogPages;
 using Common.ViewModels;
-using Domain.Entities.Common;
+using Persistance.Entities.Common;
 using Common.Utilities;
 
 namespace Application.Mapper

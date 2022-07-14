@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Common.Dto;
 
 namespace Application.Services.Client.BlogPages.Commands.AddNewVisit
@@ -28,7 +28,7 @@ namespace Application.Services.Client.BlogPages.Commands.AddNewVisit
 
             if(!db.BlogPagesVisits.Where(b=> b.BlogPage == blogPage && b.Browser == browser).Any())
             {
-                db.BlogPagesVisits.Add(new Domain.Entities.BlogPages.BlogPagesVisit
+                db.BlogPagesVisits.Add(new Persistance.Entities.BlogPages.BlogPagesVisit
                 {
                     BlogPage = blogPage,
                     Browser = browser

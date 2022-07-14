@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Common.Dto;
-using Application.Interfaces.Context;
+using Persistance.Context;
 
 namespace Application.Services.Common.Category.Queries.GetCategoryById
 {

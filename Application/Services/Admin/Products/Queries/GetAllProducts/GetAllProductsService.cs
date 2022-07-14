@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using AutoMapper;
 using Common.Dto;
 using Common.Enums;
 using Common.Utilities;
-using Domain.Entities.Products;
+using Persistance.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Common.ViewModels;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;

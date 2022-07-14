@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.ViewModels;
 using Application.Services.Admin.Comment.Queries.GetAllComments;
-using Domain.Entities.Comments;
-using Domain.Entities.Products;
-using Domain.Entities.BlogPages;
+using Persistance.Entities.Comments;
+using Persistance.Entities.Products;
+using Persistance.Entities.BlogPages;
 
 namespace Application.Mapper
 {

@@ -1,4 +1,4 @@
-﻿using Domain.Entities.User;
+﻿using Persistance.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -11,7 +11,7 @@ using Application.Interfaces.FacadPatterns.Client;
 using EndPoint.Api.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace EndPoint.Api.Controllers

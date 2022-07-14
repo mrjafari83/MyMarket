@@ -1,28 +1,12 @@
-﻿using Application.FacadPatterns.Admin;
-using Application.Interfaces.FacadPatterns.Admin;
-using Domain.Entities.User;
-using Market.EndPoint;
+﻿using Market.EndPoint;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Moq;
-using Persistance.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 
 namespace Market_Integration_Tests
 {

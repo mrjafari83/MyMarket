@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Common.Dto;
-using Domain.Entities.Common;
-using Domain.Entities.Products;
-using Domain.Entities.Products.Relations;
+using Persistance.Entities.Common;
+using Persistance.Entities.Products;
+using Persistance.Entities.Products.Relations;
 using Microsoft.EntityFrameworkCore;
 using Common.Utilities;
 using System.Threading.Tasks;
@@ -54,7 +54,7 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
             }
         }
 
-        private void DeleteFeatures(List<Domain.Entities.Products.ProductFeature> productFeatures)
+        private void DeleteFeatures(List<Persistance.Entities.Products.ProductFeature> productFeatures)
         {
             foreach (var item in productFeatures)
             {

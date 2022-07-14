@@ -1,8 +1,8 @@
-﻿using Application.Interfaces.Context;
+﻿using Persistance.Context;
 using AutoMapper;
 using Common.Dto;
 using Common.ViewModels;
-using Domain.Entities.Cart;
+using Persistance.Entities.Cart;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;

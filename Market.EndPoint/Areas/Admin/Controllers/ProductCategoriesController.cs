@@ -135,7 +135,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             try
             {
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Domain.Entities.Option.SearchItemType.ProductCategory);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Persistance.Entities.Option.SearchItemType.ProductCategory);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "ProductCategory");

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Admin.ProductColors.Queries.GetAllProductColors;
 using Application.Services.Admin.ProductColors.Queries.GetAllColors;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Application.Interfaces.FacadPatterns.Admin;
 
 namespace Application.FacadPatterns.Admin

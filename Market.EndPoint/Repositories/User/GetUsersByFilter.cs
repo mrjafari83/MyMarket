@@ -2,7 +2,7 @@
 using Common.Classes;
 using Common.Enums;
 using Common.ViewModels.SearchViewModels;
-using Domain.Entities.User;
+using Persistance.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 

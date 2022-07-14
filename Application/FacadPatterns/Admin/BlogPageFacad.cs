@@ -8,7 +8,7 @@ using Application.Services.Admin.BlogPages.Commands.EditBlogPage;
 using Application.Services.Admin.BlogPages.Commands.DeleteBlogPage;
 using Application.Services.Admin.BlogPages.Queries.GetBlogPageById;
 using Application.Interfaces.FacadPatterns.Admin;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using AutoMapper;
 
 namespace Application.FacadPatterns.Admin

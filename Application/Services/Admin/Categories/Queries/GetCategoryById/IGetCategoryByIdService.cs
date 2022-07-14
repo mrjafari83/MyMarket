@@ -2,9 +2,9 @@
 using System.Text;
 using System.Threading.Tasks;
 using Common.Dto;
-using Domain.Entities.Categories;
-using Domain.Entities.Products;
-using Domain.Entities.BlogPages;
+using Persistance.Entities.Categories;
+using Persistance.Entities.Products;
+using Persistance.Entities.BlogPages;
 
 namespace Application.Services.Admin.Categories.Queries.GetCategoryById
 {

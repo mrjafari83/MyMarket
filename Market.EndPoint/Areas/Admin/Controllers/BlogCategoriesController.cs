@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Application.FacadPatterns;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
@@ -146,7 +146,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             try
             {
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Domain.Entities.Option.SearchItemType.BlogCategory);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Persistance.Entities.Option.SearchItemType.BlogCategory);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "BlogCategory");

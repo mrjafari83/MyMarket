@@ -1,7 +1,7 @@
-﻿using Application.Interfaces.Context;
+﻿using Persistance.Context;
 using Common.Enums;
 using Common.ViewModels.SearchViewModels;
-using Domain.Entities.Message;
+using Persistance.Entities.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;

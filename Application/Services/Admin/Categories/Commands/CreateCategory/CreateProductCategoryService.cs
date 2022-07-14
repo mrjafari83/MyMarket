@@ -1,7 +1,7 @@
-﻿using Application.Interfaces.Context;
+﻿using Persistance.Context;
 using Common.Dto;
-using Domain.Entities.Categories;
-using Domain.Entities.Products;
+using Persistance.Entities.Categories;
+using Persistance.Entities.Products;
 
 namespace Application.Services.Admin.Categories.Commands.CreateCategory
 {

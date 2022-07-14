@@ -1,9 +1,9 @@
-﻿using Application.Interfaces.Context;
+﻿using Persistance.Context;
 using Common.Dto;
 using Common.ViewModels;
-using Domain.Entities.Common;
-using Domain.Entities.Products;
-using Domain.Entities.Products.Relations;
+using Persistance.Entities.Common;
+using Persistance.Entities.Products;
+using Persistance.Entities.Products.Relations;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,14 +99,14 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             }
         }
 
-        private async Task AddFeaturs(Product product, List<FeatureViewModel> features, List<Domain.Entities.Products.ProductFeature> productFeatures)
+        private async Task AddFeaturs(Product product, List<FeatureViewModel> features, List<Persistance.Entities.Products.ProductFeature> productFeatures)
         {
             foreach (var item in features)
             {
                 if (productFeatures.Where(k => k.Display == item.Display && k.FeatureValue == item.FeatureValue).Count() != 0)
                     continue;
 
-                await db.ProductFutures.AddAsync(new Domain.Entities.Products.ProductFeature
+                await db.ProductFutures.AddAsync(new Persistance.Entities.Products.ProductFeature
                 {
                     Display = item.Display,
                     FeatureValue = item.FeatureValue,
@@ -115,7 +115,7 @@ namespace Application.Services.Admin.Products.Commands.EditProduct
             }
         }
 
-        private async Task DeleteFeatures(List<FeatureViewModel> features, List<Domain.Entities.Products.ProductFeature> productFeatures)
+        private async Task DeleteFeatures(List<FeatureViewModel> features, List<Persistance.Entities.Products.ProductFeature> productFeatures)
         {
             foreach (var item in productFeatures)
             {

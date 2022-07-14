@@ -10,7 +10,7 @@ using Application.Services.Admin.Products.Queries.GetAllProducts;
 using Application.Services.Admin.Products.Queries.GetProductById;
 using Application.Services.Admin.Products.Queries.GetBestSellingProducts;
 using Application.Interfaces.FacadPatterns.Admin;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Microsoft.AspNetCore.Hosting;
 using AutoMapper;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;

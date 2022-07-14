@@ -1,7 +1,7 @@
 ﻿using Common.Dto;
-using Application.Interfaces.Context;
-using Domain.Entities.BlogPages;
-using Domain.Entities.Common;
+using Persistance.Context;
+using Persistance.Entities.BlogPages;
+using Persistance.Entities.Common;
 using System.Collections.Generic;
 using Common.ViewModels;
 using System.Linq;

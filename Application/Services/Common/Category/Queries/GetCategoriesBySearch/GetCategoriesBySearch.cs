@@ -1,5 +1,5 @@
-﻿using Application.Interfaces.Context;
-using Domain.Entities.Categories;
+﻿using Persistance.Context;
+using Persistance.Entities.Categories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Application.Services.Common.Category.Queries.GetCategoriesBySearch
 {
     public class GetBlogCategoryBySearch
     {
-        public static IQueryable<Category<Domain.Entities.BlogPages.BlogPage>> GetCategories(IDataBaseContext db , BlogCategoryViewModel searchModel)
+        public static IQueryable<Category<Persistance.Entities.BlogPages.BlogPage>> GetCategories(IDataBaseContext db , BlogCategoryViewModel searchModel)
         {
             var data = db.BlogPageCategories.AsQueryable();
             if(searchModel != null)
@@ -29,7 +29,7 @@ namespace Application.Services.Common.Category.Queries.GetCategoriesBySearch
 
     public class GetProductCategoryBySearch
     {
-        public static IQueryable<Category<Domain.Entities.Products.Product>> GetCategories(IDataBaseContext db, ProductCategoryViewModel searchModel)
+        public static IQueryable<Category<Persistance.Entities.Products.Product>> GetCategories(IDataBaseContext db, ProductCategoryViewModel searchModel)
         {
             var data = db.ProductCategories.AsQueryable();
             if (searchModel != null)

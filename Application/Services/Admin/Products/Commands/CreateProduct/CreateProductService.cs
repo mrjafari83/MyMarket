@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using Common.Dto;
 using Common.Utilities;
 using Common.ViewModels;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Application.Interfaces.FacadPatterns.Admin;
-using Domain.Entities.Products;
-using Domain.Entities.Products.Relations;
-using Domain.Entities.Common;
+using Persistance.Entities.Products;
+using Persistance.Entities.Products.Relations;
+using Persistance.Entities.Common;
 using Application.Services.Admin.Keyword.Commands.CreateKeyword;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -85,12 +85,12 @@ namespace Application.Services.Admin.Products.Commands.CreateProduct
             return finallyImages;
         }
 
-        private List<Domain.Entities.Products.ProductFeature> AddFeature(Product product, List<FeatureViewModel> features)
+        private List<Persistance.Entities.Products.ProductFeature> AddFeature(Product product, List<FeatureViewModel> features)
         {
-            List<Domain.Entities.Products.ProductFeature> finallyFeatures = new List<Domain.Entities.Products.ProductFeature>();
+            List<Persistance.Entities.Products.ProductFeature> finallyFeatures = new List<Persistance.Entities.Products.ProductFeature>();
             foreach (var item in features)
             {
-                var feature = _mapper.Map<Domain.Entities.Products.ProductFeature>(item);
+                var feature = _mapper.Map<Persistance.Entities.Products.ProductFeature>(item);
                 feature.Product = product;
                 finallyFeatures.Add(feature);
             }

@@ -9,7 +9,7 @@ using Common.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Application.Interfaces.FacadPatterns.Client;
 using Application.Interfaces.FacadPatterns.Common;
-using Domain.Entities.User;
+using Persistance.Entities.User;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Common.Classes;

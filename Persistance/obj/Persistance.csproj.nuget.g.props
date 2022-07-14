@@ -18,6 +18,5 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\Kar1\.nuget\packages\microsoft.entityframeworkcore.tools\6.0.6</PkgMicrosoft_EntityFrameworkCore_Tools>
-    <PkgEntityFramework Condition=" '$(PkgEntityFramework)' == '' ">C:\Users\Kar1\.nuget\packages\entityframework\6.1.0</PkgEntityFramework>
   </PropertyGroup>
 </Project>

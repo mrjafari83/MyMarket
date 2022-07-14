@@ -2,7 +2,7 @@
 using Common.Dto;
 using Common.ViewModels;
 using Common.Utilities;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Common.ViewModels.SearchViewModels;

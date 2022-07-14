@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Application.Interfaces.FacadPatterns.Common;
 using Application.Services.Common.Product.Queries.GetProductsByFilter;
 using Application.Services.Common.Product.Queries.GetProductById;

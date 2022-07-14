@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.Dto;
 using Common.Enums;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Application.Services.Common.Category.Queries.GetChildrenOfCategory;
 using Common.ViewModels.SearchViewModels;
 using Application.Services.Common.Category.Queries.GetCategoriesBySearch;

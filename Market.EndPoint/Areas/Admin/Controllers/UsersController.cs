@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Common.ViewModels;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
-using Domain.Entities.User;
+using Persistance.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Application.Services.Admin.User.Queries.GetUsersByFilter;
 using Common.ViewModels.SearchViewModels;
@@ -170,7 +170,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             try
             {
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Domain.Entities.Option.SearchItemType.User);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Persistance.Entities.Option.SearchItemType.User);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "User");

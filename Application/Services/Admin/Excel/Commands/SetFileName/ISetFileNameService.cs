@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Dto;
-using Application.Interfaces.Context;
+using Persistance.Context;
 
 namespace Application.Services.Admin.Excel.Commands.SetFileName
 {

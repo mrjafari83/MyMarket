@@ -22,7 +22,7 @@ namespace Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Domain.Entities.BlogPages.BlogPage", b =>
+            modelBuilder.Entity("Persistance.Entities.BlogPages.BlogPage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace Persistance.Migrations
                     b.ToTable("BlogPages", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.BlogPages.BlogPagesVisit", b =>
+            modelBuilder.Entity("Persistance.Entities.BlogPages.BlogPagesVisit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +84,7 @@ namespace Persistance.Migrations
                     b.ToTable("BlogPagesVisits", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart.Cart", b =>
+            modelBuilder.Entity("Persistance.Entities.Cart.Cart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,7 +106,7 @@ namespace Persistance.Migrations
                     b.ToTable("Carts", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart.CartPayingInfo", b =>
+            modelBuilder.Entity("Persistance.Entities.Cart.CartPayingInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -157,7 +157,7 @@ namespace Persistance.Migrations
                     b.ToTable("CartPayings", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart.ProductInCart", b =>
+            modelBuilder.Entity("Persistance.Entities.Cart.ProductInCart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -208,7 +208,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductsInCart", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Categories.Category<Domain.Entities.BlogPages.BlogPage>", b =>
+            modelBuilder.Entity("Persistance.Entities.Categories.Category<Persistance.Entities.BlogPages.BlogPage>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,7 +247,7 @@ namespace Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Categories.Category<Domain.Entities.Products.Product>", b =>
+            modelBuilder.Entity("Persistance.Entities.Categories.Category<Persistance.Entities.Products.Product>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -286,7 +286,7 @@ namespace Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Comments.Comment<Domain.Entities.BlogPages.BlogPage>", b =>
+            modelBuilder.Entity("Persistance.Entities.Comments.Comment<Persistance.Entities.BlogPages.BlogPage>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -333,7 +333,7 @@ namespace Persistance.Migrations
                     b.ToTable("BlogPageComments", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Comments.Comment<Domain.Entities.Products.Product>", b =>
+            modelBuilder.Entity("Persistance.Entities.Comments.Comment<Persistance.Entities.Products.Product>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -380,7 +380,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductComments", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Common.Keyword<Domain.Entities.BlogPages.BlogPage>", b =>
+            modelBuilder.Entity("Persistance.Entities.Common.Keyword<Persistance.Entities.BlogPages.BlogPage>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -407,7 +407,7 @@ namespace Persistance.Migrations
                     b.ToTable("BlogKeywords", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Common.Keyword<Domain.Entities.Products.Product>", b =>
+            modelBuilder.Entity("Persistance.Entities.Common.Keyword<Persistance.Entities.Products.Product>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -434,7 +434,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductKeywords", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Message.CriticismMessage", b =>
+            modelBuilder.Entity("Persistance.Entities.Message.CriticismMessage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -459,7 +459,7 @@ namespace Persistance.Migrations
                     b.ToTable("CriticismMessages", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.NewsBulletin.Email", b =>
+            modelBuilder.Entity("Persistance.Entities.NewsBulletin.Email", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -475,7 +475,7 @@ namespace Persistance.Migrations
                     b.ToTable("Emails", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.NewsBulletin.News", b =>
+            modelBuilder.Entity("Persistance.Entities.NewsBulletin.News", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -494,7 +494,7 @@ namespace Persistance.Migrations
                     b.ToTable("News", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Option.ExcelStatus", b =>
+            modelBuilder.Entity("Persistance.Entities.Option.ExcelStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -524,7 +524,7 @@ namespace Persistance.Migrations
                     b.ToTable("ExcelStatuses", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Option.SearchFilter", b =>
+            modelBuilder.Entity("Persistance.Entities.Option.SearchFilter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -549,7 +549,7 @@ namespace Persistance.Migrations
                     b.ToTable("SearchFilter", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Option.Slider", b =>
+            modelBuilder.Entity("Persistance.Entities.Option.Slider", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -574,7 +574,7 @@ namespace Persistance.Migrations
                     b.ToTable("Sliders", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Product", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -614,7 +614,7 @@ namespace Persistance.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductColor", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductColor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -636,7 +636,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductColors", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductFeature", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductFeature", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -666,7 +666,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductFutures", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductImage", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -687,7 +687,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductImages", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductInventory", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductInventory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -717,7 +717,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductInventories", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductSize", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductSize", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -739,7 +739,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductSizes", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Relations.ColorInProduct", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Relations.ColorInProduct", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -768,7 +768,7 @@ namespace Persistance.Migrations
                     b.ToTable("ColorsInProducts", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Relations.ProductsVisit", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Relations.ProductsVisit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -791,7 +791,7 @@ namespace Persistance.Migrations
                     b.ToTable("ProductsVisits", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Relations.SizeInProduct", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Relations.SizeInProduct", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -820,7 +820,7 @@ namespace Persistance.Migrations
                     b.ToTable("SizesInProducts", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.User.ApplicationRole", b =>
+            modelBuilder.Entity("Persistance.Entities.User.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -870,7 +870,7 @@ namespace Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.User.ApplicationUser", b =>
+            modelBuilder.Entity("Persistance.Entities.User.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -960,7 +960,7 @@ namespace Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.User.Browser", b =>
+            modelBuilder.Entity("Persistance.Entities.User.Browser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1082,9 +1082,9 @@ namespace Persistance.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.BlogPages.BlogPage", b =>
+            modelBuilder.Entity("Persistance.Entities.BlogPages.BlogPage", b =>
                 {
-                    b.HasOne("Domain.Entities.Categories.Category<Domain.Entities.BlogPages.BlogPage>", "Category")
+                    b.HasOne("Persistance.Entities.Categories.Category<Persistance.Entities.BlogPages.BlogPage>", "Category")
                         .WithMany("Location")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1093,13 +1093,13 @@ namespace Persistance.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Domain.Entities.BlogPages.BlogPagesVisit", b =>
+            modelBuilder.Entity("Persistance.Entities.BlogPages.BlogPagesVisit", b =>
                 {
-                    b.HasOne("Domain.Entities.BlogPages.BlogPage", "BlogPage")
+                    b.HasOne("Persistance.Entities.BlogPages.BlogPage", "BlogPage")
                         .WithMany("Visits")
                         .HasForeignKey("BlogPageId");
 
-                    b.HasOne("Domain.Entities.User.Browser", "Browser")
+                    b.HasOne("Persistance.Entities.User.Browser", "Browser")
                         .WithMany("BlogPagesVisits")
                         .HasForeignKey("BrowserId");
 
@@ -1108,9 +1108,9 @@ namespace Persistance.Migrations
                     b.Navigation("Browser");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart.CartPayingInfo", b =>
+            modelBuilder.Entity("Persistance.Entities.Cart.CartPayingInfo", b =>
                 {
-                    b.HasOne("Domain.Entities.Cart.Cart", "Cart")
+                    b.HasOne("Persistance.Entities.Cart.Cart", "Cart")
                         .WithMany("CartPayings")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1119,25 +1119,25 @@ namespace Persistance.Migrations
                     b.Navigation("Cart");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart.ProductInCart", b =>
+            modelBuilder.Entity("Persistance.Entities.Cart.ProductInCart", b =>
                 {
-                    b.HasOne("Domain.Entities.Cart.Cart", "Cart")
+                    b.HasOne("Persistance.Entities.Cart.Cart", "Cart")
                         .WithMany("Products")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Cart.CartPayingInfo", "CartPayingInfo")
+                    b.HasOne("Persistance.Entities.Cart.CartPayingInfo", "CartPayingInfo")
                         .WithMany("Products")
                         .HasForeignKey("CartPayingInfoId");
 
-                    b.HasOne("Domain.Entities.Products.Product", "Product")
+                    b.HasOne("Persistance.Entities.Products.Product", "Product")
                         .WithMany("ProductInCarts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Products.ProductInventory", "ProductInventoryAndPrice")
+                    b.HasOne("Persistance.Entities.Products.ProductInventory", "ProductInventoryAndPrice")
                         .WithMany("ProductInCarts")
                         .HasForeignKey("ProductInventoryAndPriceId");
 
@@ -1150,31 +1150,31 @@ namespace Persistance.Migrations
                     b.Navigation("ProductInventoryAndPrice");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Categories.Category<Domain.Entities.BlogPages.BlogPage>", b =>
+            modelBuilder.Entity("Persistance.Entities.Categories.Category<Persistance.Entities.BlogPages.BlogPage>", b =>
                 {
-                    b.HasOne("Domain.Entities.Categories.Category<Domain.Entities.BlogPages.BlogPage>", "Parent")
+                    b.HasOne("Persistance.Entities.Categories.Category<Persistance.Entities.BlogPages.BlogPage>", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Categories.Category<Domain.Entities.Products.Product>", b =>
+            modelBuilder.Entity("Persistance.Entities.Categories.Category<Persistance.Entities.Products.Product>", b =>
                 {
-                    b.HasOne("Domain.Entities.Categories.Category<Domain.Entities.Products.Product>", "Parent")
+                    b.HasOne("Persistance.Entities.Categories.Category<Persistance.Entities.Products.Product>", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Comments.Comment<Domain.Entities.BlogPages.BlogPage>", b =>
+            modelBuilder.Entity("Persistance.Entities.Comments.Comment<Persistance.Entities.BlogPages.BlogPage>", b =>
                 {
-                    b.HasOne("Domain.Entities.BlogPages.BlogPage", "Location")
+                    b.HasOne("Persistance.Entities.BlogPages.BlogPage", "Location")
                         .WithMany("Comments")
                         .HasForeignKey("LocationId");
 
-                    b.HasOne("Domain.Entities.Comments.Comment<Domain.Entities.BlogPages.BlogPage>", "Parent")
+                    b.HasOne("Persistance.Entities.Comments.Comment<Persistance.Entities.BlogPages.BlogPage>", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
@@ -1183,13 +1183,13 @@ namespace Persistance.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Comments.Comment<Domain.Entities.Products.Product>", b =>
+            modelBuilder.Entity("Persistance.Entities.Comments.Comment<Persistance.Entities.Products.Product>", b =>
                 {
-                    b.HasOne("Domain.Entities.Products.Product", "Location")
+                    b.HasOne("Persistance.Entities.Products.Product", "Location")
                         .WithMany("Comments")
                         .HasForeignKey("LocationId");
 
-                    b.HasOne("Domain.Entities.Comments.Comment<Domain.Entities.Products.Product>", "Parent")
+                    b.HasOne("Persistance.Entities.Comments.Comment<Persistance.Entities.Products.Product>", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
@@ -1198,27 +1198,27 @@ namespace Persistance.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Common.Keyword<Domain.Entities.BlogPages.BlogPage>", b =>
+            modelBuilder.Entity("Persistance.Entities.Common.Keyword<Persistance.Entities.BlogPages.BlogPage>", b =>
                 {
-                    b.HasOne("Domain.Entities.BlogPages.BlogPage", "Parent")
+                    b.HasOne("Persistance.Entities.BlogPages.BlogPage", "Parent")
                         .WithMany("Keywords")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Common.Keyword<Domain.Entities.Products.Product>", b =>
+            modelBuilder.Entity("Persistance.Entities.Common.Keyword<Persistance.Entities.Products.Product>", b =>
                 {
-                    b.HasOne("Domain.Entities.Products.Product", "Parent")
+                    b.HasOne("Persistance.Entities.Products.Product", "Parent")
                         .WithMany("Keywords")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Option.ExcelStatus", b =>
+            modelBuilder.Entity("Persistance.Entities.Option.ExcelStatus", b =>
                 {
-                    b.HasOne("Domain.Entities.Option.SearchFilter", "SearchFilter")
+                    b.HasOne("Persistance.Entities.Option.SearchFilter", "SearchFilter")
                         .WithMany()
                         .HasForeignKey("SearchFilterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1227,9 +1227,9 @@ namespace Persistance.Migrations
                     b.Navigation("SearchFilter");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Product", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Product", b =>
                 {
-                    b.HasOne("Domain.Entities.Categories.Category<Domain.Entities.Products.Product>", "Category")
+                    b.HasOne("Persistance.Entities.Categories.Category<Persistance.Entities.Products.Product>", "Category")
                         .WithMany("Location")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1238,27 +1238,27 @@ namespace Persistance.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductFeature", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductFeature", b =>
                 {
-                    b.HasOne("Domain.Entities.Products.Product", "Product")
+                    b.HasOne("Persistance.Entities.Products.Product", "Product")
                         .WithMany("Features")
                         .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductImage", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductImage", b =>
                 {
-                    b.HasOne("Domain.Entities.Products.Product", "Product")
+                    b.HasOne("Persistance.Entities.Products.Product", "Product")
                         .WithMany("Images")
                         .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductInventory", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductInventory", b =>
                 {
-                    b.HasOne("Domain.Entities.Products.Product", "Product")
+                    b.HasOne("Persistance.Entities.Products.Product", "Product")
                         .WithMany("Inventories")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1267,13 +1267,13 @@ namespace Persistance.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Relations.ColorInProduct", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Relations.ColorInProduct", b =>
                 {
-                    b.HasOne("Domain.Entities.Products.ProductColor", "Color")
+                    b.HasOne("Persistance.Entities.Products.ProductColor", "Color")
                         .WithMany("Products")
                         .HasForeignKey("ColorId");
 
-                    b.HasOne("Domain.Entities.Products.Product", "Product")
+                    b.HasOne("Persistance.Entities.Products.Product", "Product")
                         .WithMany("Colors")
                         .HasForeignKey("ProductId");
 
@@ -1282,13 +1282,13 @@ namespace Persistance.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Relations.ProductsVisit", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Relations.ProductsVisit", b =>
                 {
-                    b.HasOne("Domain.Entities.User.Browser", "Browser")
+                    b.HasOne("Persistance.Entities.User.Browser", "Browser")
                         .WithMany("ProductsVisits")
                         .HasForeignKey("BrowserId");
 
-                    b.HasOne("Domain.Entities.Products.Product", "Product")
+                    b.HasOne("Persistance.Entities.Products.Product", "Product")
                         .WithMany("Visits")
                         .HasForeignKey("ProductId");
 
@@ -1297,13 +1297,13 @@ namespace Persistance.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Relations.SizeInProduct", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Relations.SizeInProduct", b =>
                 {
-                    b.HasOne("Domain.Entities.Products.Product", "Product")
+                    b.HasOne("Persistance.Entities.Products.Product", "Product")
                         .WithMany("Sizes")
                         .HasForeignKey("ProductId");
 
-                    b.HasOne("Domain.Entities.Products.ProductSize", "Size")
+                    b.HasOne("Persistance.Entities.Products.ProductSize", "Size")
                         .WithMany("Products")
                         .HasForeignKey("SizeId");
 
@@ -1314,7 +1314,7 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Domain.Entities.User.ApplicationRole", null)
+                    b.HasOne("Persistance.Entities.User.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1323,7 +1323,7 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Domain.Entities.User.ApplicationUser", null)
+                    b.HasOne("Persistance.Entities.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1332,7 +1332,7 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Domain.Entities.User.ApplicationUser", null)
+                    b.HasOne("Persistance.Entities.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1341,13 +1341,13 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Domain.Entities.User.ApplicationRole", null)
+                    b.HasOne("Persistance.Entities.User.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.User.ApplicationUser", null)
+                    b.HasOne("Persistance.Entities.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1356,14 +1356,14 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Domain.Entities.User.ApplicationUser", null)
+                    b.HasOne("Persistance.Entities.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.BlogPages.BlogPage", b =>
+            modelBuilder.Entity("Persistance.Entities.BlogPages.BlogPage", b =>
                 {
                     b.Navigation("Comments");
 
@@ -1372,43 +1372,43 @@ namespace Persistance.Migrations
                     b.Navigation("Visits");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart.Cart", b =>
+            modelBuilder.Entity("Persistance.Entities.Cart.Cart", b =>
                 {
                     b.Navigation("CartPayings");
 
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart.CartPayingInfo", b =>
+            modelBuilder.Entity("Persistance.Entities.Cart.CartPayingInfo", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Categories.Category<Domain.Entities.BlogPages.BlogPage>", b =>
+            modelBuilder.Entity("Persistance.Entities.Categories.Category<Persistance.Entities.BlogPages.BlogPage>", b =>
                 {
                     b.Navigation("Children");
 
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Categories.Category<Domain.Entities.Products.Product>", b =>
+            modelBuilder.Entity("Persistance.Entities.Categories.Category<Persistance.Entities.Products.Product>", b =>
                 {
                     b.Navigation("Children");
 
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Comments.Comment<Domain.Entities.BlogPages.BlogPage>", b =>
+            modelBuilder.Entity("Persistance.Entities.Comments.Comment<Persistance.Entities.BlogPages.BlogPage>", b =>
                 {
                     b.Navigation("Children");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Comments.Comment<Domain.Entities.Products.Product>", b =>
+            modelBuilder.Entity("Persistance.Entities.Comments.Comment<Persistance.Entities.Products.Product>", b =>
                 {
                     b.Navigation("Children");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.Product", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.Product", b =>
                 {
                     b.Navigation("Colors");
 
@@ -1429,22 +1429,22 @@ namespace Persistance.Migrations
                     b.Navigation("Visits");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductColor", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductColor", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductInventory", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductInventory", b =>
                 {
                     b.Navigation("ProductInCarts");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Products.ProductSize", b =>
+            modelBuilder.Entity("Persistance.Entities.Products.ProductSize", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Domain.Entities.User.Browser", b =>
+            modelBuilder.Entity("Persistance.Entities.User.Browser", b =>
                 {
                     b.Navigation("BlogPagesVisits");
 

@@ -22,11 +22,11 @@ using Common.Utilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http;
-using Domain.Entities.User;
+using Persistance.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
@@ -264,7 +264,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                     SearchBy = searchModel.SearchBy
                 };
 
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel,Domain.Entities.Option.SearchItemType.Product);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel,Persistance.Entities.Option.SearchItemType.Product);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "Product");

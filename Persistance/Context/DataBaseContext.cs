@@ -6,24 +6,23 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Application.Interfaces.Context;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities.Products;
-using Domain.Entities.Products.Relations;
-using Domain.Entities.Categories;
-using Domain.Entities.BlogPages;
-using Domain.Entities.Common;
-using Domain.Entities.Comments;
-using Domain.Entities.Option;
-using Domain.Entities.Cart;
-using Domain.Entities.User;
+using Persistance.Entities.Products;
+using Persistance.Entities.Products.Relations;
+using Persistance.Entities.Categories;
+using Persistance.Entities.BlogPages;
+using Persistance.Entities.Common;
+using Persistance.Entities.Comments;
+using Persistance.Entities.Option;
+using Persistance.Entities.Cart;
+using Persistance.Entities.User;
 using Common.Classes;
-using Domain.Entities.NewsBulletin;
-using Domain.Entities.Message;
+using Persistance.Entities.NewsBulletin;
+using Persistance.Entities.Message;
 
 namespace Persistance.Context
 {
-    public class DataBaseContext : IdentityDbContext<ApplicationUser , ApplicationRole , string>, IDataBaseContext
+    public class DataBaseContext : IdentityDbContext<ApplicationUser , ApplicationRole , string>,IDataBaseContext
     {
         public DataBaseContext(DbContextOptions options)
             :base(options)

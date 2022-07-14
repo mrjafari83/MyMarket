@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Common.Dto;
 
 namespace Application.Services.Admin.Categories.Commands.DeleteCategory

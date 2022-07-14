@@ -161,7 +161,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             try
             {
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Domain.Entities.Option.SearchItemType.BlogPages);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Persistance.Entities.Option.SearchItemType.BlogPages);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "BlogPage");

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>MyMarketApplicationLogic</id>
+    <version>1.0.0</version>
+    <authors>Mohammad.Jafari</authors>
+    <description>My Market Application Layer(Login).</description>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="MyMarketCommon" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="MyMarketDataBase" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="AutoMapper.Extensions.Microsoft.DependencyInjection" version="11.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Identity" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="6.0.6" exclude="Build,Analyzers" />
+        <dependency id="System.Data.SqlClient" version="4.8.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Kar1\Desktop\MyMarket\Application\bin\Debug\net6.0\Application.dll" target="lib\net6.0\Application.dll" />
+  </files>
+</package>

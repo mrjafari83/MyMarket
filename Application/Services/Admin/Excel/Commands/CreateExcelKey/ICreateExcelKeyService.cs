@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Common.Dto;
 using Common.Enums;
 using Common.Utilities;
@@ -13,7 +13,7 @@ namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
 {
     public interface ICreateExcelKeyService
     {
-        Task<ResultDto<int>> Execute<JsonModel>(JsonModel searchFilters, Domain.Entities.Option.SearchItemType searchType) where JsonModel : class;
+        Task<ResultDto<int>> Execute<JsonModel>(JsonModel searchFilters, Persistance.Entities.Option.SearchItemType searchType) where JsonModel : class;
     }
 
     public class CreateExcelKeyService : ICreateExcelKeyService
@@ -24,9 +24,9 @@ namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
             db = context;
         }
 
-        public async Task<ResultDto<int>> Execute<JsonModel>(JsonModel searchFilters,Domain.Entities.Option.SearchItemType searchType) where JsonModel : class
+        public async Task<ResultDto<int>> Execute<JsonModel>(JsonModel searchFilters,Persistance.Entities.Option.SearchItemType searchType) where JsonModel : class
         {
-            var entity = await db.Excels.AddAsync(new Domain.Entities.Option.Excel
+            var entity = await db.Excels.AddAsync(new Persistance.Entities.Option.Excel
             {
                 Status = 0,
                 FileName = "",

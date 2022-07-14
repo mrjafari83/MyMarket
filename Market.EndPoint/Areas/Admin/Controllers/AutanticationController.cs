@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Common.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using Domain.Entities.User;
+using Persistance.Entities.User;
 using Application.Interfaces.FacadPatterns.Client;
 using Application.Interfaces.FacadPatterns.Common;
 using Common.Utilities;

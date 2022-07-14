@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Common.Dto;
 using Common.Utilities;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Common.ViewModels;
 using System.Collections.Generic;
 using AutoMapper;

@@ -1,27 +1,5 @@
 ﻿using Market.EndPoint;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using Persistance.Context;
 using Xunit;
-using System.Security.Claims;
-using System.Security.Principal;
-using Market.EndPoint.Areas.Admin.Controllers;
-using Application.Interfaces.FacadPatterns.Admin;
-using Application.Interfaces.FacadPatterns.Common;
-using AutoMapper;
-using Market.EndPoint.Utilities.RabbitMQ;
-using Microsoft.AspNetCore.Hosting;
-using Common.Utilities;
-using Microsoft.Extensions.Configuration;
-using Domain.Entities.User;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authorization.Policy;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
 
 namespace Market_Integration_Tests
 {

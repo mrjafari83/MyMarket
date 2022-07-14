@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Services.Admin.NewsBulletin.Commands.AddEmail;
 using Application.Services.Admin.NewsBulletin.Commands.SendNews;

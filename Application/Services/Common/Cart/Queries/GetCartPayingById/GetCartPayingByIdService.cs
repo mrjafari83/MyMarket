@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Application.Interfaces.Context;
+using Persistance.Context;
 using Common.Dto;
 using Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying;
 using AutoMapper;
