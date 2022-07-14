@@ -20,7 +20,6 @@ using Domain.Entities.User;
 using Common.Classes;
 using Domain.Entities.NewsBulletin;
 using Domain.Entities.Message;
-using Microsoft.AspNetCore.Identity;
 
 namespace Persistance.Context
 {
@@ -56,8 +55,7 @@ namespace Persistance.Context
         public DbSet<CriticismMessage> CriticismMessages { get; set; }
         public DbSet<Browser> Browsers { get; set; }
         public DbSet<ProductInventory> ProductInventories { get; set; }
-        public DbSet<SearchFilter> SearchFilter { get; set; }
-        public DbSet<ExcelStatus> ExcelStatuses { get; set; }
+        public DbSet<Excel> Excels { get; set; }
 
         //relation tables
         public DbSet<ColorInProduct> ColorsInProducts { get; set; }
@@ -88,8 +86,7 @@ namespace Persistance.Context
                 builder.Entity<Slider>().HasQueryFilter(s => !s.IsRemoved);
                 builder.Entity<Cart>().HasQueryFilter(c => !c.IsRemoved);
                 builder.Entity<ProductInCart>().HasQueryFilter(pc => !pc.IsRemoved);
-                builder.Entity<SearchFilter>().HasQueryFilter(e => !e.IsRemoved);
-                builder.Entity<ExcelStatus>().HasQueryFilter(e => !e.IsRemoved);
+                builder.Entity<Excel>().HasQueryFilter(e => !e.IsRemoved);
             }
 
             void SeedData()

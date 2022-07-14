@@ -10,6 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositores\**" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="Repositores\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="Repositores\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="Repositores\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JWT" Version="9.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
@@ -25,16 +36,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.3.1" />
   </ItemGroup>
 
+
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Market.EndPoint\Market.EndPoint.csproj" />
     <ProjectReference Include="..\Persistance\Persistance.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositores\" />
-    <Folder Include="wwwroot\Js\" />
   </ItemGroup>
 
 </Project>

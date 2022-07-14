@@ -166,17 +166,14 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateExcelConfirmed(UserSearchVIewModel model)
+        public async Task<IActionResult> CreateExcelConfirmed(UserSearchVIewModel searchModel)
         {
             try
             {
-                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.User);
-                var searchId = searchFilter.Data;
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Domain.Entities.Option.SearchItemType.User);
+                int excelId = excelStatus.Data;
 
-                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
-                int excelId = excelKey.Data;
-
-                _send.SendToCreateExcel(excelId, searchId, "Users");
+                _send.SendToCreateExcel(excelId, "User");
 
                 return Redirect("/Admin/Users");
             }

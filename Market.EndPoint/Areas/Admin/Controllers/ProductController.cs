@@ -264,13 +264,10 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                     SearchBy = searchModel.SearchBy
                 };
 
-                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.Product);
-                var searchId = searchFilter.Data;
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel,Domain.Entities.Option.SearchItemType.Product);
+                int excelId = excelStatus.Data;
 
-                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
-                int excelId = excelKey.Data;
-
-                _send.SendToCreateExcel(excelId, searchId,"Product");
+                _send.SendToCreateExcel(excelId, "Product");
 
                 return Redirect("/Admin/Product");
             }

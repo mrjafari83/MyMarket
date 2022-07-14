@@ -13,7 +13,7 @@ namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
 {
     public interface ICreateExcelKeyService
     {
-        Task<ResultDto<int>> Execute(int searchId);
+        Task<ResultDto<int>> Execute<JsonModel>(JsonModel searchFilters, Domain.Entities.Option.SearchItemType searchType) where JsonModel : class;
     }
 
     public class CreateExcelKeyService : ICreateExcelKeyService
@@ -24,13 +24,14 @@ namespace Application.Services.Admin.Excel.Commands.CreateExcelKey
             db = context;
         }
 
-        public async Task<ResultDto<int>> Execute(int searchId)
+        public async Task<ResultDto<int>> Execute<JsonModel>(JsonModel searchFilters,Domain.Entities.Option.SearchItemType searchType) where JsonModel : class
         {
-            var entity = await db.ExcelStatuses.AddAsync(new Domain.Entities.Option.ExcelStatus
+            var entity = await db.Excels.AddAsync(new Domain.Entities.Option.Excel
             {
                 Status = 0,
                 FileName = "",
-                SearchFilterId = searchId
+                SearchType = searchType,
+                FilterJson = JsonConvertor<JsonModel>.ToJson(searchFilters)
             });
 
             await db.SaveChangesAsync();

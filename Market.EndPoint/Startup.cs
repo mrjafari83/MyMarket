@@ -25,7 +25,7 @@ using Common.Utilities;
 using Microsoft.Extensions.Logging;
 using Application.Services.Admin.User.Queries.GetUsersByFilter;
 using Market.EndPoint.Repositories.User;
-using Application.Services.Admin.User.Queries.GetUsersByFilter;
+using RabbitMQ.Client;
 
 namespace Market.EndPoint
 {
@@ -96,7 +96,7 @@ namespace Market.EndPoint
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env , ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IHostApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
@@ -135,7 +135,7 @@ namespace Market.EndPoint
 
         private void AdminInjections(IServiceCollection services)
         {
-            services.AddScoped<IDataBaseContext, DataBaseContext>();
+            services.AddScoped<IDataBaseContext,DataBaseContext>();
             services.AddScoped<IBlogPageFacad, BlogPageFacad>();
             services.AddScoped<IProductFacad, ProductFacad>();
             services.AddScoped<IProductFeatureFacad, ProductFeatureFacad>();
@@ -189,6 +189,42 @@ namespace Market.EndPoint
             });
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+        }
+
+        public void OnAppStarted()
+        {
+            var _factory = new ConnectionFactory() { HostName = "localhost" };
+            var _connection = _factory.CreateConnection();
+            var _channel = _connection.CreateModel();
+
+            _channel.ExchangeDeclare("Web.Stat", "direct", true, false, null);
+
+            _channel.QueueDeclare("WebStat", true, false, false, null);
+            _channel.QueueBind("WebStat", "Web.Stat", "status", null);
+
+            var body = Encoding.UTF8.GetBytes(true.ToString());
+            var properties = _channel.CreateBasicProperties();
+            properties.Persistent = true;
+
+            _channel.BasicPublish("Web.Stat", "status", properties, body);
+        }
+
+        public void OnAppStopped()
+        {
+            var _factory = new ConnectionFactory() { HostName = "localhost" };
+            var _connection = _factory.CreateConnection();
+            var _channel = _connection.CreateModel();
+
+            _channel.ExchangeDeclare("Web.Stat", "direct", true, false, null);
+
+            _channel.QueueDeclare("WebStat", true, false, false, null);
+            _channel.QueueBind("WebStat", "Web.Stat", "status", null);
+
+            var body = Encoding.UTF8.GetBytes(false.ToString());
+            var properties = _channel.CreateBasicProperties();
+            properties.Persistent = true;
+
+            _channel.BasicPublish("Web.Stat", "status", properties, body);
         }
     }
 }

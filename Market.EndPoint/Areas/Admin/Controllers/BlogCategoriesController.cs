@@ -142,19 +142,16 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateExcelConfirmed(BlogCategoryViewModel model)
+        public async Task<IActionResult> CreateExcelConfirmed(BlogCategoryViewModel searchModel)
         {
             try
             {
-                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.BlogCategory);
-                var searchId = searchFilter.Data;
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Domain.Entities.Option.SearchItemType.BlogCategory);
+                int excelId = excelStatus.Data;
 
-                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
-                int excelId = excelKey.Data;
+                _send.SendToCreateExcel(excelId, "BlogCategory");
 
-                _send.SendToCreateExcel(excelId, searchId,"BlogCategories");
-
-                return Redirect("/Admin/Product");
+                return Redirect("/Admin/BlogCategories");
             }
             catch (Exception ex)
             {

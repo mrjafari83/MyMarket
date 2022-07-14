@@ -43,75 +43,84 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
         {
             try
             {
-                var filter = db.SearchFilter.Find(filterId);
-                IEnumerable<object> result = filter.SearchType switch
+                if(filterId != 0)
                 {
-                    //Products
-                    Domain.Entities.Option.SearchItemType.Product => GetProductsByFilter(JsonConvertor<ProducsSearchViewModel>.LoadFromJsonString(filter.FilterJson))
-                    .Select(p => new GetAllProductDetailsDto
+                    var filter = db.Excels.Find(filterId);
+                    IEnumerable<object> result = filter.SearchType switch
                     {
-                        Name = p.Name,
-                        Brand = p.Brand,
-                        CategoryName = p.Category.Name,
-                        VisitNumber = p.Visits.Count(),
-                        SellsCount = p.ProductInCarts.Where(p => !p.IsShow).Count()
-                    }).AsNoTracking().ToList(),
+                        //Products
+                        Domain.Entities.Option.SearchItemType.Product => GetProductsByFilter(JsonConvertor<ProducsSearchViewModel>.LoadFromJsonString(filter.FilterJson))
+                        .Select(p => new GetAllProductDetailsDto
+                        {
+                            Name = p.Name,
+                            Brand = p.Brand,
+                            CategoryName = p.Category.Name,
+                            VisitNumber = p.Visits.Count(),
+                            SellsCount = p.ProductInCarts.Where(p => !p.IsShow).Count()
+                        }).AsNoTracking().ToList(),
 
-                    //Blog Category
-                    Domain.Entities.Option.SearchItemType.BlogCategory => GetBlogCategoryBySearch.GetCategories(db,JsonConvertor<BlogCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
-                    .Select(c=> new ExcelCategoryViewModel
-                    {
-                        Name=c.Name,
-                        ParentName = c.Parent.Name ?? "ندارد",
-                        ChildrenCount = c.Children.Count(),
-                    }),
+                        //Blog Category
+                        Domain.Entities.Option.SearchItemType.BlogCategory => GetBlogCategoryBySearch.GetCategories(db, JsonConvertor<BlogCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
+                        .Select(c => new ExcelCategoryViewModel
+                        {
+                            Name = c.Name,
+                            ParentName = c.Parent.Name ?? "ندارد",
+                            ChildrenCount = c.Children.Count(),
+                        }),
 
-                    //Product Category
-                    Domain.Entities.Option.SearchItemType.ProductCategory => GetProductCategoryBySearch.GetCategories(db,JsonConvertor<ProductCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
-                    .Select(c => new ExcelCategoryViewModel
-                    {
-                        Name = c.Name,
-                        ParentName = c.Parent.Name ?? "ندارد",
-                        ChildrenCount = c.Children.Count(),
-                    }),
+                        //Product Category
+                        Domain.Entities.Option.SearchItemType.ProductCategory => GetProductCategoryBySearch.GetCategories(db, JsonConvertor<ProductCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
+                        .Select(c => new ExcelCategoryViewModel
+                        {
+                            Name = c.Name,
+                            ParentName = c.Parent.Name ?? "ندارد",
+                            ChildrenCount = c.Children.Count(),
+                        }),
 
-                    //Blog Pages
-                    Domain.Entities.Option.SearchItemType.BlogPages=> GetBlogPagesBySearch.GetBlogPages(db,JsonConvertor<BlogPageSearchViewModel>.LoadFromJsonString(filter.FilterJson))
-                    .Include(b=> b.Category).Select(b=> new ExcelBlogPagesViewModel
-                    {
-                        Title = b.Title,
-                        ShortDescription = b.ShortDescription,
-                        CategoryName = b.Category.Name,
-                        VisitNumber = b.Visits.Count(),
-                        CreateDate = b.CreateDate.ToShamsi()
-                    }),
+                        //Blog Pages
+                        Domain.Entities.Option.SearchItemType.BlogPages => GetBlogPagesBySearch.GetBlogPages(db, JsonConvertor<BlogPageSearchViewModel>.LoadFromJsonString(filter.FilterJson))
+                        .Include(b => b.Category).Select(b => new ExcelBlogPagesViewModel
+                        {
+                            Title = b.Title,
+                            ShortDescription = b.ShortDescription,
+                            CategoryName = b.Category.Name,
+                            VisitNumber = b.Visits.Count(),
+                            CreateDate = b.CreateDate.ToShamsi()
+                        }),
 
-                    //Messages
-                    Domain.Entities.Option.SearchItemType.Message=>GetMessagesBySearch.GetMessages(db,JsonConvertor<MessageSearchViewModel>.LoadFromJsonString(filter?.FilterJson))
-                    .Select(m=> new ExcelMessageViewModel
-                    {
-                        Name =m.Name,
-                        Email = m.Email,
-                        Website = m.Website,
-                        Text = m.Message
-                    }),
+                        //Messages
+                        Domain.Entities.Option.SearchItemType.Message => GetMessagesBySearch.GetMessages(db, JsonConvertor<MessageSearchViewModel>.LoadFromJsonString(filter?.FilterJson))
+                        .Select(m => new ExcelMessageViewModel
+                        {
+                            Name = m.Name,
+                            Email = m.Email,
+                            Website = m.Website,
+                            Text = m.Message
+                        }),
 
-                    //Users
-                    Domain.Entities.Option.SearchItemType.User => _getUserByFilter.GetUsers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
-                    .Select(u=> new ExcelUserViewModel
+                        //Users
+                        Domain.Entities.Option.SearchItemType.User => _getUserByFilter.GetUsers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
+                        .Select(u => new ExcelUserViewModel
+                        {
+                            UserName = u.UserName ?? "ندارد",
+                            Email = u.Email ?? "ندارد",
+                            Name = u.Name ?? "ندارد",
+                            Family = u.Family ?? "ندارد",
+                            PhoneNumber = u.PhoneNumber ?? "ندارد",
+                        })
+                    };
+
+                    return new ResultDto<IEnumerable<object>>
                     {
-                        UserName = u.UserName ?? "ندارد",
-                        Email = u.Email ?? "ندارد",
-                        Name = u.Name ?? "ندارد",
-                        Family = u.Family ?? "ندارد",
-                        PhoneNumber = u.PhoneNumber ?? "ندارد",
-                    })
-                };
+                        Data = result,
+                        IsSuccess = true
+                    };
+                }
 
                 return new ResultDto<IEnumerable<object>>
                 {
-                    Data = result,
-                    IsSuccess = true
+                    Data = null,
+                    IsSuccess = false
                 };
             }
             catch (Exception ex)

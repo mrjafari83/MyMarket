@@ -31,7 +31,7 @@ builder.Services.AddDbContext<DataBaseContext>(optons =>
             optons.UseSqlServer(@"Data Source= .; Initial Catalog= Market_DB; Integrated Security= False;User Id=sa;Password=123;")
             );
 
-builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
+builder.Services.AddScoped<IDataBaseContext,DataBaseContext>();
 builder.Services.AddScoped<IProductFacad, ProductFacad>();
 builder.Services.AddScoped<IClientCartFacad, ClientCartFacad>();
 builder.Services.AddScoped<IGetUserByFilter, GetUsersByFilter>();

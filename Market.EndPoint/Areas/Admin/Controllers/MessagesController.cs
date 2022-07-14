@@ -41,17 +41,14 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateExcelConfirmed(MessageSearchViewModel model)
+        public async Task<IActionResult> CreateExcelConfirmed(MessageSearchViewModel searchModel)
         {
             try
             {
-                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.Message);
-                var searchId = searchFilter.Data;
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Domain.Entities.Option.SearchItemType.Message);
+                int excelId = excelStatus.Data;
 
-                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
-                int excelId = excelKey.Data;
-
-                _send.SendToCreateExcel(excelId, searchId, "Messages");
+                _send.SendToCreateExcel(excelId, "Messages");
 
                 return Redirect("/Admin/Messages/Criticism");
             }

@@ -1,10 +1,13 @@
 ﻿using Application.Interfaces.FacadPatterns.Admin;
+using Application.Services.Admin.Excel.Queries.GetAllExcels;
 using Common.Utilities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -23,7 +26,19 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_excelFacade.GetAllExcels.Execute().Data);
+            var dbExcels = _excelFacade.GetAllExcels.Execute().Data;
+            DirectoryInfo directory = new DirectoryInfo(_environment.WebRootPath + "/Excels/");
+            var files = directory.GetFiles("*.xlsx");
+            var resul = new List<GetAllExcelsDto>();
+            foreach(var item in dbExcels)
+                if(files.Any(f => f.Name.ToString() == item.FileName))
+                    resul.Add(item);
+
+            foreach(var item in dbExcels)
+                if(item.StatusCode != 3)
+                    resul.Add(item);
+
+            return View(resul.OrderByDescending(e=> e.FileName).ToList());
         }
 
         [HttpGet]

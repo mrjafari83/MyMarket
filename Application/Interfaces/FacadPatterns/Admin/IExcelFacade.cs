@@ -8,6 +8,8 @@ using Application.Services.Admin.Excel.Commands.UpdateStatus;
 using Application.Services.Admin.Excel.Commands.SetFileName;
 using Application.Services.Admin.Excel.Commands.DeleteAll;
 using Application.Services.Admin.Excel.Queries.GetAllExcels;
+using Application.Services.Admin.Excel.Queries.GetExcelType;
+using Application.Services.Admin.Excel.Queries.GetFileName;
 using Common.Enums;
 
 namespace Application.Interfaces.FacadPatterns.Admin
@@ -19,5 +21,7 @@ namespace Application.Interfaces.FacadPatterns.Admin
         ISetFileNameService SetFileName { get; }
         IDeleteAllService DeleteAll { get; }
         IGetAllExcelsService GetAllExcels { get; }
+        IGetFileNameService GetFileName { get; }
+        IGetExcelTypeService GetExcelType { get; }
     }
 }

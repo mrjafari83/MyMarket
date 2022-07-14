@@ -3941,22 +3941,6 @@
           "Persistance.dll": {}
         }
       },
-      "RabbitMQ/1.0.0.0": {
-        "runtime": {
-          "RabbitMQ.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "EPPlus.Core/1.5.4.0": {
-        "runtime": {
-          "EPPlus.Core.dll": {
-            "assemblyVersion": "1.5.4.0",
-            "fileVersion": "1.5.4.0"
-          }
-        }
-      },
       "Microsoft.AspNetCore.Antiforgery/6.0.0.0": {
         "compile": {
           "Microsoft.AspNetCore.Antiforgery.dll": {}
@@ -7512,16 +7496,6 @@
     },
     "Persistance/1.0.0": {
       "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "RabbitMQ/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "EPPlus.Core/1.5.4.0": {
-      "type": "reference",
       "serviceable": false,
       "sha512": ""
     },

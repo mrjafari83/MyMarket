@@ -314,7 +314,6 @@ C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Castle.
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EntityFramework.SqlServer.dll
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EntityFramework.dll
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EPPlus.dll
-C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EPPlus.Core.dll
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EPPlus.Interfaces.dll
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EPPlus.System.Drawing.dll
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Humanizer.dll
@@ -682,12 +681,10 @@ C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Domain.
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EndPoint.Api.dll
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Market.EndPoint.dll
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Persistance.dll
-C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\RabbitMQ.dll
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Common.pdb
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EndPoint.Api.pdb
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\EndPoint.Api.xml
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Market.EndPoint.pdb
-C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\RabbitMQ.pdb
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Application.pdb
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Domain.pdb
 C:\Users\Kar1\Desktop\MyMarket\Market_Integration_Tests\bin\Debug\net6.0\Persistance.pdb

@@ -24,7 +24,7 @@ namespace Application.Services.Admin.Excel.Commands.UpdateStatus
 
         public ResultDto Execute(Enums.Status status , int id)
         {
-            var entity = db.ExcelStatuses.Find(id);
+            var entity = db.Excels.Find(id);
             if(entity != null)
             {
                 entity.Status = (int)status;

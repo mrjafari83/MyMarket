@@ -10,6 +10,8 @@ using Application.Services.Admin.Excel.Commands.UpdateStatus;
 using Application.Services.Admin.Excel.Commands.SetFileName;
 using Application.Services.Admin.Excel.Commands.DeleteAll;
 using Application.Services.Admin.Excel.Queries.GetAllExcels;
+using Application.Services.Admin.Excel.Queries.GetFileName;
+using Application.Services.Admin.Excel.Queries.GetExcelType;
 
 namespace Application.FacadPatterns.Admin
 {
@@ -49,6 +51,18 @@ namespace Application.FacadPatterns.Admin
         public IGetAllExcelsService GetAllExcels
         {
             get => _getAllExcelsService ?? new GetAllExcelsService(db);
+        }
+
+        private GetFileNameService  _getFileNameService;
+        public IGetFileNameService GetFileName
+        {
+            get => _getFileNameService ?? new GetFileNameService(db);
+        }
+
+        private GetExcelTypeService _getExcelTypeService;
+        public IGetExcelTypeService GetExcelType
+        {
+            get => _getExcelTypeService ?? new GetExcelTypeService(db);
         }
     }
 }

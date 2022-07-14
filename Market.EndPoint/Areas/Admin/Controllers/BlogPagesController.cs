@@ -157,17 +157,14 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateExcelConfirmed(BlogPageSearchViewModel model)
+        public async Task<IActionResult> CreateExcelConfirmed(BlogPageSearchViewModel searchModel)
         {
             try
             {
-                var searchFilter = await _optionFacade.CreateSearchFilter.Execute(model, Domain.Entities.Option.SearchItemType.BlogPages);
-                var searchId = searchFilter.Data;
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Domain.Entities.Option.SearchItemType.BlogPages);
+                int excelId = excelStatus.Data;
 
-                var excelKey = await _excelFacade.CreateExcelKey.Execute(searchId);
-                int excelId = excelKey.Data;
-
-                _send.SendToCreateExcel(excelId, searchId, "BlogPages");
+                _send.SendToCreateExcel(excelId, "BlogPage");
 
                 return Redirect("/Admin/BlogPages");
             }
