@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
-using Common.Enums;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.Enums;
+using Application.Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.ViewComponents
 {

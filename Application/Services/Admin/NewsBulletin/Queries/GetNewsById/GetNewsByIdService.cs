@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Common.Dto;
-using Common.ViewModels;
-using Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.ViewModels;
+using Application.Persistance.Context;
 
 namespace Application.Services.Admin.NewsBulletin.Queries.GetNewsById
 {

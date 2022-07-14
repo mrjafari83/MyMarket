@@ -1,6 +1,6 @@
-﻿using Common.Dto;
-using Persistance.Context;
-using Persistance.Entities.Comments;
+﻿using Application.Common.Dto;
+using Application.Persistance.Context;
+using Application.Persistance.Entities.Comments;
 using System.Threading.Tasks;
 
 namespace Application.Services.Common.Comment.Commands.CreateComment
@@ -15,7 +15,7 @@ namespace Application.Services.Common.Comment.Commands.CreateComment
 
         public async Task<ResultDto> Execute(CreateCommentDto comment)
         {
-            await db.ProductComments.AddAsync(new Comment<Persistance.Entities.Products.Product>
+            await db.ProductComments.AddAsync(new Comment<Application.Persistance.Entities.Products.Product>
             {
                 Name = comment.Name,
                 Email = comment.Email,

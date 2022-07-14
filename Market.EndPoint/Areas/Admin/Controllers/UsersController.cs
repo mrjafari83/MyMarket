@@ -4,16 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
-using Persistance.Entities.User;
+using Application.Persistance.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Application.Services.Admin.User.Queries.GetUsersByFilter;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.ViewModels.SearchViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Common.Utilities;
+using Application.Common.Utilities;
 using Market.EndPoint.Utilities.RabbitMQ;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
@@ -170,7 +170,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             try
             {
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Persistance.Entities.Option.SearchItemType.User);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Application.Persistance.Entities.Option.SearchItemType.User);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "User");

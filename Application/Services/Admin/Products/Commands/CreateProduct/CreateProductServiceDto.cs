@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Services.Admin.Products.Commands.CreateProduct

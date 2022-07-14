@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
-using Persistance.Entities.Categories;
-using Persistance.Entities.Products;
-using Persistance.Entities.BlogPages;
+using Application.Common.Dto;
+using Application.Persistance.Entities.Categories;
+using Application.Persistance.Entities.Products;
+using Application.Persistance.Entities.BlogPages;
 
 namespace Application.Services.Admin.Categories.Queries.GetCategoryById
 {

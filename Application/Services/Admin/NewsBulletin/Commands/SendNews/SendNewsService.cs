@@ -1,5 +1,5 @@
-﻿using Common.Dto;
-using Persistance.Context;
+﻿using Application.Common.Dto;
+using Application.Persistance.Context;
 
 namespace Application.Services.Admin.NewsBulletin.Commands.SendNews
 {
@@ -13,7 +13,7 @@ namespace Application.Services.Admin.NewsBulletin.Commands.SendNews
 
         public ResultDto Execute(string subject, string text)
         {
-            db.News.Add(new Persistance.Entities.NewsBulletin.News
+            db.News.Add(new Application.Persistance.Entities.NewsBulletin.News
             {
                 Subject = subject,
                 Text = text,

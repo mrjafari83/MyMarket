@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Persistance.Context;
-using Common.Dto;
-using Persistance.Entities.Option;
+using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Persistance.Entities.Option;
 
 namespace Application.Services.Admin.Slider.Commands.ReplaceSlider
 {
@@ -21,7 +21,7 @@ namespace Application.Services.Admin.Slider.Commands.ReplaceSlider
             lastSlider.RemoveTime = DateTime.Now;
             db.Sliders.Update(lastSlider);
 
-            await db.Sliders.AddAsync(new Persistance.Entities.Option.Slider 
+            await db.Sliders.AddAsync(new Application.Persistance.Entities.Option.Slider 
             {
                 Url = url,
                 ImageSrc = imageSrc

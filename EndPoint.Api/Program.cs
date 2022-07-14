@@ -1,10 +1,10 @@
 ﻿using Application.FacadPatterns.Admin;
 using Application.FacadPatterns.Client;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Client;
 using AutoMapper;
-using Persistance.Entities.User;
+using Application.Persistance.Entities.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +21,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 using Application.Services.Admin.User.Queries.GetUsersByFilter;
-using Common.Utilities;
+using Application.Common.Utilities;
 using Market.EndPoint.Repositories.User;
 
 var builder = WebApplication.CreateBuilder(args);

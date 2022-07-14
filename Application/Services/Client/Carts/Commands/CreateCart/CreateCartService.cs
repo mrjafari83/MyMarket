@@ -1,6 +1,6 @@
-﻿using Common.Dto;
-using Persistance.Context;
-using Persistance.Entities.Cart;
+﻿using Application.Common.Dto;
+using Application.Persistance.Context;
+using Application.Persistance.Entities.Cart;
 using System.Threading.Tasks;
 
 namespace Application.Services.Client.Carts.Commands.CreateCart

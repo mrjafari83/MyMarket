@@ -1,4 +1,4 @@
-﻿using Common.ViewModels;
+﻿using Application.Common.ViewModels;
 using System.Collections.Generic;
 
 namespace Application.Services.Admin.BlogPages.Queries.GetBlogPageById

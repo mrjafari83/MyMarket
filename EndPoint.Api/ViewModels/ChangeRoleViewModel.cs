@@ -1,4 +1,4 @@
-﻿using Common.Enums;
+﻿using Application.Common.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace EndPoint.Api.ViewModels

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
 using Application.Interfaces.FacadPatterns.Client;
 using Application.Services.Common.Comment.Commands.CreateComment;
-using Common.ViewModels;
-using Common.Utilities;
+using Application.Common.ViewModels;
+using Application.Common.Utilities;
 using Market.EndPoint.Models;
 
 namespace Market.EndPoint.Controllers

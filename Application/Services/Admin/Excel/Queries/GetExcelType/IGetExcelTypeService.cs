@@ -1,6 +1,6 @@
-﻿using Persistance.Context;
-using Common.Enums;
-using Persistance.Entities.Option;
+﻿using Application.Persistance.Context;
+using Application.Common.Enums;
+using Application.Persistance.Entities.Option;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Application.Services.Admin.Excel.Queries.GetExcelType
 {
     public interface IGetExcelTypeService
     {
-        Persistance.Entities.Option.SearchItemType GetExcelType(int excelId);
+        Application.Persistance.Entities.Option.SearchItemType GetExcelType(int excelId);
     }
 
     public class GetExcelTypeService : IGetExcelTypeService

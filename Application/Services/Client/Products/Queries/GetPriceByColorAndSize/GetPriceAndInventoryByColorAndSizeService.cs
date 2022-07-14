@@ -1,6 +1,6 @@
-﻿using Common.Dto;
+﻿using Application.Common.Dto;
 using System.Linq;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 

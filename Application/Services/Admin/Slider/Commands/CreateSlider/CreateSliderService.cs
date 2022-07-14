@@ -1,6 +1,6 @@
-﻿using Persistance.Context;
-using Common.Dto;
-using Persistance.Entities.Option;
+﻿using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Persistance.Entities.Option;
 using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Slider.Commands.CreateSlider
@@ -15,7 +15,7 @@ namespace Application.Services.Admin.Slider.Commands.CreateSlider
 
         public async Task<ResultDto> Execute(string url , string imageSrc)
         {
-            await db.Sliders.AddAsync(new Persistance.Entities.Option.Slider
+            await db.Sliders.AddAsync(new Application.Persistance.Entities.Option.Slider
             {
                 Url = url,
                 ImageSrc = imageSrc

@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Persistance.Entities.Products;
-using Persistance.Entities.Products.Relations;
-using Common.ViewModels;
+using Application.Persistance.Entities.Products;
+using Application.Persistance.Entities.Products.Relations;
+using Application.Common.ViewModels;
 using Application.Services.Admin.Products.Queries.GetAllProducts;
-using Persistance.Entities.Categories;
+using Application.Persistance.Entities.Categories;
 using Application.Services.Admin.Products.Queries.GetBestSellingProducts;
 using Application.Services.Admin.Products.Queries.GetProductById;
 using Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying;
 using Application.Services.Client.Carts.Queries.GetUserCart;
-using Common.Utilities;
-using Persistance.Entities.Cart;
+using Application.Common.Utilities;
+using Application.Persistance.Entities.Cart;
 
 namespace Application.Mapper
 {

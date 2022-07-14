@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Client.BlogPages.Queries.GetBlogPageById;
 using Application.Services.Client.BlogPages.Commands.AddNewVisit;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Application.Interfaces.FacadPatterns.Client;
 using AutoMapper;
 

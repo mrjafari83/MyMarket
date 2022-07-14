@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Common.Dto;
-using Common.ViewModels;
-using Common.Utilities;
-using Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.ViewModels;
+using Application.Common.Utilities;
+using Application.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.ViewModels.SearchViewModels;
 
 namespace Application.Services.Admin.Message.Queries.GetAllCriticismMessages
 {

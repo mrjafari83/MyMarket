@@ -1,5 +1,5 @@
-﻿using Common.Dto;
-using Persistance.Context;
+﻿using Application.Common.Dto;
+using Application.Persistance.Context;
 
 namespace Application.Services.Admin.NewsBulletin.Commands.AddEmail
 {
@@ -13,7 +13,7 @@ namespace Application.Services.Admin.NewsBulletin.Commands.AddEmail
 
         public ResultDto Execute(string email)
         {
-            var result = db.Emails.Add(new Persistance.Entities.NewsBulletin.Email
+            var result = db.Emails.Add(new Application.Persistance.Entities.NewsBulletin.Email
             {
                 EmailAddress = email
             }).State;

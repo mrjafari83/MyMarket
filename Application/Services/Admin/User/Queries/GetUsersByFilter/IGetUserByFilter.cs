@@ -1,5 +1,5 @@
-﻿using Common.ViewModels.SearchViewModels;
-using Persistance.Entities.User;
+﻿using Application.Common.ViewModels.SearchViewModels;
+using Application.Persistance.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

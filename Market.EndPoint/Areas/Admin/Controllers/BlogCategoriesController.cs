@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Application.FacadPatterns;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Application.Services.Admin.Categories.Commands.CreateCategory;
 using Application.Services.Admin.Categories.Commands.EditCategory;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.ViewModels.SearchViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Common.Utilities;
+using Application.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using Market.EndPoint.Utilities.RabbitMQ;
 
@@ -47,12 +47,12 @@ namespace Market.EndPoint.Areas.Admin.Controllers
             ViewBag.SearchKey = model.SearchKey;
 
             ViewBag.CategoriesList = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(model, false, Common.Enums.Enums.CategoriesFilter.Non).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(model, false, Application.Common.Enums.Enums.CategoriesFilter.Non).Data
                 , "Id"
                 , "Name");
 
             var data = _commonCategorisFacad.GetAllBlogCategories
-                .Execute(model, true, Common.Enums.Enums.CategoriesFilter.Non);
+                .Execute(model, true, Application.Common.Enums.Enums.CategoriesFilter.Non);
             if (data.IsSuccess)
                 return View(data.Data);
 
@@ -90,7 +90,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.CategoriesList = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false, Common.Enums.Enums.CategoriesFilter.ForCategoriesList,false , id).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false,  Application.Common.Enums.Enums.CategoriesFilter.ForCategoriesList,false , id).Data
                 , "Id"
                 , "Name");
 
@@ -146,7 +146,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             try
             {
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Persistance.Entities.Option.SearchItemType.BlogCategory);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Application.Persistance.Entities.Option.SearchItemType.BlogCategory);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "BlogCategory");

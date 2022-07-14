@@ -1,7 +1,7 @@
 ﻿using System;
-using Common.Dto;
-using Common.Utilities;
-using Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.Utilities;
+using Application.Persistance.Context;
 using System.Threading.Tasks;
 
 namespace Application.Services.Client.Carts.Commands.DeleteProductFromCart

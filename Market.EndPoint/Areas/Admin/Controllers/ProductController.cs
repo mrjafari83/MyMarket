@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Common.Enums;
-using Common.ViewModels;
+using Application.Common.Enums;
+using Application.Common.ViewModels;
 using Application.Services.Admin.Products.Commands.CreateProduct;
 using Application.Services.Admin.Products.Commands.EditProduct;
 using Microsoft.AspNetCore.Http;
@@ -18,16 +18,16 @@ using Microsoft.AspNetCore.Hosting;
 using System.Net;
 using Newtonsoft.Json;
 using Application.Services.Admin.Products.Queries.GetAllProducts;
-using Common.Utilities;
+using Application.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http;
-using Persistance.Entities.User;
+using Application.Persistance.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq;
-using Persistance.Context;
-using Common.ViewModels.SearchViewModels;
+using Application.Persistance.Context;
+using Application.Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {
@@ -264,7 +264,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
                     SearchBy = searchModel.SearchBy
                 };
 
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel,Persistance.Entities.Option.SearchItemType.Product);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel,Application.Persistance.Entities.Option.SearchItemType.Product);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "Product");

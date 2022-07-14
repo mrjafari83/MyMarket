@@ -1,4 +1,4 @@
-﻿using Common.ViewModels;
+﻿using Application.Common.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 

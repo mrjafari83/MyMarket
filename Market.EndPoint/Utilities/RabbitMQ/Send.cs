@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces.FacadPatterns.Admin;
-using Common.Enums;
+using Application.Common.Enums;
 using Microsoft.AspNetCore.Hosting;
 using RabbitMQ.Client;
 using System;

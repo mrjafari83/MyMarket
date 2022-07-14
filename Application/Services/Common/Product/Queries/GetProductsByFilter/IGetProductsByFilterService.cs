@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
-using Common.Enums;
+using Application.Common.Dto;
+using Application.Common.Enums;
 
 namespace Application.Services.Common.Product.Queries.GetProductsByFilter
 {

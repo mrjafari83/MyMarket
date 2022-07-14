@@ -50,8 +50,8 @@
 @await Component.InvokeAsync("CartPayingsInIndex")
 
 <div class="row">
-    @await Component.InvokeAsync("CommentsInIndex", new { categoryType = Common.Enums.Enums.CategoryType.Product })
-    @await Component.InvokeAsync("CommentsInIndex", new { categoryType = Common.Enums.Enums.CategoryType.BlogPage })
+    @await Component.InvokeAsync("CommentsInIndex", new { categoryType =  Application.Common.Enums.Enums.CategoryType.Product })
+    @await Component.InvokeAsync("CommentsInIndex", new { categoryType =  Application.Common.Enums.Enums.CategoryType.BlogPage })
 </div>
 
 @section scripts

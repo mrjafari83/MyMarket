@@ -1,8 +1,8 @@
 ﻿using Application.Services.Admin.User.Queries.GetUsersByFilter;
-using Common.Classes;
-using Common.Enums;
-using Common.ViewModels.SearchViewModels;
-using Persistance.Entities.User;
+using Application.Common.Classes;
+using Application.Common.Enums;
+using Application.Common.ViewModels.SearchViewModels;
+using Application.Persistance.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 

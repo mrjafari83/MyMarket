@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Persistance.Context;
-using Common.Dto;
-using Persistance.Entities.Common;
-using Persistance.Entities.Products;
-using Persistance.Entities.Products.Relations;
+using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Persistance.Entities.Common;
+using Application.Persistance.Entities.Products;
+using Application.Persistance.Entities.Products.Relations;
 using Microsoft.EntityFrameworkCore;
-using Common.Utilities;
+using Application.Common.Utilities;
 using System.Threading.Tasks;
 
 namespace Application.Services.Admin.Products.Commands.DeleteProduct
@@ -54,7 +54,7 @@ namespace Application.Services.Admin.Products.Commands.DeleteProduct
             }
         }
 
-        private void DeleteFeatures(List<Persistance.Entities.Products.ProductFeature> productFeatures)
+        private void DeleteFeatures(List<Application.Persistance.Entities.Products.ProductFeature> productFeatures)
         {
             foreach (var item in productFeatures)
             {

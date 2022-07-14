@@ -1,4 +1,4 @@
-﻿using Common.ViewModels;
+﻿using Application.Common.ViewModels;
 using Market.EndPoint;
 using Microsoft.AspNetCore.Http;
 using Moq;

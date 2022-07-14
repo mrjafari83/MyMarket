@@ -1,6 +1,6 @@
-﻿using Common.Dto;
-using Common.ViewModels;
-using Persistance.Context;
+﻿using Application.Common.Dto;
+using Application.Common.ViewModels;
+using Application.Persistance.Context;
 
 namespace Application.Services.Client.Messages.Commands.AddCriticsmMessage
 {
@@ -14,7 +14,7 @@ namespace Application.Services.Client.Messages.Commands.AddCriticsmMessage
 
         public ResultDto Execute(CriticismMessageViewModel message)
         {
-            db.CriticismMessages.Add(new Persistance.Entities.Message.CriticismMessage
+            db.CriticismMessages.Add(new Application.Persistance.Entities.Message.CriticismMessage
             {
                 Name = message.Name,
                 Email = message.Email,

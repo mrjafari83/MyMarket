@@ -1,11 +1,11 @@
-﻿using Persistance.Context;
+﻿using Application.Persistance.Context;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter.Dtos;
-using Common.Dto;
-using Common.Enums;
-using Common.Utilities;
-using Common.ViewModels;
-using Common.ViewModels.SearchViewModels;
-using Persistance.Entities.Products;
+using Application.Common.Dto;
+using Application.Common.Enums;
+using Application.Common.Utilities;
+using Application.Common.ViewModels;
+using Application.Common.ViewModels.SearchViewModels;
+using Application.Persistance.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
-using Common.ViewModels.ExcelViewModels;
+using Application.Common.ViewModels.ExcelViewModels;
 using Application.Services.Common.BlogPage.GetBlogPagesBySearch;
 using Application.Services.Admin.Message.Queries.GetMessagesBySearch;
 using Application.Services.Admin.User.Queries.GetUsersByFilter;
@@ -49,7 +49,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                     IEnumerable<object> result = filter.SearchType switch
                     {
                         //Products
-                        Persistance.Entities.Option.SearchItemType.Product => GetProductsByFilter(JsonConvertor<ProducsSearchViewModel>.LoadFromJsonString(filter.FilterJson))
+                        Application.Persistance.Entities.Option.SearchItemType.Product => GetProductsByFilter(JsonConvertor<ProducsSearchViewModel>.LoadFromJsonString(filter.FilterJson))
                         .Select(p => new GetAllProductDetailsDto
                         {
                             Name = p.Name,
@@ -60,7 +60,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         }).AsNoTracking().ToList(),
 
                         //Blog Category
-                        Persistance.Entities.Option.SearchItemType.BlogCategory => GetBlogCategoryBySearch.GetCategories(db, JsonConvertor<BlogCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
+                        Application.Persistance.Entities.Option.SearchItemType.BlogCategory => GetBlogCategoryBySearch.GetCategories(db, JsonConvertor<BlogCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
                         .Select(c => new ExcelCategoryViewModel
                         {
                             Name = c.Name,
@@ -69,7 +69,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         }),
 
                         //Product Category
-                        Persistance.Entities.Option.SearchItemType.ProductCategory => GetProductCategoryBySearch.GetCategories(db, JsonConvertor<ProductCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
+                        Application.Persistance.Entities.Option.SearchItemType.ProductCategory => GetProductCategoryBySearch.GetCategories(db, JsonConvertor<ProductCategoryViewModel>.LoadFromJsonString(filter.FilterJson))
                         .Select(c => new ExcelCategoryViewModel
                         {
                             Name = c.Name,
@@ -78,7 +78,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         }),
 
                         //Blog Pages
-                        Persistance.Entities.Option.SearchItemType.BlogPages => GetBlogPagesBySearch.GetBlogPages(db, JsonConvertor<BlogPageSearchViewModel>.LoadFromJsonString(filter.FilterJson))
+                        Application.Persistance.Entities.Option.SearchItemType.BlogPages => GetBlogPagesBySearch.GetBlogPages(db, JsonConvertor<BlogPageSearchViewModel>.LoadFromJsonString(filter.FilterJson))
                         .Include(b => b.Category).Select(b => new ExcelBlogPagesViewModel
                         {
                             Title = b.Title,
@@ -89,7 +89,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         }),
 
                         //Messages
-                        Persistance.Entities.Option.SearchItemType.Message => GetMessagesBySearch.GetMessages(db, JsonConvertor<MessageSearchViewModel>.LoadFromJsonString(filter?.FilterJson))
+                        Application.Persistance.Entities.Option.SearchItemType.Message => GetMessagesBySearch.GetMessages(db, JsonConvertor<MessageSearchViewModel>.LoadFromJsonString(filter?.FilterJson))
                         .Select(m => new ExcelMessageViewModel
                         {
                             Name = m.Name,
@@ -99,7 +99,7 @@ namespace Application.Services.Admin.Options.Queries.GetEntitiesByFilter
                         }),
 
                         //Users
-                        Persistance.Entities.Option.SearchItemType.User => _getUserByFilter.GetUsers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
+                        Application.Persistance.Entities.Option.SearchItemType.User => _getUserByFilter.GetUsers(JsonConvertor<UserSearchVIewModel>.LoadFromJsonString(filter?.FilterJson))
                         .Select(u => new ExcelUserViewModel
                         {
                             UserName = u.UserName ?? "ندارد",

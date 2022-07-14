@@ -21,13 +21,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\Persistance\Persistance.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <None Include="wwwroot\Fonts\XB_Font_analysisacademy\Niloofar\آکادمی تحلیل آماری ایران.url" />
     <None Include="wwwroot\Fonts\XB_Font_analysisacademy\Titre\آکادمی تحلیل آماری ایران.url" />
     <None Include="wwwroot\Fonts\XB_Font_analysisacademy\Zar\آکادمی تحلیل آماری ایران.url" />
@@ -324,10 +317,10 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="EPPlus" Version="6.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+    <PackageReference Include="EPPlus" Version="6.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
@@ -337,6 +330,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Excels\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 
 </Project>

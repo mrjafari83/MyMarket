@@ -1,6 +1,6 @@
-﻿using Persistance.Context;
-using Common.Enums;
-using Common.ViewModels.SearchViewModels;
+﻿using Application.Persistance.Context;
+using Application.Common.Enums;
+using Application.Common.ViewModels.SearchViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

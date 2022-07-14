@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.Dto;
+using Application.Common.ViewModels.SearchViewModels;
 
 namespace Application.Services.Admin.Message.Queries.GetAllCriticismMessages
 {

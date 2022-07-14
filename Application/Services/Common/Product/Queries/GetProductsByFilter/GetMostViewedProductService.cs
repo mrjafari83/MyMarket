@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Persistance.Context;
-using Common.Dto;
-using Common.Utilities;
+using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Common.Product.Queries.GetProductsByFilter

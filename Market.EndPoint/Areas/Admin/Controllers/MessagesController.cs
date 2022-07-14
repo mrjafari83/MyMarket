@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
 using Microsoft.AspNetCore.Authorization;
-using Common.ViewModels.SearchViewModels;
-using Common.Utilities;
+using Application.Common.ViewModels.SearchViewModels;
+using Application.Common.Utilities;
 using Market.EndPoint.Utilities.RabbitMQ;
 using Microsoft.Extensions.Logging;
 
@@ -45,7 +45,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             try
             {
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Persistance.Entities.Option.SearchItemType.Message);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Application.Persistance.Entities.Option.SearchItemType.Message);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "Messages");

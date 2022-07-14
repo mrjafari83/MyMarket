@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Persistance.Entities.Cart;
+using Application.Persistance.Entities.Cart;
 using Application.Services.Admin.CartPaying.Queries.GetAllCartPayings;
 using Application.Services.Client.Carts.Commands.AddProductToCart;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 
 namespace Application.Mapper
 {

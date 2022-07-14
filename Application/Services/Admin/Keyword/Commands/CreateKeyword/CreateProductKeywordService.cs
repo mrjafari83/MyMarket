@@ -1,8 +1,8 @@
-﻿using Common.Dto;
-using Common.ViewModels;
-using Persistance.Context;
-using Persistance.Entities.Common;
-using Persistance.Entities.Products;
+﻿using Application.Common.Dto;
+using Application.Common.ViewModels;
+using Application.Persistance.Context;
+using Application.Persistance.Entities.Common;
+using Application.Persistance.Entities.Products;
 
 namespace Application.Services.Admin.Keyword.Commands.CreateKeyword
 {

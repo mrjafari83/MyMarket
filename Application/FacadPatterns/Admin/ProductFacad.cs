@@ -10,13 +10,13 @@ using Application.Services.Admin.Products.Queries.GetAllProducts;
 using Application.Services.Admin.Products.Queries.GetProductById;
 using Application.Services.Admin.Products.Queries.GetBestSellingProducts;
 using Application.Interfaces.FacadPatterns.Admin;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Microsoft.AspNetCore.Hosting;
 using AutoMapper;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
 using Microsoft.Extensions.Logging;
 using Application.Services.Admin.User.Queries.GetUsersByFilter;
-using Common.Utilities;
+using Application.Common.Utilities;
 
 namespace Application.FacadPatterns.Admin
 {

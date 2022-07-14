@@ -1,6 +1,6 @@
-﻿using Persistance.Context;
-using Common.Dto;
-using Common.Enums;
+﻿using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

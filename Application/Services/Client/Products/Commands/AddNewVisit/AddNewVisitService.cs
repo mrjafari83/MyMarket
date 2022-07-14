@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Persistance.Context;
-using Common.Dto;
+using Application.Persistance.Context;
+using Application.Common.Dto;
 
 namespace Application.Services.Client.Products.Commands.AddNewVisit
 {
@@ -19,7 +19,7 @@ namespace Application.Services.Client.Products.Commands.AddNewVisit
 
             if(!db.ProductsVisits.Where(p=> p.Product == product && p.Browser == browser).Any())
             {
-                db.ProductsVisits.Add(new Persistance.Entities.Products.Relations.ProductsVisit
+                db.ProductsVisits.Add(new Application.Persistance.Entities.Products.Relations.ProductsVisit
                 {
                     Product = product,
                     Browser = browser

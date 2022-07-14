@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
 using Application.Interfaces.FacadPatterns.Client;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Market.EndPoint.Utilities;
 using System.IO;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Application.Interfaces.FacadPatterns.Common;
 using Application.Services.Common.Cart.Queries.GetUserCartPayings;
 using Application.Services.Common.Cart.Queries.GetCartPayingById;

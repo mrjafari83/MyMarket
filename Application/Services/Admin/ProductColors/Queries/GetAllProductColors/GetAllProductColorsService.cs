@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Persistance.Context;
-using Common.Dto;
+using Application.Persistance.Context;
+using Application.Common.Dto;
 
 namespace Application.Services.Admin.ProductColors.Queries.GetAllProductColors
 {

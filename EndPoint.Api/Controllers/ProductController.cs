@@ -1,12 +1,12 @@
 ﻿using Application.Interfaces.FacadPatterns.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Application.Services.Admin.Products.Commands.CreateProduct;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Application.Services.Admin.Products.Queries.GetAllProducts;
 using Application.Services.Admin.Products.Queries.GetProductById;
-using Common.Enums;
+using Application.Common.Enums;
 using Microsoft.AspNetCore.Authorization;
-using Common.Classes;
+using Application.Common.Classes;
 using Microsoft.AspNetCore.Http;
 using EndPoint.Api.ViewModels.Products;
 using AutoMapper;
@@ -35,7 +35,7 @@ namespace EndPoint.Api.Controllers
         [HttpGet]
         public async Task<ResultGetAllProductsDto> GetAll([FromQuery]CompleteSearchViewModel model)
         {
-            var result = await _productFacad.GetAllProductsService.Execute(model.PageNumber,model.PageSize, _Mapper.Map<Common.ViewModels.SearchViewModels.ProducsSearchViewModel>(model.Search));
+            var result = await _productFacad.GetAllProductsService.Execute(model.PageNumber,model.PageSize, _Mapper.Map<Application.Common.ViewModels.SearchViewModels.ProducsSearchViewModel>(model.Search));
             if (result.IsSuccess && result.Data.Products.Count() != 0)
                 return result.Data;
            

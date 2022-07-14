@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
 using Microsoft.AspNetCore.Mvc;
-using Common.Enums;
+using Application.Common.Enums;
 
 namespace Market.EndPoint.ViewComponents.Admin
 {

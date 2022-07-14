@@ -1,5 +1,5 @@
-﻿using Persistance.Context;
-using Common.Dto;
+﻿using Application.Persistance.Context;
+using Application.Common.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

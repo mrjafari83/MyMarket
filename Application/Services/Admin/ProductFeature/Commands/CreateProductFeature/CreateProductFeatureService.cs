@@ -1,6 +1,6 @@
-﻿using Persistance.Context;
-using Common.Dto;
-using Persistance.Entities.Products;
+﻿using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Persistance.Entities.Products;
 
 namespace Application.Services.Admin.ProductFeature.Commands.CreateProductFeature
 {
@@ -14,7 +14,7 @@ namespace Application.Services.Admin.ProductFeature.Commands.CreateProductFeatur
 
         public ResultDto Execute(CreateProductFeatureDto entry)
         {
-            db.ProductFutures.Add(new Persistance.Entities.Products.ProductFeature
+            db.ProductFutures.Add(new Application.Persistance.Entities.Products.ProductFeature
             {
                 Display = entry.Name,
                 FeatureValue = entry.Value,

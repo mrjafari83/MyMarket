@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Application.Services.Admin.Comment.Queries.GetAllComments;
-using Persistance.Entities.Comments;
-using Persistance.Entities.Products;
-using Persistance.Entities.BlogPages;
+using Application.Persistance.Entities.Comments;
+using Application.Persistance.Entities.Products;
+using Application.Persistance.Entities.BlogPages;
 
 namespace Application.Mapper
 {

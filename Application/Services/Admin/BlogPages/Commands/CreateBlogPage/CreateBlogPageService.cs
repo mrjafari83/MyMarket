@@ -1,11 +1,11 @@
 ﻿using System;
-using Common.Dto;
-using Persistance.Context;
-using Persistance.Entities.BlogPages;
-using Persistance.Entities.Common;
+using Application.Common.Dto;
+using Application.Persistance.Context;
+using Application.Persistance.Entities.BlogPages;
+using Application.Persistance.Entities.Common;
 using System.Collections.Generic;
-using Persistance.Entities.Products;
-using Common.ViewModels;
+using Application.Persistance.Entities.Products;
+using Application.Common.ViewModels;
 using AutoMapper;
 using System.Threading.Tasks;
 

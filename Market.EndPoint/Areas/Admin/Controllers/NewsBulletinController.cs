@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
 using Microsoft.AspNetCore.Http;
-using Common.Utilities;
-using Common.Utilities.MessageSender;
+using Application.Common.Utilities;
+using Application.Common.Utilities.MessageSender;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
 

@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Common.ViewModels;
-using Common.Utilities.MessageSender;
-using Common.Utilities;
+using Application.Common.ViewModels;
+using Application.Common.Utilities.MessageSender;
+using Application.Common.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Application.Interfaces.FacadPatterns.Client;
 using Application.Interfaces.FacadPatterns.Common;
-using Persistance.Entities.User;
+using Application.Persistance.Entities.User;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Common.Classes;
+using Application.Common.Classes;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Controllers

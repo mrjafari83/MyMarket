@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Persistance.Context;
-using Common.Dto;
-using Common.ViewModels;
+using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.ViewModels;
 
 namespace Application.Services.Admin.ProductColors.Queries.GetAllColors
 {

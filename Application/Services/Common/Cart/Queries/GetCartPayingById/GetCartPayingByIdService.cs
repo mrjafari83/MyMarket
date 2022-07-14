@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Persistance.Context;
-using Common.Dto;
+using Application.Persistance.Context;
+using Application.Common.Dto;
 using Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying;
 using AutoMapper;
 using System.Threading.Tasks;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
+using Application.Common.Dto;
 
 namespace Application.Services.Common.Product.Queries.GetProductById
 {

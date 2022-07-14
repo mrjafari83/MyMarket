@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Common.Utilities;
+using Application.Common.Utilities;
 using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
 using System.IO;

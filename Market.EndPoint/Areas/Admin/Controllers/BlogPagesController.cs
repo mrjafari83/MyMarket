@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Common.Utilities;
+using Application.Common.Utilities;
 using Microsoft.AspNetCore.Http;
 using Application.Services.Admin.BlogPages.Commands.CreateBlogPage;
 using Application.Services.Admin.BlogPages.Commands.EditBlogPage;
 using Microsoft.AspNetCore.Hosting;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.ViewModels.SearchViewModels;
 using Market.EndPoint.Utilities.RabbitMQ;
 using Microsoft.Extensions.Logging;
 
@@ -54,7 +54,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public async Task<IActionResult> Index(BlogPageSearchViewModel searchModel, int currentPage = 1)
         {
             ViewBag.Categories = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false,  Application.Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
             );
@@ -71,7 +71,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Categories = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false,  Application.Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
                 );
@@ -102,7 +102,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Categories = new SelectList(
-                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false, Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
+                _commonCategorisFacad.GetAllBlogCategories.Execute(new BlogCategoryViewModel(), false,  Application.Common.Enums.Enums.CategoriesFilter.ForPagesList).Data
                 , "Id"
                 , "Name"
                 );
@@ -161,7 +161,7 @@ namespace Market.EndPoint.Areas.Admin.Controllers
         {
             try
             {
-                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Persistance.Entities.Option.SearchItemType.BlogPages);
+                var excelStatus = await _excelFacade.CreateExcelKey.Execute(searchModel, Application.Persistance.Entities.Option.SearchItemType.BlogPages);
                 int excelId = excelStatus.Data;
 
                 _send.SendToCreateExcel(excelId, "BlogPage");

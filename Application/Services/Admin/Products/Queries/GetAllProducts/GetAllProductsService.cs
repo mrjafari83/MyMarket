@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Persistance.Context;
+using Application.Persistance.Context;
 using AutoMapper;
-using Common.Dto;
-using Common.Enums;
-using Common.Utilities;
-using Persistance.Entities.Products;
+using Application.Common.Dto;
+using Application.Common.Enums;
+using Application.Common.Utilities;
+using Application.Persistance.Entities.Products;
 using Microsoft.EntityFrameworkCore;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
 using Microsoft.Extensions.Logging;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.ViewModels.SearchViewModels;
 using Application.Services.Admin.User.Queries.GetUsersByFilter;
 
 namespace Application.Services.Admin.Products.Queries.GetAllProducts

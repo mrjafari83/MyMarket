@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Persistance.Context;
+using Application.Persistance.Context;
 using AutoMapper;
-using Common.Dto;
-using Common.Utilities;
+using Application.Common.Dto;
+using Application.Common.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
-using Common.ViewModels;
+using Application.Common.Dto;
+using Application.Common.ViewModels;
 
 namespace Application.Services.Client.Carts.Commands.AddCartPaying
 {

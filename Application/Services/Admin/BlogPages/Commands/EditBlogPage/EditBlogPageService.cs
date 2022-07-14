@@ -1,9 +1,9 @@
-﻿using Common.Dto;
-using Persistance.Context;
-using Persistance.Entities.BlogPages;
-using Persistance.Entities.Common;
+﻿using Application.Common.Dto;
+using Application.Persistance.Context;
+using Application.Persistance.Entities.BlogPages;
+using Application.Persistance.Entities.Common;
 using System.Collections.Generic;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;

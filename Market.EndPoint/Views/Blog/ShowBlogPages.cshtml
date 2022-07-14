@@ -1,6 +1,6 @@
 ﻿@using Application.Services.Client.BlogPages.Queries.GetBlogPageById
 @model GetBlogPageByIdDto
-@using Common.Utilities
+@using Application.Common.Utilities
 @using Application.Interfaces.FacadPatterns.Client
 @using Application.Interfaces.FacadPatterns.Common
 @inject ICommonOptionFacad _commonOptionFacad
@@ -88,7 +88,7 @@
                 <!--  = Comments =  -->
                 <!--  ==========  -->
 
-                @await Component.InvokeAsync("Comment", new { pageId = Model.Id, type = Common.Enums.Enums.CategoryType.BlogPage })
+                @await Component.InvokeAsync("Comment", new { pageId = Model.Id, type =  Application.Common.Enums.Enums.CategoryType.BlogPage })
 
             </section> <!-- /main content -->
             <!--  ==========  -->

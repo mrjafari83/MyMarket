@@ -7,7 +7,7 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Interfaces.FacadPatterns.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Common.Utilities;
+using Application.Common.Utilities;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Market.EndPoint.Areas.Admin.Controllers

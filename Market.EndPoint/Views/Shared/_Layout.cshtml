@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Persistance.Entities.User
+@using Application.Persistance.Entities.User
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> userManager
 @{
@@ -101,8 +101,8 @@
                             <div class="nav-collapse collapse">
                                 <ul class="nav" id="mainNavigation">
 
-                                    @await Component.InvokeAsync("CategoriesInMenu", new { categoryType = Common.Enums.Enums.CategoryType.Product })
-                                    @await Component.InvokeAsync("CategoriesInMenu", new { categoryType = Common.Enums.Enums.CategoryType.BlogPage })
+                                    @await Component.InvokeAsync("CategoriesInMenu", new { categoryType =  Application.Common.Enums.Enums.CategoryType.Product })
+                                    @await Component.InvokeAsync("CategoriesInMenu", new { categoryType =  Application.Common.Enums.Enums.CategoryType.BlogPage })
 
                                     <li><a href="/ContactUs">تماس با ما</a></li>
 
@@ -260,7 +260,7 @@
                                 <h3 class="title">محصولات</h3>
                             </div>
                             <ul class="nav">
-                                @await Component.InvokeAsync("CategoriesInFootter" , new { categoryType = Common.Enums.Enums.CategoryType.Product })
+                                @await Component.InvokeAsync("CategoriesInFootter" , new { categoryType =  Application.Common.Enums.Enums.CategoryType.Product })
                             </ul>
                         </div>
 
@@ -272,7 +272,7 @@
                                 <h3 class="title">وبلاگ</h3>
                             </div>
                             <ul class="nav">
-                                @await Component.InvokeAsync("CategoriesInFootter", new { categoryType = Common.Enums.Enums.CategoryType.BlogPage })
+                                @await Component.InvokeAsync("CategoriesInFootter", new { categoryType =  Application.Common.Enums.Enums.CategoryType.BlogPage })
                             </ul>
                         </div>
                     </div>

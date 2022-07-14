@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
-using Common.ViewModels;
-using Persistance.Context;
-using Persistance.Entities.Common;
-using Persistance.Entities.BlogPages;
+using Application.Common.Dto;
+using Application.Common.ViewModels;
+using Application.Persistance.Context;
+using Application.Persistance.Entities.Common;
+using Application.Persistance.Entities.BlogPages;
 
 namespace Application.Services.Admin.Keyword.Commands.CreateKeyword
 {

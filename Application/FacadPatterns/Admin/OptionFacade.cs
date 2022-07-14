@@ -1,4 +1,4 @@
-﻿using Persistance.Context;
+﻿using Application.Persistance.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using Application.Interfaces.FacadPatterns.Admin;
 using Application.Services.Admin.Options.Queries.GetEntitiesByFilter;
 using Microsoft.Extensions.Logging;
 using Application.Services.Admin.User.Queries.GetUsersByFilter;
-using Common.Utilities;
+using Application.Common.Utilities;
 
 namespace Application.FacadPatterns.Admin
 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
-using Common.Enums;
+using Application.Common.Enums;
 using Application.Services.Common.Comment.Queries.GetAllCommentsByPageId;
 
 namespace Market.EndPoint.ViewComponents

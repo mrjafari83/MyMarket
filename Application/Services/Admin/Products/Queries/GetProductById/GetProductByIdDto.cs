@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 
 namespace Application.Services.Admin.Products.Queries.GetProductById
 {

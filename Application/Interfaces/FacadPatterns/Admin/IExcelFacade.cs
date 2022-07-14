@@ -10,7 +10,7 @@ using Application.Services.Admin.Excel.Commands.DeleteAll;
 using Application.Services.Admin.Excel.Queries.GetAllExcels;
 using Application.Services.Admin.Excel.Queries.GetExcelType;
 using Application.Services.Admin.Excel.Queries.GetFileName;
-using Common.Enums;
+using Application.Common.Enums;
 
 namespace Application.Interfaces.FacadPatterns.Admin
 {

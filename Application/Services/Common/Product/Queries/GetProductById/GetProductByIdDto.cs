@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Application.Services.Common.Comment.Queries.GetAllCommentsByPageId;
 
 namespace Application.Services.Common.Product.Queries.GetProductById

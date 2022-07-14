@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Persistance.Context;
-using Common.Dto;
+using Application.Persistance.Context;
+using Application.Common.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Common.Option.Queries.GetAllSliders

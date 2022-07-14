@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Admin.ProductSizes.Queries.GetAllProductSizes;
 using Application.Services.Admin.ProductSizes.Queries.GetAllSizes;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Application.Interfaces.FacadPatterns.Admin;
 
 namespace Application.FacadPatterns.Admin

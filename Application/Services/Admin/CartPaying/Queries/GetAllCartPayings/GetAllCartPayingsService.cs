@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using Persistance.Context;
-using Common.Dto;
-using Common.Utilities;
-using Persistance.Entities.Cart;
+using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.Utilities;
+using Application.Persistance.Entities.Cart;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System.Threading.Tasks;

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Persistance.Context;
-using Common.Dto;
-using Common.ViewModels;
-using Common.Utilities;
+using Application.Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.ViewModels;
+using Application.Common.Utilities;
 using AutoMapper;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;

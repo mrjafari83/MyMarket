@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Common.Dto;
+using Application.Common.Dto;
 
 namespace Application.Services.Common.Product.Queries.GetProductsBySearch
 {

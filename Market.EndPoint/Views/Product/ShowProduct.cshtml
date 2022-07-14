@@ -1,9 +1,10 @@
 ﻿@using System.Linq
+@using Application.Common.Dto
 @using Application.Services.Common.Product.Queries.GetProductById
 @model ResultDto<GetProductByIdDto>
 @using Application.Interfaces.FacadPatterns.Client
 @using Application.Interfaces.FacadPatterns.Common
-@using Common.Utilities
+@using Application.Common.Utilities
 @inject ICommonOptionFacad _commonOptionFacad
 @inject IClientProductFacad _clientProductFacad
 
@@ -200,7 +201,7 @@
                     </ul>
                 </div>
                 <div class="fade tab-pane" id="tab-3">
-                    @await Component.InvokeAsync("Comment", new { pageId = Model.Data.Id, categoryType = Common.Enums.Enums.CategoryType.Product })
+                    @await Component.InvokeAsync("Comment", new { pageId = Model.Data.Id, categoryType =  Application.Common.Enums.Enums.CategoryType.Product })
                 </div>
             </div>
         </div>

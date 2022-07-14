@@ -1,7 +1,7 @@
 ﻿using System;
-using Common.Dto;
-using Persistance.Context;
-using Common.Utilities;
+using Application.Common.Dto;
+using Application.Persistance.Context;
+using Application.Common.Utilities;
 using System.Threading.Tasks;
 
 namespace Application.Services.Admin.BlogPages.Commands.DeleteBlogPage

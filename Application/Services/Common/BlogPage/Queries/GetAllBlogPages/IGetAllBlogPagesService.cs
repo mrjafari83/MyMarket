@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
-using Common.Enums;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.Dto;
+using Application.Common.Enums;
+using Application.Common.ViewModels.SearchViewModels;
 
 namespace Application.Services.Common.BlogPage.Queries.GetAllBlogPages
 {

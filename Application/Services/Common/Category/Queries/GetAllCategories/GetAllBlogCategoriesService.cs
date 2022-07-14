@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Common.Dto;
-using Common.Enums;
-using Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.Enums;
+using Application.Persistance.Context;
 using Application.Services.Common.Category.Queries.GetChildrenOfCategory;
 using Application.Services.Common.Category.Queries.GetCategoriesBySearch;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.ViewModels.SearchViewModels;
 
 namespace Application.Services.Common.Category.Queries.GetAllCategories
 {

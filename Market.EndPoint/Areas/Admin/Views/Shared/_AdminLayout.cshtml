@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Persistance.Entities.User
+@using Application.Persistance.Entities.User
 @inject UserManager<ApplicationUser> userManager
 @{
     var user = userManager.FindByNameAsync(User.Identity.Name).Result;

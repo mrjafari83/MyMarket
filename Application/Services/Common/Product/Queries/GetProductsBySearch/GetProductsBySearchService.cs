@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Common.Dto;
-using Common.Utilities;
-using Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.Utilities;
+using Application.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 

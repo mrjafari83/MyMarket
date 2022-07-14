@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
+using Application.Common.Dto;
 
 namespace Application.Services.Admin.Products.Commands.DeleteProduct
 {

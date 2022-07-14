@@ -77,7 +77,7 @@ VALUES (@p0, @p1, @p2, @p3, @p4);
 SELECT [Id]
 FROM [ExcelStatuses]
 WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
-2022-07-05T15:02:15.8045183+04:30 [ERR] (Microsoft.EntityFrameworkCore.Update) An exception occurred in the database while saving changes for context type '"Persistance.Context.DataBaseContext"'."
+2022-07-05T15:02:15.8045183+04:30 [ERR] (Microsoft.EntityFrameworkCore.Update) An exception occurred in the database while saving changes for context type '"Application.Persistance.Context.DataBaseContext"'."
 ""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
  ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint \"FK_ExcelStatuses_SearchFilter_SearchFilterId\". The conflict occurred in database \"Market_DB\", table \"dbo.SearchFilter\", column 'Id'.
 The statement has been terminated.
@@ -263,7 +263,7 @@ VALUES (@p0, @p1, @p2, @p3, @p4);
 SELECT [Id]
 FROM [ExcelStatuses]
 WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
-2022-07-05T16:19:03.7372635+04:30 [ERR] (Microsoft.EntityFrameworkCore.Update) An exception occurred in the database while saving changes for context type '"Persistance.Context.DataBaseContext"'."
+2022-07-05T16:19:03.7372635+04:30 [ERR] (Microsoft.EntityFrameworkCore.Update) An exception occurred in the database while saving changes for context type '"Application.Persistance.Context.DataBaseContext"'."
 ""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
  ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'ExcelStatuses'.
    at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__188_0(Task`1 result)

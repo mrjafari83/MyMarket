@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Common;
-using Common.Enums;
+using Application.Common.Enums;
 using Microsoft.AspNetCore.Authorization;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Areas.Admin.Controllers
 {

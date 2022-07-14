@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Common.Dto;
-using Persistance.Context;
-using Common.ViewModels;
-using Common.Utilities;
+using Application.Common.Dto;
+using Application.Persistance.Context;
+using Application.Common.ViewModels;
+using Application.Common.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Application.Services.Common.Comment.Queries.GetAllCommentsByPageId;
 using System.Threading.Tasks;

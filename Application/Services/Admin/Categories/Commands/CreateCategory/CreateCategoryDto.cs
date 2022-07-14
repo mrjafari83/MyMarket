@@ -1,4 +1,4 @@
-﻿using Common.Enums;
+﻿using Application.Common.Enums;
 
 namespace Application.Services.Admin.Categories.Commands.CreateCategory
 {

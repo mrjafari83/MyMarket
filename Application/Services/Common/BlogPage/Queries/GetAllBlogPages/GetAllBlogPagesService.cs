@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Persistance.Context;
+using Application.Persistance.Context;
 using AutoMapper;
-using Common.Dto;
-using Common.Enums;
-using Common.Utilities;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.Dto;
+using Application.Common.Enums;
+using Application.Common.Utilities;
+using Application.Common.ViewModels.SearchViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Common.BlogPage.Queries.GetAllBlogPages

@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Dto;
-using Common.ViewModels;
+using Application.Common.Dto;
+using Application.Common.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Services.Admin.Products.Commands.CreateProduct

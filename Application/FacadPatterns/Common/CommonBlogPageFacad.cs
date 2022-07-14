@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Common.BlogPage.Queries.GetAllBlogPages;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Application.Interfaces.FacadPatterns.Common;
 using AutoMapper;
 

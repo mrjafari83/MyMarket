@@ -1,17 +1,17 @@
-﻿using Persistance.Entities.User;
+﻿using Application.Persistance.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Common.Classes;
-using Common.Enums;
+using Application.Common.Classes;
+using Application.Common.Enums;
 using Application.Interfaces.FacadPatterns.Client;
 using EndPoint.Api.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
-using Persistance.Context;
+using Application.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace EndPoint.Api.Controllers

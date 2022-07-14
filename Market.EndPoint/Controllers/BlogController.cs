@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Client;
 using Application.Interfaces.FacadPatterns.Common;
-using Common.ViewModels;
+using Application.Common.ViewModels;
 using Application.Services.Common.Comment.Commands.CreateComment;
-using Common.ViewModels.SearchViewModels;
+using Application.Common.ViewModels.SearchViewModels;
 
 namespace Market.EndPoint.Controllers
 {

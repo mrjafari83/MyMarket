@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +15,7 @@ using Application.Persistance.Entities.Comments;
 using Application.Persistance.Entities.Option;
 using Application.Persistance.Entities.Cart;
 using Application.Persistance.Entities.User;
-using Common.Classes;
+using Application.Common.Classes;
 using Application.Persistance.Entities.NewsBulletin;
 using Application.Persistance.Entities.Message;
 

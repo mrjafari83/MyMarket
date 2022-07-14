@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Persistance.Context;
+using Application.Persistance.Context;
 using AutoMapper;
-using Common.Dto;
+using Application.Common.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Admin.CartPaying.Queries.GetProductsOfCartPaying

@@ -1,5 +1,5 @@
-﻿using Common.Dto;
-using Persistance.Context;
+﻿using Application.Common.Dto;
+using Application.Persistance.Context;
 using System.Linq;
 
 namespace Application.Services.Admin.Categories.Queries.GetCategoryById

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Common.Dto;
-using Common.Utilities;
-using Persistance.Context;
+using Application.Common.Dto;
+using Application.Common.Utilities;
+using Application.Persistance.Context;
 
 namespace Application.Services.Admin.NewsBulletin.Queries.GetAllEmails
 {

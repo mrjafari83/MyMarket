@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Client;
-using Common.Utilities;
-using Common.ViewModels;
+using Application.Common.Utilities;
+using Application.Common.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Market.EndPoint.Controllers

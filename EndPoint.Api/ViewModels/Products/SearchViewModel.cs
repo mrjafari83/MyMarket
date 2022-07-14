@@ -1,4 +1,4 @@
-﻿using Common.Enums;
+﻿using Application.Common.Enums;
 using Newtonsoft.Json.Converters;
 using System.Text.Json.Serialization;
 

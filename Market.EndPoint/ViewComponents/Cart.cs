@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.FacadPatterns.Client;
-using Common.Utilities;
+using Application.Common.Utilities;
 
 namespace Market.EndPoint.ViewComponents
 {
