@@ -1,7 +1,0 @@
-{
-  "Application, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Application",
-  "Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Common",
-  "EndPoint.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\EndPoint.Api",
-  "Market.EndPoint, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Market.EndPoint",
-  "MyMarketDataBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Kar1\\Desktop\\MyMarket\\Persistance"
-}
